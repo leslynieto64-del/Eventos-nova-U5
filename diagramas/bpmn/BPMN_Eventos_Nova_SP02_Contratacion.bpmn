@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Defs_SP02" targetNamespace="https://eventosnova.example/bpmn" exporter="Eventos Nova (generador del equipo)" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_SP02">
+    <bpmn:documentation>Contrato, política de no reembolso, anticipo del 30 % en 3 días hábiles, contacto y 24 horas naturales para que el Cliente pague, revisión de Administración y cierre sin contratación (BN-009, SE-010; US-008 a US-010; CA-015 a CA-021).</bpmn:documentation>
+    <bpmn:participant id="Part_SP02_Cliente" name="Cliente" />
+    <bpmn:participant id="Part_SP02_EN" name="Eventos Nova" processRef="Proc_SP02_Contratacion" />
+    <bpmn:messageFlow id="SP02_M01" name="Contrato y política de no reembolso" sourceRef="SP02_Politica" targetRef="Part_SP02_Cliente" />
+    <bpmn:messageFlow id="SP02_M02" name="Contrato firmado" sourceRef="Part_SP02_Cliente" targetRef="SP02_Firma" />
+    <bpmn:messageFlow id="SP02_M03" name="Seguimiento del anticipo: 24 horas para pagar" sourceRef="SP02_Contactar" targetRef="Part_SP02_Cliente" />
+    <bpmn:messageFlow id="SP02_M04" name="Pago del anticipo" sourceRef="Part_SP02_Cliente" targetRef="SP02_Anticipo" />
+    <bpmn:messageFlow id="SP02_M05" name="Pago del anticipo" sourceRef="Part_SP02_Cliente" targetRef="SP02_Anticipo24" />
+    <bpmn:messageFlow id="SP02_M06" name="Solicitud de corrección del anticipo" sourceRef="SP02_Corregir" targetRef="Part_SP02_Cliente" />
+    <bpmn:messageFlow id="SP02_M07" name="Anticipo corregido" sourceRef="Part_SP02_Cliente" targetRef="SP02_Corregido" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_SP02_Contratacion" name="Formalización del contrato y confirmación de la contratación" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_SP02">
+      <bpmn:lane id="Lane_SP02_Coord" name="Coordinador">
+        <bpmn:flowNodeRef>SP02_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Preparar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Politica</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Firma</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_RegFirma</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Espera</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Plazo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Contactar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Espera24</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Plazo24</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Cerrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_FinCerrado</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_SP02_Admin" name="Administración">
+        <bpmn:flowNodeRef>SP02_Anticipo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Anticipo24</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_UAnt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Revisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_GwPlazo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Union</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Verificar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Gw30</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Confirmar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_FinConfirmada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Corregir</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP02_Corregido</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="SP02_Inicio" name="Propuesta aceptada">
+      <bpmn:outgoing>SP02_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="SP02_Preparar" name="Preparar el contrato con base en la propuesta aceptada, con la política de no reembolso incluida">
+      <bpmn:documentation>CA-015, CA-016 (US-008)</bpmn:documentation>
+      <bpmn:incoming>SP02_F01</bpmn:incoming>
+      <bpmn:outgoing>SP02_F02</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP02_Politica" name="Comunicar expresamente la política de no reembolso al Cliente">
+      <bpmn:documentation>CA-016, CA-019</bpmn:documentation>
+      <bpmn:incoming>SP02_F02</bpmn:incoming>
+      <bpmn:outgoing>SP02_F03</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="SP02_Firma" name="Contrato firmado por las partes">
+      <bpmn:documentation>CA-017</bpmn:documentation>
+      <bpmn:incoming>SP02_F03</bpmn:incoming>
+      <bpmn:outgoing>SP02_F04</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP02_Firma_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP02_RegFirma" name="Registrar la firma del contrato vinculada a la propuesta aceptada">
+      <bpmn:documentation>CA-017 (US-008)</bpmn:documentation>
+      <bpmn:incoming>SP02_F04</bpmn:incoming>
+      <bpmn:outgoing>SP02_F05</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:eventBasedGateway id="SP02_Espera">
+      <bpmn:incoming>SP02_F05</bpmn:incoming>
+      <bpmn:outgoing>SP02_F06</bpmn:outgoing>
+      <bpmn:outgoing>SP02_F07</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="SP02_Plazo" name="3 días hábiles después de la firma sin anticipo">
+      <bpmn:documentation>BN-009, SE-010: el anticipo vence 3 días hábiles (lunes a viernes, GL-060) después de la firma.</bpmn:documentation>
+      <bpmn:incoming>SP02_F06</bpmn:incoming>
+      <bpmn:outgoing>SP02_F08</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="SP02_Plazo_def"></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP02_Contactar" name="Contactar al Cliente y comunicarle que dispone de 24 horas naturales para efectuar el anticipo">
+      <bpmn:documentation>BN-009; CA-020 (US-010): el plazo de 24 horas es para que el Cliente pague, no para el registro de Administración.</bpmn:documentation>
+      <bpmn:incoming>SP02_F08</bpmn:incoming>
+      <bpmn:outgoing>SP02_F09</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:eventBasedGateway id="SP02_Espera24">
+      <bpmn:incoming>SP02_F09</bpmn:incoming>
+      <bpmn:outgoing>SP02_F10</bpmn:outgoing>
+      <bpmn:outgoing>SP02_F11</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="SP02_Plazo24" name="24 horas naturales desde el contacto: plazo del Cliente para pagar">
+      <bpmn:documentation>BN-009; CA-021</bpmn:documentation>
+      <bpmn:incoming>SP02_F10</bpmn:incoming>
+      <bpmn:outgoing>SP02_F12</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="SP02_Plazo24_def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP02_Cerrar" name="Cerrar el proceso de contratación sin confirmar">
+      <bpmn:documentation>CA-021, SE-010</bpmn:documentation>
+      <bpmn:incoming>SP02_F14</bpmn:incoming>
+      <bpmn:outgoing>SP02_F15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP02_FinCerrado" name="Cerrado sin contratación (no Cancelado)">
+      <bpmn:documentation>CA-021: el Evento queda Cerrado sin contratación y no se inicia la contratación definitiva de proveedores.</bpmn:documentation>
+      <bpmn:incoming>SP02_F15</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="SP02_Anticipo" name="Anticipo recibido">
+      <bpmn:documentation>CA-018</bpmn:documentation>
+      <bpmn:incoming>SP02_F07</bpmn:incoming>
+      <bpmn:outgoing>SP02_F17</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP02_Anticipo_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:intermediateCatchEvent id="SP02_Anticipo24" name="Anticipo recibido tras el contacto">
+      <bpmn:documentation>CA-018, CA-021</bpmn:documentation>
+      <bpmn:incoming>SP02_F11</bpmn:incoming>
+      <bpmn:outgoing>SP02_F18</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP02_Anticipo24_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="SP02_UAnt">
+      <bpmn:incoming>SP02_F17</bpmn:incoming>
+      <bpmn:incoming>SP02_F18</bpmn:incoming>
+      <bpmn:outgoing>SP02_F19</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP02_Revisar" name="Revisar los pagos y comprobar si el Cliente efectuó el anticipo dentro de las 24 horas">
+      <bpmn:documentation>BN-009; CA-021: decide la fecha en que el Cliente pagó; el registro y la verificación pueden ser posteriores.</bpmn:documentation>
+      <bpmn:incoming>SP02_F12</bpmn:incoming>
+      <bpmn:outgoing>SP02_F13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP02_GwPlazo" name="¿El Cliente efectuó el anticipo dentro de las 24 horas?">
+      <bpmn:incoming>SP02_F13</bpmn:incoming>
+      <bpmn:outgoing>SP02_F14</bpmn:outgoing>
+      <bpmn:outgoing>SP02_F16</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:exclusiveGateway id="SP02_Union">
+      <bpmn:incoming>SP02_F16</bpmn:incoming>
+      <bpmn:incoming>SP02_F19</bpmn:incoming>
+      <bpmn:incoming>SP02_F26</bpmn:incoming>
+      <bpmn:outgoing>SP02_F20</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP02_Verificar" name="Registrar y verificar el anticipo: 30 % del costo total de la propuesta aceptada">
+      <bpmn:documentation>BN-009; CA-018, CA-019 (US-009): el registro y la verificación pueden ser posteriores al plazo del Cliente.</bpmn:documentation>
+      <bpmn:incoming>SP02_F20</bpmn:incoming>
+      <bpmn:outgoing>SP02_F21</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP02_Gw30" name="¿El anticipo corresponde al 30 %?">
+      <bpmn:incoming>SP02_F21</bpmn:incoming>
+      <bpmn:outgoing>SP02_F22</bpmn:outgoing>
+      <bpmn:outgoing>SP02_F24</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP02_Confirmar" name="Confirmar la contratación: contrato firmado, política incluida y comunicada, anticipo verificado">
+      <bpmn:documentation>BN-009; CA-019</bpmn:documentation>
+      <bpmn:incoming>SP02_F22</bpmn:incoming>
+      <bpmn:outgoing>SP02_F23</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP02_FinConfirmada" name="Contratación confirmada (Evento En organización)">
+      <bpmn:incoming>SP02_F23</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="SP02_Corregir" name="Informar al Cliente para que corrija el anticipo">
+      <bpmn:documentation>CA-019, SE-010</bpmn:documentation>
+      <bpmn:incoming>SP02_F24</bpmn:incoming>
+      <bpmn:outgoing>SP02_F25</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="SP02_Corregido" name="Anticipo corregido recibido">
+      <bpmn:incoming>SP02_F25</bpmn:incoming>
+      <bpmn:outgoing>SP02_F26</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP02_Corregido_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:sequenceFlow id="SP02_F01" sourceRef="SP02_Inicio" targetRef="SP02_Preparar" />
+    <bpmn:sequenceFlow id="SP02_F02" sourceRef="SP02_Preparar" targetRef="SP02_Politica" />
+    <bpmn:sequenceFlow id="SP02_F03" sourceRef="SP02_Politica" targetRef="SP02_Firma" />
+    <bpmn:sequenceFlow id="SP02_F04" sourceRef="SP02_Firma" targetRef="SP02_RegFirma" />
+    <bpmn:sequenceFlow id="SP02_F05" sourceRef="SP02_RegFirma" targetRef="SP02_Espera" />
+    <bpmn:sequenceFlow id="SP02_F06" sourceRef="SP02_Espera" targetRef="SP02_Plazo" />
+    <bpmn:sequenceFlow id="SP02_F07" sourceRef="SP02_Espera" targetRef="SP02_Anticipo" />
+    <bpmn:sequenceFlow id="SP02_F08" sourceRef="SP02_Plazo" targetRef="SP02_Contactar" />
+    <bpmn:sequenceFlow id="SP02_F09" sourceRef="SP02_Contactar" targetRef="SP02_Espera24" />
+    <bpmn:sequenceFlow id="SP02_F10" sourceRef="SP02_Espera24" targetRef="SP02_Plazo24" />
+    <bpmn:sequenceFlow id="SP02_F11" sourceRef="SP02_Espera24" targetRef="SP02_Anticipo24" />
+    <bpmn:sequenceFlow id="SP02_F12" sourceRef="SP02_Plazo24" targetRef="SP02_Revisar" />
+    <bpmn:sequenceFlow id="SP02_F13" sourceRef="SP02_Revisar" targetRef="SP02_GwPlazo" />
+    <bpmn:sequenceFlow id="SP02_F14" name="No" sourceRef="SP02_GwPlazo" targetRef="SP02_Cerrar" />
+    <bpmn:sequenceFlow id="SP02_F15" sourceRef="SP02_Cerrar" targetRef="SP02_FinCerrado" />
+    <bpmn:sequenceFlow id="SP02_F16" name="Sí: pendiente de registro y verificación" sourceRef="SP02_GwPlazo" targetRef="SP02_Union" />
+    <bpmn:sequenceFlow id="SP02_F17" sourceRef="SP02_Anticipo" targetRef="SP02_UAnt" />
+    <bpmn:sequenceFlow id="SP02_F18" sourceRef="SP02_Anticipo24" targetRef="SP02_UAnt" />
+    <bpmn:sequenceFlow id="SP02_F19" sourceRef="SP02_UAnt" targetRef="SP02_Union" />
+    <bpmn:sequenceFlow id="SP02_F20" sourceRef="SP02_Union" targetRef="SP02_Verificar" />
+    <bpmn:sequenceFlow id="SP02_F21" sourceRef="SP02_Verificar" targetRef="SP02_Gw30" />
+    <bpmn:sequenceFlow id="SP02_F22" name="Sí" sourceRef="SP02_Gw30" targetRef="SP02_Confirmar" />
+    <bpmn:sequenceFlow id="SP02_F23" sourceRef="SP02_Confirmar" targetRef="SP02_FinConfirmada" />
+    <bpmn:sequenceFlow id="SP02_F24" name="No" sourceRef="SP02_Gw30" targetRef="SP02_Corregir" />
+    <bpmn:sequenceFlow id="SP02_F25" sourceRef="SP02_Corregir" targetRef="SP02_Corregido" />
+    <bpmn:sequenceFlow id="SP02_F26" sourceRef="SP02_Corregido" targetRef="SP02_Union" />
+    <bpmn:textAnnotation id="SP02_NotaPago"><bpmn:text>El plazo de 24 horas es para que el Cliente efectúe el pago. Si pagó dentro de él, la contratación queda pendiente de que Administración registre y verifique el anticipo, aunque lo haga después; no se cierra por esa demora (BN-009, CA-021).</bpmn:text></bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_SP02" name="Formalización del contrato y confirmación de la contratación">
+    <bpmndi:BPMNPlane id="Plane_SP02" bpmnElement="Collab_SP02">
+      <bpmndi:BPMNShape id="Part_SP02_Cliente_di" bpmnElement="Part_SP02_Cliente" isHorizontal="true" bioc:fill="#D4E7FA" color:background-color="#D4E7FA" bioc:stroke="#1E5A9C" color:border-color="#1E5A9C"><dc:Bounds x="0" y="0" width="3292" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Part_SP02_EN_di" bpmnElement="Part_SP02_EN" isHorizontal="true" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="0" y="120" width="3292" height="650" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP02_Coord_di" bpmnElement="Lane_SP02_Coord" isHorizontal="true" bioc:fill="#A9E0D8" color:background-color="#A9E0D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="36" y="120" width="3256" height="260" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP02_Admin_di" bpmnElement="Lane_SP02_Admin" isHorizontal="true" bioc:fill="#D2C3F0" color:background-color="#D2C3F0" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="36" y="380" width="3256" height="390" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Inicio_di" bpmnElement="SP02_Inicio" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="164" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="127" y="207" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Preparar_di" bpmnElement="SP02_Preparar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="302" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Politica_di" bpmnElement="SP02_Politica" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="502" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Firma_di" bpmnElement="SP02_Firma" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="764" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="727" y="207" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_RegFirma_di" bpmnElement="SP02_RegFirma" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="902" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Espera_di" bpmnElement="SP02_Espera" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1157" y="160" width="50" height="50" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1087" y="213" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Plazo_di" bpmnElement="SP02_Plazo" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1364" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1327" y="207" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Contactar_di" bpmnElement="SP02_Contactar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1502" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Espera24_di" bpmnElement="SP02_Espera24" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1757" y="160" width="50" height="50" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1687" y="213" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Plazo24_di" bpmnElement="SP02_Plazo24" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1964" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1854" y="199" width="108" height="52" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Cerrar_di" bpmnElement="SP02_Cerrar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2302" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_FinCerrado_di" bpmnElement="SP02_FinCerrado" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="2564" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="2527" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Anticipo_di" bpmnElement="SP02_Anticipo" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1164" y="427" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1188" y="465" width="110" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Anticipo24_di" bpmnElement="SP02_Anticipo24" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1764" y="427" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1788" y="465" width="110" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_UAnt_di" bpmnElement="SP02_UAnt" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1757" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1687" y="532" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Revisar_di" bpmnElement="SP02_Revisar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="1902" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_GwPlazo_di" bpmnElement="SP02_GwPlazo" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2157" y="420" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2087" y="473" width="90" height="54" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Union_di" bpmnElement="SP02_Union" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2357" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2287" y="532" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Verificar_di" bpmnElement="SP02_Verificar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2502" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Gw30_di" bpmnElement="SP02_Gw30" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2757" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2687" y="506" width="90" height="41" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Confirmar_di" bpmnElement="SP02_Confirmar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2902" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_FinConfirmada_di" bpmnElement="SP02_FinConfirmada" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="3164" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="3127" y="597" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Corregir_di" bpmnElement="SP02_Corregir" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2702" y="660" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_Corregido_di" bpmnElement="SP02_Corregido" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="2564" y="687" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="2527" y="727" width="110" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP02_NotaPago_di" bpmnElement="SP02_NotaPago"><dc:Bounds x="322.0" y="285.0" width="560" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SP02_F01_di" bpmnElement="SP02_F01"><di:waypoint x="200" y="185" /><di:waypoint x="302" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F02_di" bpmnElement="SP02_F02"><di:waypoint x="462" y="185" /><di:waypoint x="502" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F03_di" bpmnElement="SP02_F03"><di:waypoint x="662" y="185" /><di:waypoint x="764" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F04_di" bpmnElement="SP02_F04"><di:waypoint x="800" y="185" /><di:waypoint x="902" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F05_di" bpmnElement="SP02_F05"><di:waypoint x="1062" y="185" /><di:waypoint x="1157" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F06_di" bpmnElement="SP02_F06"><di:waypoint x="1207" y="185" /><di:waypoint x="1364" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F07_di" bpmnElement="SP02_F07"><di:waypoint x="1182" y="210" /><di:waypoint x="1182" y="427" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F08_di" bpmnElement="SP02_F08"><di:waypoint x="1400" y="185" /><di:waypoint x="1502" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F09_di" bpmnElement="SP02_F09"><di:waypoint x="1662" y="185" /><di:waypoint x="1757" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F10_di" bpmnElement="SP02_F10"><di:waypoint x="1807" y="185" /><di:waypoint x="1964" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F11_di" bpmnElement="SP02_F11"><di:waypoint x="1782" y="210" /><di:waypoint x="1782" y="427" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F12_di" bpmnElement="SP02_F12"><di:waypoint x="1982" y="203" /><di:waypoint x="1982" y="400" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F13_di" bpmnElement="SP02_F13"><di:waypoint x="2062" y="445" /><di:waypoint x="2157" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F14_di" bpmnElement="SP02_F14"><di:waypoint x="2182" y="420" /><di:waypoint x="2182" y="315" /><di:waypoint x="2302" y="315" /><bpmndi:BPMNLabel><dc:Bounds x="2190" y="387" width="40" height="16" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F15_di" bpmnElement="SP02_F15"><di:waypoint x="2462" y="315" /><di:waypoint x="2564" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F16_di" bpmnElement="SP02_F16"><di:waypoint x="2207" y="445" /><di:waypoint x="2382" y="445" /><di:waypoint x="2382" y="550" /><bpmndi:BPMNLabel><dc:Bounds x="2212" y="451" width="150" height="20" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F17_di" bpmnElement="SP02_F17"><di:waypoint x="1182" y="463" /><di:waypoint x="1182" y="575" /><di:waypoint x="1757" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F18_di" bpmnElement="SP02_F18"><di:waypoint x="1782" y="463" /><di:waypoint x="1782" y="550" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F19_di" bpmnElement="SP02_F19"><di:waypoint x="1807" y="575" /><di:waypoint x="2357" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F20_di" bpmnElement="SP02_F20"><di:waypoint x="2407" y="575" /><di:waypoint x="2502" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F21_di" bpmnElement="SP02_F21"><di:waypoint x="2662" y="575" /><di:waypoint x="2757" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F22_di" bpmnElement="SP02_F22"><di:waypoint x="2807" y="575" /><di:waypoint x="2902" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="2814" y="578" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F23_di" bpmnElement="SP02_F23"><di:waypoint x="3062" y="575" /><di:waypoint x="3164" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F24_di" bpmnElement="SP02_F24"><di:waypoint x="2782" y="600" /><di:waypoint x="2782" y="660" /><bpmndi:BPMNLabel><dc:Bounds x="2788" y="616" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F25_di" bpmnElement="SP02_F25"><di:waypoint x="2702" y="705" /><di:waypoint x="2600" y="705" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_F26_di" bpmnElement="SP02_F26"><di:waypoint x="2564" y="705" /><di:waypoint x="2382" y="705" /><di:waypoint x="2382" y="600" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M01_di" bpmnElement="SP02_M01" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="582" y="140" /><di:waypoint x="582" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="587" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M02_di" bpmnElement="SP02_M02" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="782" y="70" /><di:waypoint x="782" y="167" /><bpmndi:BPMNLabel><dc:Bounds x="787" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M03_di" bpmnElement="SP02_M03" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1582" y="140" /><di:waypoint x="1582" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="1587" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M04_di" bpmnElement="SP02_M04" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1082" y="70" /><di:waypoint x="1082" y="445" /><di:waypoint x="1164" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="1087" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M05_di" bpmnElement="SP02_M05" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1682" y="70" /><di:waypoint x="1682" y="445" /><di:waypoint x="1764" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="1687" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M06_di" bpmnElement="SP02_M06" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="2862" y="705" /><di:waypoint x="2882" y="705" /><di:waypoint x="2882" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="2887" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP02_M07_di" bpmnElement="SP02_M07" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="2482" y="70" /><di:waypoint x="2482" y="660" /><di:waypoint x="2582" y="660" /><di:waypoint x="2582" y="687" /><bpmndi:BPMNLabel><dc:Bounds x="2487" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

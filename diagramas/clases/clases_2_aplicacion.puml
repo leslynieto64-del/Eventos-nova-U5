@@ -1,0 +1,165 @@
+@startuml clases-2-aplicacion
+' Eventos Nova · Diagrama de clases · Vista 2: capa de aplicación (Service Layer y reacciones a Domain Events)
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam classFontSize 13
+skinparam classAttributeFontSize 11
+skinparam packageStyle rectangle
+skinparam nodesep 35
+skinparam ranksep 70
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #15803D
+  ArrowColor #334155
+}
+skinparam package {
+  BackgroundColor #F0FDF4
+  BorderColor #15803D
+}
+title Eventos Nova — Diagrama de clases · Vista 2: aplicación (Service Layer y reacciones)
+
+package "Aplicación · Service Layer" <<Rectangle>> {
+  class GestionPropuestaService <<Application Service>> {
+    +registrarEvento()
+    +crearPropuesta()
+    +generarNuevaVersion()
+    +aceptarPropuesta()
+    +cerrarPropuestaNoAceptada()
+  }
+  class FormalizarContratacionService <<Application Service>> {
+    +prepararContrato()
+    +registrarComunicacionPoliticaNoReembolso()
+    +registrarFirmaContrato()
+    +darSeguimientoAnticipoPendiente()
+    +confirmarContratacion()
+  }
+  class GestionPagosService <<Application Service>> {
+    +registrarObligacionAnticipo()
+    +registrarObligacionSaldoOriginal()
+    +comunicarSolicitudPago()
+    +registrarYVerificarPago()
+    +verificarPagoRegistrado()
+    +registrarVencimientoSaldoOriginal()
+    +activarProtocoloCobro()
+    +registrarImporteAdicionalSustitucion()
+    +aplicarCierreSinRealizar()
+    +registrarYEjecutarDevolucion()
+  }
+  class GestionCierreEventoService <<Application Service>> {
+    +gestionarCancelacionSolicitada()
+    +registrarRevisionAdministrativaCancelacion()
+    +resolverRegularizacionSaldoVencido()
+    +registrarCancelacionPorFaltaDeRegularizacion()
+    +procesarInicioEvento()
+    +finalizarEvento()
+  }
+  class GestionCambiosEventoService <<Application Service>> {
+    +registrarSolicitudCambio()
+    +retomarSolicitudCambio()
+    +evaluarViabilidadCambio()
+    +registrarDecisionClienteCambio()
+    +registrarAutorizacionAdministracionCambio()
+    +registrarAnexoCambio()
+    +confirmarCambio()
+    +cerrarCambioPorFaltaDePago()
+    +cerrarCambioPorInicioEvento()
+  }
+  class GestionServiciosAdicionalesService <<Application Service>> {
+    +registrarSolicitudServicioAdicional()
+    +retomarSolicitudServicioAdicional()
+    +evaluarDisponibilidadServicioAdicional()
+    +registrarDecisionEsperaCliente()
+    +registrarAprobacionClienteServicioAdicional()
+    +registrarAutorizacionAdministracionServicioAdicional()
+    +registrarAnexoServicioAdicional()
+    +confirmarServicioAdicional()
+    +cerrarServicioAdicionalPorFaltaDePago()
+    +cerrarServicioAdicionalPorInicioEvento()
+  }
+  class GestionSustitucionProveedorService <<Application Service>> {
+    +registrarProveedorNoDisponible()
+    +buscarAlternativaSustitucion()
+    +registrarDecisionClienteSustitucion()
+    +registrarAutorizacionAdministracionSustitucion()
+    +registrarAnexoSustitucionProveedor()
+    +confirmarSustitucionProveedor()
+    +cerrarSustitucionPorInicioEvento()
+  }
+}
+
+package "Aplicación · reacciones a Domain Events (después del commit)" <<Rectangle>> {
+  class ReaccionesEvento {
+    +alConfirmarseContratacion()
+    +alCerrarseProcesoContratacion()
+    +alConfirmarseCambio()
+    +alConfirmarseServicioAdicional()
+    +alConfirmarseSustitucion()
+  }
+  class ReaccionesSolicitudes {
+    +alRegistrarseAnexo()
+    +alIniciarseEvento()
+    +alCancelarseEvento()
+    +alRegularizarseSaldo()
+  }
+  class ReaccionesPagos {
+    +alFirmarseContrato()
+    +alConfirmarseContratacion()
+    +alVerificarsePago()
+    +alCerrarseSinRealizar()
+  }
+  class ReaccionesNotificacion {
+    +alAceptarsePropuesta()
+    +alRegularizarseSaldo()
+    +alVencerPlazoRegularizacion()
+    +alCancelarseEvento()
+    +alVencerSaldo()
+    +alNoDisponerProveedor()
+    +alRegistrarseDevolucion()
+  }
+}
+
+package "Interfaces (detalle en la vista 3)" <<Rectangle>> {
+  interface IUnitOfWork
+  interface "Repository por raíz (7)" as Repos
+  interface IConsultaDisponibilidadProveedor
+  interface INotificadorParticipantes
+  interface IVerificadorPagos
+  interface IEjecutorDevoluciones
+}
+
+package "Dominio (vista 1)" <<Rectangle>> {
+  class "Aggregate Roots" as Raices
+  class "Domain Services" as DS
+}
+
+GestionPropuestaService ..> Repos
+FormalizarContratacionService ..> Repos
+GestionPagosService ..> Repos
+GestionCierreEventoService ..> Repos
+GestionCambiosEventoService ..> Repos
+GestionServiciosAdicionalesService ..> Repos
+GestionSustitucionProveedorService ..> Repos
+Repos ..> Raices
+GestionPagosService ..> IVerificadorPagos
+GestionPagosService ..> IEjecutorDevoluciones
+GestionCambiosEventoService ..> IConsultaDisponibilidadProveedor
+GestionServiciosAdicionalesService ..> IConsultaDisponibilidadProveedor
+GestionSustitucionProveedorService ..> IConsultaDisponibilidadProveedor
+GestionCambiosEventoService ..> DS
+GestionServiciosAdicionalesService ..> DS
+GestionSustitucionProveedorService ..> DS
+ReaccionesNotificacion ..> INotificadorParticipantes
+ReaccionesEvento ..> IUnitOfWork
+ReaccionesSolicitudes ..> GestionCambiosEventoService
+ReaccionesSolicitudes ..> GestionServiciosAdicionalesService
+ReaccionesSolicitudes ..> GestionSustitucionProveedorService
+ReaccionesPagos ..> GestionPagosService
+ReaccionesPagos ..> FormalizarContratacionService
+
+legend bottom left
+  Todos los Application Services que escriben usan IUnitOfWork: confirman una raíz por transacción
+  (excepción documentada: comunicarSolicitudPago()). Las reacciones se ejecutan después del commit, cada una en su transacción.
+  Línea discontinua = dependencia.
+endlegend
+@enduml

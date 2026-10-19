@@ -1,0 +1,257 @@
+@startuml clases-1-dominio
+' Eventos Nova · Diagrama de clases · Vista 1: capa de dominio (modelo v1.4)
+' Los nombres de métodos se escriben en camelCase como en el diseño; en el código Python se usan en snake_case.
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam classFontSize 13
+skinparam classAttributeFontSize 11
+skinparam packageStyle rectangle
+skinparam nodesep 40
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #FFFFFF
+  BorderColor #1D4ED8
+  ArrowColor #334155
+}
+skinparam package {
+  BackgroundColor #EFF6FF
+  BorderColor #1D4ED8
+}
+title Eventos Nova — Diagrama de clases · Vista 1: dominio (modelo v1.4)
+
+package "Dominio" <<Rectangle>> {
+
+  abstract class AggregateRoot {
+    +id
+    +extraerEventos()
+  }
+
+  abstract class SolicitudBase <<base técnica, no es agregado>> {
+    +eventoId
+    +contratoId
+    +estadoCuentaId
+    +anexoId
+    +motivoCierre : MotivoCierreSolicitud
+    +asociarAnexo()
+    +aplicarDecisionRegularizacion()
+    +cerrarPorCancelacionEvento()
+  }
+
+  class Propuesta <<Aggregate Root>> {
+    +estado : EstadoPropuesta
+    +versionVigenteId
+    +generarNuevaVersion()
+    +aceptar()
+    +cerrarPorNoAceptacion()
+    +versionAceptada()
+  }
+  class VersionPropuesta <<Entidad>> {
+    +numero
+    +fechaActualizacion
+    +contenido : ContenidoPropuesta
+  }
+
+  class Contrato <<Aggregate Root>> {
+    +estado : EstadoContrato
+    +politica : PoliticaNoReembolso
+    +fechaFirma
+    +registrarComunicacionPolitica()
+    +firmar()
+    +confirmarContratacion()
+    +registrarSeguimientoAnticipo()
+    +limitePagoAnticipo()
+    +cerrarSinConfirmar()
+    +registrarAnexo()
+  }
+  class AnexoContrato <<Entidad>> {
+    +anexoId
+    +tipoOrigen
+    +origenId
+  }
+
+  class Evento <<Aggregate Root>> {
+    +estado : EstadoEvento
+    +datos : DatosEvento
+    +motivoCancelacion : MotivoCancelacionEvento
+    +revisionAdministrativa
+    +confirmarContratacion()
+    +cerrarSinContratacion()
+    +configuracionVigente()
+    +aplicarCambioConfirmado()
+    +incorporarServicioAdicional()
+    +reasignarProveedor()
+    +solicitarCancelacion()
+    +cancelarPorFaltaDeRegularizacion()
+    +registrarRevisionAdministrativa()
+    +iniciar()
+    +finalizar()
+  }
+  class ServicioContratado <<Entidad>> {
+    +servicioContratadoId
+    +proveedorId
+    +condiciones : CondicionesServicio
+  }
+  class SolicitudCancelacion <<Entidad>> {
+    +estado : EstadoSolicitudCancelacion
+  }
+
+  class SolicitudCambio <<Aggregate Root>> {
+    +estado : EstadoSolicitudCambio
+    +anticipacion : AnticipacionSolicitud
+    +tarifa : TarifaCargoTardio
+    +datosPropuestos : DatosEvento
+    +decisionCliente : Decision
+    +autorizacionAdministracion : Decision
+    +condicionTemporal()
+    +configuracionPropuesta()
+    +registrarViabilidad()
+    +registrarDecisionCliente()
+    +registrarAutorizacion()
+    +registrarSolicitudPago()
+    +confirmar()
+    +cerrarPorFaltaDePago()
+    +cerrarPorInicioEvento()
+  }
+
+  class SolicitudServicioAdicional <<Aggregate Root>> {
+    +estado : EstadoSolicitudServicioAdicional
+    +elegibilidadObtenida
+    +disponibilidad : DisponibilidadProveedor
+    +decisionCliente : Decision
+    +autorizacionAdministracion : Decision
+    +condicionTemporal()
+    +registrarDisponibilidad()
+    +registrarRespuestaEspera()
+    +registrarDecisionCliente()
+    +registrarAutorizacion()
+    +registrarSolicitudPago()
+    +confirmar()
+    +cerrarPorFaltaDePago()
+    +cerrarPorInicioEvento()
+  }
+
+  class SustitucionProveedor <<Aggregate Root>> {
+    +estado : EstadoSustitucionProveedor
+    +servicioContratadoId
+    +costoAdicional : Importe
+    +aprobadaDespuesDelLimite
+    +proponerAlternativa()
+    +registrarDecisionCliente()
+    +registrarAutorizacion()
+    +importeAdicionalAprobado()
+    +confirmar()
+    +cerrarPorInicioEvento()
+  }
+  class AlternativaPropuesta <<Value Object>> {
+    +proveedorId
+    +impacto : ImpactoModificacion
+    +decisionCliente : Decision
+    +autorizacionAdministracion : Decision
+  }
+
+  class EstadoCuenta <<Aggregate Root>> {
+    +contratoId
+    +resultadoRegularizacion
+    +registrarObligacionAnticipo()
+    +registrarObligacionSaldoOriginal()
+    +comunicarSolicitudPago()
+    +registrarImporteAdicionalSustitucion()
+    +registrarYVerificarPago()
+    +verificarPagoRegistrado()
+    +registrarVencimientoSaldo()
+    +activarProtocoloCobro()
+    +resolverRegularizacion()
+    +pagosRealizados()
+    +saldoPendienteContrato()
+    +aplicarCierreSinRealizar()
+    +registrarDevolucionEfectuada()
+  }
+  class ObligacionPago <<Entidad>> {
+    +concepto : ConceptoPago
+    +importe : Importe
+    +plazo : PlazoPago
+    +origenId
+    +estado : EstadoObligacionPago
+  }
+  class Pago <<Entidad>> {
+    +importe : Importe
+    +fecha : pago efectuado por el Cliente
+    +registradoEn
+    +verificadoEn
+    +estado : EstadoPago
+  }
+  class Devolucion <<Entidad>> {
+    +solicitudId
+    +importe : Importe
+    +motivoDevolucion
+    +estado : EstadoDevolucion
+  }
+
+  class MotivoCancelacionEvento <<Value Object>> {
+    +origen
+    +descripcion
+    +registradoPor
+  }
+  class MotivoCierreSolicitud <<Value Object>> {
+    +causa
+    +descripcion
+  }
+  class Decision <<Value Object>> {
+    +actor
+    +aprobada
+    +fecha
+    +motivo
+  }
+
+  class EvaluarImpactoCambio <<Domain Service>> {
+    +evaluar()
+  }
+  class EvaluarRegularizacionDeSolicitudes <<Domain Service>> {
+    +evaluar()
+  }
+}
+
+AggregateRoot <|-- Propuesta
+AggregateRoot <|-- Contrato
+AggregateRoot <|-- Evento
+AggregateRoot <|-- EstadoCuenta
+AggregateRoot <|-- SolicitudBase
+SolicitudBase <|-- SolicitudCambio
+SolicitudBase <|-- SolicitudServicioAdicional
+SolicitudBase <|-- SustitucionProveedor
+
+Propuesta *-- "1..*" VersionPropuesta
+Contrato *-- "0..*" AnexoContrato
+Evento *-- "0..*" ServicioContratado
+Evento *-- "0..*" SolicitudCancelacion
+Evento *-- "0..1" MotivoCancelacionEvento
+EstadoCuenta *-- "0..*" ObligacionPago
+EstadoCuenta *-- "0..*" Pago
+EstadoCuenta *-- "0..*" Devolucion
+SustitucionProveedor *-- "0..*" AlternativaPropuesta
+SolicitudBase *-- "0..1" MotivoCierreSolicitud
+SolicitudCambio ..> Decision
+SolicitudServicioAdicional ..> Decision
+
+Propuesta ..> Evento : eventoId
+Contrato ..> Propuesta : propuestaId
+Contrato ..> Evento : eventoId
+EstadoCuenta ..> Contrato : contratoId
+SolicitudBase ..> Evento : eventoId
+SolicitudBase ..> Contrato : contratoId, anexoId
+SolicitudBase ..> EstadoCuenta : estadoCuentaId
+SustitucionProveedor ..> ServicioContratado : servicioContratadoId
+
+EvaluarImpactoCambio ..> Evento
+EvaluarImpactoCambio ..> SolicitudCambio
+EvaluarRegularizacionDeSolicitudes ..> EstadoCuenta
+EvaluarRegularizacionDeSolicitudes ..> SolicitudBase
+
+legend bottom left
+  Línea con rombo = pertenencia al agregado (composición). Línea discontinua = referencia por identificador o uso.
+  Ningún agregado modifica otra raíz: las reacciones a Domain Events lo coordinan desde la aplicación (vista 2).
+  Los Domain Services reciben de la aplicación los datos que comparan; no consultan repositorios.
+  Los demás Value Objects y enumeraciones del mapa de dominio se muestran como tipos de atributo.
+endlegend
+@enduml

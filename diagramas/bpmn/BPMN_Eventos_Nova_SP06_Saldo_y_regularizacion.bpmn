@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Defs_SP06" targetNamespace="https://eventosnova.example/bpmn" exporter="Eventos Nova (generador del equipo)" exporterVersion="1.0">
+  <bpmn:signal id="Signal_SaldoRegularizado" name="Saldo vencido regularizado" />
+  <bpmn:error id="Error_FaltaRegularizacion" name="Cancelación por falta de regularización" errorCode="FALTA_REGULARIZACION" />
+  <bpmn:collaboration id="Collab_SP06">
+    <bpmn:documentation>Saldo del contrato original 3 días hábiles antes del evento, protocolo de cobro, cargos moratorios, plazo de 24 horas naturales, revisión de Administración y registro manual de la cancelación por el Coordinador (BN-005, BN-008, SE-006, SE-007; US-011, US-022, US-024, US-025; CA-022 a CA-027, CA-066, CA-072).</bpmn:documentation>
+    <bpmn:participant id="Part_SP06_Cliente" name="Cliente" />
+    <bpmn:participant id="Part_SP06_EN" name="Eventos Nova" processRef="Proc_SP06_Saldo" />
+    <bpmn:messageFlow id="SP06_M01" name="Importe y fecha límite" sourceRef="SP06_Comunicar" targetRef="Part_SP06_Cliente" />
+    <bpmn:messageFlow id="SP06_M02" name="Pago del saldo" sourceRef="Part_SP06_Cliente" targetRef="SP06_PagoSaldo" />
+    <bpmn:messageFlow id="SP06_M03" name="Recordatorio amistoso" sourceRef="SP06_Protocolo" targetRef="Part_SP06_Cliente" />
+    <bpmn:messageFlow id="SP06_M04" name="Saldo vencido y cargos moratorios" sourceRef="SP06_Moratorios" targetRef="Part_SP06_Cliente" />
+    <bpmn:messageFlow id="SP06_M05" name="Pago del saldo vencido y de los cargos" sourceRef="Part_SP06_Cliente" targetRef="SP06_Revisar" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_SP06_Saldo" name="Seguimiento del saldo pendiente y regularización del saldo vencido" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_SP06">
+      <bpmn:lane id="Lane_SP06_Coord" name="Coordinador">
+        <bpmn:flowNodeRef>SP06_Comunicar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_UEsp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Espera</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_PagoSaldo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Vence</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Protocolo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Moratorios</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Plazo24</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Retomar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_FinRegular</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_RegCancelacion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_FinCancelacion</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_SP06_Admin" name="Administración">
+        <bpmn:flowNodeRef>SP06_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Controlar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Verificar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_GwLiquidado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_FinLiquidado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Revisar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_GwRegular</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_RegLiquidacion</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_Senal</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP06_NoRegular</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="SP06_Inicio" name="Contratación confirmada">
+      <bpmn:outgoing>SP06_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="SP06_Controlar" name="Controlar los pagos realizados y pendientes y su fecha límite, e informar al Coordinador el saldo">
+      <bpmn:documentation>BN-005, SE-007; CA-022, CA-024 (US-011, US-022)</bpmn:documentation>
+      <bpmn:incoming>SP06_F01</bpmn:incoming>
+      <bpmn:outgoing>SP06_F02</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP06_Comunicar" name="Comunicar al Cliente el importe pendiente y la fecha límite: 3 días hábiles antes del evento">
+      <bpmn:documentation>BN-005; CA-023</bpmn:documentation>
+      <bpmn:incoming>SP06_F02</bpmn:incoming>
+      <bpmn:outgoing>SP06_F03</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP06_UEsp">
+      <bpmn:incoming>SP06_F03</bpmn:incoming>
+      <bpmn:incoming>SP06_F09</bpmn:incoming>
+      <bpmn:outgoing>SP06_F04</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:eventBasedGateway id="SP06_Espera">
+      <bpmn:incoming>SP06_F04</bpmn:incoming>
+      <bpmn:outgoing>SP06_F05</bpmn:outgoing>
+      <bpmn:outgoing>SP06_F10</bpmn:outgoing>
+    </bpmn:eventBasedGateway>
+    <bpmn:intermediateCatchEvent id="SP06_PagoSaldo" name="Pago del saldo recibido">
+      <bpmn:incoming>SP06_F05</bpmn:incoming>
+      <bpmn:outgoing>SP06_F06</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP06_PagoSaldo_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP06_Verificar" name="Registrar y verificar el pago del saldo">
+      <bpmn:documentation>BN-005; CA-026: cada concepto por separado.</bpmn:documentation>
+      <bpmn:incoming>SP06_F06</bpmn:incoming>
+      <bpmn:outgoing>SP06_F07</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP06_GwLiquidado" name="¿El saldo pendiente quedó liquidado?">
+      <bpmn:incoming>SP06_F07</bpmn:incoming>
+      <bpmn:outgoing>SP06_F08</bpmn:outgoing>
+      <bpmn:outgoing>SP06_F09</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:endEvent id="SP06_FinLiquidado" name="Saldo liquidado">
+      <bpmn:incoming>SP06_F08</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:intermediateCatchEvent id="SP06_Vence" name="Fecha límite vencida sin que el Cliente haya pagado el saldo">
+      <bpmn:documentation>BN-005, SE-007: cuenta la fecha del pago, no la de su registro o verificación.</bpmn:documentation>
+      <bpmn:incoming>SP06_F10</bpmn:incoming>
+      <bpmn:outgoing>SP06_F11</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="SP06_Vence_def"></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP06_Protocolo" name="Activar el protocolo de cobro: enviar un recordatorio amistoso y registrar el seguimiento">
+      <bpmn:documentation>BN-005; CA-025</bpmn:documentation>
+      <bpmn:incoming>SP06_F11</bpmn:incoming>
+      <bpmn:outgoing>SP06_F12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP06_Moratorios" name="Comunicar al Cliente el saldo vencido y los cargos moratorios, registrados como concepto separado">
+      <bpmn:documentation>BN-005; CA-025, CA-026</bpmn:documentation>
+      <bpmn:incoming>SP06_F12</bpmn:incoming>
+      <bpmn:outgoing>SP06_F13</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="SP06_Plazo24" name="24 horas naturales desde la comunicación de los cargos: plazo del Cliente para pagar">
+      <bpmn:documentation>BN-005; CA-027</bpmn:documentation>
+      <bpmn:incoming>SP06_F13</bpmn:incoming>
+      <bpmn:outgoing>SP06_F14</bpmn:outgoing>
+      <bpmn:timerEventDefinition id="SP06_Plazo24_def"><bpmn:timeDuration xsi:type="bpmn:tFormalExpression">PT24H</bpmn:timeDuration></bpmn:timerEventDefinition>
+    </bpmn:intermediateCatchEvent>
+    <bpmn:task id="SP06_Revisar" name="Revisar los pagos y comprobar si el Cliente los efectuó dentro del plazo">
+      <bpmn:documentation>BN-005, CA-027: decide la fecha en que el Cliente pagó; el registro y la verificación pueden ser posteriores.</bpmn:documentation>
+      <bpmn:incoming>SP06_F14</bpmn:incoming>
+      <bpmn:outgoing>SP06_F15</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP06_GwRegular" name="¿El Cliente pagó el saldo vencido y los cargos dentro de las 24 horas?">
+      <bpmn:documentation>BN-005: un pago posterior a las 24 horas no evita la cancelación.</bpmn:documentation>
+      <bpmn:incoming>SP06_F15</bpmn:incoming>
+      <bpmn:outgoing>SP06_F16</bpmn:outgoing>
+      <bpmn:outgoing>SP06_F20</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP06_RegLiquidacion" name="Registrar y verificar la liquidación, aunque sea después del plazo, e informar al Coordinador">
+      <bpmn:documentation>CA-027, CA-066, CA-072</bpmn:documentation>
+      <bpmn:incoming>SP06_F16</bpmn:incoming>
+      <bpmn:outgoing>SP06_F17</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateThrowEvent id="SP06_Senal" name="Saldo vencido regularizado">
+      <bpmn:documentation>Las solicitudes detenidas se retoman (SP-03, SP-04).</bpmn:documentation>
+      <bpmn:incoming>SP06_F17</bpmn:incoming>
+      <bpmn:outgoing>SP06_F18</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SP06_Senal_def" signalRef="Signal_SaldoRegularizado" />
+    </bpmn:intermediateThrowEvent>
+    <bpmn:task id="SP06_Retomar" name="Retomar la organización del evento y las solicitudes detenidas que cumplan sus condiciones">
+      <bpmn:documentation>BN-005; CA-027, CA-066, CA-072</bpmn:documentation>
+      <bpmn:incoming>SP06_F18</bpmn:incoming>
+      <bpmn:outgoing>SP06_F19</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP06_FinRegular" name="Saldo regularizado">
+      <bpmn:incoming>SP06_F19</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="SP06_NoRegular" name="Informar al Coordinador que el saldo y los cargos moratorios no se regularizaron">
+      <bpmn:documentation>CA-027</bpmn:documentation>
+      <bpmn:incoming>SP06_F20</bpmn:incoming>
+      <bpmn:outgoing>SP06_F21</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP06_RegCancelacion" name="Registrar la cancelación del evento e indicar el motivo">
+      <bpmn:documentation>BN-005, BN-008, CA-027: registro manual del Coordinador, en cuanto recibe el aviso y antes del inicio del evento.</bpmn:documentation>
+      <bpmn:incoming>SP06_F21</bpmn:incoming>
+      <bpmn:outgoing>SP06_F22</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP06_FinCancelacion" name="Evento cancelado por falta de regularización">
+      <bpmn:incoming>SP06_F22</bpmn:incoming>
+      <bpmn:errorEventDefinition id="SP06_FinCancelacion_def" errorRef="Error_FaltaRegularizacion" />
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SP06_F01" sourceRef="SP06_Inicio" targetRef="SP06_Controlar" />
+    <bpmn:sequenceFlow id="SP06_F02" sourceRef="SP06_Controlar" targetRef="SP06_Comunicar" />
+    <bpmn:sequenceFlow id="SP06_F03" sourceRef="SP06_Comunicar" targetRef="SP06_UEsp" />
+    <bpmn:sequenceFlow id="SP06_F04" sourceRef="SP06_UEsp" targetRef="SP06_Espera" />
+    <bpmn:sequenceFlow id="SP06_F05" sourceRef="SP06_Espera" targetRef="SP06_PagoSaldo" />
+    <bpmn:sequenceFlow id="SP06_F06" sourceRef="SP06_PagoSaldo" targetRef="SP06_Verificar" />
+    <bpmn:sequenceFlow id="SP06_F07" sourceRef="SP06_Verificar" targetRef="SP06_GwLiquidado" />
+    <bpmn:sequenceFlow id="SP06_F08" name="Sí" sourceRef="SP06_GwLiquidado" targetRef="SP06_FinLiquidado" />
+    <bpmn:sequenceFlow id="SP06_F09" name="No" sourceRef="SP06_GwLiquidado" targetRef="SP06_UEsp" />
+    <bpmn:sequenceFlow id="SP06_F10" sourceRef="SP06_Espera" targetRef="SP06_Vence" />
+    <bpmn:sequenceFlow id="SP06_F11" sourceRef="SP06_Vence" targetRef="SP06_Protocolo" />
+    <bpmn:sequenceFlow id="SP06_F12" sourceRef="SP06_Protocolo" targetRef="SP06_Moratorios" />
+    <bpmn:sequenceFlow id="SP06_F13" sourceRef="SP06_Moratorios" targetRef="SP06_Plazo24" />
+    <bpmn:sequenceFlow id="SP06_F14" sourceRef="SP06_Plazo24" targetRef="SP06_Revisar" />
+    <bpmn:sequenceFlow id="SP06_F15" sourceRef="SP06_Revisar" targetRef="SP06_GwRegular" />
+    <bpmn:sequenceFlow id="SP06_F16" name="Sí" sourceRef="SP06_GwRegular" targetRef="SP06_RegLiquidacion" />
+    <bpmn:sequenceFlow id="SP06_F17" sourceRef="SP06_RegLiquidacion" targetRef="SP06_Senal" />
+    <bpmn:sequenceFlow id="SP06_F18" sourceRef="SP06_Senal" targetRef="SP06_Retomar" />
+    <bpmn:sequenceFlow id="SP06_F19" sourceRef="SP06_Retomar" targetRef="SP06_FinRegular" />
+    <bpmn:sequenceFlow id="SP06_F20" name="No" sourceRef="SP06_GwRegular" targetRef="SP06_NoRegular" />
+    <bpmn:sequenceFlow id="SP06_F21" sourceRef="SP06_NoRegular" targetRef="SP06_RegCancelacion" />
+    <bpmn:sequenceFlow id="SP06_F22" sourceRef="SP06_RegCancelacion" targetRef="SP06_FinCancelacion" />
+    <bpmn:textAnnotation id="SP06_NotaCanc"><bpmn:text>La cancelación no es automática: la registra el Coordinador. Un pago efectuado después de las 24 horas no la evita; uno efectuado dentro de ellas cuenta aunque Administración lo registre o verifique después. Si el evento inicia antes de registrarla, ya no procede y el saldo vencido y los cargos moratorios se conservan como adeudo (BN-005).</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="SP06_NotaSol"><bpmn:text>Mientras exista saldo vencido, las nuevas solicitudes de cambio o de servicio adicional quedan detenidas (SE-006).</bpmn:text></bpmn:textAnnotation>
+    <bpmn:textAnnotation id="SP06_NotaSust"><bpmn:text>El costo adicional de una sustitución aprobada y autorizada se incorpora a este saldo (BN-005, CA-052).</bpmn:text></bpmn:textAnnotation>
+    <bpmn:association id="SP06_NotaCanc_A" associationDirection="None" sourceRef="SP06_RegCancelacion" targetRef="SP06_NotaCanc" />
+    <bpmn:association id="SP06_NotaSol_A" associationDirection="None" sourceRef="SP06_Moratorios" targetRef="SP06_NotaSol" />
+    <bpmn:association id="SP06_NotaSust_A" associationDirection="None" sourceRef="SP06_Controlar" targetRef="SP06_NotaSust" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_SP06" name="Seguimiento del saldo pendiente y regularización del saldo vencido">
+    <bpmndi:BPMNPlane id="Plane_SP06" bpmnElement="Collab_SP06">
+      <bpmndi:BPMNShape id="Part_SP06_Cliente_di" bpmnElement="Part_SP06_Cliente" isHorizontal="true" bioc:fill="#D4E7FA" color:background-color="#D4E7FA" bioc:stroke="#1E5A9C" color:border-color="#1E5A9C"><dc:Bounds x="0" y="0" width="3492" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Part_SP06_EN_di" bpmnElement="Part_SP06_EN" isHorizontal="true" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="0" y="120" width="3492" height="520" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP06_Coord_di" bpmnElement="Lane_SP06_Coord" isHorizontal="true" bioc:fill="#A9E0D8" color:background-color="#A9E0D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="36" y="120" width="3456" height="260" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP06_Admin_di" bpmnElement="Lane_SP06_Admin" isHorizontal="true" bioc:fill="#D2C3F0" color:background-color="#D2C3F0" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="36" y="380" width="3456" height="260" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Inicio_di" bpmnElement="SP06_Inicio" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="164" y="427" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="127" y="467" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Controlar_di" bpmnElement="SP06_Controlar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="302" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Comunicar_di" bpmnElement="SP06_Comunicar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="502" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_UEsp_di" bpmnElement="SP06_UEsp" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="757" y="160" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="687" y="213" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Espera_di" bpmnElement="SP06_Espera" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="957" y="160" width="50" height="50" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="887" y="213" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_PagoSaldo_di" bpmnElement="SP06_PagoSaldo" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1164" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1188" y="205" width="110" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Verificar_di" bpmnElement="SP06_Verificar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="1102" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_GwLiquidado_di" bpmnElement="SP06_GwLiquidado" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1357" y="420" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1287" y="473" width="90" height="41" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_FinLiquidado_di" bpmnElement="SP06_FinLiquidado" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="1564" y="427" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="1527" y="467" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Vence_di" bpmnElement="SP06_Vence" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="964" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="857" y="295" width="105" height="44" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Protocolo_di" bpmnElement="SP06_Protocolo" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1302" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Moratorios_di" bpmnElement="SP06_Moratorios" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1502" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Plazo24_di" bpmnElement="SP06_Plazo24" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1764" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1717" y="209" width="130" height="88" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Revisar_di" bpmnElement="SP06_Revisar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="1902" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_GwRegular_di" bpmnElement="SP06_GwRegular" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2157" y="420" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2087" y="473" width="90" height="67" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_RegLiquidacion_di" bpmnElement="SP06_RegLiquidacion" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2302" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Senal_di" bpmnElement="SP06_Senal" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2564" y="427" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="2527" y="467" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_Retomar_di" bpmnElement="SP06_Retomar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2702" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_FinRegular_di" bpmnElement="SP06_FinRegular" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="2964" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="2927" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_NoRegular_di" bpmnElement="SP06_NoRegular" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2102" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_RegCancelacion_di" bpmnElement="SP06_RegCancelacion" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="3102" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_FinCancelacion_di" bpmnElement="SP06_FinCancelacion" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="3364" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="3327" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_NotaCanc_di" bpmnElement="SP06_NotaCanc"><dc:Bounds x="2702.0" y="133.0" width="440" height="100" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_NotaSol_di" bpmnElement="SP06_NotaSol"><dc:Bounds x="1600.0" y="140.0" width="265" height="62" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP06_NotaSust_di" bpmnElement="SP06_NotaSust"><dc:Bounds x="302.0" y="550.0" width="290" height="50" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SP06_F01_di" bpmnElement="SP06_F01"><di:waypoint x="200" y="445" /><di:waypoint x="302" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F02_di" bpmnElement="SP06_F02"><di:waypoint x="462" y="445" /><di:waypoint x="582" y="445" /><di:waypoint x="582" y="230" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F03_di" bpmnElement="SP06_F03"><di:waypoint x="662" y="185" /><di:waypoint x="757" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F04_di" bpmnElement="SP06_F04"><di:waypoint x="807" y="185" /><di:waypoint x="957" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F05_di" bpmnElement="SP06_F05"><di:waypoint x="1007" y="185" /><di:waypoint x="1164" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F06_di" bpmnElement="SP06_F06"><di:waypoint x="1182" y="203" /><di:waypoint x="1182" y="400" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F07_di" bpmnElement="SP06_F07"><di:waypoint x="1262" y="445" /><di:waypoint x="1357" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F08_di" bpmnElement="SP06_F08"><di:waypoint x="1407" y="445" /><di:waypoint x="1564" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="1414" y="448" width="143" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F09_di" bpmnElement="SP06_F09"><di:waypoint x="1382" y="470" /><di:waypoint x="1382" y="575" /><di:waypoint x="782" y="575" /><di:waypoint x="782" y="210" /><bpmndi:BPMNLabel><dc:Bounds x="1388" y="508" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F10_di" bpmnElement="SP06_F10"><di:waypoint x="982" y="210" /><di:waypoint x="982" y="297" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F11_di" bpmnElement="SP06_F11"><di:waypoint x="1000" y="315" /><di:waypoint x="1302" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F12_di" bpmnElement="SP06_F12"><di:waypoint x="1462" y="315" /><di:waypoint x="1502" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F13_di" bpmnElement="SP06_F13"><di:waypoint x="1662" y="315" /><di:waypoint x="1764" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F14_di" bpmnElement="SP06_F14"><di:waypoint x="1800" y="315" /><di:waypoint x="1982" y="315" /><di:waypoint x="1982" y="400" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F15_di" bpmnElement="SP06_F15"><di:waypoint x="2062" y="445" /><di:waypoint x="2157" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F16_di" bpmnElement="SP06_F16"><di:waypoint x="2207" y="445" /><di:waypoint x="2302" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="2214" y="448" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F17_di" bpmnElement="SP06_F17"><di:waypoint x="2462" y="445" /><di:waypoint x="2564" y="445" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F18_di" bpmnElement="SP06_F18"><di:waypoint x="2600" y="445" /><di:waypoint x="2782" y="445" /><di:waypoint x="2782" y="360" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F19_di" bpmnElement="SP06_F19"><di:waypoint x="2862" y="315" /><di:waypoint x="2964" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F20_di" bpmnElement="SP06_F20"><di:waypoint x="2182" y="470" /><di:waypoint x="2182" y="530" /><bpmndi:BPMNLabel><dc:Bounds x="2188" y="486" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F21_di" bpmnElement="SP06_F21"><di:waypoint x="2262" y="575" /><di:waypoint x="3182" y="575" /><di:waypoint x="3182" y="360" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_F22_di" bpmnElement="SP06_F22"><di:waypoint x="3262" y="315" /><di:waypoint x="3364" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_M01_di" bpmnElement="SP06_M01" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="582" y="140" /><di:waypoint x="582" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="587" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_M02_di" bpmnElement="SP06_M02" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1182" y="70" /><di:waypoint x="1182" y="167" /><bpmndi:BPMNLabel><dc:Bounds x="1187" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_M03_di" bpmnElement="SP06_M03" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1382" y="270" /><di:waypoint x="1382" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="1387" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_M04_di" bpmnElement="SP06_M04" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1582" y="270" /><di:waypoint x="1582" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="1587" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_M05_di" bpmnElement="SP06_M05" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1882" y="70" /><di:waypoint x="1882" y="445" /><di:waypoint x="1902" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="1887" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_NotaCanc_A_di" bpmnElement="SP06_NotaCanc_A"><di:waypoint x="3182" y="270" /><di:waypoint x="2712" y="233" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_NotaSol_A_di" bpmnElement="SP06_NotaSol_A"><di:waypoint x="1582" y="270" /><di:waypoint x="1610" y="202" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP06_NotaSust_A_di" bpmnElement="SP06_NotaSust_A"><di:waypoint x="382" y="490" /><di:waypoint x="312" y="550" /></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

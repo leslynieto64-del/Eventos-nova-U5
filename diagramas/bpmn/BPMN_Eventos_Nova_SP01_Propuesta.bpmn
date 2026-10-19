@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Defs_SP01" targetNamespace="https://eventosnova.example/bpmn" exporter="Eventos Nova (generador del equipo)" exporterVersion="1.0">
+  <bpmn:collaboration id="Collab_SP01">
+    <bpmn:documentation>Elaboración, revisión, aceptación o cierre de propuestas (BN-002, BN-009; US-003 a US-007, US-029; CA-005 a CA-014, CA-092, CA-093).</bpmn:documentation>
+    <bpmn:participant id="Part_SP01_Cliente" name="Cliente" />
+    <bpmn:participant id="Part_SP01_EN" name="Eventos Nova" processRef="Proc_SP01_Propuesta" />
+    <bpmn:messageFlow id="SP01_M01" name="Propuesta (versión vigente)" sourceRef="SP01_Presentar" targetRef="Part_SP01_Cliente" />
+    <bpmn:messageFlow id="SP01_M02" name="Acepta, solicita cambios o no acepta" sourceRef="Part_SP01_Cliente" targetRef="SP01_Decision" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_SP01_Propuesta" name="Gestión de la propuesta" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_SP01">
+      <bpmn:lane id="Lane_SP01_Coord" name="Coordinador">
+        <bpmn:flowNodeRef>SP01_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Elaborar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Union</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Version</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Presentar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Decision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_GwDecision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Cerrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_FinCerrada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_Aceptar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_FinAceptada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP01_NuevaVersion</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="SP01_Inicio" name="Información del evento registrada">
+      <bpmn:outgoing>SP01_F01</bpmn:outgoing>
+    </bpmn:startEvent>
+    <bpmn:task id="SP01_Elaborar" name="Elaborar la propuesta con los servicios, proveedores considerados, costos y condiciones">
+      <bpmn:documentation>CA-005, CA-006 (US-003)</bpmn:documentation>
+      <bpmn:incoming>SP01_F01</bpmn:incoming>
+      <bpmn:outgoing>SP01_F02</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP01_Union">
+      <bpmn:incoming>SP01_F02</bpmn:incoming>
+      <bpmn:incoming>SP01_F10</bpmn:incoming>
+      <bpmn:outgoing>SP01_F03</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP01_Version" name="Registrar la versión vigente con número consecutivo y fecha de actualización">
+      <bpmn:documentation>BN-002; CA-009, CA-010 (US-005)</bpmn:documentation>
+      <bpmn:incoming>SP01_F03</bpmn:incoming>
+      <bpmn:outgoing>SP01_F04</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP01_Presentar" name="Presentar la propuesta vigente al Cliente">
+      <bpmn:documentation>CA-011 (US-006)</bpmn:documentation>
+      <bpmn:incoming>SP01_F04</bpmn:incoming>
+      <bpmn:outgoing>SP01_F05</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:intermediateCatchEvent id="SP01_Decision" name="Decisión del Cliente recibida">
+      <bpmn:documentation>CA-012</bpmn:documentation>
+      <bpmn:incoming>SP01_F05</bpmn:incoming>
+      <bpmn:outgoing>SP01_F06</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP01_Decision_def" />
+    </bpmn:intermediateCatchEvent>
+    <bpmn:exclusiveGateway id="SP01_GwDecision" name="¿Qué decide el Cliente?">
+      <bpmn:incoming>SP01_F06</bpmn:incoming>
+      <bpmn:outgoing>SP01_F07</bpmn:outgoing>
+      <bpmn:outgoing>SP01_F08</bpmn:outgoing>
+      <bpmn:outgoing>SP01_F09</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP01_Cerrar" name="Registrar la propuesta como no aceptada y cerrada">
+      <bpmn:documentation>CA-092 (US-029)</bpmn:documentation>
+      <bpmn:incoming>SP01_F08</bpmn:incoming>
+      <bpmn:outgoing>SP01_F11</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP01_FinCerrada" name="Propuesta no aceptada y cerrada (el Evento sigue En gestión)">
+      <bpmn:documentation>CA-093: el Cliente puede solicitar una nueva propuesta; el Evento no se cancela.</bpmn:documentation>
+      <bpmn:incoming>SP01_F11</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="SP01_Aceptar" name="Registrar la propuesta como aceptada">
+      <bpmn:documentation>CA-013 (US-007)</bpmn:documentation>
+      <bpmn:incoming>SP01_F07</bpmn:incoming>
+      <bpmn:outgoing>SP01_F12</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP01_FinAceptada" name="Propuesta aceptada">
+      <bpmn:documentation>CA-014: continúa la formalización del contrato.</bpmn:documentation>
+      <bpmn:incoming>SP01_F12</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="SP01_NuevaVersion" name="Crear una nueva versión de la propuesta con los cambios solicitados">
+      <bpmn:documentation>CA-007, CA-008 (US-004)</bpmn:documentation>
+      <bpmn:incoming>SP01_F09</bpmn:incoming>
+      <bpmn:outgoing>SP01_F10</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:sequenceFlow id="SP01_F01" sourceRef="SP01_Inicio" targetRef="SP01_Elaborar" />
+    <bpmn:sequenceFlow id="SP01_F02" sourceRef="SP01_Elaborar" targetRef="SP01_Union" />
+    <bpmn:sequenceFlow id="SP01_F03" sourceRef="SP01_Union" targetRef="SP01_Version" />
+    <bpmn:sequenceFlow id="SP01_F04" sourceRef="SP01_Version" targetRef="SP01_Presentar" />
+    <bpmn:sequenceFlow id="SP01_F05" sourceRef="SP01_Presentar" targetRef="SP01_Decision" />
+    <bpmn:sequenceFlow id="SP01_F06" sourceRef="SP01_Decision" targetRef="SP01_GwDecision" />
+    <bpmn:sequenceFlow id="SP01_F07" name="Acepta la versión vigente" sourceRef="SP01_GwDecision" targetRef="SP01_Aceptar" />
+    <bpmn:sequenceFlow id="SP01_F08" name="No acepta ni solicita cambios" sourceRef="SP01_GwDecision" targetRef="SP01_Cerrar" />
+    <bpmn:sequenceFlow id="SP01_F09" name="Solicita cambios" sourceRef="SP01_GwDecision" targetRef="SP01_NuevaVersion" />
+    <bpmn:sequenceFlow id="SP01_F10" sourceRef="SP01_NuevaVersion" targetRef="SP01_Union" />
+    <bpmn:sequenceFlow id="SP01_F11" sourceRef="SP01_Cerrar" targetRef="SP01_FinCerrada" />
+    <bpmn:sequenceFlow id="SP01_F12" sourceRef="SP01_Aceptar" targetRef="SP01_FinAceptada" />
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_SP01" name="Gestión de la propuesta">
+    <bpmndi:BPMNPlane id="Plane_SP01" bpmnElement="Collab_SP01">
+      <bpmndi:BPMNShape id="Part_SP01_Cliente_di" bpmnElement="Part_SP01_Cliente" isHorizontal="true" bioc:fill="#D4E7FA" color:background-color="#D4E7FA" bioc:stroke="#1E5A9C" color:border-color="#1E5A9C"><dc:Bounds x="0" y="0" width="2092" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Part_SP01_EN_di" bpmnElement="Part_SP01_EN" isHorizontal="true" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="0" y="120" width="2092" height="390" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP01_Coord_di" bpmnElement="Lane_SP01_Coord" isHorizontal="true" bioc:fill="#A9E0D8" color:background-color="#A9E0D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="36" y="120" width="2056" height="390" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Inicio_di" bpmnElement="SP01_Inicio" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="164" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="127" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Elaborar_di" bpmnElement="SP01_Elaborar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="302" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Union_di" bpmnElement="SP01_Union" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="557" y="290" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="487" y="272" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Version_di" bpmnElement="SP01_Version" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="702" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Presentar_di" bpmnElement="SP01_Presentar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="902" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Decision_di" bpmnElement="SP01_Decision" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="1164" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="1127" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_GwDecision_di" bpmnElement="SP01_GwDecision" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1357" y="290" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1287" y="259" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Cerrar_di" bpmnElement="SP01_Cerrar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1502" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_FinCerrada_di" bpmnElement="SP01_FinCerrada" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="1764" y="167" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="1722" y="207" width="130" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_Aceptar_di" bpmnElement="SP01_Aceptar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1502" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_FinAceptada_di" bpmnElement="SP01_FinAceptada" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="1764" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="1727" y="337" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP01_NuevaVersion_di" bpmnElement="SP01_NuevaVersion" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="902" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SP01_F01_di" bpmnElement="SP01_F01"><di:waypoint x="200" y="315" /><di:waypoint x="302" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F02_di" bpmnElement="SP01_F02"><di:waypoint x="462" y="315" /><di:waypoint x="557" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F03_di" bpmnElement="SP01_F03"><di:waypoint x="607" y="315" /><di:waypoint x="702" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F04_di" bpmnElement="SP01_F04"><di:waypoint x="862" y="315" /><di:waypoint x="902" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F05_di" bpmnElement="SP01_F05"><di:waypoint x="1062" y="315" /><di:waypoint x="1164" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F06_di" bpmnElement="SP01_F06"><di:waypoint x="1200" y="315" /><di:waypoint x="1357" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F07_di" bpmnElement="SP01_F07"><di:waypoint x="1407" y="315" /><di:waypoint x="1502" y="315" /><bpmndi:BPMNLabel><dc:Bounds x="1414" y="318" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F08_di" bpmnElement="SP01_F08"><di:waypoint x="1382" y="290" /><di:waypoint x="1382" y="185" /><di:waypoint x="1502" y="185" /><bpmndi:BPMNLabel><dc:Bounds x="1388" y="224" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F09_di" bpmnElement="SP01_F09"><di:waypoint x="1382" y="340" /><di:waypoint x="1382" y="445" /><di:waypoint x="1062" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="1388" y="378" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F10_di" bpmnElement="SP01_F10"><di:waypoint x="902" y="445" /><di:waypoint x="582" y="445" /><di:waypoint x="582" y="340" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F11_di" bpmnElement="SP01_F11"><di:waypoint x="1662" y="185" /><di:waypoint x="1764" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_F12_di" bpmnElement="SP01_F12"><di:waypoint x="1662" y="315" /><di:waypoint x="1764" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_M01_di" bpmnElement="SP01_M01" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="982" y="270" /><di:waypoint x="982" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="987" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP01_M02_di" bpmnElement="SP01_M02" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1182" y="70" /><di:waypoint x="1182" y="297" /><bpmndi:BPMNLabel><dc:Bounds x="1187" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>

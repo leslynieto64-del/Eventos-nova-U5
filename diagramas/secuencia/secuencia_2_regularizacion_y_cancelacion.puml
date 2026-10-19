@@ -1,0 +1,111 @@
+@startuml secuencia-2-regularizacion-y-cancelacion
+' Eventos Nova · Diagrama de secuencia 2 · Regla de excepción CU-03: saldo vencido, regularización y cancelación registrada por el Coordinador
+' Trazabilidad: BN-005, BN-008, US-011, CA-025, CA-027; Domain Events SaldoVencidoRegularizado, PlazoRegularizacionVencido y EventoCancelado.
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 170
+skinparam defaultFontSize 13
+skinparam ParticipantPadding 4
+skinparam BoxPadding 4
+skinparam sequence {
+  ParticipantBorderColor #B91C1C
+  ParticipantBackgroundColor #FEF2F2
+  LifeLineBorderColor #64748B
+  GroupBorderColor #64748B
+}
+title Eventos Nova — Secuencia 2 · CU-03: regularización del saldo vencido y cancelación registrada por el Coordinador
+
+actor "Administración" as ADM
+actor "Coordinador" as COO
+participant "RegistrarCancelacionPorFalta\nDeRegularizacionHandler" as H
+participant "GestionCierre\nEventoService" as GC
+participant EstadoCuenta as EC
+participant IUnitOfWork as UOW
+participant "Despachador\nOutbox" as OUT
+participant "Reacciones\nSolicitudes" as RS
+participant "Reacciones\nNotificacion" as RN
+participant "INotificador\nParticipantes" as NOT
+participant Evento as EV
+
+note over ADM, EC : Precondición: saldo del contrato original vencido y cargos moratorios comunicados\ncon una ventana de 24 horas naturales (activarProtocoloCobro()).
+
+== Transacción 1 · Administración registra el resultado al vencer la ventana (raíz EstadoCuenta) ==
+ADM -> GC : resolverRegularizacionSaldoVencido(estadoCuentaId, revisadoEn)
+activate GC
+GC -> UOW : iniciar()
+GC -> EC : resolverRegularizacion(revisadoEn)
+activate EC
+alt ventana vigente, resultado ya registrado o pago efectuado a tiempo pendiente de verificación
+  EC --> GC : ErrorDominio
+  GC -> UOW : revertir()
+  GC --> ADM : Resultado rechazo
+else saldo y cargos pagados dentro de la ventana (fecha del pago) y verificados,\naunque el registro o la verificación sean posteriores
+  EC -> EC : obligaciones → Liquidada\nregistra SaldoVencidoRegularizado
+  EC --> GC : regularizado
+else sin pago efectuado dentro de la ventana
+  EC -> EC : resultado No regularizado\nregistra PlazoRegularizacionVencido
+  EC --> GC : no regularizado
+end
+deactivate EC
+opt sin ErrorDominio
+  GC -> UOW : confirmar()
+  GC --> ADM : Resultado ok (regularizado o no)
+end
+deactivate GC
+
+== Después del commit · reacciones (cada una en su transacción) ==
+alt SaldoVencidoRegularizado
+  OUT -> RS : alRegularizarseSaldo(SaldoVencidoRegularizado)
+  note right of RS : Retoma las solicitudes detenidas por saldo\nvencido que cumplan sus condiciones.
+  OUT -> RN : alRegularizarseSaldo(SaldoVencidoRegularizado)
+  RN -> NOT : notificar(Coordinador y Cliente, "Saldo regularizado")
+  note right of RN : No se envía ningún aviso de cancelación.
+else PlazoRegularizacionVencido
+  OUT -> RN : alVencerPlazoRegularizacion(PlazoRegularizacionVencido)
+  RN -> NOT : notificar(Coordinador y Administración, "Plazo de regularización vencido")
+  note right of RN : Solo avisa. El sistema no cancela el evento.
+end
+
+== Transacción 2 · el Coordinador registra formalmente la cancelación (raíz Evento) ==
+note over COO, H : Regla: el Coordinador registra la cancelación en cuanto recibe el aviso\ny antes del inicio del evento (BN-005, ADR-003).
+COO -> H : handle(RegistrarCancelacionPorFaltaDeRegularizacionCommand)
+activate H
+H -> GC : registrarCancelacionPorFaltaDeRegularizacion(eventoId, motivo, coordinador, ahora)
+activate GC
+GC -> EC : noRegularizadoVerificado()
+note right of GC : Lectura: comprueba que Administración\nregistró el resultado No regularizado.
+GC -> UOW : iniciar()
+GC -> EV : cancelarPorFaltaDeRegularizacion(motivo, registradoPor, ahora, verificado)
+activate EV
+alt sin resultado No regularizado o sin motivo
+  EV --> GC : ErrorDominio
+  GC -> UOW : revertir()
+  GC --> H : Resultado rechazo
+else ya cancelado por esta causa
+  EV --> GC : sin cambios (idempotente)
+else registro válido
+  EV -> EV : estado → Cancelado con MotivoCancelacionEvento\nregistra EventoCancelado
+  EV --> GC : cancelado
+end
+deactivate EV
+opt sin ErrorDominio
+  GC -> UOW : confirmar()
+  GC --> H : Resultado ok
+end
+deactivate GC
+H --> COO : Resultado
+deactivate H
+
+== Después del commit · comunicación de la cancelación y cierre de solicitudes en trámite ==
+OUT -> RS : alCancelarseEvento(EventoCancelado)
+note right of RS : Cierra cada solicitud en trámite con el motivo «Evento cancelado»,\nuna transacción por solicitud; las confirmadas no se cierran (BN-008).
+OUT -> RN : alCancelarseEvento(EventoCancelado)
+RN -> NOT : notificar(Cliente, Administración y Proveedores, "Evento cancelado")
+note right of RN : Se informa que aplica la política de no reembolso.
+
+legend bottom left
+  La cancelación por falta de regularización es una acción del Coordinador; no es una reacción automática a PlazoRegularizacionVencido.
+endlegend
+@enduml

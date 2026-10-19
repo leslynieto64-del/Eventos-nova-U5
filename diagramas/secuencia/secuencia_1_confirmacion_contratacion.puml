@@ -1,0 +1,95 @@
+@startuml secuencia-1-confirmacion-contratacion
+' Eventos Nova · Diagrama de secuencia 1 · Flujo principal CU-02: anticipo verificado y confirmación de la contratación
+' Trazabilidad: BN-009, BN-005, US-008, US-009, CA-015 a CA-019; Domain Events PagoVerificado y ContratacionConfirmada.
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam sequenceMessageAlign left
+skinparam responseMessageBelowArrow true
+skinparam maxMessageSize 170
+skinparam defaultFontSize 13
+skinparam ParticipantPadding 4
+skinparam BoxPadding 4
+skinparam sequence {
+  ParticipantBorderColor #1D4ED8
+  ParticipantBackgroundColor #EFF6FF
+  LifeLineBorderColor #64748B
+  GroupBorderColor #64748B
+}
+title Eventos Nova — Secuencia 1 · CU-02: anticipo verificado y confirmación de la contratación
+
+actor "Administración" as ADM
+participant "GestionPagos\nService" as GP
+participant "IVerificador\nPagos" as VER
+participant EstadoCuenta as EC
+participant IUnitOfWork as UOW
+participant "Despachador\nOutbox" as OUT
+participant "Reacciones\nPagos" as RP
+participant "FormalizarContratacion\nService" as FC
+participant Contrato as CO
+participant "Reacciones\nEvento" as RE
+participant Evento as EV
+
+== Transacción 1 · registrar y verificar el anticipo (raíz EstadoCuenta) ==
+ADM -> GP : registrarYVerificarPago(estadoCuentaId, obligacionId, importe, fecha, comprobante, registradoEn)
+activate GP
+GP -> VER : verificar(comprobante, importe)
+VER --> GP : verificado
+note right of GP : La verificación externa se consulta\nfuera de la transacción. fecha = cuándo pagó el Cliente;\nregistradoEn y la verificación pueden ser posteriores.
+GP -> UOW : iniciar()
+GP -> EC : registrarYVerificarPago(..., verificado)
+activate EC
+alt importe distinto del 30 % pactado (CA-019)
+  EC --> GP : pago con estado Importe incorrecto
+  note right of EC : No se registra PagoVerificado;\nse solicita la corrección del pago.
+else importe correcto y verificado
+  EC -> EC : obligación Anticipo → Liquidada\nregistra PagoVerificado
+  EC --> GP : pago Verificado
+end
+deactivate EC
+GP -> UOW : confirmar()
+note right of UOW : El commit guarda EstadoCuenta y deja\nlos Domain Events en el Outbox.
+GP --> ADM : Resultado ok
+deactivate GP
+
+== Después del commit · reacción a PagoVerificado (transacción propia) ==
+OUT -> OUT : despachar()
+OUT -> RP : alVerificarsePago(PagoVerificado)
+activate RP
+RP -> FC : confirmarContratacion(contratoId, ahora)
+activate FC
+FC -> CO : limitePagoAnticipo()
+FC -> EC : anticipoVerificado(limite)
+note right of FC : Lectura para construir la evidencia del anticipo;\ntras el contacto solo cuenta el anticipo efectuado\nen las 24 horas naturales (BN-009). No modifica EstadoCuenta.
+FC -> UOW : iniciar()
+FC -> CO : confirmarContratacion(evidencia, ahora)
+activate CO
+alt faltan requisitos (contrato no firmado, política no comunicada o anticipo no verificado)
+  CO --> FC : requisitos pendientes
+  FC -> UOW : confirmar()
+  FC --> RP : Resultado rechazo con los requisitos pendientes
+else requisitos cumplidos
+  CO -> CO : estado → Contratación confirmada\nregistra ContratacionConfirmada
+  CO --> FC : sin pendientes
+  FC -> UOW : confirmar()
+end
+deactivate CO
+deactivate FC
+deactivate RP
+
+== Después del commit · reacciones a ContratacionConfirmada (cada una en su transacción) ==
+OUT -> RE : alConfirmarseContratacion(ContratacionConfirmada)
+activate RE
+RE -> EV : confirmarContratacion(servicios)
+note right of EV : Evento → En organización con los\nservicios contratados del contrato.
+deactivate RE
+OUT -> RP : alConfirmarseContratacion(ContratacionConfirmada)
+activate RP
+RP -> GP : registrarObligacionSaldoOriginal(contratoId)
+note right of GP : Saldo del contrato original con fecha límite\ntres días hábiles antes del evento (BN-005).
+deactivate RP
+
+legend bottom left
+  confirmarContratacion() es idempotente: si el contrato ya estaba confirmado no repite cambios ni eventos.
+  Si una reacción falla, el despachador reintenta solo esa reacción; las ya procesadas no se repiten.
+endlegend
+@enduml

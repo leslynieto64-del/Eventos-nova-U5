@@ -1,0 +1,180 @@
+@startuml clases-3-cqrs-infraestructura
+' Eventos Nova · Diagrama de clases · Vista 3: CQRS, interfaces e infraestructura
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam classFontSize 13
+skinparam classAttributeFontSize 11
+skinparam packageStyle rectangle
+skinparam nodesep 30
+skinparam ranksep 60
+skinparam class {
+  BackgroundColor #FFFFFF
+  ArrowColor #334155
+}
+left to right direction
+title Eventos Nova — Diagrama de clases · Vista 3: CQRS, interfaces e infraestructura
+
+package "Aplicación · CQRS básico" <<Rectangle>> #F0FDF4 {
+  class GenerarNuevaVersionPropuestaHandler <<Command Handler>> {
+    +handle()
+  }
+  class ConfirmarCambioHandler <<Command Handler>> {
+    +handle()
+  }
+  class DarSeguimientoAnticipoPendienteHandler <<Command Handler>> {
+    +handle()
+  }
+  class RegistrarCancelacionPorFaltaDeRegularizacionHandler <<Command Handler>> {
+    +handle()
+  }
+  class ConsultarEstadoPagosHandler <<Query Handler>> {
+    +handle()
+  }
+  class ConsultarSolicitudesPendientesHandler <<Query Handler>> {
+    +handle()
+  }
+  class EstadoPagosViewModel <<View Model>> {
+    +eventoId
+    +estadosCuenta
+  }
+  class EstadoCuentaResumenViewModel <<View Model>> {
+    +estadoCuentaId
+    +contratoId
+    +anticipo
+    +pagosRegistrados
+    +saldoContratoOriginal
+    +obligacionesAdicionales
+  }
+  class SolicitudesPendientesViewModel <<View Model>> {
+    +eventoId
+    +solicitudes
+  }
+  class SolicitudPendienteViewModel <<View Model>> {
+    +tipoSolicitud
+    +solicitudId
+    +servicioAfectado
+    +estadoActual
+    +accionPendiente
+    +estadoPago
+  }
+}
+
+package "Aplicación · interfaces (puertos)" <<Rectangle>> #F0FDF4 {
+  interface IPropuestaRepository {
+    +obtenerPorId()
+    +listarPorEventoId()
+    +guardar()
+  }
+  interface IContratoRepository {
+    +obtenerPorId()
+    +listarPorEventoId()
+    +guardar()
+  }
+  interface IEventoRepository {
+    +obtenerPorId()
+    +guardar()
+  }
+  interface ISolicitudCambioRepository {
+    +obtenerPorId()
+    +listarPendientesPorEventoId()
+    +guardar()
+  }
+  interface ISolicitudServicioAdicionalRepository {
+    +obtenerPorId()
+    +listarPendientesPorEventoId()
+    +guardar()
+  }
+  interface ISustitucionProveedorRepository {
+    +obtenerPorId()
+    +listarPendientesPorEventoId()
+    +guardar()
+  }
+  interface IEstadoCuentaRepository {
+    +obtenerPorId()
+    +obtenerPorContratoId()
+    +listarPorEventoId()
+    +guardar()
+  }
+  interface IUnitOfWork {
+    +iniciar()
+    +registrar()
+    +confirmar()
+    +revertir()
+  }
+  interface IPublicadorEventosDominio {
+    +suscribir()
+    +publicar()
+  }
+  interface IConsultaDisponibilidadProveedor {
+    +consultar()
+  }
+  interface INotificadorParticipantes {
+    +notificar()
+  }
+  interface IVerificadorPagos {
+    +verificar()
+  }
+  interface IEjecutorDevoluciones {
+    +ejecutar()
+  }
+}
+
+package "Infraestructura (implementaciones en memoria del código base)" <<Rectangle>> #F1F5F9 {
+  class PropuestaRepositoryMemoria
+  class ContratoRepositoryMemoria
+  class EventoRepositoryMemoria
+  class SolicitudCambioRepositoryMemoria
+  class SolicitudServicioAdicionalRepositoryMemoria
+  class SustitucionProveedorRepositoryMemoria
+  class EstadoCuentaRepositoryMemoria
+  class UnitOfWorkMemoria {
+    +iniciar()
+    +registrar()
+    +confirmar()
+    +revertir()
+  }
+  class PublicadorEnProceso {
+    +suscribir()
+    +reacciones()
+    +publicar()
+  }
+  class DespachadorOutbox {
+    +despachar()
+  }
+  class ConsultaDisponibilidadSimulada
+  class NotificadorEnMemoria
+  class VerificadorPagosSimulado
+  class EjecutorDevolucionesSimulado
+}
+
+ConsultarEstadoPagosHandler ..> IEstadoCuentaRepository
+ConsultarEstadoPagosHandler ..> EstadoPagosViewModel
+EstadoPagosViewModel *-- "0..*" EstadoCuentaResumenViewModel
+ConsultarSolicitudesPendientesHandler ..> ISolicitudCambioRepository
+ConsultarSolicitudesPendientesHandler ..> ISolicitudServicioAdicionalRepository
+ConsultarSolicitudesPendientesHandler ..> ISustitucionProveedorRepository
+ConsultarSolicitudesPendientesHandler ..> SolicitudesPendientesViewModel
+SolicitudesPendientesViewModel *-- "0..*" SolicitudPendienteViewModel
+
+IPropuestaRepository <|.. PropuestaRepositoryMemoria
+IContratoRepository <|.. ContratoRepositoryMemoria
+IEventoRepository <|.. EventoRepositoryMemoria
+ISolicitudCambioRepository <|.. SolicitudCambioRepositoryMemoria
+ISolicitudServicioAdicionalRepository <|.. SolicitudServicioAdicionalRepositoryMemoria
+ISustitucionProveedorRepository <|.. SustitucionProveedorRepositoryMemoria
+IEstadoCuentaRepository <|.. EstadoCuentaRepositoryMemoria
+IUnitOfWork <|.. UnitOfWorkMemoria
+IPublicadorEventosDominio <|.. PublicadorEnProceso
+IConsultaDisponibilidadProveedor <|.. ConsultaDisponibilidadSimulada
+INotificadorParticipantes <|.. NotificadorEnMemoria
+IVerificadorPagos <|.. VerificadorPagosSimulado
+IEjecutorDevoluciones <|.. EjecutorDevolucionesSimulado
+DespachadorOutbox ..> UnitOfWorkMemoria : lee el Outbox
+DespachadorOutbox ..> PublicadorEnProceso
+
+legend bottom left
+  Los Command Handlers delegan en el Application Service correspondiente (vista 2); los Query Handlers solo leen y no usan IUnitOfWork.
+  Línea discontinua con triángulo = implementación de la interfaz. La infraestructura depende de la aplicación, nunca al revés.
+endlegend
+@enduml

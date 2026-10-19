@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn:definitions xmlns:bpmn="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bioc="http://bpmn.io/schema/bpmn/biocolor/1.0" xmlns:color="http://www.omg.org/spec/BPMN/non-normative/color/1.0" id="Defs_SP05" targetNamespace="https://eventosnova.example/bpmn" exporter="Eventos Nova (generador del equipo)" exporterVersion="1.0">
+  <bpmn:signal id="Signal_EventoIniciado" name="Evento iniciado" />
+  <bpmn:signal id="Signal_EventoCancelado" name="Evento cancelado" />
+  <bpmn:collaboration id="Collab_SP05">
+    <bpmn:documentation>Proveedor no disponible o que cancela: búsqueda de alternativa, impacto, aprobación del Cliente, autorización de Administración, búsqueda continua si se rechaza, anexo, costo adicional en el saldo del contrato y cierre por inicio o cancelación del Evento. Al recibir el aviso se comprueba el estado actual del Evento (BN-004, BN-005, BN-006, BN-008, SE-001, SE-007, SE-012; US-016, US-021; CA-036, CA-046 a CA-054, CA-096).</bpmn:documentation>
+    <bpmn:participant id="Part_SP05_Cliente" name="Cliente" />
+    <bpmn:participant id="Part_SP05_Proveedor" name="Proveedor" />
+    <bpmn:participant id="Part_SP05_EN" name="Eventos Nova" processRef="Proc_SP05_Sustitucion" />
+    <bpmn:messageFlow id="SP05_M01" name="No disponible o cancela" sourceRef="Part_SP05_Proveedor" targetRef="SP05_Inicio" />
+    <bpmn:messageFlow id="SP05_M02" name="Consulta de disponibilidad" sourceRef="SP05_Buscar" targetRef="Part_SP05_Proveedor" />
+    <bpmn:messageFlow id="SP05_M03" name="Disponibilidad, costo y condiciones" sourceRef="Part_SP05_Proveedor" targetRef="SP05_Buscar" />
+    <bpmn:messageFlow id="SP05_M04" name="Aviso: sustitución pendiente" sourceRef="SP05_SinAlt" targetRef="Part_SP05_Cliente" />
+    <bpmn:messageFlow id="SP05_M05" name="Alternativa propuesta" sourceRef="SP05_Presentar" targetRef="Part_SP05_Cliente" />
+    <bpmn:messageFlow id="SP05_M06" name="Aprobación o rechazo" sourceRef="Part_SP05_Cliente" targetRef="SP05_Presentar" />
+    <bpmn:messageFlow id="SP05_M07" name="Solicitud de pago" sourceRef="SP05_PagoAntes" targetRef="Part_SP05_Cliente" />
+    <bpmn:messageFlow id="SP05_M08" name="Pago" sourceRef="Part_SP05_Cliente" targetRef="SP05_PagoRecibido" />
+    <bpmn:messageFlow id="SP05_M09" name="Sustitución confirmada" sourceRef="SP05_Comunicar" targetRef="Part_SP05_Proveedor" />
+  </bpmn:collaboration>
+  <bpmn:process id="Proc_SP05_Sustitucion" name="Sustitución de proveedor" isExecutable="false">
+    <bpmn:laneSet id="LaneSet_SP05">
+      <bpmn:lane id="Lane_SP05_Coord" name="Coordinador">
+        <bpmn:flowNodeRef>SP05_Inicio</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwEstado</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_NoInicioCanc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinNoCanc</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinNoEjec</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Tramitar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_IniSub</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Registrar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UBusca</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Buscar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwAlt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_SinAlt</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UPend</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Impacto</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwModifica</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Presentar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwCliente</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_RechCliente</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UPend2</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_NoAut</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UAprob</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Anexo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwCosto</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwLimite</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_AlSaldo</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_PagoAntes</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_PagoRecibido</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UConf</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Confirmar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinConfirmada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_CerrarCan</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_CerrarIni</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwCancel</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_NoAplicar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Revision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinRevision</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Aplicar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_Comunicar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinAplicada</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_UCierre</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_DevImp</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_FinImportes</bpmn:flowNodeRef>
+      </bpmn:lane>
+      <bpmn:lane id="Lane_SP05_Admin" name="Administración">
+        <bpmn:flowNodeRef>SP05_Autorizar</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_GwAdmin</bpmn:flowNodeRef>
+        <bpmn:flowNodeRef>SP05_VerificarPago</bpmn:flowNodeRef>
+      </bpmn:lane>
+    </bpmn:laneSet>
+    <bpmn:startEvent id="SP05_Inicio" name="Aviso del proveedor: no disponible o cancela el servicio">
+      <bpmn:documentation>CA-036, GL-038</bpmn:documentation>
+      <bpmn:outgoing>SP05_F01</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP05_Inicio_def" />
+    </bpmn:startEvent>
+    <bpmn:exclusiveGateway id="SP05_GwEstado" name="¿En qué estado está el Evento?">
+      <bpmn:documentation>Comprobación del estado actual al recibir el aviso, antes de buscar alternativas (BN-006, BN-008, SE-007, CA-096).</bpmn:documentation>
+      <bpmn:incoming>SP05_F01</bpmn:incoming>
+      <bpmn:outgoing>SP05_F02</bpmn:outgoing>
+      <bpmn:outgoing>SP05_F04</bpmn:outgoing>
+      <bpmn:outgoing>SP05_F05</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP05_NoInicioCanc" name="No iniciar la sustitución: con el Evento cancelado no se confirman operaciones">
+      <bpmn:documentation>BN-008, SE-007: ninguna solicitud se confirma con el Evento cancelado.</bpmn:documentation>
+      <bpmn:incoming>SP05_F02</bpmn:incoming>
+      <bpmn:outgoing>SP05_F03</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP05_FinNoCanc" name="Sin sustitución (Evento cancelado)">
+      <bpmn:incoming>SP05_F03</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:endEvent id="SP05_FinNoEjec" name="Fuera del alcance del sistema">
+      <bpmn:documentation>Decisión del equipo: el aviso del proveedor recibido después del inicio del evento está fuera del alcance del sistema.</bpmn:documentation>
+      <bpmn:incoming>SP05_F04</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:subProcess id="SP05_Tramitar" name="Tramitar la sustitución de proveedor (sustitución en trámite)">
+      <bpmn:documentation>El proveedor original sigue vigente hasta que se confirme el reemplazo (GL-036).</bpmn:documentation>
+      <bpmn:incoming>SP05_F05</bpmn:incoming>
+      <bpmn:outgoing>SP05_F40</bpmn:outgoing>
+      <bpmn:startEvent id="SP05_IniSub" name="Aviso recibido">
+        <bpmn:outgoing>SP05_F06</bpmn:outgoing>
+      </bpmn:startEvent>
+      <bpmn:task id="SP05_Registrar" name="Registrar la falta de disponibilidad o la cancelación del proveedor">
+        <bpmn:documentation>CA-046 (US-021)</bpmn:documentation>
+        <bpmn:incoming>SP05_F06</bpmn:incoming>
+        <bpmn:outgoing>SP05_F07</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_UBusca">
+        <bpmn:incoming>SP05_F07</bpmn:incoming>
+        <bpmn:incoming>SP05_F12</bpmn:incoming>
+        <bpmn:outgoing>SP05_F08</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Buscar" name="Buscar un proveedor alternativo y consultar su disponibilidad">
+        <bpmn:documentation>CA-030, CA-047</bpmn:documentation>
+        <bpmn:incoming>SP05_F08</bpmn:incoming>
+        <bpmn:outgoing>SP05_F09</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_GwAlt" name="¿Hay una alternativa disponible?">
+        <bpmn:incoming>SP05_F09</bpmn:incoming>
+        <bpmn:outgoing>SP05_F10</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F13</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_SinAlt" name="Informar al Cliente y mantener pendiente la sustitución">
+        <bpmn:documentation>CA-048</bpmn:documentation>
+        <bpmn:incoming>SP05_F10</bpmn:incoming>
+        <bpmn:outgoing>SP05_F11</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_UPend">
+        <bpmn:incoming>SP05_F11</bpmn:incoming>
+        <bpmn:incoming>SP05_F20</bpmn:incoming>
+        <bpmn:outgoing>SP05_F12</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Impacto" name="Evaluar el impacto de la alternativa en los servicios, los costos y las condiciones">
+        <bpmn:documentation>GL-029, GL-039; CA-049, CA-053</bpmn:documentation>
+        <bpmn:incoming>SP05_F13</bpmn:incoming>
+        <bpmn:outgoing>SP05_F14</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_GwModifica" name="¿Modifica los servicios, los costos o las condiciones acordadas?">
+        <bpmn:incoming>SP05_F14</bpmn:incoming>
+        <bpmn:outgoing>SP05_F15</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F16</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Presentar" name="Presentar la alternativa al Cliente y registrar su decisión">
+        <bpmn:documentation>SE-001; CA-049, CA-054</bpmn:documentation>
+        <bpmn:incoming>SP05_F16</bpmn:incoming>
+        <bpmn:outgoing>SP05_F17</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_GwCliente" name="¿El Cliente aprueba la alternativa?">
+        <bpmn:incoming>SP05_F17</bpmn:incoming>
+        <bpmn:outgoing>SP05_F18</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F21</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_RechCliente" name="Registrar el rechazo, no confirmar el reemplazo y mantener pendiente la sustitución">
+        <bpmn:documentation>CA-054</bpmn:documentation>
+        <bpmn:incoming>SP05_F18</bpmn:incoming>
+        <bpmn:outgoing>SP05_F19</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_UPend2">
+        <bpmn:incoming>SP05_F19</bpmn:incoming>
+        <bpmn:incoming>SP05_F24</bpmn:incoming>
+        <bpmn:outgoing>SP05_F20</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Autorizar" name="Autorizar o rechazar la sustitución">
+        <bpmn:documentation>SE-001; CA-049, CA-050</bpmn:documentation>
+        <bpmn:incoming>SP05_F21</bpmn:incoming>
+        <bpmn:outgoing>SP05_F22</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_GwAdmin" name="¿Administración autoriza?">
+        <bpmn:incoming>SP05_F22</bpmn:incoming>
+        <bpmn:outgoing>SP05_F23</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F25</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_NoAut" name="Registrar que el reemplazo no fue autorizado, informar al Cliente y mantener pendiente la sustitución">
+        <bpmn:documentation>CA-050: se continúa buscando otra alternativa.</bpmn:documentation>
+        <bpmn:incoming>SP05_F23</bpmn:incoming>
+        <bpmn:outgoing>SP05_F24</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_UAprob">
+        <bpmn:incoming>SP05_F15</bpmn:incoming>
+        <bpmn:incoming>SP05_F25</bpmn:incoming>
+        <bpmn:outgoing>SP05_F26</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Anexo" name="Documentar la sustitución en un anexo vinculado al contrato original">
+        <bpmn:documentation>SE-001; CA-051, CA-053: proveedor sustituto, servicio, costos y condiciones cuando correspondan.</bpmn:documentation>
+        <bpmn:incoming>SP05_F26</bpmn:incoming>
+        <bpmn:outgoing>SP05_F27</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_GwCosto" name="¿Genera un costo adicional?">
+        <bpmn:incoming>SP05_F27</bpmn:incoming>
+        <bpmn:outgoing>SP05_F28</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F29</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:exclusiveGateway id="SP05_GwLimite" name="¿Se aprobó después del límite de 3 días hábiles antes del evento?">
+        <bpmn:documentation>SE-001, CA-052</bpmn:documentation>
+        <bpmn:incoming>SP05_F29</bpmn:incoming>
+        <bpmn:outgoing>SP05_F30</bpmn:outgoing>
+        <bpmn:outgoing>SP05_F32</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_AlSaldo" name="Incorporar el costo adicional al saldo pendiente del contrato original, que vence 3 días hábiles antes del evento">
+        <bpmn:documentation>BN-005, CA-052</bpmn:documentation>
+        <bpmn:incoming>SP05_F30</bpmn:incoming>
+        <bpmn:outgoing>SP05_F31</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:task id="SP05_PagoAntes" name="Incorporar el costo al saldo y solicitar su pago antes de confirmar el reemplazo">
+        <bpmn:documentation>SE-001, CA-052: no se considera vencido; no hay otro plazo fijo.</bpmn:documentation>
+        <bpmn:incoming>SP05_F32</bpmn:incoming>
+        <bpmn:outgoing>SP05_F33</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:intermediateCatchEvent id="SP05_PagoRecibido" name="Pago del Cliente recibido">
+        <bpmn:incoming>SP05_F33</bpmn:incoming>
+        <bpmn:outgoing>SP05_F34</bpmn:outgoing>
+      <bpmn:messageEventDefinition id="SP05_PagoRecibido_def" />
+      </bpmn:intermediateCatchEvent>
+      <bpmn:task id="SP05_VerificarPago" name="Registrar y verificar el pago">
+        <bpmn:documentation>CA-052</bpmn:documentation>
+        <bpmn:incoming>SP05_F34</bpmn:incoming>
+        <bpmn:outgoing>SP05_F35</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:exclusiveGateway id="SP05_UConf">
+        <bpmn:incoming>SP05_F28</bpmn:incoming>
+        <bpmn:incoming>SP05_F31</bpmn:incoming>
+        <bpmn:incoming>SP05_F35</bpmn:incoming>
+        <bpmn:outgoing>SP05_F36</bpmn:outgoing>
+      </bpmn:exclusiveGateway>
+      <bpmn:task id="SP05_Confirmar" name="Confirmar el reemplazo">
+        <bpmn:documentation>SE-001; CA-051, CA-052</bpmn:documentation>
+        <bpmn:incoming>SP05_F36</bpmn:incoming>
+        <bpmn:outgoing>SP05_F37</bpmn:outgoing>
+      </bpmn:task>
+      <bpmn:endEvent id="SP05_FinConfirmada" name="Sustitución confirmada">
+        <bpmn:incoming>SP05_F37</bpmn:incoming>
+      </bpmn:endEvent>
+      <bpmn:sequenceFlow id="SP05_F06" sourceRef="SP05_IniSub" targetRef="SP05_Registrar" />
+      <bpmn:sequenceFlow id="SP05_F07" sourceRef="SP05_Registrar" targetRef="SP05_UBusca" />
+      <bpmn:sequenceFlow id="SP05_F08" sourceRef="SP05_UBusca" targetRef="SP05_Buscar" />
+      <bpmn:sequenceFlow id="SP05_F09" sourceRef="SP05_Buscar" targetRef="SP05_GwAlt" />
+      <bpmn:sequenceFlow id="SP05_F10" name="No" sourceRef="SP05_GwAlt" targetRef="SP05_SinAlt" />
+      <bpmn:sequenceFlow id="SP05_F11" sourceRef="SP05_SinAlt" targetRef="SP05_UPend" />
+      <bpmn:sequenceFlow id="SP05_F12" sourceRef="SP05_UPend" targetRef="SP05_UBusca" />
+      <bpmn:sequenceFlow id="SP05_F13" name="Sí" sourceRef="SP05_GwAlt" targetRef="SP05_Impacto" />
+      <bpmn:sequenceFlow id="SP05_F14" sourceRef="SP05_Impacto" targetRef="SP05_GwModifica" />
+      <bpmn:sequenceFlow id="SP05_F15" name="No" sourceRef="SP05_GwModifica" targetRef="SP05_UAprob" />
+      <bpmn:sequenceFlow id="SP05_F16" name="Sí" sourceRef="SP05_GwModifica" targetRef="SP05_Presentar" />
+      <bpmn:sequenceFlow id="SP05_F17" sourceRef="SP05_Presentar" targetRef="SP05_GwCliente" />
+      <bpmn:sequenceFlow id="SP05_F18" name="No" sourceRef="SP05_GwCliente" targetRef="SP05_RechCliente" />
+      <bpmn:sequenceFlow id="SP05_F19" sourceRef="SP05_RechCliente" targetRef="SP05_UPend2" />
+      <bpmn:sequenceFlow id="SP05_F20" name="Continuar la búsqueda" sourceRef="SP05_UPend2" targetRef="SP05_UPend" />
+      <bpmn:sequenceFlow id="SP05_F21" name="Sí" sourceRef="SP05_GwCliente" targetRef="SP05_Autorizar" />
+      <bpmn:sequenceFlow id="SP05_F22" sourceRef="SP05_Autorizar" targetRef="SP05_GwAdmin" />
+      <bpmn:sequenceFlow id="SP05_F23" name="No" sourceRef="SP05_GwAdmin" targetRef="SP05_NoAut" />
+      <bpmn:sequenceFlow id="SP05_F24" sourceRef="SP05_NoAut" targetRef="SP05_UPend2" />
+      <bpmn:sequenceFlow id="SP05_F25" name="Sí" sourceRef="SP05_GwAdmin" targetRef="SP05_UAprob" />
+      <bpmn:sequenceFlow id="SP05_F26" sourceRef="SP05_UAprob" targetRef="SP05_Anexo" />
+      <bpmn:sequenceFlow id="SP05_F27" sourceRef="SP05_Anexo" targetRef="SP05_GwCosto" />
+      <bpmn:sequenceFlow id="SP05_F28" name="No" sourceRef="SP05_GwCosto" targetRef="SP05_UConf" />
+      <bpmn:sequenceFlow id="SP05_F29" name="Sí" sourceRef="SP05_GwCosto" targetRef="SP05_GwLimite" />
+      <bpmn:sequenceFlow id="SP05_F30" name="No" sourceRef="SP05_GwLimite" targetRef="SP05_AlSaldo" />
+      <bpmn:sequenceFlow id="SP05_F31" sourceRef="SP05_AlSaldo" targetRef="SP05_UConf" />
+      <bpmn:sequenceFlow id="SP05_F32" name="Sí" sourceRef="SP05_GwLimite" targetRef="SP05_PagoAntes" />
+      <bpmn:sequenceFlow id="SP05_F33" sourceRef="SP05_PagoAntes" targetRef="SP05_PagoRecibido" />
+      <bpmn:sequenceFlow id="SP05_F34" sourceRef="SP05_PagoRecibido" targetRef="SP05_VerificarPago" />
+      <bpmn:sequenceFlow id="SP05_F35" sourceRef="SP05_VerificarPago" targetRef="SP05_UConf" />
+      <bpmn:sequenceFlow id="SP05_F36" sourceRef="SP05_UConf" targetRef="SP05_Confirmar" />
+      <bpmn:sequenceFlow id="SP05_F37" sourceRef="SP05_Confirmar" targetRef="SP05_FinConfirmada" />
+    </bpmn:subProcess>
+    <bpmn:boundaryEvent id="SP05_BCancelado" name="Evento cancelado" attachedToRef="SP05_Tramitar">
+      <bpmn:documentation>Caso A (BN-008): la solicitud sigue en trámite cuando se cancela el Evento.</bpmn:documentation>
+      <bpmn:outgoing>SP05_F38</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SP05_BCancelado_def" signalRef="Signal_EventoCancelado" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="SP05_CerrarCan" name="Cerrar la sustitución con el motivo «Evento cancelado» (Cerrada por evento cancelado)">
+      <bpmn:documentation>BN-008, SE-007, CA-087: no se confirma ni se realiza.</bpmn:documentation>
+      <bpmn:incoming>SP05_F38</bpmn:incoming>
+      <bpmn:outgoing>SP05_F47</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:boundaryEvent id="SP05_BIniciado" name="Evento iniciado" attachedToRef="SP05_Tramitar">
+      <bpmn:documentation>CA-096: se registra que el reemplazo no se concretó: lo no confirmado antes del inicio se cierra.</bpmn:documentation>
+      <bpmn:outgoing>SP05_F39</bpmn:outgoing>
+      <bpmn:signalEventDefinition id="SP05_BIniciado_def" signalRef="Signal_EventoIniciado" />
+    </bpmn:boundaryEvent>
+    <bpmn:task id="SP05_CerrarIni" name="Cerrar la sustitución como no procedente por inicio del evento">
+      <bpmn:documentation>CA-096: se registra que el reemplazo no se concretó</bpmn:documentation>
+      <bpmn:incoming>SP05_F39</bpmn:incoming>
+      <bpmn:outgoing>SP05_F48</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:exclusiveGateway id="SP05_GwCancel" name="¿El Evento fue cancelado antes de reasignar el proveedor?">
+      <bpmn:documentation>Se evalúa al aplicar la operación confirmada (BN-006, BN-008).</bpmn:documentation>
+      <bpmn:incoming>SP05_F40</bpmn:incoming>
+      <bpmn:outgoing>SP05_F41</bpmn:outgoing>
+      <bpmn:outgoing>SP05_F44</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:task id="SP05_NoAplicar" name="No reasignar el proveedor en el Evento cancelado; la solicitud conserva su confirmación y su historial">
+      <bpmn:documentation>Caso B (BN-008): no se modifica la configuración del Evento cancelado ni se cierra la solicitud.</bpmn:documentation>
+      <bpmn:incoming>SP05_F41</bpmn:incoming>
+      <bpmn:outgoing>SP05_F42</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP05_Revision" name="Registrar para revisión que la operación no pudo aplicarse por la cancelación (registro técnico en «Revisión»)">
+      <bpmn:documentation>Caso B (BN-008): sin devoluciones, nuevas obligaciones ni cambios en el saldo; rige la política de no reembolso (SE-012). «Revisión» es el estado técnico del registro del Outbox, no un estado de negocio ni un trámite humano adicional.</bpmn:documentation>
+      <bpmn:incoming>SP05_F42</bpmn:incoming>
+      <bpmn:outgoing>SP05_F43</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP05_FinRevision" name="Confirmada, no aplicada: en revisión">
+      <bpmn:incoming>SP05_F43</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:task id="SP05_Aplicar" name="Reasignar el proveedor del servicio, aunque el Evento ya haya iniciado (O-02)">
+      <bpmn:documentation>Caso C (BN-006, O-02): el Evento sigue activo; si ya inició, se aplica porque se confirmó antes del inicio.</bpmn:documentation>
+      <bpmn:incoming>SP05_F44</bpmn:incoming>
+      <bpmn:outgoing>SP05_F45</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:task id="SP05_Comunicar" name="Comunicar la sustitución al proveedor y a las personas involucradas">
+      <bpmn:documentation>BN-006</bpmn:documentation>
+      <bpmn:incoming>SP05_F45</bpmn:incoming>
+      <bpmn:outgoing>SP05_F46</bpmn:outgoing>
+    </bpmn:task>
+    <bpmn:endEvent id="SP05_FinAplicada" name="Confirmada y aplicada al Evento">
+      <bpmn:incoming>SP05_F46</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:exclusiveGateway id="SP05_UCierre">
+      <bpmn:incoming>SP05_F47</bpmn:incoming>
+      <bpmn:incoming>SP05_F48</bpmn:incoming>
+      <bpmn:outgoing>SP05_F49</bpmn:outgoing>
+    </bpmn:exclusiveGateway>
+    <bpmn:callActivity id="SP05_DevImp" name="Resolver los importes de la operación no realizada (SE-012)" calledElement="Proc_SP08_Devolucion">
+      <bpmn:documentation>Cobros exclusivos sin efecto; devolución solo si el Evento no está cancelado (SE-012).</bpmn:documentation>
+      <bpmn:incoming>SP05_F49</bpmn:incoming>
+      <bpmn:outgoing>SP05_F50</bpmn:outgoing>
+    </bpmn:callActivity>
+    <bpmn:endEvent id="SP05_FinImportes" name="Solicitud cerrada sin realizarse: importes resueltos">
+      <bpmn:incoming>SP05_F50</bpmn:incoming>
+    </bpmn:endEvent>
+    <bpmn:sequenceFlow id="SP05_F01" sourceRef="SP05_Inicio" targetRef="SP05_GwEstado" />
+    <bpmn:sequenceFlow id="SP05_F02" name="Cancelado" sourceRef="SP05_GwEstado" targetRef="SP05_NoInicioCanc" />
+    <bpmn:sequenceFlow id="SP05_F03" sourceRef="SP05_NoInicioCanc" targetRef="SP05_FinNoCanc" />
+    <bpmn:sequenceFlow id="SP05_F04" name="En ejecución o finalizado" sourceRef="SP05_GwEstado" targetRef="SP05_FinNoEjec" />
+    <bpmn:sequenceFlow id="SP05_F05" name="En organización" sourceRef="SP05_GwEstado" targetRef="SP05_Tramitar" />
+    <bpmn:sequenceFlow id="SP05_F38" sourceRef="SP05_BCancelado" targetRef="SP05_CerrarCan" />
+    <bpmn:sequenceFlow id="SP05_F39" sourceRef="SP05_BIniciado" targetRef="SP05_CerrarIni" />
+    <bpmn:sequenceFlow id="SP05_F40" sourceRef="SP05_Tramitar" targetRef="SP05_GwCancel" />
+    <bpmn:sequenceFlow id="SP05_F41" name="Sí (caso B)" sourceRef="SP05_GwCancel" targetRef="SP05_NoAplicar" />
+    <bpmn:sequenceFlow id="SP05_F42" sourceRef="SP05_NoAplicar" targetRef="SP05_Revision" />
+    <bpmn:sequenceFlow id="SP05_F43" sourceRef="SP05_Revision" targetRef="SP05_FinRevision" />
+    <bpmn:sequenceFlow id="SP05_F44" name="No: Evento activo (caso C)" sourceRef="SP05_GwCancel" targetRef="SP05_Aplicar" />
+    <bpmn:sequenceFlow id="SP05_F45" sourceRef="SP05_Aplicar" targetRef="SP05_Comunicar" />
+    <bpmn:sequenceFlow id="SP05_F46" sourceRef="SP05_Comunicar" targetRef="SP05_FinAplicada" />
+    <bpmn:sequenceFlow id="SP05_F47" sourceRef="SP05_CerrarCan" targetRef="SP05_UCierre" />
+    <bpmn:sequenceFlow id="SP05_F48" sourceRef="SP05_CerrarIni" targetRef="SP05_UCierre" />
+    <bpmn:sequenceFlow id="SP05_F49" sourceRef="SP05_UCierre" targetRef="SP05_DevImp" />
+    <bpmn:sequenceFlow id="SP05_F50" sourceRef="SP05_DevImp" targetRef="SP05_FinImportes" />
+    <bpmn:textAnnotation id="SP05_NotaEstado"><bpmn:text>El aviso del proveedor recibido después del inicio del evento está fuera del alcance del sistema (decisión del equipo). Dentro del alcance: una sustitución que sigue pendiente al iniciar el evento no se confirma y se cierra como no procedente por inicio (borde «Evento iniciado»).</bpmn:text></bpmn:textAnnotation>
+  </bpmn:process>
+  <bpmndi:BPMNDiagram id="Diagram_SP05" name="Sustitución de proveedor">
+    <bpmndi:BPMNPlane id="Plane_SP05" bpmnElement="Collab_SP05">
+      <bpmndi:BPMNShape id="Part_SP05_Cliente_di" bpmnElement="Part_SP05_Cliente" isHorizontal="true" bioc:fill="#D4E7FA" color:background-color="#D4E7FA" bioc:stroke="#1E5A9C" color:border-color="#1E5A9C"><dc:Bounds x="0" y="0" width="6092" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Part_SP05_Proveedor_di" bpmnElement="Part_SP05_Proveedor" isHorizontal="true" bioc:fill="#FCE2BC" color:background-color="#FCE2BC" bioc:stroke="#A85E00" color:border-color="#A85E00"><dc:Bounds x="0" y="1080" width="6092" height="70" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Part_SP05_EN_di" bpmnElement="Part_SP05_EN" isHorizontal="true" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="0" y="120" width="6092" height="910" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP05_Coord_di" bpmnElement="Lane_SP05_Coord" isHorizontal="true" bioc:fill="#A9E0D8" color:background-color="#A9E0D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="36" y="120" width="6056" height="780" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Lane_SP05_Admin_di" bpmnElement="Lane_SP05_Admin" isHorizontal="true" bioc:fill="#D2C3F0" color:background-color="#D2C3F0" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="36" y="900" width="6056" height="130" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Inicio_di" bpmnElement="SP05_Inicio" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="164" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="127" y="509" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwEstado_di" bpmnElement="SP05_GwEstado" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="357" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="287" y="506" width="90" height="41" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_NoInicioCanc_di" bpmnElement="SP05_NoInicioCanc" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="302" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinNoCanc_di" bpmnElement="SP05_FinNoCanc" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="364" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="250" y="299" width="110" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinNoEjec_di" bpmnElement="SP05_FinNoEjec" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="364" y="687" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="250" y="689" width="110" height="32" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Tramitar_di" bpmnElement="SP05_Tramitar" isExpanded="true" bioc:fill="none" color:background-color="none" bioc:stroke="#37474F" color:border-color="#37474F"><dc:Bounds x="490" y="384" width="4184" height="642" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_IniSub_di" bpmnElement="SP05_IniSub" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="564" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#263238"><dc:Bounds x="527" y="597" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Registrar_di" bpmnElement="SP05_Registrar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="702" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UBusca_di" bpmnElement="SP05_UBusca" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="957" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="887" y="532" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Buscar_di" bpmnElement="SP05_Buscar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1102" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwAlt_di" bpmnElement="SP05_GwAlt" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1357" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1287" y="506" width="90" height="41" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_SinAlt_di" bpmnElement="SP05_SinAlt" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1302" y="660" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UPend_di" bpmnElement="SP05_UPend" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1357" y="810" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1287" y="792" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Impacto_di" bpmnElement="SP05_Impacto" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1502" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwModifica_di" bpmnElement="SP05_GwModifica" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="1757" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="1687" y="480" width="90" height="67" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Presentar_di" bpmnElement="SP05_Presentar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="1902" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwCliente_di" bpmnElement="SP05_GwCliente" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2157" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2087" y="506" width="90" height="41" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_RechCliente_di" bpmnElement="SP05_RechCliente" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2102" y="660" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UPend2_di" bpmnElement="SP05_UPend2" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2157" y="810" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2087" y="792" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Autorizar_di" bpmnElement="SP05_Autorizar" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="2302" y="920" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwAdmin_di" bpmnElement="SP05_GwAdmin" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2557" y="940" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2487" y="993" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_NoAut_di" bpmnElement="SP05_NoAut" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2502" y="790" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UAprob_di" bpmnElement="SP05_UAprob" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="2757" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="2687" y="532" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Anexo_di" bpmnElement="SP05_Anexo" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2902" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwCosto_di" bpmnElement="SP05_GwCosto" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="3157" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="3087" y="519" width="90" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwLimite_di" bpmnElement="SP05_GwLimite" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="3357" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="3352" y="603" width="175" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_AlSaldo_di" bpmnElement="SP05_AlSaldo" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="3902" y="400" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_PagoAntes_di" bpmnElement="SP05_PagoAntes" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="3502" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_PagoRecibido_di" bpmnElement="SP05_PagoRecibido" bioc:fill="#FFF2A8" color:background-color="#FFF2A8" bioc:stroke="#8F6C00" color:border-color="#8F6C00"><dc:Bounds x="3764" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#8F6C00"><dc:Bounds x="3788" y="595" width="110" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_VerificarPago_di" bpmnElement="SP05_VerificarPago" bioc:fill="#D6C9F1" color:background-color="#D6C9F1" bioc:stroke="#5B4A9B" color:border-color="#5B4A9B"><dc:Bounds x="3702" y="920" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UConf_di" bpmnElement="SP05_UConf" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="4157" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="4087" y="532" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Confirmar_di" bpmnElement="SP05_Confirmar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="4302" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinConfirmada_di" bpmnElement="SP05_FinConfirmada" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="4564" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="4527" y="597" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_BCancelado_di" bpmnElement="SP05_BCancelado" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="859" y="366" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="885" y="344" width="100" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_CerrarCan_di" bpmnElement="SP05_CerrarCan" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="902" y="140" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_BIniciado_di" bpmnElement="SP05_BIniciado" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="2859" y="366" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="2765" y="344" width="100" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_CerrarIni_di" bpmnElement="SP05_CerrarIni" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="2902" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_GwCancel_di" bpmnElement="SP05_GwCancel" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="4757" y="550" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="4693" y="491" width="90" height="56" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_NoAplicar_di" bpmnElement="SP05_NoAplicar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="4902" y="660" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Revision_di" bpmnElement="SP05_Revision" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="5102" y="660" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinRevision_di" bpmnElement="SP05_FinRevision" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="5364" y="687" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="5327" y="727" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Aplicar_di" bpmnElement="SP05_Aplicar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="4902" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_Comunicar_di" bpmnElement="SP05_Comunicar" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="5102" y="530" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinAplicada_di" bpmnElement="SP05_FinAplicada" bioc:fill="#CBEBD1" color:background-color="#CBEBD1" bioc:stroke="#2E7D32" color:border-color="#2E7D32"><dc:Bounds x="5364" y="557" width="36" height="36" /><bpmndi:BPMNLabel color:color="#2E7D32"><dc:Bounds x="5327" y="597" width="110" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_UCierre_di" bpmnElement="SP05_UCierre" bioc:fill="#FFFFFF" color:background-color="#FFFFFF" bioc:stroke="#263238" color:border-color="#263238"><dc:Bounds x="5557" y="290" width="50" height="50" /><bpmndi:BPMNLabel><dc:Bounds x="5487" y="272" width="90" height="15" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_DevImp_di" bpmnElement="SP05_DevImp" bioc:fill="#A6E1D8" color:background-color="#A6E1D8" bioc:stroke="#0F766E" color:border-color="#0F766E"><dc:Bounds x="5702" y="270" width="160" height="90" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_FinImportes_di" bpmnElement="SP05_FinImportes" bioc:fill="#F8CFC7" color:background-color="#F8CFC7" bioc:stroke="#B3261E" color:border-color="#B3261E"><dc:Bounds x="5964" y="297" width="36" height="36" /><bpmndi:BPMNLabel color:color="#B3261E"><dc:Bounds x="5927" y="337" width="120" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="SP05_NotaEstado_di" bpmnElement="SP05_NotaEstado"><dc:Bounds x="142.0" y="170.0" width="360" height="84" /></bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="SP05_F01_di" bpmnElement="SP05_F01"><di:waypoint x="200" y="575" /><di:waypoint x="357" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F02_di" bpmnElement="SP05_F02"><di:waypoint x="382" y="550" /><di:waypoint x="382" y="490" /><bpmndi:BPMNLabel><dc:Bounds x="390" y="501" width="82" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F03_di" bpmnElement="SP05_F03"><di:waypoint x="382" y="400" /><di:waypoint x="382" y="333" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F04_di" bpmnElement="SP05_F04"><di:waypoint x="382" y="600" /><di:waypoint x="382" y="687" /><bpmndi:BPMNLabel><dc:Bounds x="390" y="605" width="82" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F05_di" bpmnElement="SP05_F05"><di:waypoint x="407" y="575" /><di:waypoint x="490" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="406" y="581" width="76" height="30" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F06_di" bpmnElement="SP05_F06"><di:waypoint x="600" y="575" /><di:waypoint x="702" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F07_di" bpmnElement="SP05_F07"><di:waypoint x="862" y="575" /><di:waypoint x="957" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F08_di" bpmnElement="SP05_F08"><di:waypoint x="1007" y="575" /><di:waypoint x="1102" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F09_di" bpmnElement="SP05_F09"><di:waypoint x="1262" y="575" /><di:waypoint x="1357" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F10_di" bpmnElement="SP05_F10"><di:waypoint x="1382" y="600" /><di:waypoint x="1382" y="660" /><bpmndi:BPMNLabel><dc:Bounds x="1388" y="616" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F11_di" bpmnElement="SP05_F11"><di:waypoint x="1382" y="750" /><di:waypoint x="1382" y="810" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F12_di" bpmnElement="SP05_F12"><di:waypoint x="1357" y="835" /><di:waypoint x="982" y="835" /><di:waypoint x="982" y="600" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F13_di" bpmnElement="SP05_F13"><di:waypoint x="1407" y="575" /><di:waypoint x="1502" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="1414" y="578" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F14_di" bpmnElement="SP05_F14"><di:waypoint x="1662" y="575" /><di:waypoint x="1757" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F15_di" bpmnElement="SP05_F15"><di:waypoint x="1782" y="550" /><di:waypoint x="1782" y="445" /><di:waypoint x="2782" y="445" /><di:waypoint x="2782" y="550" /><bpmndi:BPMNLabel><dc:Bounds x="1788" y="484" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F16_di" bpmnElement="SP05_F16"><di:waypoint x="1807" y="575" /><di:waypoint x="1902" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="1814" y="578" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F17_di" bpmnElement="SP05_F17"><di:waypoint x="2062" y="575" /><di:waypoint x="2157" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F18_di" bpmnElement="SP05_F18"><di:waypoint x="2182" y="600" /><di:waypoint x="2182" y="660" /><bpmndi:BPMNLabel><dc:Bounds x="2188" y="616" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F19_di" bpmnElement="SP05_F19"><di:waypoint x="2182" y="750" /><di:waypoint x="2182" y="810" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F20_di" bpmnElement="SP05_F20"><di:waypoint x="2157" y="835" /><di:waypoint x="1407" y="835" /><bpmndi:BPMNLabel><dc:Bounds x="2000" y="838" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F21_di" bpmnElement="SP05_F21"><di:waypoint x="2207" y="575" /><di:waypoint x="2382" y="575" /><di:waypoint x="2382" y="920" /><bpmndi:BPMNLabel><dc:Bounds x="2214" y="578" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F22_di" bpmnElement="SP05_F22"><di:waypoint x="2462" y="965" /><di:waypoint x="2557" y="965" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F23_di" bpmnElement="SP05_F23"><di:waypoint x="2582" y="940" /><di:waypoint x="2582" y="880" /><bpmndi:BPMNLabel><dc:Bounds x="2590" y="907" width="40" height="16" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F24_di" bpmnElement="SP05_F24"><di:waypoint x="2502" y="835" /><di:waypoint x="2207" y="835" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F25_di" bpmnElement="SP05_F25"><di:waypoint x="2607" y="965" /><di:waypoint x="2782" y="965" /><di:waypoint x="2782" y="600" /><bpmndi:BPMNLabel><dc:Bounds x="2614" y="968" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F26_di" bpmnElement="SP05_F26"><di:waypoint x="2807" y="575" /><di:waypoint x="2902" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F27_di" bpmnElement="SP05_F27"><di:waypoint x="3062" y="575" /><di:waypoint x="3157" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F28_di" bpmnElement="SP05_F28"><di:waypoint x="3182" y="600" /><di:waypoint x="3182" y="705" /><di:waypoint x="4182" y="705" /><di:waypoint x="4182" y="600" /><bpmndi:BPMNLabel><dc:Bounds x="3188" y="638" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F29_di" bpmnElement="SP05_F29"><di:waypoint x="3207" y="575" /><di:waypoint x="3357" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="3214" y="578" width="136" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F30_di" bpmnElement="SP05_F30"><di:waypoint x="3382" y="550" /><di:waypoint x="3382" y="445" /><di:waypoint x="3902" y="445" /><bpmndi:BPMNLabel><dc:Bounds x="3388" y="484" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F31_di" bpmnElement="SP05_F31"><di:waypoint x="4062" y="445" /><di:waypoint x="4182" y="445" /><di:waypoint x="4182" y="550" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F32_di" bpmnElement="SP05_F32"><di:waypoint x="3407" y="575" /><di:waypoint x="3502" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="3414" y="578" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F33_di" bpmnElement="SP05_F33"><di:waypoint x="3662" y="575" /><di:waypoint x="3764" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F34_di" bpmnElement="SP05_F34"><di:waypoint x="3782" y="593" /><di:waypoint x="3782" y="920" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F35_di" bpmnElement="SP05_F35"><di:waypoint x="3862" y="965" /><di:waypoint x="3982" y="965" /><di:waypoint x="3982" y="575" /><di:waypoint x="4157" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F36_di" bpmnElement="SP05_F36"><di:waypoint x="4207" y="575" /><di:waypoint x="4302" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F37_di" bpmnElement="SP05_F37"><di:waypoint x="4462" y="575" /><di:waypoint x="4564" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F38_di" bpmnElement="SP05_F38"><di:waypoint x="877" y="366" /><di:waypoint x="877" y="185" /><di:waypoint x="902" y="185" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F39_di" bpmnElement="SP05_F39"><di:waypoint x="2877" y="366" /><di:waypoint x="2877" y="315" /><di:waypoint x="2902" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F40_di" bpmnElement="SP05_F40"><di:waypoint x="4674" y="575" /><di:waypoint x="4757" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F41_di" bpmnElement="SP05_F41"><di:waypoint x="4782" y="600" /><di:waypoint x="4782" y="705" /><di:waypoint x="4902" y="705" /><bpmndi:BPMNLabel><dc:Bounds x="4788" y="638" width="150" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F42_di" bpmnElement="SP05_F42"><di:waypoint x="5062" y="705" /><di:waypoint x="5102" y="705" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F43_di" bpmnElement="SP05_F43"><di:waypoint x="5262" y="705" /><di:waypoint x="5364" y="705" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F44_di" bpmnElement="SP05_F44"><di:waypoint x="4807" y="575" /><di:waypoint x="4902" y="575" /><bpmndi:BPMNLabel><dc:Bounds x="4814" y="578" width="81" height="28" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F45_di" bpmnElement="SP05_F45"><di:waypoint x="5062" y="575" /><di:waypoint x="5102" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F46_di" bpmnElement="SP05_F46"><di:waypoint x="5262" y="575" /><di:waypoint x="5364" y="575" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F47_di" bpmnElement="SP05_F47"><di:waypoint x="1062" y="185" /><di:waypoint x="5582" y="185" /><di:waypoint x="5582" y="290" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F48_di" bpmnElement="SP05_F48"><di:waypoint x="3062" y="315" /><di:waypoint x="5557" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F49_di" bpmnElement="SP05_F49"><di:waypoint x="5607" y="315" /><di:waypoint x="5702" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_F50_di" bpmnElement="SP05_F50"><di:waypoint x="5862" y="315" /><di:waypoint x="5964" y="315" /></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M01_di" bpmnElement="SP05_M01" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="182" y="1080" /><di:waypoint x="182" y="593" /><bpmndi:BPMNLabel><dc:Bounds x="187" y="1035" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M02_di" bpmnElement="SP05_M02" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1147" y="620" /><di:waypoint x="1147" y="1080" /><bpmndi:BPMNLabel><dc:Bounds x="1047" y="1035" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M03_di" bpmnElement="SP05_M03" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1217" y="1080" /><di:waypoint x="1217" y="620" /><bpmndi:BPMNLabel><dc:Bounds x="1222" y="1035" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M04_di" bpmnElement="SP05_M04" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1462" y="705" /><di:waypoint x="1482" y="705" /><di:waypoint x="1482" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="1487" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M05_di" bpmnElement="SP05_M05" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="1947" y="530" /><di:waypoint x="1947" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="1847" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M06_di" bpmnElement="SP05_M06" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="2017" y="70" /><di:waypoint x="2017" y="530" /><bpmndi:BPMNLabel><dc:Bounds x="2022" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M07_di" bpmnElement="SP05_M07" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="3582" y="530" /><di:waypoint x="3582" y="70" /><bpmndi:BPMNLabel><dc:Bounds x="3587" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M08_di" bpmnElement="SP05_M08" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="3782" y="70" /><di:waypoint x="3782" y="557" /><bpmndi:BPMNLabel><dc:Bounds x="3787" y="75" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="SP05_M09_di" bpmnElement="SP05_M09" bioc:stroke="#5F6B73" color:border-color="#5F6B73"><di:waypoint x="5262" y="603" /><di:waypoint x="5282" y="603" /><di:waypoint x="5282" y="1080" /><bpmndi:BPMNLabel><dc:Bounds x="5287" y="1035" width="95" height="40" /></bpmndi:BPMNLabel></bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn:definitions>
