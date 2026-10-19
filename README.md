@@ -58,6 +58,9 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │       ├── Reporte_BRD_Corregido.docx / .pdf
 │       └── User_Stories_corregido.docx / .pdf
 ├── src/
+│   ├── api/
+│   │   ├── __init__.py
+│   │   └── main.py            (aplicación FastAPI: GET / y GET /health)
 │   ├── application/
 │   │   ├── cqrs.py
 │   │   ├── puertos.py
@@ -84,18 +87,20 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── ejecucion-pruebas.txt
 │   │   ├── evidencia-pruebas.docx
 │   │   └── evidencia-pruebas.pdf
+│   ├── test_api_etapa1.py
 │   ├── test_coherencia_diagramas.py
 │   ├── test_correcciones_etapas_3_a_7.py
 │   ├── test_decisiones_stakeholder.py
 │   ├── test_etapa9_casos_de_uso.py
 │   ├── test_etapa9_transacciones_y_reacciones.py
 │   └── test_reglas_corregidas.py
+├── requirements.txt
 └── README.md
 ```
 
 ## Instrucciones de ejecución
 
-Se requiere Python 3. Abre una terminal en la carpeta raíz del proyecto y ejecuta:
+Se requiere Python 3 (3.13 para la API). Desde la Etapa 1, la suite incluye `tests/test_api_etapa1.py`, que necesita las dependencias de `requirements.txt`; instálalas primero (ver la sección *Etapa 1*). Abre una terminal en la carpeta raíz del proyecto y ejecuta:
 
 ```bash
 py -m unittest discover -s tests -v
@@ -108,6 +113,44 @@ python -m unittest discover -s tests -v
 ```
 
 El registro de evidencias incluido reporta **91 pruebas aprobadas**. Para verificar el resultado de una ejecución actual, ejecuta nuevamente el comando y revisa el resumen de la terminal.
+
+## Etapa 1 de desarrollo funcional: API con FastAPI
+
+Se agregó la capa de presentación HTTP en `src/api/`. En esta etapa la API solo expone dos rutas:
+
+| Ruta | Respuesta |
+|------|-----------|
+| `GET /` | Identifica la aplicación Eventos Nova (nombre, descripción, versión y enlaces a `/docs` y `/health`). |
+| `GET /health` | `{"estado": "ok", "aplicacion": "Eventos Nova", "version": "0.1.0"}` para verificar que la API está disponible. |
+
+Las capas `domain`, `application` e `infrastructure` no se modificaron y no dependen de FastAPI. Todavía no se exponen casos de uso, persistencia en base de datos ni autenticación; se incorporarán en etapas posteriores.
+
+### Comandos en Windows (PowerShell o CMD, desde la raíz del proyecto)
+
+Requiere Python 3.13. Crear y activar un entorno virtual e instalar las dependencias:
+
+```bat
+py -3.13 -m venv .venv
+.venv\Scripts\activate
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
+
+> En PowerShell, si la activación está bloqueada, ejecuta una vez `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` o usa CMD.
+
+Ejecutar todas las pruebas (las existentes y las de la API):
+
+```bat
+python -m unittest discover -s tests -v
+```
+
+Arrancar la API:
+
+```bat
+python -m uvicorn api.main:app --app-dir src --reload
+```
+
+Luego abre <http://127.0.0.1:8000/>, <http://127.0.0.1:8000/health> o la documentación interactiva en <http://127.0.0.1:8000/docs>. Detén el servidor con `Ctrl+C`.
 
 ## Entregables
 

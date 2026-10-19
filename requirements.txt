@@ -1,0 +1,6 @@
+# Dependencias de Eventos Nova — Etapa 1: configuración inicial de FastAPI.
+# Compatibles con Python 3.13. Las reglas de negocio (src/domain, src/application)
+# siguen sin depender de estos paquetes.
+fastapi>=0.115,<1.0     # framework de la API (incluye Starlette y Pydantic)
+uvicorn>=0.34,<1.0      # servidor ASGI para ejecutar la API
+httpx>=0.28,<1.0        # requerido por fastapi.testclient en las pruebas de la API
