@@ -80,6 +80,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── contrato.py
 │   │   ├── especificacion.py      (Etapa E2: base Specification y combinadores)
 │   │   ├── especificaciones.py    (Etapa E2: especificaciones de negocio)
+│   │   ├── maquina_estados.py     (Etapa E3A: State Machine declarativa)
 │   │   ├── estado_cuenta.py
 │   │   ├── evento.py
 │   │   ├── eventos_dominio.py
@@ -274,6 +275,38 @@ pendientes = CONTRATACION_CONFIRMABLE.motivos_incumplimiento(SituacionContrataci
 
 ```bat
 python -m unittest tests.test_especificacion_combinadores tests.test_especificaciones_negocio tests.test_especificaciones_conservacion -v
+python -m unittest discover -s tests -v
+```
+
+## Etapa E3A: State Machine explícita de Evento
+
+Las transiciones de estado del agregado `Evento` se validan ahora con una máquina de estados declarativa. Los estados, las acciones, las precondiciones, los mensajes, los Domain Events y la idempotencia son los mismos de v8; solo cambia *dónde* se decide si un par estado-acción está permitido. Los estados ilustrativos del paquete CSV (COTIZADO, CONTRATADO, EN_PREPARACION, REALIZADO) no forman parte del dominio. Propuesta, Contrato y las solicitudes todavía no usan la máquina.
+
+| Archivo | Contenido |
+|---------|-----------|
+| `src/domain/maquina_estados.py` | `MaquinaEstados` genérica: tabla (estado de origen, acción) → destino, repeticiones idempotentes y mensajes de rechazo; `TransicionNoPermitida` es un `ErrorDominio`. |
+| `src/domain/evento.py` | `AccionEvento`, la tabla `MAQUINA_EVENTO` y su uso en los métodos del agregado. |
+
+**Tabla de Evento** (GL-033 del mapa de dominio):
+
+| Origen | Acción | Destino | Método de Evento |
+|--------|--------|---------|------------------|
+| En gestión | `confirmar_contratacion` | En organización | `confirmar_contratacion` (reacción a ContratacionConfirmada) |
+| En gestión | `cerrar_sin_contratacion` | Cerrado sin contratación | `cerrar_sin_contratacion` (reacción a ProcesoContratacionCerrado; nunca Cancelado, CA-021) |
+| En organización | `cancelar` | Cancelado | `solicitar_cancelacion` y `cancelar_por_falta_de_regularizacion` (BN-008, CA-087, CA-027) |
+| En organización | `iniciar` | En ejecución | `iniciar` |
+| En ejecución | `finalizar` | Finalizado | `finalizar` (CA-094, CA-095) |
+
+Repeticiones idempotentes (aceptadas sin efecto): `confirmar_contratacion` en En organización y `cerrar_sin_contratacion` en Cerrado sin contratación. Estados terminales: Finalizado, Cancelado y Cerrado sin contratación.
+
+**Cómo se usa.** Cada método de Evento pide a la máquina el destino (`MAQUINA_EVENTO.transitar(estado, acción)`) y lo asigna; si el par no está en la tabla, la máquina lanza el mismo mensaje que el agregado ya usaba. Las precondiciones de negocio siguen en el agregado y se evalúan antes que la máquina: contratación confirmada (CA-084), rechazo registrado si el evento ya inició (CA-088), verificación de Administración y motivo del Coordinador (BN-005, CA-027), e idempotencia de la cancelación por falta de regularización según su origen. Las Specifications de E2 no cambian.
+
+**Corrección E3A-01 (aprobada en la revisión).** `solicitar_cancelacion` valida con la máquina que la cancelación está permitida *antes* de registrar la solicitud como «Procedente». En v8 la solicitud se agregaba primero, y si el Evento estaba En gestión, Finalizado, Cerrado sin contratación o Cancelado el rechazo dejaba esa solicitud dentro del agregado (el servicio revertía la transacción, por lo que nunca se persistió). Ahora el rechazo conserva el mensaje y no modifica el agregado. Se mantienen CA-084 (se rechaza antes de registrar nada), CA-088 (En ejecución: solicitud Rechazada por inicio del evento, sin EventoCancelado) y la cancelación válida desde En organización con un único EventoCancelado. No se modificaron servicios ni repositorios.
+
+**Pruebas de la etapa** (48): `tests/test_maquina_estados.py` y `tests/test_evento_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_evento_v8_e2.json`, capturado con v8 + E1 + E2 antes del cambio (70 combinaciones de estado × acción × precondiciones): 65 deben ser idénticas y las 5 de E3A-01 solo pueden diferir en que ya no queda la solicitud «Procedente».
+
+```bat
+python -m unittest tests.test_maquina_estados tests.test_evento_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
 

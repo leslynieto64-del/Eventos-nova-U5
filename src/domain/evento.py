@@ -2,12 +2,54 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
 from typing import Dict, List, Optional, Set
 from .base import AggregateRoot
 from .valores import (DatosEvento, EstadoEvento, EstadoSolicitudCancelacion, MotivoCancelacionEvento,
                       OrigenCancelacion, CondicionesServicio, ErrorDominio, Importe)
 from .servicios_dominio import ConfiguracionComparable
 from .eventos_dominio import EventoIniciado, EventoCancelado, EventoFinalizado
+from .maquina_estados import MaquinaEstados, Transicion
+
+
+class AccionEvento(Enum):
+    """Acciones que cambian el estado del Evento; corresponden a sus métodos existentes."""
+    CONFIRMAR_CONTRATACION = "confirmar_contratacion"
+    CERRAR_SIN_CONTRATACION = "cerrar_sin_contratacion"
+    CANCELAR = "cancelar"                  # solicitar_cancelacion y cancelar_por_falta_de_regularizacion
+    INICIAR = "iniciar"
+    FINALIZAR = "finalizar"
+
+
+_EE, _AE = EstadoEvento, AccionEvento
+
+# GL-033 (mapa de dominio): En gestión → En organización | Cerrado sin contratación;
+# En organización → En ejecución | Cancelado; En ejecución → Finalizado.
+MAQUINA_EVENTO = MaquinaEstados(
+    estados=EstadoEvento,
+    transiciones=(
+        Transicion(_EE.EN_GESTION, _AE.CONFIRMAR_CONTRATACION, _EE.EN_ORGANIZACION),      # reacción a ContratacionConfirmada
+        Transicion(_EE.EN_GESTION, _AE.CERRAR_SIN_CONTRATACION, _EE.CERRADO_SIN_CONTRATACION),  # reacción a ProcesoContratacionCerrado (CA-021)
+        Transicion(_EE.EN_ORGANIZACION, _AE.CANCELAR, _EE.CANCELADO),                     # BN-008, CA-087, CA-027
+        Transicion(_EE.EN_ORGANIZACION, _AE.INICIAR, _EE.EN_EJECUCION),
+        Transicion(_EE.EN_EJECUCION, _AE.FINALIZAR, _EE.FINALIZADO),                      # BN-010, CA-094
+    ),
+    # Idempotencia de las reacciones: repetirlas en el estado que ya produjeron no tiene efecto.
+    repeticiones_idempotentes=(
+        (_EE.EN_ORGANIZACION, _AE.CONFIRMAR_CONTRATACION),
+        (_EE.CERRADO_SIN_CONTRATACION, _AE.CERRAR_SIN_CONTRATACION),
+    ),
+    # Mensajes de rechazo existentes del agregado, sin cambios.
+    mensajes_rechazo={
+        _AE.CONFIRMAR_CONTRATACION: lambda o: f"No puede pasar a En organización desde {o.value}.",
+        _AE.CERRAR_SIN_CONTRATACION: lambda o: f"No puede cerrarse sin contratación desde {o.value}.",
+        _AE.CANCELAR: lambda o: f"No puede cancelarse un evento {o.value}.",
+        _AE.INICIAR: lambda o: f"No puede iniciar un evento {o.value}.",
+        _AE.FINALIZAR: lambda o: ("Un evento cancelado no puede registrarse como Finalizado (CA-095)."
+                                  if o == _EE.CANCELADO else "Solo puede finalizarse un evento que se realizó (CA-094)."),
+    },
+    nombre="Evento",
+)
 
 
 @dataclass
@@ -51,23 +93,24 @@ class Evento(AggregateRoot):
         self.fecha_inicio: Optional[datetime] = None
         self._operaciones_aplicadas: Set[str] = set()   # idempotencia de las reacciones
 
+    # -- State Machine (Etapa E3A): valida el par estado-acción; el agregado asigna el destino
+    def _transitar(self, accion: AccionEvento) -> EstadoEvento:
+        """Destino permitido por MAQUINA_EVENTO o TransicionNoPermitida (ErrorDominio) con el mensaje existente."""
+        return MAQUINA_EVENTO.transitar(self.estado, accion)
+
     # -- reacciones de la contratación
     def confirmar_contratacion(self, servicios: List[ServicioContratado]) -> None:
-        if self.estado == EstadoEvento.EN_ORGANIZACION:
-            return
-        if self.estado != EstadoEvento.EN_GESTION:
-            raise ErrorDominio(f"No puede pasar a En organización desde {self.estado.value}.")
-        self.estado = EstadoEvento.EN_ORGANIZACION
+        if MAQUINA_EVENTO.es_repeticion(self.estado, AccionEvento.CONFIRMAR_CONTRATACION):
+            return                                          # idempotente: no vuelve a incorporar servicios
+        self.estado = self._transitar(AccionEvento.CONFIRMAR_CONTRATACION)
         for s in servicios:
             self.servicios[s.servicio_contratado_id] = s
 
     def cerrar_sin_contratacion(self) -> None:
         """Nunca Cancelado (CA-021)."""
-        if self.estado == EstadoEvento.CERRADO_SIN_CONTRATACION:
+        if MAQUINA_EVENTO.es_repeticion(self.estado, AccionEvento.CERRAR_SIN_CONTRATACION):
             return
-        if self.estado != EstadoEvento.EN_GESTION:
-            raise ErrorDominio(f"No puede cerrarse sin contratación desde {self.estado.value}.")
-        self.estado = EstadoEvento.CERRADO_SIN_CONTRATACION
+        self.estado = self._transitar(AccionEvento.CERRAR_SIN_CONTRATACION)
 
     # -- configuración operativa (solo por reacciones a confirmaciones, BN-006)
     def _no_iniciado(self, confirmado_en: Optional[datetime] = None) -> None:
@@ -127,12 +170,15 @@ class Evento(AggregateRoot):
         """Devuelve True si se canceló. BN-008, CA-084, CA-087, CA-088."""
         if not contratacion_confirmada:
             raise ErrorDominio("La cancelación solo procede con la contratación confirmada (CA-084).")
-        sc = SolicitudCancelacion(ahora, motivo)
-        self.solicitudes_cancelacion.append(sc)
         if self.estado == EstadoEvento.EN_EJECUCION:
-            sc.estado = EstadoSolicitudCancelacion.RECHAZADA_INICIO_EVENTO
+            # CA-088: la solicitud se registra como rechazada y el Evento continúa En ejecución (no es una transición).
+            self.solicitudes_cancelacion.append(
+                SolicitudCancelacion(ahora, motivo, EstadoSolicitudCancelacion.RECHAZADA_INICIO_EVENTO))
             return False
-        sc.estado = EstadoSolicitudCancelacion.PROCEDENTE
+        # E3A-01: la transición se valida antes de modificar el agregado. Si no está permitida, se rechaza con el
+        # mensaje de siempre y no queda ninguna solicitud «Procedente» registrada.
+        MAQUINA_EVENTO.validar(self.estado, AccionEvento.CANCELAR)
+        self.solicitudes_cancelacion.append(SolicitudCancelacion(ahora, motivo, EstadoSolicitudCancelacion.PROCEDENTE))
         self._cancelar(MotivoCancelacionEvento(OrigenCancelacion.SOLICITUD_CLIENTE, motivo, ahora, "Coordinador"))
         return True
 
@@ -151,9 +197,7 @@ class Evento(AggregateRoot):
         return True
 
     def _cancelar(self, motivo: MotivoCancelacionEvento) -> None:
-        if self.estado != EstadoEvento.EN_ORGANIZACION:
-            raise ErrorDominio(f"No puede cancelarse un evento {self.estado.value}.")
-        self.estado, self.motivo_cancelacion = EstadoEvento.CANCELADO, motivo
+        self.estado, self.motivo_cancelacion = self._transitar(AccionEvento.CANCELAR), motivo
         self._registrar(EventoCancelado(self.id, motivo.fecha, origen=motivo.origen.value))
 
     def registrar_revision_administrativa(self, revision: RevisionAdministrativa) -> None:
@@ -164,17 +208,12 @@ class Evento(AggregateRoot):
         self.revision_administrativa = revision
 
     def iniciar(self, ahora: datetime) -> None:
-        if self.estado != EstadoEvento.EN_ORGANIZACION:
-            raise ErrorDominio(f"No puede iniciar un evento {self.estado.value}.")
-        self.estado, self.fecha_inicio = EstadoEvento.EN_EJECUCION, ahora
+        self.estado, self.fecha_inicio = self._transitar(AccionEvento.INICIAR), ahora
         self._registrar(EventoIniciado(self.id, ahora))
 
     def finalizar(self, fecha: datetime) -> None:
-        if self.estado == EstadoEvento.CANCELADO:
-            raise ErrorDominio("Un evento cancelado no puede registrarse como Finalizado (CA-095).")
-        if self.estado != EstadoEvento.EN_EJECUCION:
-            raise ErrorDominio("Solo puede finalizarse un evento que se realizó (CA-094).")
-        self.estado, self.fecha_finalizacion = EstadoEvento.FINALIZADO, fecha
+        """CA-094: solo un evento En ejecución; CA-095: un evento cancelado nunca se registra como Finalizado."""
+        self.estado, self.fecha_finalizacion = self._transitar(AccionEvento.FINALIZAR), fecha
         self._registrar(EventoFinalizado(self.id, fecha))
 
     @property

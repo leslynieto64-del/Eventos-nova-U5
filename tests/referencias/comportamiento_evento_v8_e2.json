@@ -1,0 +1,933 @@
+{
+ "EN_GESTION | confirmar_contratacion": {
+  "devuelve": null,
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S2"
+  ]
+ },
+ "EN_GESTION | cerrar_sin_contratacion": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | iniciar": {
+  "error": "No puede iniciar un evento En gestión.",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | finalizar": {
+  "error": "Solo puede finalizarse un evento que se realizó (CA-094).",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | solicitar_cancelacion(confirmada=True)": {
+  "error": "No puede cancelarse un evento En gestión.",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_GESTION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "error": "No puede cancelarse un evento En gestión.",
+  "estado": "EN_GESTION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": []
+ },
+ "EN_ORGANIZACION | confirmar_contratacion": {
+  "devuelve": null,
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | cerrar_sin_contratacion": {
+  "error": "No puede cerrarse sin contratación desde En organización.",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | iniciar": {
+  "devuelve": null,
+  "estado": "EN_EJECUCION",
+  "eventos": [
+   "EventoIniciado"
+  ],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | finalizar": {
+  "error": "Solo puede finalizarse un evento que se realizó (CA-094).",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | solicitar_cancelacion(confirmada=True)": {
+  "devuelve": true,
+  "estado": "CANCELADO",
+  "eventos": [
+   "EventoCancelado"
+  ],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "Motivo del Cliente"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "EN_ORGANIZACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_ORGANIZACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "devuelve": true,
+  "estado": "CANCELADO",
+  "eventos": [
+   "EventoCancelado"
+  ],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "Sin regularizar"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | confirmar_contratacion": {
+  "error": "No puede pasar a En organización desde En ejecución.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | cerrar_sin_contratacion": {
+  "error": "No puede cerrarse sin contratación desde En ejecución.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | iniciar": {
+  "error": "No puede iniciar un evento En ejecución.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | finalizar": {
+  "devuelve": null,
+  "estado": "FINALIZADO",
+  "eventos": [
+   "EventoFinalizado"
+  ],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T03:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | solicitar_cancelacion(confirmada=True)": {
+  "devuelve": false,
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "RECHAZADA_INICIO_EVENTO"
+   ]
+  ],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "EN_EJECUCION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "error": "No puede cancelarse un evento En ejecución.",
+  "estado": "EN_EJECUCION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | confirmar_contratacion": {
+  "error": "No puede pasar a En organización desde Finalizado.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | cerrar_sin_contratacion": {
+  "error": "No puede cerrarse sin contratación desde Finalizado.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | iniciar": {
+  "error": "No puede iniciar un evento Finalizado.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | finalizar": {
+  "error": "Solo puede finalizarse un evento que se realizó (CA-094).",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | solicitar_cancelacion(confirmada=True)": {
+  "error": "No puede cancelarse un evento Finalizado.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "FINALIZADO | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "error": "No puede cancelarse un evento Finalizado.",
+  "estado": "FINALIZADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": "2026-11-20T18:05:00",
+  "fecha_finalizacion": "2026-11-21T02:00:00",
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | confirmar_contratacion": {
+  "error": "No puede pasar a En organización desde Cerrado sin contratación.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | cerrar_sin_contratacion": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | iniciar": {
+  "error": "No puede iniciar un evento Cerrado sin contratación.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | finalizar": {
+  "error": "Solo puede finalizarse un evento que se realizó (CA-094).",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | solicitar_cancelacion(confirmada=True)": {
+  "error": "No puede cancelarse un evento Cerrado sin contratación.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CERRADO_SIN_CONTRATACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "error": "No puede cancelarse un evento Cerrado sin contratación.",
+  "estado": "CERRADO_SIN_CONTRATACION",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": null,
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | confirmar_contratacion": {
+  "error": "No puede pasar a En organización desde Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | cerrar_sin_contratacion": {
+  "error": "No puede cerrarse sin contratación desde Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | iniciar": {
+  "error": "No puede iniciar un evento Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | finalizar": {
+  "error": "Un evento cancelado no puede registrarse como Finalizado (CA-095).",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | solicitar_cancelacion(confirmada=True)": {
+  "error": "No puede cancelarse un evento Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "error": "Administración no ha verificado el vencimiento del plazo de regularización.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "error": "El Coordinador debe indicar el motivo de la cancelación (BN-005).",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_SOLICITUD_CLIENTE | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "error": "No puede cancelarse un evento Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "SOLICITUD_CLIENTE",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | confirmar_contratacion": {
+  "error": "No puede pasar a En organización desde Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | cerrar_sin_contratacion": {
+  "error": "No puede cerrarse sin contratación desde Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | iniciar": {
+  "error": "No puede iniciar un evento Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | finalizar": {
+  "error": "Un evento cancelado no puede registrarse como Finalizado (CA-095).",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | solicitar_cancelacion(confirmada=False)": {
+  "error": "La cancelación solo procede con la contratación confirmada (CA-084).",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | solicitar_cancelacion(confirmada=True)": {
+  "error": "No puede cancelarse un evento Cancelado.",
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [
+   [
+    "Motivo del Cliente",
+    "PROCEDENTE"
+   ]
+  ],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=False)": {
+  "devuelve": false,
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | cancelar_por_falta_de_regularizacion(verificado=False, motivo=True)": {
+  "devuelve": false,
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=False)": {
+  "devuelve": false,
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ },
+ "CANCELADO_FALTA_REGULARIZACION | cancelar_por_falta_de_regularizacion(verificado=True, motivo=True)": {
+  "devuelve": false,
+  "estado": "CANCELADO",
+  "eventos": [],
+  "solicitudes_cancelacion": [],
+  "motivo_cancelacion": [
+   "FALTA_REGULARIZACION",
+   "previo"
+  ],
+  "fecha_inicio": null,
+  "fecha_finalizacion": null,
+  "servicios": [
+   "CT-S1"
+  ]
+ }
+}
