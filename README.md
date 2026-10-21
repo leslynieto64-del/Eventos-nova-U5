@@ -60,7 +60,11 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 ├── src/
 │   ├── api/
 │   │   ├── __init__.py
-│   │   └── main.py            (aplicación FastAPI: GET / y GET /health)
+│   │   ├── main.py            (raíz de composición de la API: GET /, GET /health y rutas de CU-01)
+│   │   ├── dependencias.py    (obtención sustituible de servicios y reloj)
+│   │   ├── esquemas.py        (esquemas de entrada y respuesta, conversión a objetos del dominio)
+│   │   ├── errores.py         (rechazos de negocio → HTTP 422)
+│   │   └── rutas_propuestas.py (POST /eventos y POST /eventos/{evento_id}/propuestas)
 │   ├── application/
 │   │   ├── cqrs.py
 │   │   ├── puertos.py
@@ -87,7 +91,9 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── ejecucion-pruebas.txt
 │   │   ├── evidencia-pruebas.docx
 │   │   └── evidencia-pruebas.pdf
+│   ├── test_api_esquemas.py
 │   ├── test_api_etapa1.py
+│   ├── test_api_propuestas.py
 │   ├── test_coherencia_diagramas.py
 │   ├── test_correcciones_etapas_3_a_7.py
 │   ├── test_decisiones_stakeholder.py
@@ -151,6 +157,37 @@ python -m uvicorn api.main:app --app-dir src --reload
 ```
 
 Luego abre <http://127.0.0.1:8000/>, <http://127.0.0.1:8000/health> o la documentación interactiva en <http://127.0.0.1:8000/docs>. Detén el servidor con `Ctrl+C`.
+
+## Etapa 3A: primera integración de casos de uso (CU-01)
+
+La API expone dos casos de uso existentes de `GestionPropuestaService`, sin reglas nuevas:
+
+| Ruta | Servicio | Respuesta correcta |
+|------|----------|--------------------|
+| `POST /eventos` | `registrar_evento(cliente_id, DatosEvento, servicios)` | `201` con `evento_id` y mensaje |
+| `POST /eventos/{evento_id}/propuestas` | `crear_propuesta(evento_id, ContenidoPropuesta, ahora)` | `201` con `propuesta_id`, `evento_id` y mensaje |
+
+> **Datos temporales.** Mientras la API use la composición en memoria (`infrastructure.composicion.construir`), los eventos y propuestas solo existen mientras el servidor está en marcha: **se pierden al detenerlo o reiniciarlo** (también con cada recarga de `--reload`). Es una implementación provisional para desarrollo y pruebas; la persistencia se incorporará cuando se reciba la base de datos oficial del proyecto.
+
+**Diseño**
+
+- Las rutas obtienen el servicio con `Depends(obtener_servicio_propuestas)`; no crean repositorios ni importan la infraestructura. `crear_app(fabrica_contenedor)` recibe la fábrica de servicios (por omisión, la composición en memoria) y cada instancia tiene su propio contenedor.
+- Los esquemas (`src/api/esquemas.py`) validan solo la forma de la petición: campos obligatorios, tipos y ningún campo desconocido. Las reglas (datos completos del evento, CA-003; contenido de la propuesta, CA-005; importe no negativo) las aplica el dominio al construir `DatosEvento`, `ContenidoPropuesta` e `Importe`.
+- `fecha_hora` se envía sin zona horaria (`2026-11-20T18:00:00`), igual que las fechas del dominio; una fecha con zona se rechaza. La fecha de la versión de la propuesta (`ahora`) la asigna el servidor.
+- Respuestas de error:
+  - `422` con `{"tipo": "rechazo_de_negocio", "detalle": ..., "pendientes": [...]}`: rechazo del servicio o del dominio, con su motivo original.
+  - `422` con `{"detail": [...]}`: petición mal formada (validación de FastAPI).
+  - `500`: falla técnica; no se convierte en rechazo de negocio.
+
+**Prueba manual en Windows** (con el servidor en marcha, en PowerShell):
+
+```powershell
+$evento = Invoke-RestMethod -Method Post -Uri http://127.0.0.1:8000/eventos -ContentType "application/json" -Body '{"cliente_id":"CL-1","datos":{"tipo":"Boda","fecha_hora":"2026-11-20T18:00:00","lugar":"Salon","invitados_aproximados":100},"servicios":["Banquete"]}'
+$evento
+Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/eventos/$($evento.evento_id)/propuestas" -ContentType "application/json" -Body '{"servicios":["Banquete"],"proveedores_considerados":["PV-1"],"costo_total":"10000.00","condiciones":"Condiciones generales"}'
+```
+
+También pueden probarse desde la documentación interactiva en <http://127.0.0.1:8000/docs>.
 
 ## Entregables
 
