@@ -213,7 +213,9 @@ class ImpactoModificacion:
 
     @property
     def tiene_impacto(self) -> bool:
-        return self.afecta_servicios or self.afecta_costos or self.afecta_condiciones
+        """Specification MODIFICACION_CON_IMPACTO: servicios OR costos OR condiciones (sustitución de proveedor)."""
+        from .especificaciones import MODIFICACION_CON_IMPACTO      # importación diferida: evita el ciclo con valores
+        return MODIFICACION_CON_IMPACTO.es_satisfecha_por(self)
 
 
 @dataclass(frozen=True)

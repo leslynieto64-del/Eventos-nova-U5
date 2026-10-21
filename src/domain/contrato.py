@@ -6,6 +6,7 @@ from typing import List, Optional
 from .base import AggregateRoot
 from .valores import CondicionesContractuales, PoliticaNoReembolso, EstadoContrato, ErrorDominio, TipoSolicitud
 from .eventos_dominio import ContratoFirmado, ContratacionConfirmada, ProcesoContratacionCerrado, AnexoContratoRegistrado
+from .especificaciones import CONTRATACION_CONFIRMABLE, SituacionContratacion
 
 HORAS_PAGO_TRAS_CONTACTO = 24            # BN-009: plazo del Cliente para efectuar el anticipo desde el contacto
 
@@ -53,13 +54,8 @@ class Contrato(AggregateRoot):
         """Devuelve requisitos pendientes; idempotente si ya estaba confirmada (CA-019, GL-009)."""
         if self.estado == EstadoContrato.CONTRATACION_CONFIRMADA:
             return []
-        pendientes = []
-        if self.estado != EstadoContrato.FIRMADO:
-            pendientes.append("contrato firmado")
-        if not self.politica.comunicada():
-            pendientes.append("política de no reembolso comunicada")
-        if not (evidencia.registrado and evidencia.verificado and evidencia.importe_correcto):
-            pendientes.append("anticipo del 30 % registrado y verificado")
+        # Specification ContratacionConfirmable: firmado AND política comunicada AND anticipo verificado.
+        pendientes = CONTRATACION_CONFIRMABLE.motivos_incumplimiento(SituacionContratacion(self, evidencia))
         if not pendientes:
             self.estado = EstadoContrato.CONTRATACION_CONFIRMADA
             self._registrar(ContratacionConfirmada(self.id, ahora, evento_ref=self.evento_id))

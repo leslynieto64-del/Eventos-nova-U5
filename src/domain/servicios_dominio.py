@@ -5,6 +5,7 @@ from dataclasses import dataclass
 from decimal import Decimal
 from typing import Optional
 from .valores import ImpactoModificacion, CondicionTemporal, DatosEvento, Importe
+from .especificaciones import SOLICITUD_PUEDE_CONTINUAR, SituacionContinuidadSolicitud, SinSaldoVencido
 
 
 @dataclass(frozen=True)
@@ -48,10 +49,9 @@ class EvaluarRegularizacionDeSolicitudes:
     No conoce reglas temporales por tipo de solicitud (hallazgo H-04)."""
 
     def evaluar(self, saldo: SituacionSaldo, evento_cancelado: bool, condicion: CondicionTemporal) -> DecisionRegularizacion:
-        if evento_cancelado:
-            return DecisionRegularizacion(False, False, "El evento fue cancelado; la solicitud no puede retomarse (SE-006).")
-        if not condicion.cumple:
-            return DecisionRegularizacion(False, False, condicion.motivo)
-        if saldo.saldo_vencido_sin_regularizar:
-            return DecisionRegularizacion(False, True, "Saldo vencido sin regularizar (CA-066, CA-072).")
-        return DecisionRegularizacion(True, False)
+        """Specification SolicitudPuedeContinuar; se usa el primer motivo según el orden O-01."""
+        fallo = SOLICITUD_PUEDE_CONTINUAR.primer_incumplimiento(
+            SituacionContinuidadSolicitud(saldo.saldo_vencido_sin_regularizar, evento_cancelado, condicion))
+        if fallo is None:
+            return DecisionRegularizacion(True, False)
+        return DecisionRegularizacion(False, isinstance(fallo.especificacion, SinSaldoVencido), fallo.motivo)

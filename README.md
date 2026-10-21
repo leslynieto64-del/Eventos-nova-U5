@@ -78,6 +78,8 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   ├── domain/
 │   │   ├── base.py
 │   │   ├── contrato.py
+│   │   ├── especificacion.py      (Etapa E2: base Specification y combinadores)
+│   │   ├── especificaciones.py    (Etapa E2: especificaciones de negocio)
 │   │   ├── estado_cuenta.py
 │   │   ├── evento.py
 │   │   ├── eventos_dominio.py
@@ -241,6 +243,39 @@ Get-Content datos\paquete_pia\MANIFIESTO.sha256
 ```
 
 > Si los CSV ya se habían agregado a Git **antes** de existir `.gitattributes`, revisa que no se hayan convertido a LF: `python validar_paquete_pia.py` lo detecta como «archivo alterado». En ese caso vuelve a copiar los originales del zip.
+
+## Etapa E2: patrón Specification
+
+Las condiciones de negocio que antes estaban escritas como `if` dentro de los métodos ahora son **especificaciones** reutilizables del dominio. Los métodos públicos, los estados, los mensajes, las listas de pendientes y la idempotencia no cambian; solo cambia *cómo* se evalúa cada condición. No se agregaron reglas, endpoints ni cambios de persistencia.
+
+| Archivo | Contenido |
+|---------|-----------|
+| `src/domain/especificacion.py` | Base `Especificacion` y combinadores `Y` (AND), `O` (OR), `No` (NOT) y `ConMotivo`. Sin dependencias externas. |
+| `src/domain/especificaciones.py` | Especificaciones de negocio de Eventos Nova (una sola definición por condición) y los candidatos que evalúan. |
+
+**Cómo se usa.** Una especificación responde `es_satisfecha_por(candidato)`. Se combinan con `&` / `y()`, `|` / `o()` y `~` / `no()`. Cuando no se cumple, `motivos_incumplimiento(candidato)` devuelve todos los motivos en el orden de composición (listas de pendientes) y `primer_motivo(candidato)` el primero (rechazos con un solo motivo). `con_motivo(texto)` asigna un motivo propio a una combinación.
+
+```python
+CONTRATACION_CONFIRMABLE = ContratoEstaFirmado() & PoliticaNoReembolsoComunicada() & AnticipoVerificado()
+pendientes = CONTRATACION_CONFIRMABLE.motivos_incumplimiento(SituacionContratacion(contrato, evidencia))
+```
+
+| Especificación | Regla | Dónde se usa |
+|----------------|-------|--------------|
+| `CONTRATACION_CONFIRMABLE` = firmado **Y** política comunicada **Y** anticipo verificado | BN-009, CA-019 | `Contrato.confirmar_contratacion` (lista de pendientes) |
+| `CAMBIO_REQUIERE_APROBACION_CLIENTE` = afecta costos **O** condiciones | BN-003 (ruta B) | `SolicitudCambio.registrar_viabilidad` |
+| `MODIFICACION_CON_IMPACTO` = servicios **O** costos **O** condiciones | SE-001 (sustitución) | `ImpactoModificacion.tiene_impacto`, usado por `SustitucionProveedor` |
+| `CAMBIO_CON_CARGO_TARDIO` = **NO** anticipación mínima de 7 días | BN-003, CA-061, CA-062 | `SolicitudCambio.aplica_cargo_tardio` (solo el cargo; la viabilidad se evalúa siempre) |
+| `SERVICIO_ADICIONAL_EN_PLAZO` = evento no iniciado **Y** (elegibilidad obtenida **O** 5 días naturales) | SE-004, CA-077, CA-080, CA-083 | `SolicitudServicioAdicional.condicion_temporal` |
+| `SOLICITUD_CAMBIO_EN_PLAZO` = evento no iniciado | CA-039 | `SolicitudCambio.condicion_temporal` |
+| `SOLICITUD_PUEDE_CONTINUAR` = evento no cancelado **Y** condición temporal **Y** sin saldo vencido | O-01, SE-006, BN-005 | `EvaluarRegularizacionDeSolicitudes.evaluar` (primer motivo; solo el saldo detiene) |
+
+**Pruebas de la etapa** (64): `tests/test_especificacion_combinadores.py`, `tests/test_especificaciones_negocio.py` y `tests/test_especificaciones_conservacion.py`. La última compara el comportamiento actual con `tests/referencias/comportamiento_reglas_v8_e1.json`, capturado con el código de v8 + E1 antes del cambio (169 combinaciones de entradas).
+
+```bat
+python -m unittest tests.test_especificacion_combinadores tests.test_especificaciones_negocio tests.test_especificaciones_conservacion -v
+python -m unittest discover -s tests -v
+```
 
 ## Entregables
 

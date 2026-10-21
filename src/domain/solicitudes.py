@@ -15,9 +15,17 @@ from .eventos_dominio import (CambioConfirmado, SolicitudCambioCerradaPorFaltaDe
                               SustitucionProveedorConfirmada, SustitucionProveedorCerradaPorInicioEvento,
                               AlternativaRechazadaPorCliente, AlternativaNoAutorizadaPorAdministracion)
 from .servicios_dominio import DecisionRegularizacion, ConfiguracionComparable
+from .especificaciones import (DIAS_MINIMOS_SERVICIO_ADICIONAL, DIAS_SIN_CARGO_TARDIO,   # noqa: F401  (5 y 7 días)
+                               CAMBIO_CON_CARGO_TARDIO, CAMBIO_REQUIERE_APROBACION_CLIENTE, AfectaCostos,
+                               SOLICITUD_CAMBIO_EN_PLAZO, SERVICIO_ADICIONAL_EN_PLAZO, SituacionTemporalSolicitud)
 
-DIAS_MINIMOS_SERVICIO_ADICIONAL = 5   # SE-004
-DIAS_SIN_CARGO_TARDIO = 7            # BN-003
+_AFECTA_COSTOS = AfectaCostos()
+
+
+def _condicion_temporal(especificacion, situacion: SituacionTemporalSolicitud) -> CondicionTemporal:
+    """Traduce una Specification temporal al Value Object CondicionTemporal (primer motivo o cumplida)."""
+    motivo = especificacion.primer_motivo(situacion)
+    return CondicionTemporal(True) if motivo is None else CondicionTemporal(False, motivo)
 
 
 class _SolicitudBase(AggregateRoot):
@@ -98,7 +106,7 @@ class SolicitudCambio(_SolicitudBase):
         self._registrar(CambioSolicitado(self.id, anticipacion.fecha_solicitud))
 
     def condicion_temporal(self, evento_iniciado: bool) -> CondicionTemporal:
-        return CondicionTemporal(not evento_iniciado, "" if not evento_iniciado else "El evento ya inició (CA-039).")
+        return _condicion_temporal(SOLICITUD_CAMBIO_EN_PLAZO, SituacionTemporalSolicitud(evento_iniciado))
 
     def configuracion_propuesta(self, vigente: ConfiguracionComparable, costo_adicional: Optional[Importe]) -> ConfiguracionComparable:
         condiciones = dict(vigente.condiciones)
@@ -109,7 +117,7 @@ class SolicitudCambio(_SolicitudBase):
     @property
     def aplica_cargo_tardio(self) -> bool:
         """Con menos de 7 días; solo se cobra si el cambio es viable, aceptado y se realiza (CA-061, CA-062)."""
-        return self.anticipacion.dias_naturales < DIAS_SIN_CARGO_TARDIO
+        return CAMBIO_CON_CARGO_TARDIO.es_satisfecha_por(self.anticipacion)
 
     def registrar_viabilidad(self, resultado: ResultadoViabilidad, impacto: ImpactoModificacion, ahora: datetime) -> None:
         if self.estado not in (ESC.REGISTRADA, ESC.EN_EVALUACION):
@@ -118,11 +126,11 @@ class SolicitudCambio(_SolicitudBase):
         self._registrar(ViabilidadCambioEvaluada(self.id, ahora, viable=resultado.viable))
         if not resultado.viable:                                   # Ruta A
             self._cerrar(ESC.NO_PROCEDENTE, CausaCierreSolicitud.NO_VIABLE, resultado.motivo, ahora)
-        elif impacto.afecta_costos or impacto.afecta_condiciones:   # Ruta B
+        elif CAMBIO_REQUIERE_APROBACION_CLIENTE.es_satisfecha_por(impacto):   # Ruta B
             self.estado = ESC.PENDIENTE_APROBACION_CLIENTE
         else:                                                       # Ruta C
             self.estado = ESC.PENDIENTE_FORMALIZACION
-        self.importes_por_pagar = resultado.viable and (impacto.afecta_costos or self.aplica_cargo_tardio)
+        self.importes_por_pagar = resultado.viable and (_AFECTA_COSTOS.es_satisfecha_por(impacto) or self.aplica_cargo_tardio)
 
     def registrar_decision_cliente(self, d: Decision) -> None:
         if self.estado != ESC.PENDIENTE_APROBACION_CLIENTE:
@@ -196,15 +204,12 @@ class SolicitudServicioAdicional(_SolicitudBase):
         self._registrar(ServicioAdicionalSolicitado(self.id, anticipacion.fecha_solicitud))
 
     def condicion_temporal(self, ahora: datetime, evento_iniciado: bool) -> CondicionTemporal:
-        """La propia solicitud calcula su ventana de elegibilidad (corrección de la Etapa 3 / H-04)."""
-        if evento_iniciado:
-            return CondicionTemporal(False, "Condición temporal: el evento ya inició.")
-        if self.elegibilidad_obtenida:
-            return CondicionTemporal(True)       # la pausa o los días restantes no la invalidan
-        dias = (self.anticipacion.fecha_evento.date() - ahora.date()).days
-        if dias < DIAS_MINIMOS_SERVICIO_ADICIONAL:
-            return CondicionTemporal(False, "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).")
-        return CondicionTemporal(True)
+        """La propia solicitud calcula su ventana de elegibilidad (corrección de la Etapa 3 / H-04).
+        Specification SERVICIO_ADICIONAL_EN_PLAZO: evento no iniciado AND (elegibilidad obtenida OR cinco días
+        naturales contados desde `ahora`). La elegibilidad obtenida no se invalida por la pausa ni por los días
+        restantes; si la solicitud se detuvo antes de obtenerla, al retomarla se revalidan los cinco días."""
+        return _condicion_temporal(SERVICIO_ADICIONAL_EN_PLAZO, SituacionTemporalSolicitud(
+            evento_iniciado, self.elegibilidad_obtenida, AnticipacionSolicitud(ahora, self.anticipacion.fecha_evento)))
 
     def registrar_disponibilidad(self, d: DisponibilidadProveedor, ahora: datetime) -> None:
         if self.estado not in (ESA.REGISTRADA, ESA.EN_BUSQUEDA_PROVEEDOR):
