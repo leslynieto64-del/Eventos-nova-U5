@@ -387,6 +387,17 @@ python -m unittest tests.test_sustitucion_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
 
+## Corrección documental previa a E3D (AR-07 y AR-08)
+
+Antes de planificar E3D se revisaron las fuentes del dominio financiero. Esta corrección es solo documental: no cambia código, pruebas, diagramas, CSV ni manifiestos. El plan de la etapa está en [`docs/planificacion/Plan_E3D_Final.docx`](docs/planificacion/Plan_E3D_Final.docx).
+
+**Asuntos registrados** (se suman a AR-01 a AR-06; esos siguen pendientes y no se modifican):
+
+| ID | Asunto | Estado |
+|----|--------|--------|
+| AR-07 | CA-097 condicionaba que los cobros pendientes exclusivos de una solicitud cerrada sin realizarse quedaran sin efecto a que el Evento no estuviera cancelado. SE-012, BN-008, GL-053, el mapa de dominio, el BPMN SP-08 y el código (`EstadoCuenta.aplicar_cierre_sin_realizar`) los dejan sin efecto en ambos casos y reservan la condición «Evento no cancelado» para la devolución. Se conservó SE-012 y se alinearon con ella CA-097, CA-070 y CA-071 (User Stories), GL-032 (Glosario y su copia en el informe de arquitectura), la restricción del negocio del BRD y las celdas B15 y B24 de la matriz de trazabilidad. Los ID, las demás condiciones y la política de no reembolso no cambian. | Resuelto (documental) |
+| AR-08 | `EstadoCuenta.registrar_devolucion_efectuada` y `EstadoCuentaService.registrar_y_ejecutar_devolucion` buscan la devolución con `next(...)` sin valor por omisión: con un `devolucion_id` inexistente se lanza `StopIteration` en lugar de un rechazo de negocio (`ErrorDominio`). | Pendiente; no se corrige en E3D |
+
 ## Entregables
 
 Los entregables principales están organizados en las siguientes rutas relativas:
