@@ -452,6 +452,43 @@ python -m unittest tests.test_regularizacion_solicitudes -v
 python -m unittest discover -s tests -v
 ```
 
+## Etapa E3E: State Machine explícita de SolicitudServicioAdicional
+
+`SolicitudServicioAdicional` (en `src/domain/solicitudes.py`) valida ahora los cambios de estado de sus métodos propios con la `MaquinaEstados` de E3A, sin modificarla. Las acciones internas y la tabla están a nivel de módulo, como en Evento, Contrato y EstadoCuenta: `AccionServicioAdicional` y `MAQUINA_SERVICIO_ADICIONAL`. `_SolicitudBase`, `SolicitudCambio`, `SustitucionProveedor`, las Specifications, los servicios, las reacciones, la API, los repositorios, los diagramas y los CSV no se modificaron. Las firmas públicas, los 15 estados, los mensajes, los faltantes de `confirmar` y los Domain Events son los mismos.
+
+**Tabla** (mapa de dominio U3, página «03 — Detalle B», «Estados de SolicitudServicioAdicional · SE-004, CA-071–CA-083», y BPMN SP-04). Las acciones derivan de los métodos reales («método:resultado»); el método elige la acción a partir del resultado que ya calculaba.
+
+| Origen | Acción interna | Destino | Domain Event | Fuente |
+|--------|----------------|---------|--------------|--------|
+| Registrada, En búsqueda de proveedor | `registrar_disponibilidad:con_proveedor` | Pendiente de aprobación del Cliente | AlternativaProveedorEncontrada | CA-073, CA-075, CA-079 |
+| Registrada | `registrar_disponibilidad:sin_proveedor` | En búsqueda de proveedor | — | CA-074, CA-076 |
+| Registrada, En búsqueda de proveedor | `registrar_disponibilidad:fuera_de_plazo` | No procedente | — | CA-077, CA-083 |
+| En búsqueda de proveedor | `registrar_respuesta_espera:no_espera` | No se realizará | — | CA-078 |
+| En búsqueda de proveedor | `registrar_respuesta_espera:fuera_de_plazo` | No procedente | — | CA-077 |
+| Pendiente de aprobación del Cliente | `registrar_decision_cliente:aprobada` / `:rechazada` | Pendiente de autorización / No aprobada | — | CA-079 |
+| Pendiente de autorización | `registrar_autorizacion:aprobada` / `:rechazada` | Autorizada / No autorizada | — | CA-079, CA-081 |
+| Autorizada | `registrar_solicitud_pago` | Pendiente de pago | — | CA-082 |
+| Pendiente de pago | `confirmar` | Confirmada | ServicioAdicionalConfirmado | CA-080, CA-082, SE-007 |
+| Pendiente de pago | `cerrar_por_falta_de_pago` | Cerrada por falta de pago | ServicioAdicionalCerradoPorFaltaDePago | CA-080, BN-004 |
+| Los 7 estados no finales | `cerrar_por_inicio_evento` | Cerrada por inicio del evento | ServicioAdicionalCerradoPorInicioEvento | CA-071, GL-032 |
+
+21 transiciones. Estados terminales: los 8 de `FINALES`. Una repetición idempotente: `registrar_disponibilidad` sin proveedor estando ya En búsqueda de proveedor (la búsqueda continúa sin cambios, CA-076).
+
+**Cómo se usa.**
+- `registrar_disponibilidad` calcula primero el resultado (la condición temporal no tiene efectos), después valida el estado con la máquina, luego exige costo y condiciones (CA-075) y al final modifica el agregado. Los rechazos conservan su orden y sus mensajes; la repetición no omite la comprobación de la ventana.
+- `registrar_respuesta_espera` conserva su guarda manual: si el Cliente acepta esperar dentro de la ventana, la operación es válida y no cambia el estado ni emite eventos (no se declara como repetición).
+- `confirmar` conserva su lista de faltantes; la máquina solo se consulta cuando no falta ningún requisito. `cerrar_por_inicio_evento` en un estado final sigue sin efecto.
+- Fuera de la máquina, con sus guardas actuales: la regularización (`aplicar_decision_regularizacion`, N2, con `ESTADOS_REGULARIZABLES` sin ampliar), el cierre por cancelación del evento (BN-008) y `asociar_anexo`, heredados de `_SolicitudBase`. El plazo de pago de 24 horas lo siguen comprobando los servicios de aplicación.
+
+**Asuntos que se conservan sin resolver.** AR-06: el mapa de dominio dibuja Registrada → En búsqueda de proveedor → Pendiente de aprobación; el código (respaldado por SE-004, CA-073, CA-074 y el BPMN SP-04) pasa de Registrada a Pendiente de aprobación cuando un proveedor está disponible. Se trata como posible discrepancia documental; el código no cambia. N6 (registro de una solicitud con el Evento iniciado o cancelado) sigue pendiente de decisión de negocio y fuera de E3E: no se modificaron `src/application/servicios.py` ni el BPMN SP-04.
+
+**Pruebas de la etapa** (35): `tests/test_servicio_adicional_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_servicio_adicional_v8_n2.json`, capturado con `tests/apoyo_maquina_estados_servicio_adicional.py` sobre el código del commit 5e046c6, antes de E3E: 544 combinaciones (16 situaciones de la solicitud × estado inicial y 33 operaciones propias y heredadas), que son idénticas. La referencia guarda también la huella de `_SolicitudBase`, `SolicitudCambio` y `SustitucionProveedor`, que no cambia. Contra la referencia de N2 se comprueba su regla documentada: Registrada y Detenida, idénticas; los demás estados, sin cambios y con el mismo valor devuelto.
+
+```bat
+python -m unittest tests.test_servicio_adicional_maquina_estados -v
+python -m unittest discover -s tests -v
+```
+
 ## Entregables
 
 Los entregables principales están organizados en las siguientes rutas relativas:

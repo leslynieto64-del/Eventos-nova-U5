@@ -2,8 +2,10 @@
 from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime
+from enum import Enum
 from typing import List, Optional
 from .base import AggregateRoot
+from .maquina_estados import MaquinaEstados, Transicion
 from .valores import (DatosEvento, CondicionesServicio, restar_dias_habiles, AnticipacionSolicitud, TarifaCargoTardio, ResultadoViabilidad, ImpactoModificacion, Decision,
                       Importe, MotivoCierreSolicitud, CausaCierreSolicitud, CondicionTemporal, DisponibilidadProveedor,
                       EstadoSolicitudCambio as ESC, EstadoSolicitudServicioAdicional as ESA,
@@ -196,6 +198,74 @@ class SolicitudCambio(_SolicitudBase):
 
 
 # ------------------------------------------------------------------ SolicitudServicioAdicional
+class AccionServicioAdicional(Enum):
+    """Acciones internas de la State Machine de SolicitudServicioAdicional (Etapa E3E). Corresponden a los métodos propios
+    de la clase; los que tienen varios resultados usan una acción por resultado («método:resultado»), elegida a partir
+    del resultado que el método ya calcula, sin reglas nuevas."""
+    REGISTRAR_DISPONIBILIDAD_CON_PROVEEDOR = "registrar_disponibilidad:con_proveedor"
+    REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR = "registrar_disponibilidad:sin_proveedor"
+    REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO = "registrar_disponibilidad:fuera_de_plazo"
+    REGISTRAR_RESPUESTA_ESPERA_NO_ESPERA = "registrar_respuesta_espera:no_espera"
+    REGISTRAR_RESPUESTA_ESPERA_FUERA_DE_PLAZO = "registrar_respuesta_espera:fuera_de_plazo"
+    REGISTRAR_DECISION_CLIENTE_APROBADA = "registrar_decision_cliente:aprobada"
+    REGISTRAR_DECISION_CLIENTE_RECHAZADA = "registrar_decision_cliente:rechazada"
+    REGISTRAR_AUTORIZACION_APROBADA = "registrar_autorizacion:aprobada"
+    REGISTRAR_AUTORIZACION_RECHAZADA = "registrar_autorizacion:rechazada"
+    REGISTRAR_SOLICITUD_PAGO = "registrar_solicitud_pago"
+    CONFIRMAR = "confirmar"
+    CERRAR_POR_FALTA_DE_PAGO = "cerrar_por_falta_de_pago"
+    CERRAR_POR_INICIO_EVENTO = "cerrar_por_inicio_evento"
+
+
+_AS = AccionServicioAdicional
+_MENSAJE_DISPONIBILIDAD = "La disponibilidad se registra durante la búsqueda de proveedor."
+_MENSAJE_ESPERA = "No hay una búsqueda en curso."
+_EN_TRAMITE_SA = (ESA.REGISTRADA, ESA.DETENIDA_SALDO_VENCIDO, ESA.EN_BUSQUEDA_PROVEEDOR, ESA.PENDIENTE_APROBACION_CLIENTE,
+                  ESA.PENDIENTE_AUTORIZACION, ESA.AUTORIZADA, ESA.PENDIENTE_PAGO)
+
+# Mapa de dominio U3, página «03 — Detalle B», «Estados de SolicitudServicioAdicional · SE-004, CA-071–CA-083», y
+# BPMN SP-04. Fuera de la tabla, con sus guardas actuales: la regularización (aplicar_decision_regularizacion, N2), el
+# cierre por cancelación del evento (BN-008) y asociar_anexo, heredados de _SolicitudBase; y la respuesta del Cliente
+# que acepta esperar dentro de la ventana, que no cambia el estado (guarda manual de registrar_respuesta_espera).
+MAQUINA_SERVICIO_ADICIONAL = MaquinaEstados(
+    estados=ESA,
+    transiciones=(
+        Transicion(ESA.REGISTRADA, _AS.REGISTRAR_DISPONIBILIDAD_CON_PROVEEDOR, ESA.PENDIENTE_APROBACION_CLIENTE),        # CA-073, CA-075, CA-079
+        Transicion(ESA.EN_BUSQUEDA_PROVEEDOR, _AS.REGISTRAR_DISPONIBILIDAD_CON_PROVEEDOR, ESA.PENDIENTE_APROBACION_CLIENTE),
+        Transicion(ESA.REGISTRADA, _AS.REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR, ESA.EN_BUSQUEDA_PROVEEDOR),               # CA-074, CA-076
+        Transicion(ESA.REGISTRADA, _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO, ESA.NO_PROCEDENTE),                     # CA-077, CA-083
+        Transicion(ESA.EN_BUSQUEDA_PROVEEDOR, _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO, ESA.NO_PROCEDENTE),
+        Transicion(ESA.EN_BUSQUEDA_PROVEEDOR, _AS.REGISTRAR_RESPUESTA_ESPERA_NO_ESPERA, ESA.NO_SE_REALIZARA),           # CA-078
+        Transicion(ESA.EN_BUSQUEDA_PROVEEDOR, _AS.REGISTRAR_RESPUESTA_ESPERA_FUERA_DE_PLAZO, ESA.NO_PROCEDENTE),        # CA-077
+        Transicion(ESA.PENDIENTE_APROBACION_CLIENTE, _AS.REGISTRAR_DECISION_CLIENTE_APROBADA, ESA.PENDIENTE_AUTORIZACION),  # CA-079
+        Transicion(ESA.PENDIENTE_APROBACION_CLIENTE, _AS.REGISTRAR_DECISION_CLIENTE_RECHAZADA, ESA.NO_APROBADA),
+        Transicion(ESA.PENDIENTE_AUTORIZACION, _AS.REGISTRAR_AUTORIZACION_APROBADA, ESA.AUTORIZADA),                    # CA-079, CA-081
+        Transicion(ESA.PENDIENTE_AUTORIZACION, _AS.REGISTRAR_AUTORIZACION_RECHAZADA, ESA.NO_AUTORIZADA),
+        Transicion(ESA.AUTORIZADA, _AS.REGISTRAR_SOLICITUD_PAGO, ESA.PENDIENTE_PAGO),                                   # CA-082
+        Transicion(ESA.PENDIENTE_PAGO, _AS.CONFIRMAR, ESA.CONFIRMADA),                                                   # CA-080, CA-082, SE-007
+        Transicion(ESA.PENDIENTE_PAGO, _AS.CERRAR_POR_FALTA_DE_PAGO, ESA.CERRADA_FALTA_PAGO),                           # CA-080, BN-004
+    ) + tuple(Transicion(e, _AS.CERRAR_POR_INICIO_EVENTO, ESA.CERRADA_INICIO_EVENTO) for e in _EN_TRAMITE_SA),      # CA-071, GL-032
+    # Sin proveedor estando ya En búsqueda: la búsqueda continúa sin cambios (CA-076).
+    repeticiones_idempotentes=((ESA.EN_BUSQUEDA_PROVEEDOR, _AS.REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR),),
+    # Mensajes de rechazo existentes, sin cambios. confirmar devuelve sus faltantes y cerrar_por_inicio_evento no tiene
+    # efecto en un estado final: la máquina solo se consulta cuando la operación procede.
+    mensajes_rechazo={
+        _AS.REGISTRAR_DISPONIBILIDAD_CON_PROVEEDOR: lambda o: _MENSAJE_DISPONIBILIDAD,
+        _AS.REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR: lambda o: _MENSAJE_DISPONIBILIDAD,
+        _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO: lambda o: _MENSAJE_DISPONIBILIDAD,
+        _AS.REGISTRAR_RESPUESTA_ESPERA_NO_ESPERA: lambda o: _MENSAJE_ESPERA,
+        _AS.REGISTRAR_RESPUESTA_ESPERA_FUERA_DE_PLAZO: lambda o: _MENSAJE_ESPERA,
+        _AS.REGISTRAR_DECISION_CLIENTE_APROBADA: lambda o: "La solicitud no espera la aprobación del Cliente.",
+        _AS.REGISTRAR_DECISION_CLIENTE_RECHAZADA: lambda o: "La solicitud no espera la aprobación del Cliente.",
+        _AS.REGISTRAR_AUTORIZACION_APROBADA: lambda o: "La autorización es posterior a la aprobación del Cliente (CA-081).",
+        _AS.REGISTRAR_AUTORIZACION_RECHAZADA: lambda o: "La autorización es posterior a la aprobación del Cliente (CA-081).",
+        _AS.REGISTRAR_SOLICITUD_PAGO: lambda o: "El anexo se registra antes de comunicar la solicitud de pago (CA-082).",
+        _AS.CERRAR_POR_FALTA_DE_PAGO: lambda o: "Solo se cierra por falta de pago una solicitud Pendiente de pago.",
+    },
+    nombre="SolicitudServicioAdicional",
+)
+
+
 class SolicitudServicioAdicional(_SolicitudBase):
     FINALES = (ESA.CONFIRMADA, ESA.NO_PROCEDENTE, ESA.NO_SE_REALIZARA, ESA.NO_APROBADA, ESA.NO_AUTORIZADA,
                ESA.CERRADA_FALTA_PAGO, ESA.CERRADA_INICIO_EVENTO, ESA.CERRADA_EVENTO_CANCELADO)
@@ -222,57 +292,71 @@ class SolicitudServicioAdicional(_SolicitudBase):
             evento_iniciado, self.elegibilidad_obtenida, AnticipacionSolicitud(ahora, self.anticipacion.fecha_evento)))
 
     def registrar_disponibilidad(self, d: DisponibilidadProveedor, ahora: datetime) -> None:
-        if self.estado not in (ESA.REGISTRADA, ESA.EN_BUSQUEDA_PROVEEDOR):
-            raise ErrorDominio("La disponibilidad se registra durante la búsqueda de proveedor.")
+        """E3E: el resultado se calcula como antes (la condición temporal no tiene efectos) y elige la acción; la máquina
+        valida el estado antes de exigir costo y condiciones (CA-075) y antes de modificar el agregado, de modo que los
+        rechazos conservan su orden: estado, CA-075."""
         if not d.disponible:
             ct = self.condicion_temporal(ahora, False)
-            if not ct.cumple:
-                self._cerrar(ESA.NO_PROCEDENTE, CausaCierreSolicitud.PLAZO_INSUFICIENTE, ct.motivo, ahora)
-            else:
-                self.estado = ESA.EN_BUSQUEDA_PROVEEDOR
+            accion = _AS.REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR if ct.cumple else _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO
+            motivo = ct.motivo
+        elif not self.condicion_temporal(ahora, False).cumple:
+            accion, motivo = _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO, "Alternativa fuera de la ventana"
+        else:
+            accion, motivo = _AS.REGISTRAR_DISPONIBILIDAD_CON_PROVEEDOR, None
+        if MAQUINA_SERVICIO_ADICIONAL.es_repeticion(self.estado, accion):
+            return                                       # ya En búsqueda y sin proveedor: la búsqueda continúa (CA-076)
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, accion)
+        if accion is _AS.REGISTRAR_DISPONIBILIDAD_FUERA_DE_PLAZO:
+            self._cerrar(destino, CausaCierreSolicitud.PLAZO_INSUFICIENTE, motivo, ahora)
             return
-        if not self.condicion_temporal(ahora, False).cumple:
-            self._cerrar(ESA.NO_PROCEDENTE, CausaCierreSolicitud.PLAZO_INSUFICIENTE, "Alternativa fuera de la ventana", ahora)
+        if accion is _AS.REGISTRAR_DISPONIBILIDAD_SIN_PROVEEDOR:
+            self.estado = destino
             return
         if d.costo is None or d.condiciones is None:
             raise ErrorDominio("Antes de continuar deben determinarse el costo y las condiciones del servicio (CA-075).")
         self.disponibilidad, self.elegibilidad_obtenida = d, True
-        self.estado = ESA.PENDIENTE_APROBACION_CLIENTE
+        self.estado = destino
         self._registrar(AlternativaProveedorEncontrada(self.id, ahora, proveedor_id=d.proveedor_id))
 
     def registrar_respuesta_espera(self, acepta_esperar: bool, ahora: datetime) -> None:
-        if self.estado != ESA.EN_BUSQUEDA_PROVEEDOR:
-            raise ErrorDominio("No hay una búsqueda en curso.")
+        if self.estado != ESA.EN_BUSQUEDA_PROVEEDOR:          # guarda manual existente
+            raise ErrorDominio(_MENSAJE_ESPERA)
         if not acepta_esperar:
-            self._cerrar(ESA.NO_SE_REALIZARA, CausaCierreSolicitud.CLIENTE_NO_ESPERA, "El Cliente no acepta esperar (CA-078)", ahora)
+            accion, causa, motivo = (_AS.REGISTRAR_RESPUESTA_ESPERA_NO_ESPERA, CausaCierreSolicitud.CLIENTE_NO_ESPERA,
+                                     "El Cliente no acepta esperar (CA-078)")
         elif not self.condicion_temporal(ahora, False).cumple:
-            self._cerrar(ESA.NO_PROCEDENTE, CausaCierreSolicitud.PLAZO_INSUFICIENTE, "Esperar no amplía el plazo (CA-077)", ahora)
+            accion, causa, motivo = (_AS.REGISTRAR_RESPUESTA_ESPERA_FUERA_DE_PLAZO, CausaCierreSolicitud.PLAZO_INSUFICIENTE,
+                                     "Esperar no amplía el plazo (CA-077)")
+        else:
+            return                       # acepta esperar dentro de la ventana: operación válida sin cambio de estado
+        self._cerrar(MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, accion), causa, motivo, ahora)
 
     def registrar_decision_cliente(self, d: Decision) -> None:
-        if self.estado != ESA.PENDIENTE_APROBACION_CLIENTE:
-            raise ErrorDominio("La solicitud no espera la aprobación del Cliente.")
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(
+            self.estado, _AS.REGISTRAR_DECISION_CLIENTE_APROBADA if d.aprobada else _AS.REGISTRAR_DECISION_CLIENTE_RECHAZADA)
         self.decision_cliente = d
         if d.aprobada:
-            self.estado = ESA.PENDIENTE_AUTORIZACION
+            self.estado = destino
         else:
-            self._cerrar(ESA.NO_APROBADA, CausaCierreSolicitud.RECHAZO_CLIENTE, d.motivo, d.fecha)
+            self._cerrar(destino, CausaCierreSolicitud.RECHAZO_CLIENTE, d.motivo, d.fecha)
 
     def registrar_autorizacion(self, d: Decision) -> None:
-        if self.estado != ESA.PENDIENTE_AUTORIZACION:
-            raise ErrorDominio("La autorización es posterior a la aprobación del Cliente (CA-081).")
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(
+            self.estado, _AS.REGISTRAR_AUTORIZACION_APROBADA if d.aprobada else _AS.REGISTRAR_AUTORIZACION_RECHAZADA)
         self.autorizacion_administracion = d
         if d.aprobada:
-            self.estado = ESA.AUTORIZADA
+            self.estado = destino
         else:
-            self._cerrar(ESA.NO_AUTORIZADA, CausaCierreSolicitud.NO_AUTORIZADA, d.motivo, d.fecha)
+            self._cerrar(destino, CausaCierreSolicitud.NO_AUTORIZADA, d.motivo, d.fecha)
 
     def puede_registrar_anexo(self) -> bool:
         return self.estado == ESA.AUTORIZADA and self.anexo_id is None
 
     def registrar_solicitud_pago(self, obligacion_pago_id: str) -> None:
-        if self.estado != ESA.AUTORIZADA or not self.anexo_id:
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, _AS.REGISTRAR_SOLICITUD_PAGO)
+        if not self.anexo_id:
             raise ErrorDominio("El anexo se registra antes de comunicar la solicitud de pago (CA-082).")
-        self.obligacion_pago_id, self.estado = obligacion_pago_id, ESA.PENDIENTE_PAGO
+        self.obligacion_pago_id, self.estado = obligacion_pago_id, destino
 
     def confirmar(self, pago_verificado: bool, evento_iniciado: bool, ahora: datetime,
                   evento_cancelado: bool = False) -> List[str]:
@@ -281,23 +365,23 @@ class SolicitudServicioAdicional(_SolicitudBase):
         if not self.condicion_temporal(ahora, evento_iniciado).cumple: faltan.append("elegibilidad vigente")
         if self.estado != ESA.PENDIENTE_PAGO: faltan.append("aprobación, autorización, anexo y solicitud de pago")
         if not pago_verificado: faltan.append("pago registrado y verificado")
-        if not faltan:
-            self.estado = ESA.CONFIRMADA
+        if not faltan:                                   # la máquina solo se consulta con todos los requisitos cumplidos
+            self.estado = MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, _AS.CONFIRMAR)
             self._registrar(ServicioAdicionalConfirmado(self.id, ahora, evento_ref=self.evento_id,
                                                         servicio=self.servicio, proveedor_id=self.disponibilidad.proveedor_id,
                                                         condiciones=self.disponibilidad.condiciones))
         return faltan
 
     def cerrar_por_falta_de_pago(self, ahora: datetime) -> None:
-        if self.estado != ESA.PENDIENTE_PAGO:
-            raise ErrorDominio("Solo se cierra por falta de pago una solicitud Pendiente de pago.")
-        self._cerrar(ESA.CERRADA_FALTA_PAGO, CausaCierreSolicitud.FALTA_PAGO, "El Cliente no efectuó el pago en las 24 h naturales", ahora)
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, _AS.CERRAR_POR_FALTA_DE_PAGO)
+        self._cerrar(destino, CausaCierreSolicitud.FALTA_PAGO, "El Cliente no efectuó el pago en las 24 h naturales", ahora)
         self._registrar(ServicioAdicionalCerradoPorFaltaDePago(self.id, ahora, evento_ref=self.evento_id))
 
     def cerrar_por_inicio_evento(self, ahora: datetime) -> None:
-        if not self.pendiente:
+        if not self.pendiente:                           # estados finales: sin efecto
             return
-        self._cerrar(ESA.CERRADA_INICIO_EVENTO, CausaCierreSolicitud.INICIO_EVENTO, "El evento inició antes de confirmar", ahora)
+        destino = MAQUINA_SERVICIO_ADICIONAL.transitar(self.estado, _AS.CERRAR_POR_INICIO_EVENTO)
+        self._cerrar(destino, CausaCierreSolicitud.INICIO_EVENTO, "El evento inició antes de confirmar", ahora)
         self._registrar(ServicioAdicionalCerradoPorInicioEvento(self.id, ahora, evento_ref=self.evento_id))
 
 
