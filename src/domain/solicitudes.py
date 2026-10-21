@@ -32,6 +32,9 @@ class _SolicitudBase(AggregateRoot):
     FINALES: tuple = ()
     DETENIDA = None
     CERRADA_CANCELACION = None
+    # N2: únicos estados que una decisión de regularización puede modificar. SE-006 y P-06 la aplican al registrar una
+    # solicitud nueva de cambio o de servicio adicional (Registrada) y al retomarla (Detenida por saldo vencido).
+    ESTADOS_REGULARIZABLES: tuple = ()
 
     def __init__(self, id_, evento_id, contrato_id, estado_cuenta_id):
         super().__init__(id_)
@@ -65,7 +68,12 @@ class _SolicitudBase(AggregateRoot):
             raise ErrorDominio("La solicitud ya tiene otro anexo asociado.")
 
     def aplicar_decision_regularizacion(self, d: DecisionRegularizacion, ahora: datetime, estado_no_procede):
-        """Usado al registrar y al retomar: la solicitud cambia su propio estado."""
+        """Usado al registrar y al retomar: la solicitud cambia su propio estado.
+        N2: solo una solicitud Registrada o Detenida por saldo vencido (ESTADOS_REGULARIZABLES) cambia por esta
+        decisión. En cualquier otro estado (en trámite, P-06, o final) la llamada no tiene efecto: no modifica estado,
+        atributos ni Domain Events y devuelve el mismo valor que antes (True si puede continuar; False si no)."""
+        if self.estado not in self.ESTADOS_REGULARIZABLES:
+            return d.puede_continuar
         if d.puede_continuar:
             if self.estado == self.DETENIDA:
                 self.estado = self._estado_antes_de_detener
@@ -85,6 +93,7 @@ class SolicitudCambio(_SolicitudBase):
                ESC.CERRADA_FALTA_PAGO, ESC.CERRADA_INICIO_EVENTO, ESC.CERRADA_EVENTO_CANCELADO)
     DETENIDA = ESC.DETENIDA_SALDO_VENCIDO
     CERRADA_CANCELACION = ESC.CERRADA_EVENTO_CANCELADO
+    ESTADOS_REGULARIZABLES = (ESC.REGISTRADA, ESC.DETENIDA_SALDO_VENCIDO)        # N2
 
     def __init__(self, id_, evento_id, contrato_id, estado_cuenta_id, descripcion: str,
                  anticipacion: AnticipacionSolicitud, tarifa: TarifaCargoTardio,
@@ -192,6 +201,7 @@ class SolicitudServicioAdicional(_SolicitudBase):
                ESA.CERRADA_FALTA_PAGO, ESA.CERRADA_INICIO_EVENTO, ESA.CERRADA_EVENTO_CANCELADO)
     DETENIDA = ESA.DETENIDA_SALDO_VENCIDO
     CERRADA_CANCELACION = ESA.CERRADA_EVENTO_CANCELADO
+    ESTADOS_REGULARIZABLES = (ESA.REGISTRADA, ESA.DETENIDA_SALDO_VENCIDO)        # N2
 
     def __init__(self, id_, evento_id, contrato_id, estado_cuenta_id, servicio: str, anticipacion: AnticipacionSolicitud):
         super().__init__(id_, evento_id, contrato_id, estado_cuenta_id)

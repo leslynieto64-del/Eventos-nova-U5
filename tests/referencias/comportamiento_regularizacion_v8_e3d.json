@@ -1,0 +1,6396 @@
+{
+ "SolicitudCambio|REGISTRADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | (inicial)": {
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "EN_EVALUACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "EN_EVALUACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "EN_EVALUACION",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_AUTORIZACION",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_FORMALIZACION",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "PENDIENTE_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_PAGO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CONFIRMADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_PROCEDENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "RECHAZADA_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "RECHAZADA_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "RECHAZADA_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_AUTORIZADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_FALTA_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_FALTA_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_FALTA_PAGO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_INICIO_EVENTO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_EVENTO_CANCELADO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "condiciones_propuestas": {},
+  "contrato_id": "CT-1",
+  "datos_propuestos": null,
+  "decision_cliente": null,
+  "descripcion": "Cambio",
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SC-1",
+  "impacto": null,
+  "importes_por_pagar": false,
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "tarifa": {
+   "importe": {
+    "cantidad": "150"
+   }
+  },
+  "viabilidad": null,
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | (inicial)": {
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "REGISTRADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "REGISTRADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "EN_BUSQUEDA_PROVEEDOR",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "EN_BUSQUEDA_PROVEEDOR",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "EN_BUSQUEDA_PROVEEDOR",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_AUTORIZACION",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "AUTORIZADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "PENDIENTE_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_PAGO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CONFIRMADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_PROCEDENTE",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_SE_REALIZARA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_SE_REALIZARA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_SE_REALIZARA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_APROBADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_APROBADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_APROBADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_AUTORIZADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "NO_AUTORIZADA",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_FALTA_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_FALTA_PAGO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_FALTA_PAGO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_INICIO_EVENTO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_EVENTO_CANCELADO",
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "DETENIDA_SALDO_VENCIDO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "anexo_id": null,
+  "anticipacion": {
+   "fecha_solicitud": "2026-11-01T10:00:00",
+   "fecha_evento": "2026-11-20T18:00:00"
+  },
+  "autorizacion_administracion": null,
+  "contrato_id": "CT-1",
+  "decision_cliente": null,
+  "disponibilidad": null,
+  "elegibilidad_obtenida": false,
+  "estado": "NO_PROCEDENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SA-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "servicio": "DJ",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_AUTORIZACION",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "PENDIENTE_FORMALIZACION",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CONFIRMADA",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CONFIRMADA",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": null,
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_INICIO_EVENTO",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | (inicial)": {
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | continuar": {
+  "devuelve": true,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | detener_por_saldo": {
+  "devuelve": false,
+  "_estado_antes_de_detener": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "NO_VIABLE",
+   "descripcion": "Cierre previo",
+   "fecha": "2026-11-01T10:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | no_procede_condicion_temporal": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "PLAZO_INSUFICIENTE",
+   "descripcion": "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | no_procede_evento_cancelado": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento fue cancelado; la solicitud no puede retomarse (SE-006).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | no_procede_evento_iniciado_cambio": {
+  "devuelve": false,
+  "_estado_antes_de_detener": null,
+  "alternativas": [],
+  "anexo_id": null,
+  "aprobada_despues_del_limite": false,
+  "contrato_id": "CT-1",
+  "costo_adicional": null,
+  "estado": null,
+  "estado_cuenta_id": "EC-1",
+  "evento_id": "EV-1",
+  "id": "SP-1",
+  "motivo_cierre": {
+   "causa": "EVENTO_CANCELADO",
+   "descripcion": "El evento ya inició (CA-039).",
+   "fecha": "2026-11-12T09:00:00"
+  },
+  "obligacion_pago_id": null,
+  "proveedor_original_id": "PV-1",
+  "servicio_contratado_id": "CT-1-S1",
+  "pendiente": true,
+  "eventos": []
+ }
+}

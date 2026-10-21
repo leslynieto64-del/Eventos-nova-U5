@@ -435,6 +435,23 @@ python -m unittest tests.test_estado_cuenta_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
 
+## Corrección N2: regularización de solicitudes
+
+**Hallazgo.** `_SolicitudBase.aplicar_decision_regularizacion` (en `src/domain/solicitudes.py`) no comprobaba el estado de la solicitud. Una llamada directa (por ejemplo, `retomar_solicitud_cambio` o `retomar_solicitud_servicio_adicional` sobre una solicitud que no estaba detenida) podía dejar una solicitud Confirmada, cerrada o en trámite como Detenida por saldo vencido o como No procedente; en una `SustitucionProveedor` la dejaba sin estado. Los flujos normales no lo hacían: al registrar, la solicitud está Registrada, y la reacción a `SaldoVencidoRegularizado` solo retoma las Detenidas.
+
+**Corrección.** Una decisión de regularización solo modifica una solicitud en `ESTADOS_REGULARIZABLES`: Registrada (al registrarla) y Detenida por saldo vencido (al retomarla), según SE-006 y P-06 («la solicitud que ya está en trámite continúa»). `SolicitudCambio` y `SolicitudServicioAdicional` declaran esos dos estados; `SustitucionProveedor`, a la que ningún servicio aplica la regularización, no declara ninguno. En cualquier otro estado la llamada no tiene efecto, igual que `cerrar_por_cancelacion_evento` en un estado final: no cambia el estado, los atributos ni los Domain Events y devuelve el mismo valor que antes (`True` si la decisión permite continuar; `False` si no). No se añadieron mensajes ni excepciones: los métodos `retomar_*` de los servicios no devuelven `Resultado`, por lo que un `ErrorDominio` se habría propagado como falla técnica.
+
+Se conservan la detención al registrar, la reanudación que restaura el estado anterior, el cierre como No procedente desde Registrada o Detenida (con la misma causa y motivo; N3 sigue sin cambios), los servicios, las reacciones, las Specifications y las máquinas de estados.
+
+**Diferencia de comportamiento registrada.** 128 llamadas que antes modificaban la solicitud ahora no tienen efecto: los 12 estados de `SolicitudCambio`, 13 de `SolicitudServicioAdicional` y 7 de `SustitucionProveedor` distintos de Registrada y Detenida, por las 4 decisiones que modifican (detener por saldo y los tres «no procede»). El valor devuelto no cambia en ningún caso.
+
+**Pruebas** (19): `tests/test_regularizacion_solicitudes.py`. Comparan con `tests/referencias/comportamiento_regularizacion_v8_e3d.json`, capturado con `tests/apoyo_regularizacion_solicitudes.py` sobre el código del commit bdc98c3, antes de N2: 228 casos (38 situaciones de las tres solicitudes × estado inicial y 5 decisiones). Registrada y Detenida son idénticas; las 128 diferencias son exactamente las descritas.
+
+```bat
+python -m unittest tests.test_regularizacion_solicitudes -v
+python -m unittest discover -s tests -v
+```
+
 ## Entregables
 
 Los entregables principales están organizados en las siguientes rutas relativas:
