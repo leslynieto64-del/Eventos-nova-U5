@@ -1,0 +1,4 @@
+# Los CSV oficiales del paquete 16_Eventos_Nova se conservan byte a byte (UTF-8 con BOM y CRLF).
+# Sin esta regla, Git con core.autocrlf podría convertir los saltos de línea y el manifiesto SHA-256 no coincidiría.
+datos/paquete_pia/*.csv -text
+datos/paquete_pia/MANIFIESTO.sha256 -text

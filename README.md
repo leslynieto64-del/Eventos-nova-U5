@@ -25,6 +25,9 @@ El proyecto contiene una propuesta arquitectural organizada en las capas de domi
 EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 ├── Resumen_EventosNova_U3_Equipo16.docx
 ├── Resumen_Eventos_Nova_Equipo16.pdf
+├── validar_paquete_pia.py     (Etapa E1: validación de los CSV oficiales)
+├── datos/
+│   └── paquete_pia/           (Etapa E1: seis CSV oficiales sin modificar + MANIFIESTO.sha256)
 ├── diagramas/
 │   ├── bpmn/
 │   │   ├── BPMN_Eventos_Nova.drawio / .bpmn / .pdf / .svg / .png (maestro con los subprocesos desplegados)
@@ -71,6 +74,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── reacciones.py
 │   │   ├── resultados.py
 │   │   └── servicios.py
+│   ├── paquete_pia/           (Etapa E1: lector y DTO de los CSV, independiente de las demás capas)
 │   ├── domain/
 │   │   ├── base.py
 │   │   ├── contrato.py
@@ -188,6 +192,55 @@ Invoke-RestMethod -Method Post -Uri "http://127.0.0.1:8000/eventos/$($evento.eve
 ```
 
 También pueden probarse desde la documentación interactiva en <http://127.0.0.1:8000/docs>.
+
+## Etapa E1: lector y validación de los CSV oficiales (paquete 16_Eventos_Nova)
+
+Se incorporaron los seis CSV del paquete oficial proporcionado por el ingeniero como **datos de entrada reproducibles**, junto con un lector que valida su estructura e integridad. En esta etapa **no** hay base de datos, tablas ni conexión de los CSV con los agregados del dominio, y **no** se implementan las reglas ilustrativas del paquete (`puede_procesarse`, `beneficio_referencia`). Las capas `domain`, `application`, `infrastructure` y `api` no se modificaron.
+
+| Ruta | Contenido |
+|------|-----------|
+| `datos/paquete_pia/*.csv` | Los seis CSV originales (`01_Alumno/datos` de `16_Eventos_Nova.zip`), copiados byte a byte: UTF-8 con BOM y saltos de línea CRLF. **No deben editarse.** |
+| `datos/paquete_pia/MANIFIESTO.sha256` | SHA-256 de cada CSV (formato compatible con `sha256sum -c`). |
+| `.gitattributes` | Indica a Git que no convierta los saltos de línea de esos archivos (con `core.autocrlf` el hash dejaría de coincidir). |
+| `src/paquete_pia/` | Lector independiente: solo usa la biblioteca estándar; no importa el dominio, la aplicación, la API ni librerías de persistencia. |
+| `validar_paquete_pia.py` | Atajo de línea de comandos desde la raíz del proyecto. |
+| `tests/test_paquete_pia_lector.py`, `tests/test_paquete_pia_integridad.py`, `tests/apoyo_paquete_pia.py` | Pruebas del lector (no requieren FastAPI ni base de datos). |
+
+**Qué valida el lector** (`paquete_pia.leer_paquete()`), reuniendo todos los problemas antes de rechazar:
+
+1. **Integridad:** cada CSV coincide con `MANIFIESTO.sha256`; el manifiesto incluye exactamente los seis archivos. Si algo no coincide, el paquete se rechaza sin leer los datos.
+2. **Lectura:** codificación `utf-8-sig` (UTF-8 con BOM) y `newline=''`, de modo que el módulo `csv` maneja CRLF; los archivos se abren solo para lectura.
+3. **Estructura:** encabezados exactos y en orden, número de columnas por fila, filas vacías y número de registros: actores 40, catálogo 20, operaciones 60, detalle 117, casos de prueba 120, transiciones 20.
+4. **Claves y unicidad:** `actor_id`, `recurso_id`, `operacion_id`, `caso_id` y la clave compuesta (`operacion_id`, `recurso_id`) del detalle; `referencia` de operaciones única.
+5. **Referencias:** operaciones → actores; detalle → operaciones y catálogo; casos y transiciones → operaciones; el `estado_inicial` de cada transición coincide con el de su operación.
+6. **Formatos:** identificadores con el patrón del paquete (`EVE-C001`, `EVE-P001`, `EVE-O001`, `EVE-T/B001`, `EVE-S001`); booleanos solo `0`/`1`; importes `1234.56` convertidos a `Decimal` (nunca `float`); enteros sin signo (cantidad mayor que cero); fechas ISO `AAAA-MM-DD` existentes; estados dentro del vocabulario que declara el LEEME del paquete (no son los estados del dominio); textos obligatorios sin espacios sobrantes.
+
+El lector devuelve DTO inmutables (`Actor`, `RecursoCatalogo`, `Operacion`, `DetalleOperacion`, `CasoPrueba`, `TransicionPrueba`) con los valores tal como vienen; no aplica reglas de negocio ni calcula resultados esperados. `resultado_alumno` se conserva como texto (es una columna de salida del paquete).
+
+### Comandos en Windows (desde la raíz del proyecto, con el entorno virtual activado)
+
+```bat
+REM 1. Validar el paquete (integridad + estructura). Código de salida 0 si es válido, 1 si se rechaza.
+python validar_paquete_pia.py
+
+REM 2. Solo las pruebas nuevas de la Etapa E1 (no requieren FastAPI)
+python -m unittest tests.test_paquete_pia_lector tests.test_paquete_pia_integridad -v
+
+REM 3. Toda la suite: las 134 pruebas existentes más las de E1
+python -m unittest discover -s tests -v
+
+REM 4. (Opcional) Ver el manifiesto calculado; no escribe ningún archivo
+python validar_paquete_pia.py hashes
+```
+
+Comprobación manual de un hash en PowerShell (debe coincidir con la línea del manifiesto):
+
+```powershell
+(Get-FileHash datos\paquete_pia\actores.csv -Algorithm SHA256).Hash.ToLower()
+Get-Content datos\paquete_pia\MANIFIESTO.sha256
+```
+
+> Si los CSV ya se habían agregado a Git **antes** de existir `.gitattributes`, revisa que no se hayan convertido a LF: `python validar_paquete_pia.py` lo detecta como «archivo alterado». En ese caso vuelve a copiar los originales del zip.
 
 ## Entregables
 

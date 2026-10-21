@@ -1,0 +1,21 @@
+﻿caso_id,operacion_id,accion_sugerida,estado_inicial,resultado_alumno,instrucciones
+EVE-S001,EVE-O001,completar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S002,EVE-O002,cancelar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S003,EVE-O003,repetir_aprobacion,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S004,EVE-O004,saltar_estado,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S005,EVE-O005,aprobar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S006,EVE-O006,completar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S007,EVE-O007,cancelar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S008,EVE-O008,repetir_aprobacion,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S009,EVE-O009,saltar_estado,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S010,EVE-O010,aprobar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S011,EVE-O011,completar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S012,EVE-O012,cancelar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S013,EVE-O013,repetir_aprobacion,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S014,EVE-O014,saltar_estado,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S015,EVE-O015,aprobar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S016,EVE-O016,completar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S017,EVE-O017,cancelar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S018,EVE-O018,repetir_aprobacion,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S019,EVE-O019,saltar_estado,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion
+EVE-S020,EVE-O020,aprobar,COTIZADO,PENDIENTE,Ejecutar la operacion y registrar evento o excepcion

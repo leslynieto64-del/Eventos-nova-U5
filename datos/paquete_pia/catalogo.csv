@@ -1,0 +1,21 @@
+﻿recurso_id,descripcion,precio_mxn,capacidad_o_stock,habilitado
+EVE-P001,Boda 01,589.00,13,1
+EVE-P002,Conferencia 02,660.00,16,1
+EVE-P003,Cumpleaños 03,731.00,19,1
+EVE-P004,Graduación 04,802.00,22,1
+EVE-P005,Boda 05,873.00,25,1
+EVE-P006,Conferencia 06,944.00,28,1
+EVE-P007,Cumpleaños 07,1015.00,31,1
+EVE-P008,Graduación 08,1086.00,34,1
+EVE-P009,Boda 09,1157.00,37,1
+EVE-P010,Conferencia 10,1228.00,40,1
+EVE-P011,Cumpleaños 11,1299.00,43,0
+EVE-P012,Graduación 12,1370.00,46,1
+EVE-P013,Boda 13,1441.00,49,1
+EVE-P014,Conferencia 14,1512.00,52,1
+EVE-P015,Cumpleaños 15,1583.00,10,1
+EVE-P016,Graduación 16,1654.00,13,1
+EVE-P017,Boda 17,1725.00,16,1
+EVE-P018,Conferencia 18,1796.00,19,1
+EVE-P019,Cumpleaños 19,1867.00,22,1
+EVE-P020,Graduación 20,1938.00,25,1
