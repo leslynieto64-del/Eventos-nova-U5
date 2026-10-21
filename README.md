@@ -80,7 +80,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── contrato.py
 │   │   ├── especificacion.py      (Etapa E2: base Specification y combinadores)
 │   │   ├── especificaciones.py    (Etapa E2: especificaciones de negocio)
-│   │   ├── maquina_estados.py     (Etapa E3A: State Machine declarativa; Evento en E3A, Contrato en E3B)
+│   │   ├── maquina_estados.py     (Etapa E3A: State Machine declarativa; Evento en E3A, Contrato en E3B, SustitucionProveedor en E3C)
 │   │   ├── estado_cuenta.py
 │   │   ├── evento.py
 │   │   ├── eventos_dominio.py
@@ -343,6 +343,47 @@ Repetición idempotente declarada en la máquina: `confirmar_contratacion` en Co
 
 ```bat
 python -m unittest tests.test_contrato_maquina_estados -v
+python -m unittest discover -s tests -v
+```
+
+## Etapa E3C: State Machine explícita de SustitucionProveedor
+
+`SustitucionProveedor` (en `src/domain/solicitudes.py`) valida ahora sus cambios de estado con la `MaquinaEstados` de E3A, sin modificarla. Todo el cambio está dentro de la clase: `SustitucionProveedor.Accion` y `SustitucionProveedor.MAQUINA`. `_SolicitudBase`, `SolicitudCambio`, `SolicitudServicioAdicional`, las Specifications de E2, Evento, Contrato, servicios, reacciones, API, repositorios, Outbox, diagramas y CSV no se modificaron. Las firmas públicas, los estados, los mensajes, los faltantes y los Domain Events son los mismos.
+
+**Tabla de SustitucionProveedor** (mapa de dominio U3, página «03 — Detalle B», «Estados de SustitucionProveedor · SE-001, CA-046–CA-054, CA-096»):
+
+| Origen | Método (acción interna) | Destino | Domain Event | Fuente |
+|--------|-------------------------|---------|--------------|--------|
+| En búsqueda de alternativa | `proponer_alternativa`, con impacto (`PROPONER_ALTERNATIVA_CON_IMPACTO`) | Pendiente de aprobación del Cliente | — | CA-049, SE-001 |
+| En búsqueda de alternativa | `proponer_alternativa`, sin impacto (`PROPONER_ALTERNATIVA_SIN_IMPACTO`) | Pendiente de formalización | — | CA-053 |
+| Pendiente de aprobación del Cliente | `registrar_decision_cliente`, aprobada (`APROBACION_CLIENTE`) | Pendiente de autorización | — | CA-049 |
+| Pendiente de aprobación del Cliente | `registrar_decision_cliente`, rechazada (`RECHAZO_CLIENTE`) | En búsqueda de alternativa | AlternativaRechazadaPorCliente | CA-054 |
+| Pendiente de autorización | `registrar_autorizacion`, aprobada (`AUTORIZACION_ADMINISTRACION`) | Pendiente de formalización | — | CA-051, CA-052 |
+| Pendiente de autorización | `registrar_autorizacion`, rechazada (`RECHAZO_ADMINISTRACION`) | En búsqueda de alternativa | AlternativaNoAutorizadaPorAdministracion | CA-050 |
+| Pendiente de formalización | `confirmar` (`CONFIRMAR`) | Confirmada | SustitucionProveedorConfirmada | CA-051, CA-052, CA-053 |
+| Cualquiera de los 4 estados en trámite | `cerrar_por_inicio_evento` | Cerrada por inicio del evento | SustitucionProveedorCerradaPorInicioEvento | CA-096 |
+| Cualquiera de los 4 estados en trámite | `cerrar_por_cancelacion_evento` | Cerrada por evento cancelado | — (sin Domain Event, como antes) | BN-008 |
+
+Estados terminales: Confirmada, Cerrada por inicio del evento y Cerrada por evento cancelado (iguales a `FINALES`). No hay repeticiones idempotentes.
+
+**Cómo se usa.**
+- Los métodos con dos resultados (`proponer_alternativa`, `registrar_decision_cliente`, `registrar_autorizacion`) eligen la acción interna a partir del resultado que ya calculaba el código (`ImpactoModificacion.tiene_impacto` o `Decision.aprobada`), validan con la máquina **antes** de modificar el agregado y asignan el destino. Los mensajes de rechazo no cambian.
+- `confirmar` conserva su lista de faltantes y sus mensajes; la máquina solo se consulta cuando no falta ningún requisito.
+- Los cierres en estados finales siguen resolviéndose con `pendiente` y no tienen efecto. `cerrar_por_cancelacion_evento` se sobrescribe solo en `SustitucionProveedor`: valida con la máquina y delega en `_SolicitudBase`, que conserva el resultado (`True`/`False`) y no emite Domain Event.
+
+**Specifications de E2 que usa SustitucionProveedor.** Solo `MODIFICACION_CON_IMPACTO` (servicios **O** costos **O** condiciones), a través de `ImpactoModificacion.tiene_impacto`, para decidir en `proponer_alternativa` si la alternativa requiere la aprobación del Cliente y la autorización de Administración (SE-001, CA-049) o pasa directamente a formalización (CA-053). El impacto lo calcula antes el Domain Service `EvaluarImpactoCambio` (no es una Specification), en `GestionSustitucionProveedorService.buscar_alternativa_sustitucion`. La sustitución no usa `CAMBIO_REQUIERE_APROBACION_CLIENTE`, `CAMBIO_CON_CARGO_TARDIO`, `SERVICIO_ADICIONAL_EN_PLAZO`, `SOLICITUD_CAMBIO_EN_PLAZO`, `SOLICITUD_PUEDE_CONTINUAR` ni `CONTRATACION_CONFIRMABLE`.
+
+**Asuntos registrados para revisión posterior** (se suman a AR-01 a AR-04 de E3B; no se modifican en E3C):
+
+| ID | Asunto |
+|----|--------|
+| AR-05 | `EstadoSolicitudCambio.EN_EVALUACION`: el mapa de dominio dibuja Registrada → En evaluación → No procedente / Pendiente de aprobación del Cliente / Pendiente de formalización; el código solo lo menciona en la comprobación de `registrar_viabilidad` y pasa de Registrada directamente al resultado. |
+| AR-06 | `SolicitudServicioAdicional`: el mapa dibuja Registrada → En búsqueda de proveedor → Pendiente de aprobación del Cliente; el código pasa de Registrada directamente a Pendiente de aprobación del Cliente cuando el proveedor está disponible (y a En búsqueda de proveedor cuando no lo está). |
+
+**Pruebas de la etapa** (32): `tests/test_sustitucion_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_sustitucion_v8_e3b.json`, capturado con `tests/apoyo_maquina_estados_sustitucion.py` sobre el código anterior a E3C: 209 combinaciones de SustitucionProveedor (sus 7 estados con variantes de alternativa, costo, límite y anexo × cada método y parámetros) y 58 cierres de SolicitudCambio y SolicitudServicioAdicional en todos sus estados, que deben ser idénticos.
+
+```bat
+python -m unittest tests.test_sustitucion_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
 

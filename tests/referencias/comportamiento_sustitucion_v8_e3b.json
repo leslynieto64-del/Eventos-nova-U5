@@ -1,0 +1,6333 @@
+{
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | proponer_alternativa(con_impacto, costo)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-3",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "800",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | proponer_alternativa(sin_impacto, sin_costo)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-3",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|sin_alternativas | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | proponer_alternativa(con_impacto, costo)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ],
+   [
+    "PV-3",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "800",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | proponer_alternativa(sin_impacto, sin_costo)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ],
+   [
+    "PV-3",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|EN_BUSQUEDA_ALTERNATIVA|alternativa_rechazada | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-01T10:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | registrar_decision_cliente(aprobada)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-10T12:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | registrar_decision_cliente(rechazada)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     false,
+     "2026-11-10T12:00:00",
+     "No acepta"
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "AlternativaRechazadaPorCliente",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_APROBACION_CLIENTE | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_APROBACION_CLIENTE",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-10T12:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-18T12:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | registrar_autorizacion(rechazada)": {
+  "devuelve": null,
+  "estado": "EN_BUSQUEDA_ALTERNATIVA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     false,
+     "2026-11-10T12:00:00",
+     "No acepta"
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "AlternativaNoAutorizadaPorAdministracion",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_AUTORIZACION | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_AUTORIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    null
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": true,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|sin_anexo | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorConfirmada",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorConfirmada",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|sin_impacto|con_anexo | asociar_anexo(AX-2)": {
+  "error": "La solicitud ya tiene otro anexo asociado.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": [
+   [
+    "SustitucionProveedorConfirmada",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": [
+   [
+    "SustitucionProveedorConfirmada",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|antes_del_limite|con_anexo | asociar_anexo(AX-2)": {
+  "error": "La solicitud ya tiene otro anexo asociado.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "pago del costo adicional verificado antes de confirmar (CA-052)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "pago del costo adicional verificado antes de confirmar (CA-052)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "pago del costo adicional verificado antes de confirmar (CA-052)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "pago del costo adicional verificado antes de confirmar (CA-052)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": [
+   [
+    "SustitucionProveedorConfirmada",
+    "PV-2"
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)"
+  ],
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El reemplazo no se concretó",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": [
+   [
+    "SustitucionProveedorCerradaPorInicioEvento",
+    null
+   ]
+  ]
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|PENDIENTE_FORMALIZACION|con_costo|despues_del_limite|con_anexo | asociar_anexo(AX-2)": {
+  "error": "La solicitud ya tiene otro anexo asociado.",
+  "estado": "PENDIENTE_FORMALIZACION",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    [
+     "Cliente",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ],
+    [
+     "Administración",
+     true,
+     "2026-11-01T10:00:00",
+     ""
+    ]
+   ]
+  ],
+  "costo_adicional": "500",
+  "aprobada_despues_del_limite": true,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": true,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": true,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas"
+  ],
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CONFIRMADA | asociar_anexo(AX-2)": {
+  "error": "La solicitud ya tiene otro anexo asociado.",
+  "estado": "CONFIRMADA",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     false,
+     false
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": null,
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_INICIO_EVENTO | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "alternativas": [
+   [
+    "PV-2",
+    [
+     false,
+     true,
+     true
+    ],
+    null,
+    null
+   ]
+  ],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "Inicio del evento",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | proponer_alternativa(con_impacto, costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | proponer_alternativa(sin_impacto, sin_costo)": {
+  "error": "La sustitución no está en búsqueda de alternativa.",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | registrar_decision_cliente(aprobada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | registrar_decision_cliente(rechazada)": {
+  "error": "La alternativa no requiere o no espera aprobación del Cliente.",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | registrar_autorizacion(aprobada, antes_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | registrar_autorizacion(aprobada, despues_del_limite)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | registrar_autorizacion(rechazada)": {
+  "error": "La autorización es posterior a la aprobación del Cliente (SE-001).",
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=False, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=False, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=False, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=False, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=True, iniciado=False, cancelado=False)": {
+  "devuelve": [
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=True, iniciado=False, cancelado=True)": {
+  "devuelve": [
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=True, iniciado=True, cancelado=False)": {
+  "devuelve": [
+   "evento no iniciado",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | confirmar(pago_previo=True, iniciado=True, cancelado=True)": {
+  "devuelve": [
+   "evento no iniciado",
+   "evento no cancelado (SE-007)",
+   "decisiones requeridas",
+   "anexo vinculado al contrato original"
+  ],
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": null,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | asociar_anexo(AX-1)": {
+  "devuelve": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-1",
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SustitucionProveedor|CERRADA_EVENTO_CANCELADO | asociar_anexo(AX-2)": {
+  "devuelve": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "alternativas": [],
+  "costo_adicional": null,
+  "aprobada_despues_del_limite": false,
+  "anexo_id": "AX-2",
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado",
+   "2026-11-01T10:00:00"
+  ],
+  "pendiente": false,
+  "puede_registrar_anexo": false,
+  "importe_adicional_aprobado": false,
+  "eventos": []
+ },
+ "SolicitudCambio|REGISTRADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|REGISTRADA | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|DETENIDA_SALDO_VENCIDO | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|EN_EVALUACION | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|EN_EVALUACION | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|PENDIENTE_APROBACION_CLIENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|PENDIENTE_AUTORIZACION | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|PENDIENTE_FORMALIZACION | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "SolicitudCambioCerradaPorInicioEvento"
+  ]
+ },
+ "SolicitudCambio|PENDIENTE_PAGO | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CONFIRMADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CONFIRMADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CONFIRMADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_PROCEDENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_PROCEDENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_PROCEDENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "RECHAZADA_CLIENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|RECHAZADA_CLIENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "RECHAZADA_CLIENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_AUTORIZADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|NO_AUTORIZADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_AUTORIZADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_FALTA_PAGO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_FALTA_PAGO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_FALTA_PAGO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_INICIO_EVENTO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudCambio|CERRADA_EVENTO_CANCELADO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|REGISTRADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|REGISTRADA | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|DETENIDA_SALDO_VENCIDO | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|EN_BUSQUEDA_PROVEEDOR | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|PENDIENTE_APROBACION_CLIENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|PENDIENTE_AUTORIZACION | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|AUTORIZADA | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "INICIO_EVENTO",
+   "El evento inició antes de confirmar"
+  ],
+  "eventos": [
+   "ServicioAdicionalCerradoPorInicioEvento"
+  ]
+ },
+ "SolicitudServicioAdicional|PENDIENTE_PAGO | cerrar_por_cancelacion_evento": {
+  "devuelve": true,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": [
+   "EVENTO_CANCELADO",
+   "Evento cancelado"
+  ],
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CONFIRMADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CONFIRMADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CONFIRMADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_PROCEDENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_PROCEDENTE | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_PROCEDENTE",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_SE_REALIZARA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_SE_REALIZARA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_SE_REALIZARA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_APROBADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_APROBADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_APROBADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "NO_AUTORIZADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|NO_AUTORIZADA | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "NO_AUTORIZADA",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_FALTA_PAGO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_FALTA_PAGO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_FALTA_PAGO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_INICIO_EVENTO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_INICIO_EVENTO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | cerrar_por_inicio_evento": {
+  "devuelve": null,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ },
+ "SolicitudServicioAdicional|CERRADA_EVENTO_CANCELADO | cerrar_por_cancelacion_evento": {
+  "devuelve": false,
+  "estado": "CERRADA_EVENTO_CANCELADO",
+  "pendiente": false,
+  "motivo_cierre": null,
+  "eventos": []
+ }
+}

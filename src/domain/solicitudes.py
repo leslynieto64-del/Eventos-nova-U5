@@ -305,6 +305,63 @@ class SustitucionProveedor(_SolicitudBase):
     FINALES = (ESP.CONFIRMADA, ESP.CERRADA_INICIO_EVENTO, ESP.CERRADA_EVENTO_CANCELADO)
     CERRADA_CANCELACION = ESP.CERRADA_EVENTO_CANCELADO
 
+    # -- State Machine (Etapa E3C). Las importaciones se hacen aquí para que el cambio quede dentro de la clase.
+    from enum import Enum as _Enum
+    from .maquina_estados import MaquinaEstados as _MaquinaEstados, Transicion as _Transicion
+
+    class Accion(_Enum):
+        """Acciones internas de la máquina. Los métodos con dos resultados posibles se representan con una acción por
+        resultado; el método la elige a partir del resultado que ya calcula (impacto de la alternativa o
+        Decision.aprobada), sin reglas nuevas."""
+        PROPONER_ALTERNATIVA_CON_IMPACTO = "proponer_alternativa:con_impacto"     # ImpactoModificacion.tiene_impacto
+        PROPONER_ALTERNATIVA_SIN_IMPACTO = "proponer_alternativa:sin_impacto"
+        APROBACION_CLIENTE = "registrar_decision_cliente:aprobada"                 # Decision.aprobada
+        RECHAZO_CLIENTE = "registrar_decision_cliente:rechazada"
+        AUTORIZACION_ADMINISTRACION = "registrar_autorizacion:aprobada"
+        RECHAZO_ADMINISTRACION = "registrar_autorizacion:rechazada"
+        CONFIRMAR = "confirmar"
+        CERRAR_POR_INICIO_EVENTO = "cerrar_por_inicio_evento"
+        CERRAR_POR_CANCELACION_EVENTO = "cerrar_por_cancelacion_evento"
+
+    # Mapa de dominio U3, página «03 — Detalle B», «Estados de SustitucionProveedor · SE-001, CA-046–CA-054, CA-096».
+    # Los cierres proceden «desde cualquier estado pendiente» (CA-096) o «en trámite» (BN-008): los cuatro no finales.
+    MAQUINA = _MaquinaEstados(
+        estados=ESP,
+        transiciones=(
+            _Transicion(ESP.EN_BUSQUEDA_ALTERNATIVA, Accion.PROPONER_ALTERNATIVA_CON_IMPACTO, ESP.PENDIENTE_APROBACION_CLIENTE),  # CA-049
+            _Transicion(ESP.EN_BUSQUEDA_ALTERNATIVA, Accion.PROPONER_ALTERNATIVA_SIN_IMPACTO, ESP.PENDIENTE_FORMALIZACION),       # CA-053
+            _Transicion(ESP.PENDIENTE_APROBACION_CLIENTE, Accion.APROBACION_CLIENTE, ESP.PENDIENTE_AUTORIZACION),                 # CA-049
+            _Transicion(ESP.PENDIENTE_APROBACION_CLIENTE, Accion.RECHAZO_CLIENTE, ESP.EN_BUSQUEDA_ALTERNATIVA),                   # CA-054
+            _Transicion(ESP.PENDIENTE_AUTORIZACION, Accion.AUTORIZACION_ADMINISTRACION, ESP.PENDIENTE_FORMALIZACION),             # CA-051, CA-052
+            _Transicion(ESP.PENDIENTE_AUTORIZACION, Accion.RECHAZO_ADMINISTRACION, ESP.EN_BUSQUEDA_ALTERNATIVA),                  # CA-050
+            _Transicion(ESP.PENDIENTE_FORMALIZACION, Accion.CONFIRMAR, ESP.CONFIRMADA),                                           # CA-051, CA-053
+            _Transicion(ESP.EN_BUSQUEDA_ALTERNATIVA, Accion.CERRAR_POR_INICIO_EVENTO, ESP.CERRADA_INICIO_EVENTO),                 # CA-096
+            _Transicion(ESP.PENDIENTE_APROBACION_CLIENTE, Accion.CERRAR_POR_INICIO_EVENTO, ESP.CERRADA_INICIO_EVENTO),
+            _Transicion(ESP.PENDIENTE_AUTORIZACION, Accion.CERRAR_POR_INICIO_EVENTO, ESP.CERRADA_INICIO_EVENTO),
+            _Transicion(ESP.PENDIENTE_FORMALIZACION, Accion.CERRAR_POR_INICIO_EVENTO, ESP.CERRADA_INICIO_EVENTO),
+            _Transicion(ESP.EN_BUSQUEDA_ALTERNATIVA, Accion.CERRAR_POR_CANCELACION_EVENTO, ESP.CERRADA_EVENTO_CANCELADO),         # BN-008
+            _Transicion(ESP.PENDIENTE_APROBACION_CLIENTE, Accion.CERRAR_POR_CANCELACION_EVENTO, ESP.CERRADA_EVENTO_CANCELADO),
+            _Transicion(ESP.PENDIENTE_AUTORIZACION, Accion.CERRAR_POR_CANCELACION_EVENTO, ESP.CERRADA_EVENTO_CANCELADO),
+            _Transicion(ESP.PENDIENTE_FORMALIZACION, Accion.CERRAR_POR_CANCELACION_EVENTO, ESP.CERRADA_EVENTO_CANCELADO),
+        ),
+        # Mensajes de rechazo existentes, sin cambios. confirmar y los cierres no los usan: confirmar devuelve la lista
+        # de faltantes y los cierres en un estado final no tienen efecto (comprobación `pendiente`).
+        mensajes_rechazo={
+            Accion.PROPONER_ALTERNATIVA_CON_IMPACTO: lambda o: "La sustitución no está en búsqueda de alternativa.",
+            Accion.PROPONER_ALTERNATIVA_SIN_IMPACTO: lambda o: "La sustitución no está en búsqueda de alternativa.",
+            Accion.APROBACION_CLIENTE: lambda o: "La alternativa no requiere o no espera aprobación del Cliente.",
+            Accion.RECHAZO_CLIENTE: lambda o: "La alternativa no requiere o no espera aprobación del Cliente.",
+            Accion.AUTORIZACION_ADMINISTRACION: lambda o: "La autorización es posterior a la aprobación del Cliente (SE-001).",
+            Accion.RECHAZO_ADMINISTRACION: lambda o: "La autorización es posterior a la aprobación del Cliente (SE-001).",
+        },
+        nombre="SustitucionProveedor",
+    )
+    del _Enum, _MaquinaEstados, _Transicion
+
+    def _transitar(self, accion: "SustitucionProveedor.Accion") -> ESP:
+        """Destino permitido por MAQUINA o TransicionNoPermitida (ErrorDominio) con el mensaje existente."""
+        return self.MAQUINA.transitar(self.estado, accion)
+
     def __init__(self, id_, evento_id, servicio_contratado_id, proveedor_original_id, contrato_id, estado_cuenta_id, ahora):
         super().__init__(id_, evento_id, contrato_id, estado_cuenta_id)
         self.servicio_contratado_id, self.proveedor_original_id = servicio_contratado_id, proveedor_original_id
@@ -319,37 +376,35 @@ class SustitucionProveedor(_SolicitudBase):
         return self.alternativas[-1] if self.alternativas else None
 
     def proponer_alternativa(self, alt: AlternativaPropuesta, costo_adicional: Optional[Importe], ahora: datetime) -> None:
-        if self.estado != ESP.EN_BUSQUEDA_ALTERNATIVA:
-            raise ErrorDominio("La sustitución no está en búsqueda de alternativa.")
+        # El impacto lo decide la Specification MODIFICACION_CON_IMPACTO de E2 (ImpactoModificacion.tiene_impacto).
+        accion = (self.Accion.PROPONER_ALTERNATIVA_CON_IMPACTO if alt.impacto.tiene_impacto
+                  else self.Accion.PROPONER_ALTERNATIVA_SIN_IMPACTO)
+        destino = self._transitar(accion)                 # valida antes de modificar el agregado
         self.alternativas.append(alt)
         self.costo_adicional = costo_adicional
-        self.estado = ESP.PENDIENTE_APROBACION_CLIENTE if alt.impacto.tiene_impacto else ESP.PENDIENTE_FORMALIZACION
+        self.estado = destino
 
     def _reemplazar(self, **cambios):
         a = self.alternativas[-1]
         self.alternativas[-1] = AlternativaPropuesta(**{**a.__dict__, **cambios})
 
     def registrar_decision_cliente(self, d: Decision) -> None:
-        if self.estado != ESP.PENDIENTE_APROBACION_CLIENTE:
-            raise ErrorDominio("La alternativa no requiere o no espera aprobación del Cliente.")
+        destino = self._transitar(self.Accion.APROBACION_CLIENTE if d.aprobada else self.Accion.RECHAZO_CLIENTE)
         self._reemplazar(decision_cliente=d)
-        if d.aprobada:
-            self.estado = ESP.PENDIENTE_AUTORIZACION
-        else:
-            self.estado = ESP.EN_BUSQUEDA_ALTERNATIVA                    # CA-054
+        self.estado = destino
+        if not d.aprobada:                                               # CA-054: se vuelve a buscar
             self._registrar(AlternativaRechazadaPorCliente(self.id, d.fecha, proveedor_id=self.alternativas[-1].proveedor_id))
 
     def registrar_autorizacion(self, d: Decision, fecha_evento: datetime) -> None:
         """Si la autorización llega después del límite ordinario (3 días hábiles antes del evento), el costo
         adicional debe pagarse y verificarse antes de confirmar, sin considerarse vencido (SE-001, CA-052)."""
-        if self.estado != ESP.PENDIENTE_AUTORIZACION:
-            raise ErrorDominio("La autorización es posterior a la aprobación del Cliente (SE-001).")
+        destino = self._transitar(self.Accion.AUTORIZACION_ADMINISTRACION if d.aprobada
+                                  else self.Accion.RECHAZO_ADMINISTRACION)
         self._reemplazar(autorizacion_administracion=d)
+        self.estado = destino
         if d.aprobada:
-            self.estado = ESP.PENDIENTE_FORMALIZACION
             self.aprobada_despues_del_limite = d.fecha > restar_dias_habiles(fecha_evento, 3)
-        else:
-            self.estado = ESP.EN_BUSQUEDA_ALTERNATIVA                    # CA-050
+        else:                                                            # CA-050: se vuelve a buscar
             self._registrar(AlternativaNoAutorizadaPorAdministracion(self.id, d.fecha, proveedor_id=self.alternativas[-1].proveedor_id))
 
     def puede_registrar_anexo(self) -> bool:
@@ -373,15 +428,23 @@ class SustitucionProveedor(_SolicitudBase):
         if not self.anexo_id: faltan.append("anexo vinculado al contrato original")
         if self.costo_adicional and self.aprobada_despues_del_limite and not pago_previo_verificado:
             faltan.append("pago del costo adicional verificado antes de confirmar (CA-052)")
-        if not faltan:
-            self.estado = ESP.CONFIRMADA
+        if not faltan:                                   # la máquina solo se consulta con todos los requisitos cumplidos
+            self.estado = self._transitar(self.Accion.CONFIRMAR)
             self._registrar(SustitucionProveedorConfirmada(self.id, ahora, evento_ref=self.evento_id,
                                                            servicio_contratado_id=self.servicio_contratado_id,
                                                            proveedor_id=self.alternativa_vigente.proveedor_id))
         return faltan
 
     def cerrar_por_inicio_evento(self, ahora: datetime) -> None:
-        if not self.pendiente:
+        if not self.pendiente:                           # estados finales: sin efecto
             return
-        self._cerrar(ESP.CERRADA_INICIO_EVENTO, CausaCierreSolicitud.INICIO_EVENTO, "El reemplazo no se concretó", ahora)
+        destino = self._transitar(self.Accion.CERRAR_POR_INICIO_EVENTO)
+        self._cerrar(destino, CausaCierreSolicitud.INICIO_EVENTO, "El reemplazo no se concretó", ahora)
         self._registrar(SustitucionProveedorCerradaPorInicioEvento(self.id, ahora, evento_ref=self.evento_id))
+
+    def cerrar_por_cancelacion_evento(self, ahora: datetime) -> bool:
+        """BN-008. Valida con la máquina antes de modificar el agregado y delega en _SolicitudBase, que conserva el
+        resultado actual: False sin cambios en un estado final, True al cerrar. Este cierre no emite Domain Event."""
+        if self.pendiente:
+            self.MAQUINA.validar(self.estado, self.Accion.CERRAR_POR_CANCELACION_EVENTO)
+        return super().cerrar_por_cancelacion_evento(ahora)
