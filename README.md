@@ -80,7 +80,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── contrato.py
 │   │   ├── especificacion.py      (Etapa E2: base Specification y combinadores)
 │   │   ├── especificaciones.py    (Etapa E2: especificaciones de negocio)
-│   │   ├── maquina_estados.py     (Etapa E3A: State Machine declarativa)
+│   │   ├── maquina_estados.py     (Etapa E3A: State Machine declarativa; Evento en E3A, Contrato en E3B)
 │   │   ├── estado_cuenta.py
 │   │   ├── evento.py
 │   │   ├── eventos_dominio.py
@@ -307,6 +307,42 @@ Repeticiones idempotentes (aceptadas sin efecto): `confirmar_contratacion` en En
 
 ```bat
 python -m unittest tests.test_maquina_estados tests.test_evento_maquina_estados -v
+python -m unittest discover -s tests -v
+```
+
+## Etapa E3B: State Machine explícita de Contrato
+
+`Contrato` valida ahora sus cambios de estado con la misma `MaquinaEstados` de E3A (sin modificarla). Los estados, los mensajes, los plazos, los Domain Events y la idempotencia son los mismos; la Specification `CONTRATACION_CONFIRMABLE` de E2 no cambia. Servicios, reacciones, API, repositorios, Outbox, diagramas y CSV no se modificaron.
+
+**Tabla de Contrato** (mapa de dominio U3, «Estados de Contrato»):
+
+| Origen | Acción | Destino | Domain Event | Fuente |
+|--------|--------|---------|--------------|--------|
+| En preparación | `firmar` | Firmado | ContratoFirmado | US-008, CA-017, BN-009 |
+| Firmado | `confirmar_contratacion` | Contratación confirmada | ContratacionConfirmada | CA-019, CA-016, GL-009, BN-009, SE-010 |
+| Firmado | `cerrar_sin_confirmar` | Cerrado sin confirmar | ProcesoContratacionCerrado | CA-020, CA-021, SE-010, BN-009, GL-011 |
+
+Repetición idempotente declarada en la máquina: `confirmar_contratacion` en Contratación confirmada devuelve `[]`, no cambia el estado y no emite un segundo `ContratacionConfirmada`. Estados terminales: Contratación confirmada y Cerrado sin confirmar.
+
+**Cómo se usa.**
+- `firmar`: la máquina valida y da el destino («Solo un contrato En preparación puede firmarse.» si no procede).
+- `confirmar_contratacion`: (1) si la máquina declara la repetición, devuelve `[]` sin evaluar nada; (2) la Specification de E2 calcula los pendientes y, si los hay, se devuelven sin excepción ni cambios (también desde En preparación o Cerrado sin confirmar); (3) sin pendientes, la máquina da el destino y se registra un único Domain Event.
+- `cerrar_sin_confirmar`: todas las validaciones ocurren antes de modificar el agregado y en el orden de siempre: estado (máquina) y seguimiento con el mismo mensaje («Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).»); 24 horas naturales desde el contacto; anticipo efectuado dentro del plazo.
+- `registrar_seguimiento_anticipo`, `registrar_anexo` y `registrar_comunicacion_politica` no cambian el estado: quedan fuera de la tabla con sus validaciones actuales.
+
+**Asuntos registrados para revisión posterior** (no se modifican en E3B):
+
+| ID | Asunto |
+|----|--------|
+| AR-01 | `registrar_comunicacion_politica` no valida el estado del contrato; CA-016 y GL-055 indican que la política se comunica «antes de confirmar la contratación». |
+| AR-02 | `EstadoPropuesta.EN_ELABORACION` aparece en BN-009 («desde su elaboración y revisión por el Cliente») y en el mapa de dominio, pero el código no lo asigna: la propuesta nace En revisión del Cliente. |
+| AR-03 | Se admiten varios seguimientos del anticipo; las 24 horas naturales se cuentan desde el primero. Las fuentes hablan de «ese contacto» sin precisar el caso de varios contactos. |
+| AR-04 | Al confirmar desde Cerrado sin confirmar, el primer pendiente es «contrato firmado» aunque el contrato sí se firmó. |
+
+**Pruebas de la etapa** (40): `tests/test_contrato_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_contrato_v8_e3a.json`, capturado con `tests/apoyo_maquina_estados_contrato.py` sobre el código anterior a E3B (336 combinaciones de estado × política × seguimiento × método y parámetros), que deben ser idénticas.
+
+```bat
+python -m unittest tests.test_contrato_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
 

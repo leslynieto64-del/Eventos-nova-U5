@@ -1,0 +1,5866 @@
+{
+ "EN_PREPARACION|politica=False|seguimiento=False | firmar": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-02T12:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": [
+   "ContratoFirmado"
+  ]
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | firmar": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-02T12:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": [
+   "ContratoFirmado"
+  ]
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=False|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | firmar": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-02T12:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "ContratoFirmado"
+  ]
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado"
+   ]
+  },
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | firmar": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-02T12:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "ContratoFirmado"
+  ]
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado"
+  ],
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado"
+   ]
+  },
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "EN_PREPARACION|politica=True|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "EN_PREPARACION",
+  "fecha_firma": null,
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El plazo de tres días hábiles para el anticipo no ha vencido (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-09T09:00:00",
+    "Nuevo contacto"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "política de no reembolso comunicada"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": [
+   "ProcesoContratacionCerrado"
+  ]
+ },
+ "FIRMADO|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente efectuó el anticipo dentro del plazo; queda pendiente de registro o verificación (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El plazo de tres días hábiles para el anticipo no ha vencido (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ],
+   [
+    "2026-10-09T09:00:00",
+    "Nuevo contacto"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=False|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "ContratacionConfirmada"
+  ]
+ },
+ "FIRMADO|politica=True|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [
+    "ContratacionConfirmada"
+   ],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El plazo de tres días hábiles para el anticipo no ha vencido (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-09T09:00:00",
+    "Nuevo contacto"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "ContratacionConfirmada"
+  ]
+ },
+ "FIRMADO|politica=True|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [
+    "ContratacionConfirmada"
+   ],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente todavía dispone de 24 horas naturales desde el contacto para efectuar el anticipo (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "ProcesoContratacionCerrado"
+  ]
+ },
+ "FIRMADO|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "El Cliente efectuó el anticipo dentro del plazo; queda pendiente de registro o verificación (CA-021).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El plazo de tres días hábiles para el anticipo no ha vencido (CA-020).",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ],
+   [
+    "2026-10-09T09:00:00",
+    "Nuevo contacto"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "FIRMADO|politica=True|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "FIRMADO",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "devuelve": [
+   "AnexoContrato",
+   "AX-9",
+   "SERVICIO_ADICIONAL",
+   "SC-9"
+  ],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ],
+   [
+    "AX-9",
+    "SERVICIO_ADICIONAL",
+    "SC-9"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": [
+   "AnexoContratoRegistrado"
+  ]
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "La operación ya tiene un anexo registrado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "devuelve": [
+   "AnexoContrato",
+   "AX-9",
+   "SERVICIO_ADICIONAL",
+   "SC-9"
+  ],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ],
+   [
+    "AX-9",
+    "SERVICIO_ADICIONAL",
+    "SC-9"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": [
+   "AnexoContratoRegistrado"
+  ]
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "La operación ya tiene un anexo registrado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=False|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "devuelve": [
+   "AnexoContrato",
+   "AX-9",
+   "SERVICIO_ADICIONAL",
+   "SC-9"
+  ],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ],
+   [
+    "AX-9",
+    "SERVICIO_ADICIONAL",
+    "SC-9"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "AnexoContratoRegistrado"
+  ]
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "La operación ya tiene un anexo registrado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [],
+   "eventos_primera": [],
+   "segunda": []
+  },
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "devuelve": [
+   "AnexoContrato",
+   "AX-9",
+   "SERVICIO_ADICIONAL",
+   "SC-9"
+  ],
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ],
+   [
+    "AX-9",
+    "SERVICIO_ADICIONAL",
+    "SC-9"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": [
+   "AnexoContratoRegistrado"
+  ]
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "La operación ya tiene un anexo registrado.",
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CONTRATACION_CONFIRMADA|politica=True|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CONTRATACION_CONFIRMADA",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [
+   [
+    "AX-0",
+    "CAMBIO",
+    "SC-0"
+   ]
+  ],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "política de no reembolso comunicada"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado",
+    "política de no reembolso comunicada"
+   ]
+  },
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   null
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=False|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado"
+   ]
+  },
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=False | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | firmar": {
+  "error": "Solo un contrato En preparación puede firmarse.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=False, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=False, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=False)": {
+  "devuelve": [
+   "contrato firmado",
+   "anticipo del 30 % registrado y verificado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion(registrado=True, verificado=True, importe_correcto=True)": {
+  "devuelve": [
+   "contrato firmado"
+  ],
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | confirmar_contratacion dos veces": {
+  "devuelve": {
+   "primera": [
+    "contrato firmado"
+   ],
+   "eventos_primera": [],
+   "segunda": [
+    "contrato firmado"
+   ]
+  },
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=antes_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=en_el_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=False)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | cerrar_sin_confirmar(ahora=despues_del_limite, anticipo_efectuado_en_plazo=True)": {
+  "error": "Debe existir un seguimiento del anticipo antes de cerrar la contratación (CA-020).",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=False)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | registrar_seguimiento_anticipo(plazo_vencido=True)": {
+  "error": "El seguimiento del anticipo solo aplica a un contrato firmado.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | registrar_anexo(origen=SC-9)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | registrar_anexo(origen=SC-0)": {
+  "error": "Solo se registran anexos sobre una contratación confirmada.",
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-01T10:00:00"
+  ],
+  "eventos": []
+ },
+ "CERRADO_SIN_CONFIRMAR|politica=True|seguimiento=True | registrar_comunicacion_politica": {
+  "devuelve": null,
+  "estado": "CERRADO_SIN_CONFIRMAR",
+  "fecha_firma": "2026-10-01T10:00:00",
+  "seguimientos": [
+   [
+    "2026-10-07T10:00:00",
+    "Contacto con el Cliente"
+   ]
+  ],
+  "anexos": [],
+  "politica": [
+   true,
+   "2026-10-09T09:00:00"
+  ],
+  "eventos": []
+ }
+}
