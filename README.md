@@ -398,6 +398,43 @@ Antes de planificar E3D se revisaron las fuentes del dominio financiero. Esta co
 | AR-07 | CA-097 condicionaba que los cobros pendientes exclusivos de una solicitud cerrada sin realizarse quedaran sin efecto a que el Evento no estuviera cancelado. SE-012, BN-008, GL-053, el mapa de dominio, el BPMN SP-08 y el código (`EstadoCuenta.aplicar_cierre_sin_realizar`) los dejan sin efecto en ambos casos y reservan la condición «Evento no cancelado» para la devolución. Se conservó SE-012 y se alinearon con ella CA-097, CA-070 y CA-071 (User Stories), GL-032 (Glosario y su copia en el informe de arquitectura), la restricción del negocio del BRD y las celdas B15 y B24 de la matriz de trazabilidad. Los ID, las demás condiciones y la política de no reembolso no cambian. | Resuelto (documental) |
 | AR-08 | `EstadoCuenta.registrar_devolucion_efectuada` y `EstadoCuentaService.registrar_y_ejecutar_devolucion` buscan la devolución con `next(...)` sin valor por omisión: con un `devolucion_id` inexistente se lanza `StopIteration` en lugar de un rechazo de negocio (`ErrorDominio`). | Pendiente; no se corrige en E3D |
 
+## Etapa E3D: State Machines explícitas de EstadoCuenta
+
+`EstadoCuenta` (en `src/domain/estado_cuenta.py`) valida ahora con la `MaquinaEstados` de E3A, sin modificarla, los cambios de estado de sus tres entidades: `ObligacionPago`, `Pago` y `Devolucion`. Las acciones internas y las tablas están a nivel de módulo, como en Evento y Contrato: `AccionObligacionPago`/`MAQUINA_OBLIGACION_PAGO`, `AccionPago`/`MAQUINA_PAGO` y `AccionDevolucion`/`MAQUINA_DEVOLUCION`. Plan aprobado: [`docs/planificacion/Plan_E3D_Final.docx`](docs/planificacion/Plan_E3D_Final.docx) (decisiones D-E3D-1 a D-E3D-5).
+
+No se modificaron la máquina genérica, las Specifications de E2, Evento, Contrato, las solicitudes, `valores.py`, `eventos_dominio.py`, servicios, reacciones, API, repositorios, Outbox, UoW, diagramas ni CSV. Las firmas públicas, los estados, las reglas, los plazos, los importes, los mensajes y los Domain Events son los mismos.
+
+**Tablas** (mapa de dominio U3, página «04 — Detalle C: Gestión financiera»):
+
+| Entidad | Origen | Acción interna | Destino | Método | Domain Event | Fuente |
+|---------|--------|----------------|---------|--------|--------------|--------|
+| ObligacionPago | Pendiente | `LIQUIDAR_POR_PAGO` | Liquidada | verificación de un pago | PagoVerificado (del pago) | CA-018, CA-019, CA-026 |
+| ObligacionPago | Pendiente | `VENCER` | Vencida | `registrar_vencimiento_saldo` | SaldoContratoOriginalVencido (uno por llamada) | CA-023, CA-025, BN-005 |
+| ObligacionPago | Vencida | `REGULARIZAR` | Liquidada | `resolver_regularizacion` (saldo) | SaldoVencidoRegularizado | CA-027 |
+| ObligacionPago | Pendiente | `REGULARIZAR` | Liquidada | `resolver_regularizacion` (cargos moratorios) | el mismo SaldoVencidoRegularizado | CA-025, CA-027 |
+| ObligacionPago | Pendiente | `DEJAR_SIN_EFECTO` | Sin efecto | `aplicar_cierre_sin_realizar` | — | SE-012, CA-070, CA-071, CA-096, CA-097, GL-053 |
+| Pago | Registrado | `VERIFICAR` | Verificado | `registrar_y_verificar_pago`, `verificar_pago_registrado` | PagoVerificado | CA-018, CA-021, CA-027 |
+| Pago | Registrado | `RECHAZAR_IMPORTE` | Importe incorrecto | `registrar_y_verificar_pago` (anticipo) | — | CA-019 |
+| Devolucion | Pendiente | `REGISTRAR_EFECTUADA` | Efectuada | `registrar_devolucion_efectuada` | DevolucionRegistrada | SE-012, CA-098, GL-057 |
+
+Estados terminales: Liquidada y Sin efecto (ObligacionPago), Verificado e Importe incorrecto (Pago), Efectuada (Devolucion). Única repetición idempotente: registrar otra vez una devolución Efectuada (sin cambios y sin segundo DevolucionRegistrada).
+
+**Cómo se usa.**
+- Las condiciones de negocio siguen en los métodos de `EstadoCuenta`; las máquinas solo validan el par estado-acción. Se consultan después de las comprobaciones existentes (mismos mensajes y orden) y antes de cualquier modificación.
+- Pago y obligación son independientes. Un pago válido sobre una obligación Liquidada se registra, se verifica y emite su `PagoVerificado`; la obligación sigue Liquidada (no se consulta su máquina y no es una repetición idempotente). Los destinos del pago y de la obligación se validan antes de agregar o verificar el pago.
+- Vencimiento masivo: primero se seleccionan las obligaciones que cumplen las condiciones actuales, luego se validan todas sus transiciones y solo entonces se asignan; las que no cumplen las condiciones no cambian. Lo mismo en `resolver_regularizacion` (antes de registrar el resultado) y en `aplicar_cierre_sin_realizar` (solo los cobros Pendiente; los demás se omiten sin rechazo, como antes).
+- `verificar_pago_registrado` conserva su mensaje («Solo se verifica un pago registrado que está pendiente de verificación.») mediante `mensajes_rechazo` de `MAQUINA_PAGO`.
+- Las altas de obligaciones, pagos y devoluciones son creaciones, no transiciones.
+
+**Asuntos que se conservan sin resolver:** AR-08 (la búsqueda con `next(...)` no cambia) y los puntos del plan P-E3D-01 (tras «No regularizado» no se admite una segunda ventana), P-E3D-02 (el pago en el instante límite cuenta; la revisión exige un instante posterior) y P-E3D-03 (una sustitución integrada que está Vencida no queda Sin efecto al cerrarse). Las pruebas los fijan tal como están.
+
+**Pruebas de la etapa** (53): `tests/test_estado_cuenta_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_estado_cuenta_v8_e3c.json`, capturado con `tests/apoyo_maquina_estados_estado_cuenta.py` sobre el código del commit 8c80470, antes de E3D: 1203 combinaciones (30 situaciones del agregado × su estado inicial y 39 operaciones, más `registrar_devolucion_efectuada` en las 3 situaciones con devolución), que deben ser idénticas. La referencia no incluye identificadores inexistentes de devolución (D-E3D-5, AR-08).
+
+```bat
+python -m unittest tests.test_estado_cuenta_maquina_estados -v
+python -m unittest discover -s tests -v
+```
+
 ## Entregables
 
 Los entregables principales están organizados en las siguientes rutas relativas:

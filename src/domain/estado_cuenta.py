@@ -3,8 +3,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta
 from decimal import Decimal
+from enum import Enum
 from typing import Dict, List, Optional
 from .base import AggregateRoot
+from .maquina_estados import MaquinaEstados, Transicion
 from .valores import (Importe, PlazoPago, ConceptoPago as CP, EstadoObligacionPago as EO, EstadoPago as EPg,
                       EstadoDevolucion as ED, ErrorDominio, restar_dias_habiles)
 from .eventos_dominio import (PagoVerificado, SaldoContratoOriginalVencido, SaldoVencidoRegularizado,
@@ -14,6 +16,65 @@ PORCENTAJE_ANTICIPO = Decimal(30)       # BN-009
 DIAS_HABILES_ANTICIPO = 3                # BN-009
 DIAS_HABILES_SALDO = 3                   # BN-005
 HORAS_VENTANA = 24                       # BN-003, BN-004, BN-005
+
+MENSAJE_PAGO_NO_VERIFICABLE = "Solo se verifica un pago registrado que está pendiente de verificación."
+
+
+# ---------------------------------------------------------------- State Machines (Etapa E3D)
+# Mapa de dominio U3, página «04 — Detalle C: Gestión financiera». Las máquinas solo validan pares estado-acción; las
+# condiciones de negocio (plazos, importes, ventana de regularización, SE-012) siguen en los métodos de EstadoCuenta.
+# Las altas (obligaciones, pagos y devoluciones nuevas) son creaciones, no transiciones.
+class AccionObligacionPago(Enum):
+    LIQUIDAR_POR_PAGO = "liquidar_por_pago"        # verificación de un pago (_destinos_verificacion)
+    VENCER = "vencer"                              # registrar_vencimiento_saldo
+    REGULARIZAR = "regularizar"                    # resolver_regularizacion con resultado «Regularizado»
+    DEJAR_SIN_EFECTO = "dejar_sin_efecto"          # aplicar_cierre_sin_realizar
+
+
+class AccionPago(Enum):
+    VERIFICAR = "verificar"                        # verificación de un pago (_destinos_verificacion)
+    RECHAZAR_IMPORTE = "rechazar_importe"          # registrar_y_verificar_pago: anticipo con importe incorrecto
+
+
+class AccionDevolucion(Enum):
+    REGISTRAR_EFECTUADA = "registrar_efectuada"    # registrar_devolucion_efectuada
+
+
+_AO, _AP, _AD = AccionObligacionPago, AccionPago, AccionDevolucion
+
+# Pendiente → Liquidada | Vencida | Sin efecto; Vencida → Liquidada. Liquidada y Sin efecto no tienen salida.
+# Una obligación Liquidada sigue admitiendo pagos válidos: el pago se registra y verifica (con su PagoVerificado) y la
+# obligación no cambia; por eso (Liquidada, LIQUIDAR_POR_PAGO) no se declara como repetición idempotente.
+MAQUINA_OBLIGACION_PAGO = MaquinaEstados(
+    estados=EO,
+    transiciones=(
+        Transicion(EO.PENDIENTE, _AO.LIQUIDAR_POR_PAGO, EO.LIQUIDADA),     # CA-018, CA-019, CA-026
+        Transicion(EO.PENDIENTE, _AO.VENCER, EO.VENCIDA),                  # CA-023, CA-025, BN-005
+        Transicion(EO.VENCIDA, _AO.REGULARIZAR, EO.LIQUIDADA),             # CA-027: saldo vencido regularizado
+        Transicion(EO.PENDIENTE, _AO.REGULARIZAR, EO.LIQUIDADA),           # CA-025, CA-027: cargos moratorios
+        Transicion(EO.PENDIENTE, _AO.DEJAR_SIN_EFECTO, EO.SIN_EFECTO),     # SE-012, CA-070, CA-071, CA-096, CA-097, GL-053
+    ),
+    nombre="ObligacionPago",
+)
+
+# Registrado → Verificado | Importe incorrecto. Un pago corregido es un pago nuevo.
+MAQUINA_PAGO = MaquinaEstados(
+    estados=EPg,
+    transiciones=(
+        Transicion(EPg.REGISTRADO, _AP.VERIFICAR, EPg.VERIFICADO),                 # CA-018, CA-021, CA-027
+        Transicion(EPg.REGISTRADO, _AP.RECHAZAR_IMPORTE, EPg.IMPORTE_INCORRECTO),  # CA-019
+    ),
+    mensajes_rechazo={_AP.VERIFICAR: lambda o: MENSAJE_PAGO_NO_VERIFICABLE},
+    nombre="Pago",
+)
+
+# Pendiente → Efectuada. Registrar otra vez una devolución Efectuada se acepta sin efecto y sin DevolucionRegistrada.
+MAQUINA_DEVOLUCION = MaquinaEstados(
+    estados=ED,
+    transiciones=(Transicion(ED.PENDIENTE, _AD.REGISTRAR_EFECTUADA, ED.EFECTUADA),),   # SE-012, CA-098, GL-057
+    repeticiones_idempotentes=((ED.EFECTUADA, _AD.REGISTRAR_EFECTUADA),),
+    nombre="Devolucion",
+)
 
 
 @dataclass
@@ -118,34 +179,51 @@ class EstadoCuenta(AggregateRoot):
         if o is None or o.estado == EO.SIN_EFECTO:
             raise ErrorDominio("La obligación no existe o quedó sin efecto.")
         p = Pago(pago_id, ob_id, importe, fecha, comprobante, registrado_en=registrado_en or fecha)
-        self.pagos.append(p)                                           # registrado ≠ verificado (GL-046, GL-052)
         if o.concepto == CP.ANTICIPO and importe != o.importe:
-            p.estado = EPg.IMPORTE_INCORRECTO                          # CA-019: se solicita corrección
+            p.estado = MAQUINA_PAGO.transitar(p.estado, AccionPago.RECHAZAR_IMPORTE)   # CA-019: se solicita corrección
+            self.pagos.append(p)
             return p
-        if verificado_externamente:
-            self._verificar(o, p, p.registrado_en)
+        # Con verificación externa, ambos destinos (pago y obligación) se validan antes de agregar el pago.
+        destinos = self._destinos_verificacion(o, p) if verificado_externamente else None
+        self.pagos.append(p)                                           # registrado ≠ verificado (GL-046, GL-052)
+        if destinos is not None:
+            self._aplicar_verificacion(o, p, p.registrado_en, *destinos)
         return p
 
     def verificar_pago_registrado(self, pago_id: str, verificado_en: datetime) -> Pago:
         """Administración verifica después un pago que ya había registrado. La verificación tardía no convierte en
         incumplimiento un pago que el Cliente efectuó dentro del plazo."""
         p = next((x for x in self.pagos if x.pago_id == pago_id), None)
-        if p is None or p.estado != EPg.REGISTRADO:
-            raise ErrorDominio("Solo se verifica un pago registrado que está pendiente de verificación.")
+        if p is None:
+            raise ErrorDominio(MENSAJE_PAGO_NO_VERIFICABLE)
+        MAQUINA_PAGO.validar(p.estado, AccionPago.VERIFICAR)          # mismo mensaje si ya no está Registrado
         o = self.obligaciones[p.obligacion_id]
         if o.estado == EO.SIN_EFECTO:
             raise ErrorDominio("La obligación quedó sin efecto.")
-        self._verificar(o, p, verificado_en)
+        self._aplicar_verificacion(o, p, verificado_en, *self._destinos_verificacion(o, p))
         return p
 
-    def _verificar(self, o: ObligacionPago, p: Pago, verificado_en: datetime) -> None:
-        p.estado, p.verificado_en = EPg.VERIFICADO, verificado_en
+    def _destinos_verificacion(self, o: ObligacionPago, p: Pago):
+        """Destinos validados del pago y, si transita, de la obligación; no modifica nada.
+        El ciclo de vida del Pago y el estado de la ObligacionPago son independientes: el pago se verifica (y se emite
+        PagoVerificado) aunque la obligación ya esté Liquidada o en regularización; la obligación solo transita si está
+        Pendiente y lo pagado, contando este pago, cubre su importe."""
+        destino_pago = MAQUINA_PAGO.transitar(p.estado, AccionPago.VERIFICAR)
         en_regularizacion = o.estado == EO.VENCIDA or o.concepto == CP.CARGOS_MORATORIOS
+        destino_obligacion = None
         if en_regularizacion:
             pass        # la liquidación la determina resolver_regularizacion() al revisar la ventana (CA-027)
         elif o.plazo is None or not o.plazo.vencido(p.fecha) or o.concepto in (CP.SALDO_CONTRATO_ORIGINAL, CP.SUSTITUCION_PROVEEDOR):
-            if self._pagado(o.obligacion_id) >= o.importe.cantidad:
-                o.estado = EO.LIQUIDADA
+            pagado = self._pagado(o.obligacion_id) + p.importe.cantidad          # este pago todavía no está Verificado
+            if o.estado == EO.PENDIENTE and pagado >= o.importe.cantidad:          # Liquidada: sigue Liquidada
+                destino_obligacion = MAQUINA_OBLIGACION_PAGO.transitar(o.estado, AccionObligacionPago.LIQUIDAR_POR_PAGO)
+        return destino_pago, destino_obligacion
+
+    def _aplicar_verificacion(self, o: ObligacionPago, p: Pago, verificado_en: datetime, destino_pago: EPg,
+                              destino_obligacion: Optional[EO]) -> None:
+        p.estado, p.verificado_en = destino_pago, verificado_en
+        if destino_obligacion is not None:
+            o.estado = destino_obligacion
         self._registrar(PagoVerificado(self.id, verificado_en, obligacion_id=o.obligacion_id, concepto=o.concepto.value,
                                        origen_id=o.origen_id))
 
@@ -194,8 +272,10 @@ class EstadoCuenta(AggregateRoot):
                   and not self._pago_pendiente_de_verificacion({o.obligacion_id}, o.plazo.vence)]   # pagado a tiempo, sin verificar aún
         if not vencen:
             return False
-        for o in vencen:
-            o.estado = EO.VENCIDA
+        # Vencimiento masivo: se validan todas las transiciones antes de asignar la primera (sin cambios parciales).
+        destinos = [MAQUINA_OBLIGACION_PAGO.transitar(o.estado, AccionObligacionPago.VENCER) for o in vencen]
+        for o, destino in zip(vencen, destinos):
+            o.estado = destino
         self._registrar(SaldoContratoOriginalVencido(self.id, ahora, evento_ref=self.evento_id))
         return True
 
@@ -230,13 +310,16 @@ class EstadoCuenta(AggregateRoot):
         if not ok and self._pago_pendiente_de_verificacion({o.obligacion_id for o in vencidas} | {mor.obligacion_id}, limite):
             raise ErrorDominio("Hay pagos efectuados dentro del plazo pendientes de verificación; "
                                "Administración debe verificarlos antes de registrar el resultado.")
+        if ok:      # se validan todas las transiciones antes de registrar el resultado y asignar estados
+            destinos = [MAQUINA_OBLIGACION_PAGO.transitar(o.estado, AccionObligacionPago.REGULARIZAR) for o in vencidas]
+            destino_moratorios = MAQUINA_OBLIGACION_PAGO.transitar(mor.estado, AccionObligacionPago.REGULARIZAR)
         self.resultado_regularizacion = 'Regularizado' if ok else 'No regularizado'
         self.fecha_resultado_regularizacion = revisado_en
         self._ventana_resuelta = mor.obligacion_id
         if ok:
-            for o in vencidas:
-                o.estado = EO.LIQUIDADA
-            mor.estado = EO.LIQUIDADA
+            for o, destino in zip(vencidas, destinos):
+                o.estado = destino
+            mor.estado = destino_moratorios
             self._registrar(SaldoVencidoRegularizado(self.id, revisado_en, evento_ref=self.evento_id))
         else:
             self._registrar(PlazoRegularizacionVencido(self.id, revisado_en, evento_ref=self.evento_id))
@@ -265,9 +348,14 @@ class EstadoCuenta(AggregateRoot):
                                     devolucion_id_factory) -> List[Devolucion]:
         """Idempotente por origen. Las obligaciones del contrato original no cambian."""
         nuevas = []
-        for o in [o for o in self.obligaciones.values() if o.origen_id == origen_id]:
-            if o.estado == EO.PENDIENTE:
-                o.estado = EO.SIN_EFECTO
+        del_origen = [o for o in self.obligaciones.values() if o.origen_id == origen_id]
+        # Solo los cobros Pendiente quedan sin efecto, esté o no cancelado el Evento (SE-012, AR-07); los demás estados
+        # se omiten sin rechazo. Se validan todas las transiciones antes de asignar la primera.
+        pendientes = [o for o in del_origen if o.estado == EO.PENDIENTE]
+        destinos = [MAQUINA_OBLIGACION_PAGO.transitar(o.estado, AccionObligacionPago.DEJAR_SIN_EFECTO) for o in pendientes]
+        for o, destino in zip(pendientes, destinos):
+            o.estado = destino
+        for o in del_origen:
             recibido = self._pagado(o.obligacion_id)
             ya = any(d.solicitud_id == origen_id and d.concepto == o.concepto for d in self.devoluciones)
             if recibido > 0 and not evento_cancelado and not ya:
@@ -277,8 +365,9 @@ class EstadoCuenta(AggregateRoot):
         return nuevas
 
     def registrar_devolucion_efectuada(self, devolucion_id: str, fecha: datetime, comprobante: str) -> None:
-        d = next(d for d in self.devoluciones if d.devolucion_id == devolucion_id)
-        if d.estado == ED.EFECTUADA:
-            return
-        d.estado, d.fecha_devolucion, d.comprobante = ED.EFECTUADA, fecha, comprobante
+        d = next(d for d in self.devoluciones if d.devolucion_id == devolucion_id)    # AR-08 (pendiente): sin cambios
+        if MAQUINA_DEVOLUCION.es_repeticion(d.estado, AccionDevolucion.REGISTRAR_EFECTUADA):
+            return                                     # ya Efectuada: sin segunda devolución ni DevolucionRegistrada
+        destino = MAQUINA_DEVOLUCION.transitar(d.estado, AccionDevolucion.REGISTRAR_EFECTUADA)
+        d.estado, d.fecha_devolucion, d.comprobante = destino, fecha, comprobante
         self._registrar(DevolucionRegistrada(self.id, fecha, devolucion_id=devolucion_id))
