@@ -26,6 +26,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 ├── Resumen_EventosNova_U3_Equipo16.docx
 ├── Resumen_Eventos_Nova_Equipo16.pdf
 ├── validar_paquete_pia.py     (Etapa E1: validación de los CSV oficiales)
+├── ejecutar_paquete_pia.py    (Etapa F2: ejecución de los casos y transiciones del paquete)
 ├── datos/
 │   └── paquete_pia/           (Etapa E1: seis CSV oficiales sin modificar + MANIFIESTO.sha256)
 ├── diagramas/
@@ -75,6 +76,7 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   ├── resultados.py
 │   │   └── servicios.py
 │   ├── paquete_pia/           (Etapa E1: lector y DTO de los CSV, independiente de las demás capas)
+│   ├── ejecucion_paquete/     (Etapa F2: ejecutor de casos y transiciones del paquete, fuera del dominio)
 │   ├── domain/
 │   │   ├── base.py
 │   │   ├── contrato.py
@@ -97,7 +99,8 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   ├── evidencias/
 │   │   ├── ejecucion-pruebas.txt
 │   │   ├── evidencia-pruebas.docx
-│   │   └── evidencia-pruebas.pdf
+│   │   ├── evidencia-pruebas.pdf
+│   │   └── f2/                (Etapa F2: resultados de los 120 casos y las 20 transiciones)
 │   ├── test_api_esquemas.py
 │   ├── test_api_etapa1.py
 │   ├── test_api_propuestas.py
@@ -544,6 +547,48 @@ python -m unittest discover -s tests -v
 python -m unittest tests.test_servicio_adicional_maquina_estados -v
 python -m unittest discover -s tests -v
 ```
+
+## Etapa F2: ejecución de los casos y transiciones del paquete oficial
+
+Se ejecutan los **120 casos** de `casos_prueba.csv` y las **20 transiciones** de `transiciones_prueba.csv` y los resultados se escriben, como tablas completas, en `tests/evidencias/f2/`. Los CSV oficiales y `MANIFIESTO.sha256` solo se leen (el lector verifica los hashes antes de ejecutar) y la columna `resultado_alumno` sigue en `PENDIENTE`: los resultados van en archivos separados.
+
+El LEEME del paquete declara que su flujo, sus estados y sus reglas son un **modelo de pruebas propuesto** y pide documentar las diferencias con los requerimientos propios y adaptar fixtures y oráculos, sin reemplazar esos requerimientos. Por eso:
+
+- Las reglas `puede_procesarse` y `beneficio_referencia` se evalúan con Specifications en `src/ejecucion_paquete/reglas_paquete.py`, **fuera del dominio** (el BRD no tiene clientes activos o preferentes, autorizaciones por operación ni promociones: diferencias D-01 y D-02).
+- Las transiciones se ejecutan con los **servicios de aplicación reales** sobre la composición en memoria, una instancia nueva por transición. No se añadió ningún estado al dominio ni se cambió ninguna regla aprobada; la correspondencia de estados y acciones y las diferencias D-01 a D-08 están en `src/ejecucion_paquete/mapeo.py` y en `tests/evidencias/f2/`.
+- Los totales se calculan solo con `Decimal` (`src/ejecucion_paquete/totales.py`); se rechazan `float`, booleanos, precios negativos, no finitos o con más de dos decimales y cantidades que no sean enteros positivos.
+- El resultado esperado de cada caso lo calcula un **oráculo independiente** (`oraculo.py`: lectura directa de los CSV y expresiones booleanas, sin el lector ni las Specifications). El paquete del alumno no incluye los resultados del docente.
+
+**Veredictos.** `APROBADO`: el resultado real coincide con el esperado (en los casos, el resultado y las condiciones incumplidas; en las transiciones, el resultado, el mensaje, los estados, los Domain Events, el anticipo y la ausencia de cambios parciales). No basta con que no haya excepción. `FALLIDO`: no coincide (fallo funcional). `NO_EJECUTABLE`: la entrada no se puede representar en el dominio por una regla aprobada y documentada, y se verifica el rechazo. En las transiciones, la columna `coincide_con_paquete` compara además con el flujo de referencia del paquete; un `NO` remite a una diferencia documentada y no es un fallo.
+
+| Archivo de `tests/evidencias/f2/` | Contenido |
+|------|-----------|
+| `totales_operaciones.csv` | 60 operaciones: precio × cantidad por línea, total con `Decimal` y total del oráculo |
+| `casos_resultados.csv` | 120 casos: entradas, esperado, real, condiciones incumplidas, veredicto, diferencia, explicación, observaciones y `fila_origen` |
+| `transiciones_resultados.csv` | 20 transiciones: estado de partida, operación de dominio, esperado del paquete y del dominio, resultado, mensaje, estados finales, anticipo, Domain Events, cambios parciales, veredicto y `fila_origen` |
+| `mapeo_estados_acciones.csv` | Correspondencia de los 5 estados y las 5 acciones del paquete con el dominio, con su fuente |
+| `diferencias_modelo.csv` | Diferencias D-01 a D-08 con su fuente, el ajuste del oráculo y los registros afectados |
+| `resumen.md` | Conteos por familia, acción y veredicto, hashes SHA-256 de las entradas y preguntas abiertas Q-01 a Q-03 |
+
+Los archivos son deterministas (sin identificadores aleatorios ni marcas de tiempo). Los CSV se escriben en UTF-8 con BOM para que Excel muestre los acentos. La verificación ignora la diferencia entre LF y CRLF, por lo que admite un checkout con `core.autocrlf`.
+
+**Comandos en Windows** (desde la raíz del proyecto, con el entorno virtual activado):
+
+```bat
+REM 1. Regenerar las evidencias en tests\evidencias\f2\
+python ejecutar_paquete_pia.py
+
+REM 2. Comprobar, sin escribir, que las evidencias guardadas coinciden con una ejecución nueva (código de salida 0)
+python ejecutar_paquete_pia.py --verificar
+
+REM 3. Solo las pruebas de F2 (no requieren FastAPI)
+python -m unittest tests.test_f2_ejecucion_paquete -v
+
+REM 4. Toda la suite
+python -m unittest discover -s tests -v
+```
+
+La configuración de cobertura de F1 no cambia: `source = src` incluye también `src/ejecucion_paquete/`.
 
 ## Entregables
 
