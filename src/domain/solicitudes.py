@@ -19,7 +19,8 @@ from .eventos_dominio import (CambioConfirmado, SolicitudCambioCerradaPorFaltaDe
 from .servicios_dominio import DecisionRegularizacion, ConfiguracionComparable
 from .especificaciones import (DIAS_MINIMOS_SERVICIO_ADICIONAL, DIAS_SIN_CARGO_TARDIO,   # noqa: F401  (5 y 7 días)
                                CAMBIO_CON_CARGO_TARDIO, CAMBIO_REQUIERE_APROBACION_CLIENTE, AfectaCostos,
-                               SOLICITUD_CAMBIO_EN_PLAZO, SERVICIO_ADICIONAL_EN_PLAZO, SituacionTemporalSolicitud)
+                               SOLICITUD_CAMBIO_EN_PLAZO, SERVICIO_ADICIONAL_EN_PLAZO, SituacionTemporalSolicitud,
+                               MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL)
 
 _AFECTA_COSTOS = AfectaCostos()
 
@@ -84,7 +85,10 @@ class _SolicitudBase(AggregateRoot):
             if self.estado != self.DETENIDA:
                 self._estado_antes_de_detener, self.estado = self.estado, self.DETENIDA
             return False
-        causa = CausaCierreSolicitud.PLAZO_INSUFICIENTE if d.motivo.startswith('Condición') else CausaCierreSolicitud.EVENTO_CANCELADO
+        if d.motivo == MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL:
+            causa = CausaCierreSolicitud.INICIO_EVENTO       # N6, CA-099: el Evento ya inició; no es falta de plazo
+        else:
+            causa = CausaCierreSolicitud.PLAZO_INSUFICIENTE if d.motivo.startswith('Condición') else CausaCierreSolicitud.EVENTO_CANCELADO
         self._cerrar(estado_no_procede, causa, d.motivo, ahora)
         return False
 

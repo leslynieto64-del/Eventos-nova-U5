@@ -530,7 +530,10 @@ class GestionServiciosAdicionalesService:
         ec = self.ec.obtener_por_contrato_id(contrato_id)
         s = SolicitudServicioAdicional(nuevo_id("SA"), evento_id, contrato_id, ec.id, servicio,
                                        AnticipacionSolicitud(ahora, ev.datos.fecha_hora))
-        d = self._evaluar(s, ev, ahora)
+        # N6 (SE-004, O-01): la solicitud ya está registrada; se verifica en orden el Evento, el plazo y, al final, el
+        # saldo. Cada verificación se ejecuta solo si las anteriores se cumplieron y se conserva el primer motivo.
+        d = self.regularizacion.evaluar_solicitud_nueva(ev.cancelado, lambda: s.condicion_temporal(ahora, ev.iniciado),
+                                                        lambda: _saldo(self.ec, contrato_id))
         with transaccion(self.uow, s):
             s.aplicar_decision_regularizacion(d, ahora, EstadoSolicitudServicioAdicional.NO_PROCEDENTE); self.adicionales.guardar(s)
         return Resultado.ok(f"Solicitud {s.estado.value}.", solicitud_id=s.id, estado=s.estado.value, motivo=d.motivo)

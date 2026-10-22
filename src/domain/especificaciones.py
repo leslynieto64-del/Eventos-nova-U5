@@ -150,8 +150,9 @@ SOLICITUD_CAMBIO_EN_PLAZO = EventoNoIniciado("El evento ya inició (CA-039).")
 # SE-004, CA-077, CA-080, CA-083: evento no iniciado y, salvo que la elegibilidad ya se haya obtenido dentro del
 # plazo, al menos cinco días naturales hasta el evento contados desde el momento de la evaluación (al registrar o
 # al retomar una solicitud detenida antes de obtenerla).
+MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL = "Condición temporal: el evento ya inició."   # N6: causa «Inicio del evento»
 SERVICIO_ADICIONAL_EN_PLAZO = (
-    EventoNoIniciado("Condición temporal: el evento ya inició.")
+    EventoNoIniciado(MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL)
     & (ElegibilidadObtenida() | AnticipacionMinima(DIAS_MINIMOS_SERVICIO_ADICIONAL)).con_motivo(
         "Condición temporal: quedan menos de cinco días naturales (CA-077, CA-083).")
 )

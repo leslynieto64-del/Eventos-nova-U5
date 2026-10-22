@@ -119,6 +119,15 @@ class Y(_Compuesta):
     def incumplimientos(self, candidato: Any) -> List[Incumplimiento]:
         return [i for p in self.partes for i in p.incumplimientos(candidato)]
 
+    def primer_incumplimiento(self, candidato: Any) -> Optional[Incumplimiento]:
+        """N6: el primer incumplimiento es el de la primera parte que no se satisface (el mismo que el primero de
+        `incumplimientos`), pero las partes posteriores ya no se evalúan."""
+        for p in self.partes:
+            i = p.primer_incumplimiento(candidato)
+            if i is not None:
+                return i
+        return None
+
 
 class O(_Compuesta):
     """OR: se satisface si alguna parte se satisface. Si ninguna lo hace, informa los incumplimientos de todas

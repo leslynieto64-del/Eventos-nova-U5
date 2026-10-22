@@ -3,7 +3,7 @@ No consultan repositorios, no notifican y no cambian estados."""
 from __future__ import annotations
 from dataclasses import dataclass
 from decimal import Decimal
-from typing import Optional
+from typing import Callable, Optional
 from .valores import ImpactoModificacion, CondicionTemporal, DatosEvento, Importe
 from .especificaciones import SOLICITUD_PUEDE_CONTINUAR, SituacionContinuidadSolicitud, SinSaldoVencido
 
@@ -55,3 +55,37 @@ class EvaluarRegularizacionDeSolicitudes:
         if fallo is None:
             return DecisionRegularizacion(True, False)
         return DecisionRegularizacion(False, isinstance(fallo.especificacion, SinSaldoVencido), fallo.motivo)
+
+    def evaluar_solicitud_nueva(self, evento_cancelado: bool, condicion: Callable[[], CondicionTemporal],
+                                saldo: Callable[[], SituacionSaldo]) -> DecisionRegularizacion:
+        """N6 (SE-004, O-01, CA-099, CA-100): misma Specification y mismo orden que `evaluar`, para una solicitud nueva
+        ya registrada. La condición temporal y el saldo se obtienen solo cuando las verificaciones anteriores se
+        cumplieron: con el Evento cancelado no se calcula el plazo ni se consulta el saldo, y con la condición temporal
+        incumplida no se consulta el saldo. Se conserva solo el primer motivo."""
+        fallo = SOLICITUD_PUEDE_CONTINUAR.primer_incumplimiento(
+            _SituacionContinuidadDiferida(evento_cancelado, condicion, saldo))
+        if fallo is None:
+            return DecisionRegularizacion(True, False)
+        return DecisionRegularizacion(False, isinstance(fallo.especificacion, SinSaldoVencido), fallo.motivo)
+
+
+class _SituacionContinuidadDiferida:
+    """Los mismos datos que SituacionContinuidadSolicitud; la condición temporal y el saldo se obtienen al leerlos por
+    primera vez (N6)."""
+
+    def __init__(self, evento_cancelado: bool, condicion: Callable[[], CondicionTemporal],
+                 saldo: Callable[[], SituacionSaldo]):
+        self.evento_cancelado = evento_cancelado
+        self._condicion, self._saldo = condicion, saldo
+
+    @property
+    def condicion_temporal(self) -> CondicionTemporal:
+        if callable(self._condicion):
+            self._condicion = self._condicion()
+        return self._condicion
+
+    @property
+    def saldo_vencido_sin_regularizar(self) -> bool:
+        if callable(self._saldo):
+            self._saldo = self._saldo()
+        return self._saldo.saldo_vencido_sin_regularizar
