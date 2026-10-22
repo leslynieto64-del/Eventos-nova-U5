@@ -45,8 +45,8 @@ TABLA_ESPERADA = {
     (ESC.PENDIENTE_AUTORIZACION, A.REGISTRAR_AUTORIZACION_APROBADA): ESC.PENDIENTE_FORMALIZACION,
     (ESC.PENDIENTE_AUTORIZACION, A.REGISTRAR_AUTORIZACION_RECHAZADA): ESC.NO_AUTORIZADA,
     (ESC.PENDIENTE_FORMALIZACION, A.REGISTRAR_SOLICITUD_PAGO): ESC.PENDIENTE_PAGO,
-    (ESC.PENDIENTE_FORMALIZACION, A.CONFIRMAR): ESC.CONFIRMADA,
-    (ESC.PENDIENTE_PAGO, A.CONFIRMAR): ESC.CONFIRMADA,
+    (ESC.PENDIENTE_FORMALIZACION, A.CONFIRMAR_SIN_IMPORTES): ESC.CONFIRMADA,        # E3F.1: sin importes por pagar
+    (ESC.PENDIENTE_PAGO, A.CONFIRMAR_CON_IMPORTES): ESC.CONFIRMADA,                 # E3F.1: con importes, tras el pago
     (ESC.PENDIENTE_PAGO, A.CERRAR_POR_FALTA_DE_PAGO): ESC.CERRADA_FALTA_PAGO,
 }
 for _e in EN_TRAMITE:
@@ -64,6 +64,10 @@ M_CLIENTE = "La solicitud no espera la aprobación del Cliente."
 M_AUTORIZACION = "La autorización requiere la aprobación previa del Cliente (CA-043)."
 M_PAGO = "El pago se solicita con el anexo registrado (CA-068)."
 M_FALTA_PAGO = "Solo se cierra por falta de pago una solicitud Pendiente de pago."
+# E3F.1 (BN-003, SE-006, CA-041, CA-067, CA-068): textos nuevos, escritos literalmente.
+M_SIN_IMPORTES = "No se puede solicitar el pago porque el cambio no genera importes por pagar (BN-003, CA-041, CA-067)."
+F_SOLICITUD_PAGO = "solicitud de pago comunicada al Cliente (BN-003, CA-067)"
+F_EVENTO = ('evento no iniciado', 'evento no cancelado (SE-007)')
 VARIANTES = {n: (e, a) for n, e, a in variantes() + variantes_historicas()}
 
 NO_VIABLE = ResultadoViabilidad(False, 'Sin disponibilidad')
@@ -196,7 +200,8 @@ OPERACIONES = {
     A.REGISTRAR_AUTORIZACION_APROBADA: ('PENDIENTE_AUTORIZACION', lambda s: s.registrar_autorizacion(Decision('Administración', True, A10))),
     A.REGISTRAR_AUTORIZACION_RECHAZADA: ('PENDIENTE_AUTORIZACION', lambda s: s.registrar_autorizacion(Decision('Administración', False, A10, 'No'))),
     A.REGISTRAR_SOLICITUD_PAGO: ('PENDIENTE_FORMALIZACION|ruta_B|con_anexo', lambda s: s.registrar_solicitud_pago('OB-9')),
-    A.CONFIRMAR: ('PENDIENTE_PAGO', lambda s: s.confirmar(True, False, A10, False)),
+    A.CONFIRMAR_CON_IMPORTES: ('PENDIENTE_PAGO', lambda s: s.confirmar(True, False, A10, False)),
+    A.CONFIRMAR_SIN_IMPORTES: ('PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo', lambda s: s.confirmar(False, False, A10, False)),
     A.CERRAR_POR_FALTA_DE_PAGO: ('PENDIENTE_PAGO', lambda s: s.cerrar_por_falta_de_pago(A10)),
     A.CERRAR_POR_INICIO_EVENTO: ('PENDIENTE_AUTORIZACION', lambda s: s.cerrar_por_inicio_evento(FECHA_EVENTO)),
 }
@@ -214,7 +219,7 @@ class UsoRealDeLaMaquina(unittest.TestCase):
             with self.subTest(accion=accion):
                 s = en(variante)
                 with mock.patch.object(mod_solicitudes, 'MAQUINA_SOLICITUD_CAMBIO', self._sin(MAQ, accion)):
-                    if accion is A.CONFIRMAR:                    # confirmar no lanza: informa el faltante
+                    if accion in (A.CONFIRMAR_CON_IMPORTES, A.CONFIRMAR_SIN_IMPORTES):   # confirmar informa el faltante
                         self.assertEqual(llamada(s), ['aprobaciones requeridas'])
                     else:
                         with self.assertRaises(TransicionNoPermitida):
@@ -234,11 +239,15 @@ class UsoRealDeLaMaquina(unittest.TestCase):
                 self.assertEqual([c.args[1] for c in espia.call_args_list], [esperada])
 
     def test_confirmar_consulta_la_tabla_y_no_una_lista_de_estados(self):
-        """El faltante «aprobaciones requeridas» lo decide MAQ.permite(estado, CONFIRMAR)."""
+        """El faltante de estado lo decide MAQ.permite con la acción que corresponde a importes_por_pagar (E3F.1)."""
         s = en('PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo')
         with mock.patch.object(MAQ, 'permite', wraps=MAQ.permite) as espia:
             self.assertEqual(s.confirmar(False, False, A10), [])
-        espia.assert_any_call(ESC.PENDIENTE_FORMALIZACION, A.CONFIRMAR)
+        espia.assert_any_call(ESC.PENDIENTE_FORMALIZACION, A.CONFIRMAR_SIN_IMPORTES)
+        s = en('PENDIENTE_FORMALIZACION|ruta_B|con_anexo')
+        with mock.patch.object(MAQ, 'permite', wraps=MAQ.permite) as espia:
+            self.assertEqual(s.confirmar(True, False, A10), [F_SOLICITUD_PAGO])
+        espia.assert_any_call(ESC.PENDIENTE_FORMALIZACION, A.CONFIRMAR_CON_IMPORTES)
 
 
 # ======================================================================= transiciones válidas
@@ -282,17 +291,15 @@ class TransicionesValidas(unittest.TestCase):
                     self.assertEqual((s.motivo_cierre.descripcion, s.motivo_cierre.fecha), ('Motivo', A10))
                 self.assertEqual(s.extraer_eventos(), [])
 
-    def test_solicitud_de_pago_con_anexo(self):                               # CA-068
-        for variante in ('PENDIENTE_FORMALIZACION|ruta_B|con_anexo', 'PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo',
-                         'PENDIENTE_FORMALIZACION|ruta_C|cargo_tardio|con_anexo'):
+    def test_solicitud_de_pago_con_anexo(self):                               # CA-068; sin importes: RutaDePagoE3F1
+        for variante in ('PENDIENTE_FORMALIZACION|ruta_B|con_anexo', 'PENDIENTE_FORMALIZACION|ruta_C|cargo_tardio|con_anexo'):
             with self.subTest(variante=variante):
                 s = en(variante); s.registrar_solicitud_pago('OB-9')
                 self.assertEqual((s.estado, s.obligacion_pago_id), (ESC.PENDIENTE_PAGO, 'OB-9'))
                 self.assertEqual(s.extraer_eventos(), [])
 
     def test_confirmar_desde_formalizacion_y_desde_pago(self):               # SE-007, BN-006
-        for variante, pago in (('PENDIENTE_PAGO', True), ('PENDIENTE_FORMALIZACION|ruta_B|con_anexo', True),
-                               ('PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo', False)):
+        for variante, pago in (('PENDIENTE_PAGO', True), ('PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo', False)):
             with self.subTest(variante=variante):
                 s = en(variante)
                 self.assertEqual(s.confirmar(pago, False, A10), [])
@@ -401,7 +408,7 @@ class RechazosSinEfectos(unittest.TestCase):
         casos = [('PENDIENTE_PAGO', (False, True, A10, True),
                   ['evento no iniciado', 'evento no cancelado (SE-007)', 'pago registrado y verificado']),
                  ('PENDIENTE_FORMALIZACION|ruta_B|sin_anexo', (True, False, A10),
-                  ['anexo vinculado al contrato original']),
+                  [F_SOLICITUD_PAGO, 'anexo vinculado al contrato original']),                 # E3F.1
                  ('PENDIENTE_AUTORIZACION', (True, False, A10),
                   ['aprobaciones requeridas', 'anexo vinculado al contrato original']),
                  ('CONFIRMADA', (True, False, A10), ['aprobaciones requeridas'])]
@@ -454,10 +461,9 @@ class RegularizacionN2(unittest.TestCase):
         self.assertEqual(s.estado, ESC.REGISTRADA)
         s.registrar_viabilidad(VIABLE, COSTOS, A10)                            # retomada, sigue el flujo normal
         self.assertEqual(s.estado, ESC.PENDIENTE_APROBACION_CLIENTE)
-        # «no_procede_evento_iniciado_cambio» no se fija aquí: hoy cierra con causa EVENTO_CANCELADO (hallazgo documentado
-        # en el reporte de E3F, fuera de su alcance); lo conserva la comparación con la referencia pre-E3F.
         causas = {'no_procede_condicion_temporal': CausaCierreSolicitud.PLAZO_INSUFICIENTE,
-                  'no_procede_evento_cancelado': CausaCierreSolicitud.EVENTO_CANCELADO}
+                  'no_procede_evento_cancelado': CausaCierreSolicitud.EVENTO_CANCELADO,
+                  'no_procede_evento_iniciado_cambio': CausaCierreSolicitud.INICIO_EVENTO}       # E3F.1 (N3)
         for decision, causa in causas.items():
             for variante in ('REGISTRADA|10d', 'DETENIDA_SALDO_VENCIDO|antes=REGISTRADA'):
                 with self.subTest(decision=decision, variante=variante):
@@ -545,13 +551,52 @@ class EnEvaluacionAR05(unittest.TestCase):
 
 
 # ======================================================================= conservación del comportamiento
+# Diferencias intencionales de E3F.1 respecto a la referencia pre-E3F (que no se modifica). Son las únicas: cualquier
+# otro caso debe seguir idéntico.
+_RAMAS_CONFIRMAR = [f'confirmar(pago={p}, iniciado={i}, cancelado={c})' for p in (False, True) for i in (False, True)
+                    for c in (False, True)]
+DIFERENCIAS_E3F1 = {
+    # A — CA-070, GL-032, BPMN SP-03 (evento de borde «Evento iniciado»): causa «Inicio del evento» (hallazgo N3).
+    'causa_inicio_evento': {f'{v} | aplicar_decision_regularizacion(no_procede_evento_iniciado_cambio)'
+                            for v in ('REGISTRADA|10d', 'REGISTRADA|3d', 'REGISTRADA|con_modificacion',
+                                      'DETENIDA_SALDO_VENCIDO|antes=REGISTRADA')},
+    # B — BN-003, SE-006, CA-067, mapa («¿Existen importes por pagar?»): sin importes no se solicita pago.
+    'solicitud_pago_sin_importes': {'PENDIENTE_FORMALIZACION|ruta_C|sin_importes|con_anexo | registrar_solicitud_pago(OB-9)'},
+    # B — BN-003, CA-041, CA-067, CA-068: con importes no se confirma desde Pendiente de formalización.
+    'confirmar_con_importes_sin_solicitud_de_pago': {
+        f'{v} | {r}' for v in ('PENDIENTE_FORMALIZACION|ruta_B|sin_anexo', 'PENDIENTE_FORMALIZACION|ruta_B|con_anexo',
+                               'PENDIENTE_FORMALIZACION|ruta_C|cargo_tardio|con_anexo') for r in _RAMAS_CONFIRMAR},
+}
+
+
+def esperado_e3f1(bloque, clave, referencia):
+    """El resultado que E3F.1 exige para un caso de la referencia, derivado de lo que la referencia registraba."""
+    caso = referencia[bloque][clave]
+    if bloque != 'comportamiento':
+        return caso
+    inicial_ = referencia[bloque][clave.split(' | ')[0] + ' | (inicial)']
+    if clave in DIFERENCIAS_E3F1['causa_inicio_evento']:
+        assert caso['motivo_cierre']['causa'] == CausaCierreSolicitud.EVENTO_CANCELADO.name
+        return {**caso, 'motivo_cierre': {**caso['motivo_cierre'], 'causa': CausaCierreSolicitud.INICIO_EVENTO.name}}
+    if clave in DIFERENCIAS_E3F1['solicitud_pago_sin_importes']:
+        assert caso['estado'] == ESC.PENDIENTE_PAGO.name               # antes generaba una obligación innecesaria
+        return {'error': M_SIN_IMPORTES, **inicial_}
+    if clave in DIFERENCIAS_E3F1['confirmar_con_importes_sin_solicitud_de_pago']:
+        faltan = list(caso['devuelve'])
+        posicion = sum(1 for f in faltan if f in F_EVENTO)              # mismo lugar que el faltante de estado
+        return {'devuelve': faltan[:posicion] + [F_SOLICITUD_PAGO] + faltan[posicion:], **inicial_}
+    return caso
+
+
 class ConservacionDelComportamiento(unittest.TestCase):
-    """Referencia capturada antes de E3F (`comportamiento_solicitud_cambio_pre_e3f.json`): constructor (5 casos),
-    comportamiento (20 variantes × 29 = 580) e histórico de EN_EVALUACION (2 × 29 = 58), todos idénticos. Las huellas de
-    _SolicitudBase y SustitucionProveedor no cambian; la de SolicitudCambio queda como dato histórico, porque E3F
-    modifica la clase a propósito, y su conservación se comprueba por comportamiento."""
+    """Referencia capturada antes de E3F (`comportamiento_solicitud_cambio_pre_e3f.json`, sin modificar): constructor
+    (5 casos), comportamiento (20 variantes × 29 = 580) e histórico de EN_EVALUACION (2 × 29 = 58). Todo es idéntico
+    salvo los 29 casos de DIFERENCIAS_E3F1, cuyo resultado exacto se deriva de la referencia. La huella de
+    SustitucionProveedor no cambia; la de _SolicitudBase cambia por E3F.1 y se protege con su nuevo valor; la de
+    SolicitudCambio queda como dato histórico."""
     BLOQUES = ('constructor', 'comportamiento', 'historico_en_evaluacion')
     HUELLAS_PROTEGIDAS = ('_SolicitudBase', 'SustitucionProveedor')
+    HUELLAS_DESDE_E3F1 = {'_SolicitudBase': 'e9947bcb48d349066310697f00a5aa1a07bb0ffa64611074751f2cc07c25500b'}
 
     @classmethod
     def setUpClass(cls):
@@ -567,16 +612,30 @@ class ConservacionDelComportamiento(unittest.TestCase):
         self.assertEqual(len(self.referencia['comportamiento']), len(variantes()) * (1 + len(acciones())))
         self.assertEqual(len(self.referencia['historico_en_evaluacion']), len(variantes_historicas()) * (1 + len(acciones())))
 
-    def test_bloques_identicos(self):
-        for bloque in self.BLOQUES:
-            with self.subTest(bloque=bloque):
+    def test_solo_cambian_los_casos_de_e3f1(self):
+        todos = set().union(*DIFERENCIAS_E3F1.values())
+        self.assertEqual(len(todos), 29)
+        self.assertTrue(todos <= set(self.referencia['comportamiento']))
+        distintos = {k for k in self.referencia['comportamiento']
+                     if self.actual['comportamiento'][k] != self.referencia['comportamiento'][k]}
+        self.assertEqual(distintos, todos)
+        for bloque in ('constructor', 'historico_en_evaluacion'):
+            with self.subTest(bloque=bloque):                          # EN_EVALUACION conserva su comportamiento
                 self.assertEqual(diferencias(self.referencia[bloque], self.actual[bloque]), [])
-                self.assertEqual(self.actual[bloque], self.referencia[bloque])
+
+    def test_bloques_identicos_salvo_e3f1(self):
+        for bloque in self.BLOQUES:
+            for clave in self.referencia[bloque]:
+                with self.subTest(bloque=bloque, caso=clave):
+                    self.assertEqual(self.actual[bloque][clave], esperado_e3f1(bloque, clave, self.referencia))
 
     def test_huellas_protegidas(self):
         for clase in self.HUELLAS_PROTEGIDAS:
             with self.subTest(clase=clase):
-                self.assertEqual(huellas_de_clases()[clase], self.referencia['huellas'][clase])
+                esperada = self.HUELLAS_DESDE_E3F1.get(clase, self.referencia['huellas'][clase])
+                self.assertEqual(huellas_de_clases()[clase], esperada)
+        self.assertEqual(self.referencia['huellas']['_SolicitudBase'],
+                         '4b9632f58bf2a48a79cead87ea7c931b82f9aa70ba1bef517b3bedfef174a2b6')   # histórica, sin cambios
 
     def test_huella_de_solicitud_cambio_es_dato_historico(self):
         """Solo se comprueba que la referencia la conserva; no se compara con la clase actual."""

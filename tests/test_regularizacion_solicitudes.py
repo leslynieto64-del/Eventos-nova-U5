@@ -27,6 +27,22 @@ from domain.valores import (CausaCierreSolicitud, Importe, ResultadoViabilidad, 
 CLASES = (('SolicitudCambio', SolicitudCambio, ESC), ('SolicitudServicioAdicional', SolicitudServicioAdicional, ESA))
 MODIFICADORAS = ('detener_por_saldo', 'no_procede_condicion_temporal', 'no_procede_evento_cancelado',
                  'no_procede_evento_iniciado_cambio')
+# E3F.1 (resuelve el hallazgo N3): en SolicitudCambio, el motivo «El evento ya inició (CA-039).» cierra con la causa
+# «Inicio del evento» (CA-070, GL-032), no «Evento cancelado». Únicos casos de la referencia de N2 que cambian por
+# E3F.1; solo cambia `motivo_cierre.causa`. SolicitudServicioAdicional y SustitucionProveedor no cambian.
+DIFERENCIAS_E3F1 = {
+    'SolicitudCambio|REGISTRADA | no_procede_evento_iniciado_cambio',
+    'SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=REGISTRADA | no_procede_evento_iniciado_cambio',
+    'SolicitudCambio|DETENIDA_SALDO_VENCIDO|antes=PENDIENTE_APROBACION_CLIENTE | no_procede_evento_iniciado_cambio',
+}
+
+
+def esperado_e3f1(clave, referencia):
+    """Lo que la referencia de N2 registraba, con la causa corregida por E3F.1."""
+    if clave not in DIFERENCIAS_E3F1:
+        return referencia
+    assert referencia['motivo_cierre']['causa'] == CausaCierreSolicitud.EVENTO_CANCELADO.name
+    return {**referencia, 'motivo_cierre': {**referencia['motivo_cierre'], 'causa': CausaCierreSolicitud.INICIO_EVENTO.name}}
 
 
 def aplicar(tipo, estado, decision, antes=None, con_motivo=False):
@@ -101,11 +117,14 @@ class DecisionesValidas(unittest.TestCase):
 
     def test_no_procede_desde_registrada_y_desde_detenida(self):            # SE-004, SE-006, CA-083
         esperado = {'no_procede_condicion_temporal': CausaCierreSolicitud.PLAZO_INSUFICIENTE,
-                    'no_procede_evento_cancelado': CausaCierreSolicitud.EVENTO_CANCELADO,
-                    'no_procede_evento_iniciado_cambio': CausaCierreSolicitud.EVENTO_CANCELADO}   # N3, sin cambios
+                    'no_procede_evento_cancelado': CausaCierreSolicitud.EVENTO_CANCELADO}
+        # E3F.1 resuelve N3 solo en SolicitudCambio, cuya condición temporal produce ese motivo (CA-070, GL-032). En
+        # SolicitudServicioAdicional, que nunca lo produce (usa el motivo N6), se conserva el resultado anterior.
+        iniciado_cambio = {'SolicitudCambio': CausaCierreSolicitud.INICIO_EVENTO,
+                           'SolicitudServicioAdicional': CausaCierreSolicitud.EVENTO_CANCELADO}
         for tipo, clase, enum in CLASES:
             for origen, antes in ((enum.REGISTRADA, None), (clase.DETENIDA, enum.REGISTRADA)):
-                for decision, causa in esperado.items():
+                for decision, causa in {**esperado, 'no_procede_evento_iniciado_cambio': iniciado_cambio[tipo]}.items():
                     with self.subTest(tipo=tipo, origen=origen, decision=decision):
                         s, devuelve = aplicar(tipo, origen, decision, antes=antes)
                         self.assertFalse(devuelve)
@@ -217,10 +236,12 @@ class ComparacionConLaReferencia(unittest.TestCase):
         self.assertEqual(set(self.actual), set(self.referencia))
 
     def test_registrada_y_detenida_identicas(self):
+        """Idénticas a la referencia, salvo las tres diferencias de E3F.1 (DIFERENCIAS_E3F1), que solo cambian la causa."""
+        self.assertTrue(DIFERENCIAS_E3F1 <= {k for k in self.referencia if self._regularizable(k)})
         for clave, esperado in self.referencia.items():
             if self._regularizable(clave):
                 with self.subTest(caso=clave):
-                    self.assertEqual(self.actual[clave], esperado)
+                    self.assertEqual(self.actual[clave], esperado_e3f1(clave, esperado))
 
     def test_los_demas_estados_conservan_el_valor_devuelto_y_no_cambian(self):
         for clave, esperado in self.referencia.items():
@@ -234,11 +255,13 @@ class ComparacionConLaReferencia(unittest.TestCase):
     def test_diferencias_documentadas_de_n2(self):
         """128 casos: 12 estados de SolicitudCambio, 13 de SolicitudServicioAdicional y 7 de SustitucionProveedor fuera
         de Registrada y Detenida, por las 4 decisiones que modifican (detener y los tres «no procede»)."""
-        diferentes = sorted(k for k in self.referencia if self.actual[k] != self.referencia[k])
+        diferentes = sorted(k for k in self.referencia if self.actual[k] != esperado_e3f1(k, self.referencia[k]))
         esperadas = sorted(k for k in self.referencia if not self._regularizable(k) and not k.endswith('(inicial)')
                            and k.split(' | ')[1] in MODIFICADORAS)
         self.assertEqual(diferentes, esperadas)
         self.assertEqual(len(diferentes), 128)
+        self.assertEqual(sorted(k for k in self.referencia if self.actual[k] != self.referencia[k]),
+                         sorted(set(esperadas) | DIFERENCIAS_E3F1))                         # 128 de N2 + 3 de E3F.1
         for clave in diferentes:                                       # antes cambiaban; ahora no
             inicial = self.referencia[clave.split(' | ')[0] + ' | (inicial)']
             self.assertNotEqual({k: v for k, v in self.referencia[clave].items() if k != 'devuelve'}, inicial)

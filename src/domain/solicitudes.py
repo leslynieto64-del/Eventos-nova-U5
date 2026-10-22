@@ -23,6 +23,9 @@ from .especificaciones import (DIAS_MINIMOS_SERVICIO_ADICIONAL, DIAS_SIN_CARGO_T
                                MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL)
 
 _AFECTA_COSTOS = AfectaCostos()
+# E3F.1: motivo que SOLICITUD_CAMBIO_EN_PLAZO informa cuando el Evento ya inició, obtenido de la propia Specification
+# (no se copia el texto).
+_MOTIVO_EVENTO_INICIADO_CAMBIO = SOLICITUD_CAMBIO_EN_PLAZO.primer_motivo(SituacionTemporalSolicitud(evento_iniciado=True))
 
 
 def _condicion_temporal(especificacion, situacion: SituacionTemporalSolicitud) -> CondicionTemporal:
@@ -38,6 +41,8 @@ class _SolicitudBase(AggregateRoot):
     # N2: únicos estados que una decisión de regularización puede modificar. SE-006 y P-06 la aplican al registrar una
     # solicitud nueva de cambio o de servicio adicional (Registrada) y al retomarla (Detenida por saldo vencido).
     ESTADOS_REGULARIZABLES: tuple = ()
+    # E3F.1: motivos de la condición temporal propia de cada tipo que significan «el Evento ya inició» (GL-032, CA-070).
+    MOTIVOS_EVENTO_INICIADO: tuple = ()
 
     def __init__(self, id_, evento_id, contrato_id, estado_cuenta_id):
         super().__init__(id_)
@@ -85,8 +90,8 @@ class _SolicitudBase(AggregateRoot):
             if self.estado != self.DETENIDA:
                 self._estado_antes_de_detener, self.estado = self.estado, self.DETENIDA
             return False
-        if d.motivo == MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL:
-            causa = CausaCierreSolicitud.INICIO_EVENTO       # N6, CA-099: el Evento ya inició; no es falta de plazo
+        if d.motivo == MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL or d.motivo in self.MOTIVOS_EVENTO_INICIADO:
+            causa = CausaCierreSolicitud.INICIO_EVENTO       # N6, CA-099; E3F.1, CA-070, GL-032: el Evento ya inició
         else:
             causa = CausaCierreSolicitud.PLAZO_INSUFICIENTE if d.motivo.startswith('Condición') else CausaCierreSolicitud.EVENTO_CANCELADO
         self._cerrar(estado_no_procede, causa, d.motivo, ahora)
@@ -107,7 +112,8 @@ class AccionSolicitudCambio(Enum):
     REGISTRAR_AUTORIZACION_APROBADA = "registrar_autorizacion:aprobada"
     REGISTRAR_AUTORIZACION_RECHAZADA = "registrar_autorizacion:rechazada"
     REGISTRAR_SOLICITUD_PAGO = "registrar_solicitud_pago"
-    CONFIRMAR = "confirmar"
+    CONFIRMAR_SIN_IMPORTES = "confirmar:sin_importes_por_pagar"                                       # E3F.1
+    CONFIRMAR_CON_IMPORTES = "confirmar:con_importes_por_pagar"                                       # E3F.1
     CERRAR_POR_FALTA_DE_PAGO = "cerrar_por_falta_de_pago"
     CERRAR_POR_INICIO_EVENTO = "cerrar_por_inicio_evento"
 
@@ -117,6 +123,9 @@ _MENSAJE_VIABILIDAD = "La viabilidad solo se evalúa en una solicitud registrada
 _MENSAJE_DECISION_CLIENTE_SC = "La solicitud no espera la aprobación del Cliente."
 _MENSAJE_AUTORIZACION_SC = "La autorización requiere la aprobación previa del Cliente (CA-043)."
 _MENSAJE_PAGO_SC = "El pago se solicita con el anexo registrado (CA-068)."
+_MENSAJE_SIN_IMPORTES_SC = ("No se puede solicitar el pago porque el cambio no genera importes por pagar "
+                            "(BN-003, CA-041, CA-067).")                                             # E3F.1
+_FALTA_SOLICITUD_PAGO_SC = "solicitud de pago comunicada al Cliente (BN-003, CA-067)"               # E3F.1
 _EN_TRAMITE_SC = (ESC.REGISTRADA, ESC.DETENIDA_SALDO_VENCIDO, ESC.PENDIENTE_APROBACION_CLIENTE, ESC.PENDIENTE_AUTORIZACION,
                   ESC.PENDIENTE_FORMALIZACION, ESC.PENDIENTE_PAGO)
 # Mensajes de rechazo existentes, sin cambios. confirmar devuelve sus faltantes y cerrar_por_inicio_evento no tiene
@@ -134,10 +143,12 @@ _MENSAJES_RECHAZO_SC = {
 }
 
 # Mapa de dominio U3, página «03 — Detalle B», «Estados de SolicitudCambio · CA-037–CA-070», y BPMN SP-03. La puerta
-# «¿Existen importes por pagar?» del mapa corresponde a las dos salidas de Pendiente de formalización (solicitud de
-# pago y confirmación). Fuera de la tabla, con sus guardas actuales y sin cambios: la regularización
-# (aplicar_decision_regularizacion, N2: Registrada → Detenida → estado anterior, o No procedente), el cierre por
-# cancelación del evento (BN-008) y asociar_anexo, heredados de _SolicitudBase.
+# «¿Existen importes por pagar?» del mapa (y «¿Genera nuevos importes por pagar?» de SP-03) corresponde a las dos
+# salidas de Pendiente de formalización: con importes, solicitud de pago → Pendiente de pago → confirmación; sin
+# importes, confirmación directa (E3F.1: BN-003, SE-006, CA-041, CA-067, CA-068). Fuera de la tabla, con sus guardas
+# actuales y sin cambios: la regularización (aplicar_decision_regularizacion, N2: Registrada → Detenida → estado
+# anterior, o No procedente), el cierre por cancelación del evento (BN-008) y asociar_anexo, heredados de
+# _SolicitudBase.
 # AR-05: «En evaluación» no es un estado del flujo normal. No figura entre los estados de esta máquina, ninguna
 # transición entra en él ni sale de él; ver MAQUINA_COMPATIBILIDAD_EN_EVALUACION.
 MAQUINA_SOLICITUD_CAMBIO = MaquinaEstados(
@@ -151,8 +162,8 @@ MAQUINA_SOLICITUD_CAMBIO = MaquinaEstados(
         Transicion(ESC.PENDIENTE_AUTORIZACION, _AC.REGISTRAR_AUTORIZACION_APROBADA, ESC.PENDIENTE_FORMALIZACION),   # CA-043
         Transicion(ESC.PENDIENTE_AUTORIZACION, _AC.REGISTRAR_AUTORIZACION_RECHAZADA, ESC.NO_AUTORIZADA),
         Transicion(ESC.PENDIENTE_FORMALIZACION, _AC.REGISTRAR_SOLICITUD_PAGO, ESC.PENDIENTE_PAGO),                 # CA-068
-        Transicion(ESC.PENDIENTE_FORMALIZACION, _AC.CONFIRMAR, ESC.CONFIRMADA),
-        Transicion(ESC.PENDIENTE_PAGO, _AC.CONFIRMAR, ESC.CONFIRMADA),                                            # SE-007
+        Transicion(ESC.PENDIENTE_FORMALIZACION, _AC.CONFIRMAR_SIN_IMPORTES, ESC.CONFIRMADA),                     # CA-041
+        Transicion(ESC.PENDIENTE_PAGO, _AC.CONFIRMAR_CON_IMPORTES, ESC.CONFIRMADA),                              # CA-041, CA-067
         Transicion(ESC.PENDIENTE_PAGO, _AC.CERRAR_POR_FALTA_DE_PAGO, ESC.CERRADA_FALTA_PAGO),                    # BN-004
     ) + tuple(Transicion(e, _AC.CERRAR_POR_INICIO_EVENTO, ESC.CERRADA_INICIO_EVENTO) for e in _EN_TRAMITE_SC),
     mensajes_rechazo=_MENSAJES_RECHAZO_SC,
@@ -188,6 +199,7 @@ class SolicitudCambio(_SolicitudBase):
     DETENIDA = ESC.DETENIDA_SALDO_VENCIDO
     CERRADA_CANCELACION = ESC.CERRADA_EVENTO_CANCELADO
     ESTADOS_REGULARIZABLES = (ESC.REGISTRADA, ESC.DETENIDA_SALDO_VENCIDO)        # N2
+    MOTIVOS_EVENTO_INICIADO = (_MOTIVO_EVENTO_INICIADO_CAMBIO,)                  # E3F.1, CA-070, GL-032
 
     def __init__(self, id_, evento_id, contrato_id, estado_cuenta_id, descripcion: str,
                  anticipacion: AnticipacionSolicitud, tarifa: TarifaCargoTardio,
@@ -268,6 +280,8 @@ class SolicitudCambio(_SolicitudBase):
         destino = self._transitar(_AC.REGISTRAR_SOLICITUD_PAGO)
         if not self.anexo_id:
             raise ErrorDominio(_MENSAJE_PAGO_SC)
+        if not self.importes_por_pagar:                  # E3F.1: sin importes no se genera una obligación de pago
+            raise ErrorDominio(_MENSAJE_SIN_IMPORTES_SC)
         self.obligacion_pago_id, self.estado = obligacion_pago_id, destino
 
     def confirmar(self, pago_verificado: bool, evento_iniciado: bool, ahora: datetime,
@@ -275,12 +289,19 @@ class SolicitudCambio(_SolicitudBase):
         faltan = []
         if evento_iniciado: faltan.append("evento no iniciado")
         if evento_cancelado: faltan.append("evento no cancelado (SE-007)")
-        if not _maquina_solicitud_cambio(self.estado).permite(self.estado, _AC.CONFIRMAR):   # la tabla decide el estado
-            faltan.append("aprobaciones requeridas")
+        # E3F.1: con importes por pagar se confirma solo desde Pendiente de pago (tras la solicitud de pago); sin
+        # importes, desde Pendiente de formalización. La tabla decide el estado; el pago verificado no lo sustituye.
+        accion = _AC.CONFIRMAR_CON_IMPORTES if self.importes_por_pagar else _AC.CONFIRMAR_SIN_IMPORTES
+        maquina = _maquina_solicitud_cambio(self.estado)
+        if not maquina.permite(self.estado, accion):
+            if accion is _AC.CONFIRMAR_CON_IMPORTES and maquina.permite(self.estado, _AC.REGISTRAR_SOLICITUD_PAGO):
+                faltan.append(_FALTA_SOLICITUD_PAGO_SC)
+            else:
+                faltan.append("aprobaciones requeridas")
         if not self.anexo_id: faltan.append("anexo vinculado al contrato original")
         if self.importes_por_pagar and not pago_verificado: faltan.append("pago registrado y verificado")
         if not faltan:                                   # la máquina solo se consulta con todos los requisitos cumplidos
-            self.estado = self._transitar(_AC.CONFIRMAR)
+            self.estado = self._transitar(accion)
             self._registrar(CambioConfirmado(self.id, ahora, evento_ref=self.evento_id, descripcion=self.descripcion,
                                              datos_propuestos=self.datos_propuestos,
                                              condiciones_propuestas=tuple(self.condiciones_propuestas.items())))
