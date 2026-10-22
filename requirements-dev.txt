@@ -1,0 +1,5 @@
+# Herramientas de desarrollo de Eventos Nova (F1). No forman parte de la ejecución de la aplicación.
+# Incluye las dependencias de la aplicación porque la suite completa necesita FastAPI y httpx.
+# Instalación: python -m pip install -r requirements-dev.txt
+-r requirements.txt
+coverage==7.16.2        # medición de cobertura de líneas y ramas (configuración en .coveragerc)

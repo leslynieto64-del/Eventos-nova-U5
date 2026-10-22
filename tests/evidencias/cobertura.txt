@@ -1,0 +1,47 @@
+﻿Python 3.13.16
+5e5762b fix: correct SolicitudCambio closure and payment flow E3F.1
+2026-10-22 14:32
+Name                                         Stmts   Miss Branch BrPart  Cover   Missing
+----------------------------------------------------------------------------------------
+src\__init__.py                                  0      0      0      0 100.0%
+src\api\__init__.py                              0      0      0      0 100.0%
+src\api\dependencias.py                         11      0      0      0 100.0%
+src\api\errores.py                              26      0      2      0 100.0%
+src\api\esquemas.py                             36      0      0      0 100.0%
+src\api\main.py                                 22      0      0      0 100.0%
+src\api\rutas_propuestas.py                     18      0      0      0 100.0%
+src\application\__init__.py                      0      0      0      0 100.0%
+src\application\cqrs.py                        106     12     10      1  83.6%   51, 58, 65, 132->134, 154-157, 160-167
+src\application\puertos.py                      27      0      0      0 100.0%
+src\application\reacciones.py                  111      3     38      4  94.0%   42, 78->75, 83->82, 86-87, 108->exit
+src\application\resultados.py                   15      0      0      0 100.0%
+src\application\servicios.py                   540     40     50      9  91.7%   76-77, 97-98, 115-116, 132, 136-137, 153-154, 175, 255-256, 263, 267-268, 283-284, 293, 449-450, 458-459, 467-468, 470, 477, 482-483, 557-558, 562-565, 584, 647-648, 676
+src\domain\__init__.py                           0      0      0      0 100.0%
+src\domain\base.py                              12      0      0      0 100.0%
+src\domain\contrato.py                          85      1     22      1  98.1%   71
+src\domain\especificacion.py                    92      0     10      0 100.0%
+src\domain\especificaciones.py                  88      0      0      0 100.0%
+src\domain\estado_cuenta.py                    232      0     58      0 100.0%
+src\domain\evento.py                           137      6     38      4  94.3%   155, 163, 165-166, 205, 207
+src\domain\eventos_dominio.py                   80      0     58      0 100.0%
+src\domain\maquina_estados.py                   59      0     16      0 100.0%
+src\domain\propuesta.py                         46      1      6      1  96.2%   57
+src\domain\servicios_dominio.py                 50      0      8      1  98.3%   89->91
+src\domain\solicitudes.py                      368      0     80      0 100.0%
+src\domain\valores.py                          221      1     14      1  99.1%   149, 306->304
+src\infrastructure\__init__.py                   0      0      0      0 100.0%
+src\infrastructure\adaptadores.py               22      0      0      0 100.0%
+src\infrastructure\composicion.py               17      0      0      0 100.0%
+src\infrastructure\repositorios_memoria.py      44      0      6      0 100.0%
+src\infrastructure\unidad_trabajo.py            71      2     20      0  95.6%   65-66
+src\paquete_pia\__init__.py                      6      0      0      0 100.0%
+src\paquete_pia\__main__.py                     28      1      6      1  94.1%   42
+src\paquete_pia\dto.py                          59      0      0      0 100.0%
+src\paquete_pia\errores.py                      25      1      6      1  93.5%   34
+src\paquete_pia\esquema.py                      37      0      0      0 100.0%
+src\paquete_pia\formatos.py                     56      2     18      0  97.3%   51-52
+src\paquete_pia\lector.py                       99      5     50      2  95.3%   74-76, 79-80, 143->exit
+src\paquete_pia\manifiesto.py                   58      3     24      2  93.9%   40, 73-74
+----------------------------------------------------------------------------------------
+TOTAL                                         2904     78    540     28  96.6%
+Lineas: 97.3 %  Ramas: 93.0 %  Combinada: 96.6 %

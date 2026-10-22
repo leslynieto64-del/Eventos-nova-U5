@@ -1,0 +1,24 @@
+# Configuración de coverage.py para Eventos Nova (F1).
+# Se mide todo src/: domain, application, infrastructure, api y paquete_pia. No se omite ningún módulo,
+# incluidos los de la API, para que los módulos sin cobertura aparezcan en el informe.
+[run]
+source = src
+branch = True
+relative_files = True
+
+[report]
+# Métrica del requisito de 80 %: cobertura de líneas (sentencias). Con branch = True, el «TOTAL» del informe
+# de texto combina sentencias y ramas; el porcentaje de líneas y el de ramas se obtienen por separado con
+# «coverage json» (totals.percent_statements_covered y totals.percent_branches_covered).
+show_missing = True
+skip_empty = False
+precision = 1
+
+[html]
+directory = htmlcov
+title = Eventos Nova - cobertura de pruebas
+
+[json]
+# Fuera de Git (htmlcov/ está en .gitignore); se usa para leer los porcentajes de líneas y de ramas.
+output = htmlcov/coverage.json
+pretty_print = True

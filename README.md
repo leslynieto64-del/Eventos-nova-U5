@@ -108,6 +108,8 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   ├── test_etapa9_transacciones_y_reacciones.py
 │   └── test_reglas_corregidas.py
 ├── requirements.txt
+├── requirements-dev.txt       (F1: herramientas de desarrollo; incluye coverage)
+├── .coveragerc                (F1: configuración de la medición de cobertura)
 └── README.md
 ```
 
@@ -125,7 +127,61 @@ Si el comando `py` no está disponible, utiliza:
 python -m unittest discover -s tests -v
 ```
 
-El registro de evidencias incluido reporta **91 pruebas aprobadas**. Para verificar el resultado de una ejecución actual, ejecuta nuevamente el comando y revisa el resumen de la terminal.
+`tests/evidencias/ejecucion-pruebas.txt` es el registro de una ejecución anterior (19/10/2026, versión v6, **91 pruebas**); no corresponde a la suite actual. Para regenerarlo con la versión actual, junto con la cobertura, usa los comandos de la sección *Cobertura de pruebas (F1)*. Para verificar una ejecución sin cobertura, ejecuta el comando anterior y revisa el resumen de la terminal.
+
+## Cobertura de pruebas (F1)
+
+La cobertura se mide con `coverage.py` sobre **todo `src/`** (`domain`, `application`, `infrastructure`, `api` y `paquete_pia`), sin omitir módulos. La configuración está en `.coveragerc` y la versión de la herramienta, fijada en `requirements-dev.txt`.
+
+- **Métrica del requisito de 80 %:** cobertura de **líneas** (sentencias), `percent_statements_covered`.
+- **Métrica complementaria:** cobertura de **ramas**, `percent_branches_covered`, porque `.coveragerc` activa `branch = True`.
+- **El «TOTAL» del informe de texto** combina sentencias y ramas; por eso los dos porcentajes se leen por separado del JSON.
+- **Exclusiones:** solo las predeterminadas de `coverage.py`. En este proyecto afectan únicamente a las declaraciones abstractas cuyo cuerpo es `...` (`application/puertos.py` y `domain/especificacion.py`); no hay marcas `pragma: no cover`.
+- **Requisito para medir la API:** la medición debe hacerse con la suite completa, con las dependencias de `requirements.txt` instaladas. Sin FastAPI no se cargan `test_api_etapa1` ni `test_api_propuestas` y los módulos de la API aparecen sin cubrir: ese resultado es parcial y no sirve como evidencia.
+
+**Instalación** (una vez, con el entorno virtual activado):
+
+```bat
+python -m pip install -r requirements-dev.txt
+```
+
+**CMD (Windows), desde la raíz del proyecto.** Regenera `tests/evidencias/ejecucion-pruebas.txt` y `tests/evidencias/cobertura.txt`, y crea el informe HTML en `htmlcov/`:
+
+```bat
+set PYTHONUTF8=1
+python -m coverage erase
+(echo Ejecucion: python -m coverage run -m unittest discover -s tests -v & python --version & git log -1 --oneline & date /t & time /t) > tests\evidencias\ejecucion-pruebas.txt
+python -m coverage run -m unittest discover -s tests -v 2>> tests\evidencias\ejecucion-pruebas.txt
+echo Codigo de salida: %ERRORLEVEL% >> tests\evidencias\ejecucion-pruebas.txt
+(python --version & git log -1 --oneline & date /t & time /t) > tests\evidencias\cobertura.txt
+python -m coverage report >> tests\evidencias\cobertura.txt
+python -m coverage json -q
+python -c "import json; t=json.load(open('htmlcov/coverage.json'))['totals']; print('Lineas:', t['percent_statements_covered_display'], '%  Ramas:', t['percent_branches_covered_display'], '%  Combinada:', t['percent_covered_display'], '%')" >> tests\evidencias\cobertura.txt
+python -m coverage html
+```
+
+**PowerShell (Windows), desde la raíz del proyecto.** Mismo resultado:
+
+```powershell
+$env:PYTHONUTF8 = "1"
+python -m coverage erase
+@("Ejecucion: python -m coverage run -m unittest discover -s tests -v", (python --version), (git log -1 --oneline), (Get-Date -Format "yyyy-MM-dd HH:mm")) | Set-Content -Encoding utf8 tests\evidencias\ejecucion-pruebas.txt
+cmd /c "python -m coverage run -m unittest discover -s tests -v 2>> tests\evidencias\ejecucion-pruebas.txt"
+"Codigo de salida: $LASTEXITCODE" | Add-Content -Encoding utf8 tests\evidencias\ejecucion-pruebas.txt
+@((python --version), (git log -1 --oneline), (Get-Date -Format "yyyy-MM-dd HH:mm")) | Set-Content -Encoding utf8 tests\evidencias\cobertura.txt
+python -m coverage report | Add-Content -Encoding utf8 tests\evidencias\cobertura.txt
+python -m coverage json -q
+$t = (Get-Content htmlcov\coverage.json -Raw | ConvertFrom-Json).totals
+"Lineas: $($t.percent_statements_covered_display) %  Ramas: $($t.percent_branches_covered_display) %  Combinada: $($t.percent_covered_display) %" | Add-Content -Encoding utf8 tests\evidencias\cobertura.txt
+python -m coverage html
+```
+
+**Cómo revisar el resultado:**
+- **El código de salida debe ser 0** y el resumen de `ejecucion-pruebas.txt` no debe tener errores de carga.
+- **La última línea de `cobertura.txt`** indica los porcentajes de líneas y de ramas.
+- **El informe navegable** está en `htmlcov\index.html`.
+
+`.coverage` y `htmlcov/` no se guardan en Git (`.gitignore`); `tests/evidencias/ejecucion-pruebas.txt` y `tests/evidencias/cobertura.txt` sí, como evidencia.
 
 ## Etapa 1 de desarrollo funcional: API con FastAPI
 
