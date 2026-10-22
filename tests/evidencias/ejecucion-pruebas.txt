@@ -1,7 +1,7 @@
 ﻿Ejecucion: python -m coverage run -m unittest discover -s tests -v
 Python 3.13.16
-5e5762b fix: correct SolicitudCambio closure and payment flow E3F.1
-2026-10-22 14:28
+26109b6 feat: execute official PIA package F2
+2026-10-22 16:18
 C:\Users\YAZMIN\Downloads\5to semeste\CLNEG\Eventosnova\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
   from starlette.testclient import TestClient as TestClient  # noqa
 test_contenido_propuesta (test_api_esquemas.ConversionADominio.test_contenido_propuesta) ... ok
@@ -354,6 +354,62 @@ test_confirmar_contratacion (test_evento_maquina_estados.TransicionesValidas.tes
 test_finalizar (test_evento_maquina_estados.TransicionesValidas.test_finalizar) ... ok
 test_iniciar (test_evento_maquina_estados.TransicionesValidas.test_iniciar) ... ok
 test_recorrido_completo (test_evento_maquina_estados.TransicionesValidas.test_recorrido_completo) ... ok
+test_aprobado_solo_si_coinciden_resultado_y_condiciones (test_f2_ejecucion_paquete.ComparacionEsperadoReal.test_aprobado_solo_si_coinciden_resultado_y_condiciones) ... ok
+test_coincide_con_paquete_independiente_del_veredicto (test_f2_ejecucion_paquete.ComparacionEsperadoReal.test_coincide_con_paquete_independiente_del_veredicto) ... ok
+test_mismas_condiciones_pero_distinto_motivo_produce_fallido (test_f2_ejecucion_paquete.ComparacionEsperadoReal.test_mismas_condiciones_pero_distinto_motivo_produce_fallido) ... ok
+test_transicion_con_oraculo_distinto_produce_fallido (test_f2_ejecucion_paquete.ComparacionEsperadoReal.test_transicion_con_oraculo_distinto_produce_fallido) ... ok
+test_un_oraculo_distinto_produce_fallido (test_f2_ejecucion_paquete.ComparacionEsperadoReal.test_un_oraculo_distinto_produce_fallido) ... ok
+test_120_casos_en_el_orden_del_csv (test_f2_ejecucion_paquete.Conteos.test_120_casos_en_el_orden_del_csv) ... ok
+test_20_transiciones_en_el_orden_del_csv_y_4_por_accion (test_f2_ejecucion_paquete.Conteos.test_20_transiciones_en_el_orden_del_csv_y_4_por_accion) ... ok
+test_resultados_no_todos_aprobados_por_defecto (test_f2_ejecucion_paquete.Conteos.test_resultados_no_todos_aprobados_por_defecto) ... ok
+test_caso_con_operacion_inexistente_o_tipo_desconocido_no_es_ejecutable (test_f2_ejecucion_paquete.EntradasNoValidas.test_caso_con_operacion_inexistente_o_tipo_desconocido_no_es_ejecutable) ... ok
+test_linea_con_recurso_inexistente_no_es_ejecutable (test_f2_ejecucion_paquete.EntradasNoValidas.test_linea_con_recurso_inexistente_no_es_ejecutable) ... ok
+test_operacion_sin_lineas_en_transicion_es_no_ejecutable_con_rechazo_ca005 (test_f2_ejecucion_paquete.EntradasNoValidas.test_operacion_sin_lineas_en_transicion_es_no_ejecutable_con_rechazo_ca005) ... ok
+test_paquete_alterado_se_rechaza_antes_de_ejecutar (test_f2_ejecucion_paquete.EntradasNoValidas.test_paquete_alterado_se_rechaza_antes_de_ejecutar) ... ok
+test_archivos_y_ubicacion (test_f2_ejecucion_paquete.Evidencias.test_archivos_y_ubicacion) ... ok
+test_csv_con_bom_para_excel (test_f2_ejecucion_paquete.Evidencias.test_csv_con_bom_para_excel) ... ok
+test_las_evidencias_guardadas_coinciden_con_la_ejecucion (test_f2_ejecucion_paquete.Evidencias.test_las_evidencias_guardadas_coinciden_con_la_ejecucion) ... ok
+test_linea_de_comandos (test_f2_ejecucion_paquete.Evidencias.test_linea_de_comandos) ... ok
+test_salidas_reproducibles (test_f2_ejecucion_paquete.Evidencias.test_salidas_reproducibles) ... ok
+test_tablas_completas_y_trazables (test_f2_ejecucion_paquete.Evidencias.test_tablas_completas_y_trazables) ... ok
+test_verificacion_detecta_faltantes_y_alteraciones_y_tolera_crlf (test_f2_ejecucion_paquete.Evidencias.test_verificacion_detecta_faltantes_y_alteraciones_y_tolera_crlf) ... ok
+test_accion_desconocida (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_accion_desconocida) ... ok
+test_anticipo_distinto_al_30_es_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_anticipo_distinto_al_30_es_fallido) ... ok
+test_cambio_parcial_es_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_cambio_parcial_es_fallido) ... ok
+test_estado_o_resultado_distinto_es_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_estado_o_resultado_distinto_es_fallido) ... ok
+test_paso_rechazado_en_la_aprobacion_es_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_paso_rechazado_en_la_aprobacion_es_fallido) ... ok
+test_propuesta_sin_servicios_aceptada_seria_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_propuesta_sin_servicios_aceptada_seria_fallido) ... ok
+test_rechazo_al_preparar_es_fallido (test_f2_ejecucion_paquete.FallosFuncionalesDeTransicion.test_rechazo_al_preparar_es_fallido) ... ok
+test_ambas_familias_tienen_casos_que_cumplen_y_que_no (test_f2_ejecucion_paquete.FamiliasDeCasos.test_ambas_familias_tienen_casos_que_cumplen_y_que_no) ... ok
+test_cada_familia_completa_y_con_su_diferencia (test_f2_ejecucion_paquete.FamiliasDeCasos.test_cada_familia_completa_y_con_su_diferencia) ... ok
+test_evaluar_beneficio_situaciones_del_paquete (test_f2_ejecucion_paquete.FamiliasDeCasos.test_evaluar_beneficio_situaciones_del_paquete) ... ok
+test_observaciones_del_catalogo_no_cambian_el_veredicto (test_f2_ejecucion_paquete.FamiliasDeCasos.test_observaciones_del_catalogo_no_cambian_el_veredicto) ... ok
+test_validar_operacion_situaciones_del_paquete (test_f2_ejecucion_paquete.FamiliasDeCasos.test_validar_operacion_situaciones_del_paquete) ... ok
+test_el_resumen_registra_los_hashes_del_manifiesto (test_f2_ejecucion_paquete.IntegridadDeLasEntradas.test_el_resumen_registra_los_hashes_del_manifiesto) ... ok
+test_manifiesto_valido_y_csv_sin_modificar_despues_de_ejecutar (test_f2_ejecucion_paquete.IntegridadDeLasEntradas.test_manifiesto_valido_y_csv_sin_modificar_despues_de_ejecutar) ... ok
+test_resultado_alumno_sigue_pendiente_en_los_csv_oficiales (test_f2_ejecucion_paquete.IntegridadDeLasEntradas.test_resultado_alumno_sigue_pendiente_en_los_csv_oficiales) ... ok
+test_cada_estado_y_accion_del_paquete_tiene_correspondencia_con_fuente (test_f2_ejecucion_paquete.Mapeos.test_cada_estado_y_accion_del_paquete_tiene_correspondencia_con_fuente) ... ok
+test_diferencias_identificadas_y_referenciadas (test_f2_ejecucion_paquete.Mapeos.test_diferencias_identificadas_y_referenciadas) ... ok
+test_las_capas_no_dependen_del_ejecutor_ni_el_lector_del_dominio (test_f2_ejecucion_paquete.Mapeos.test_las_capas_no_dependen_del_ejecutor_ni_el_lector_del_dominio) ... ok
+test_no_se_anaden_estados_artificiales_al_dominio (test_f2_ejecucion_paquete.Mapeos.test_no_se_anaden_estados_artificiales_al_dominio) ... ok
+test_beneficio_referencia_cada_condicion_y_umbral_incluido (test_f2_ejecucion_paquete.ReglasDelPaquete.test_beneficio_referencia_cada_condicion_y_umbral_incluido) ... ok
+test_puede_procesarse_cada_condicion (test_f2_ejecucion_paquete.ReglasDelPaquete.test_puede_procesarse_cada_condicion) ... ok
+test_reglas_por_tipo_de_prueba (test_f2_ejecucion_paquete.ReglasDelPaquete.test_reglas_por_tipo_de_prueba) ... ok
+test_cada_rechazo_deja_identicos_agregados_y_outbox (test_f2_ejecucion_paquete.SinCambiosParciales.test_cada_rechazo_deja_identicos_agregados_y_outbox) ... ok
+test_cada_transicion_usa_una_composicion_nueva (test_f2_ejecucion_paquete.SinCambiosParciales.test_cada_transicion_usa_una_composicion_nueva) ... ok
+test_la_fotografia_detecta_cambios (test_f2_ejecucion_paquete.SinCambiosParciales.test_la_fotografia_detecta_cambios) ... ok
+test_rechazos_y_repeticiones_registran_ausencia_de_cambios (test_f2_ejecucion_paquete.SinCambiosParciales.test_rechazos_y_repeticiones_registran_ausencia_de_cambios) ... ok
+test_importe_de_linea_exacto_con_dos_decimales (test_f2_ejecucion_paquete.TotalesDecimal.test_importe_de_linea_exacto_con_dos_decimales) ... ok
+test_ningun_resultado_usa_float (test_f2_ejecucion_paquete.TotalesDecimal.test_ningun_resultado_usa_float) ... ok
+test_rechaza_float_bool_y_valores_no_validos (test_f2_ejecucion_paquete.TotalesDecimal.test_rechaza_float_bool_y_valores_no_validos) ... ok
+test_total_suma_lineas_operacion_vacia_y_recurso_inexistente (test_f2_ejecucion_paquete.TotalesDecimal.test_total_suma_lineas_operacion_vacia_y_recurso_inexistente) ... ok
+test_totales_del_paquete_coinciden_con_el_oraculo_y_son_decimal (test_f2_ejecucion_paquete.TotalesDecimal.test_totales_del_paquete_coinciden_con_el_oraculo_y_son_decimal) ... ok
+test_valores_conocidos (test_f2_ejecucion_paquete.TotalesDecimal.test_valores_conocidos) ... ok
+test_aprobar_valida_confirma_la_contratacion_con_anticipo_del_30 (test_f2_ejecucion_paquete.Transiciones.test_aprobar_valida_confirma_la_contratacion_con_anticipo_del_30) ... ok
+test_esperado_del_paquete_derivado_del_flujo_de_referencia (test_f2_ejecucion_paquete.Transiciones.test_esperado_del_paquete_derivado_del_flujo_de_referencia) ... ok
+test_invalidas_se_rechazan_con_su_mensaje (test_f2_ejecucion_paquete.Transiciones.test_invalidas_se_rechazan_con_su_mensaje) ... ok
+test_repetir_aprobacion_es_idempotente (test_f2_ejecucion_paquete.Transiciones.test_repetir_aprobacion_es_idempotente) ... ok
+test_todas_parten_de_la_correspondencia_de_cotizado (test_f2_ejecucion_paquete.Transiciones.test_todas_parten_de_la_correspondencia_de_cotizado) ... ok
 test_acciones_desde_y_terminales (test_maquina_estados.Consultas.test_acciones_desde_y_terminales) ... ok
 test_destino_y_permite (test_maquina_estados.Consultas.test_destino_y_permite) ... ok
 test_repeticiones_idempotentes (test_maquina_estados.Consultas.test_repeticiones_idempotentes) ... ok
@@ -590,7 +646,7 @@ test_recorridos_completos (test_sustitucion_maquina_estados.TransicionesValidas.
 test_cada_metodo_consulta_la_maquina (test_sustitucion_maquina_estados.UsoRealDeLaMaquina.test_cada_metodo_consulta_la_maquina) ... ok
 
 ----------------------------------------------------------------------
-Ran 552 tests in 21.936s
+Ran 608 tests in 10.291s
 
 OK
 Codigo de salida: 0

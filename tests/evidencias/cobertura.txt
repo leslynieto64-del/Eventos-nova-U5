@@ -1,6 +1,6 @@
 ﻿Python 3.13.16
-5e5762b fix: correct SolicitudCambio closure and payment flow E3F.1
-2026-10-22 14:32
+26109b6 feat: execute official PIA package F2
+2026-10-22 16:19
 Name                                         Stmts   Miss Branch BrPart  Cover   Missing
 ----------------------------------------------------------------------------------------
 src\__init__.py                                  0      0      0      0 100.0%
@@ -28,7 +28,16 @@ src\domain\maquina_estados.py                   59      0     16      0 100.0%
 src\domain\propuesta.py                         46      1      6      1  96.2%   57
 src\domain\servicios_dominio.py                 50      0      8      1  98.3%   89->91
 src\domain\solicitudes.py                      368      0     80      0 100.0%
-src\domain\valores.py                          221      1     14      1  99.1%   149, 306->304
+src\domain\valores.py                          221      1     14      0  99.6%   149
+src\ejecucion_paquete\__init__.py                5      0      0      0 100.0%
+src\ejecucion_paquete\__main__.py               19      1      8      1  92.6%   26
+src\ejecucion_paquete\casos.py                  81      1     14      1  97.9%   61
+src\ejecucion_paquete\evidencias.py            108      2     28      2  97.1%   41, 45
+src\ejecucion_paquete\mapeo.py                  36      0      0      0 100.0%
+src\ejecucion_paquete\oraculo.py                30      1      6      1  94.4%   50
+src\ejecucion_paquete\reglas_paquete.py         43      0      0      0 100.0%
+src\ejecucion_paquete\totales.py                30      0     16      0 100.0%
+src\ejecucion_paquete\transiciones.py          247      0     76      0 100.0%
 src\infrastructure\__init__.py                   0      0      0      0 100.0%
 src\infrastructure\adaptadores.py               22      0      0      0 100.0%
 src\infrastructure\composicion.py               17      0      0      0 100.0%
@@ -43,5 +52,5 @@ src\paquete_pia\formatos.py                     56      2     18      0  97.3%  
 src\paquete_pia\lector.py                       99      5     50      2  95.3%   74-76, 79-80, 143->exit
 src\paquete_pia\manifiesto.py                   58      3     24      2  93.9%   40, 73-74
 ----------------------------------------------------------------------------------------
-TOTAL                                         2904     78    540     28  96.6%
-Lineas: 97.3 %  Ramas: 93.0 %  Combinada: 96.6 %
+TOTAL                                         3503     83    688     32  97.0%
+Lineas: 97.6 %  Ramas: 93.9 %  Combinada: 97.0 %
