@@ -94,6 +94,94 @@ class _SolicitudBase(AggregateRoot):
 
 
 # ------------------------------------------------------------------ SolicitudCambio
+class AccionSolicitudCambio(Enum):
+    """Acciones internas de la State Machine de SolicitudCambio (Etapa E3F). Corresponden a los métodos propios de la
+    clase; los que tienen varios resultados usan una acción por resultado («método:resultado»), elegida a partir del
+    resultado que el método ya calcula (ResultadoViabilidad.viable, CAMBIO_REQUIERE_APROBACION_CLIENTE o
+    Decision.aprobada), sin reglas nuevas."""
+    REGISTRAR_VIABILIDAD_NO_VIABLE = "registrar_viabilidad:no_viable"                                # ruta A
+    REGISTRAR_VIABILIDAD_REQUIERE_APROBACION = "registrar_viabilidad:requiere_aprobacion_cliente"    # ruta B
+    REGISTRAR_VIABILIDAD_SIN_APROBACION = "registrar_viabilidad:sin_aprobacion_cliente"              # ruta C
+    REGISTRAR_DECISION_CLIENTE_APROBADA = "registrar_decision_cliente:aprobada"
+    REGISTRAR_DECISION_CLIENTE_RECHAZADA = "registrar_decision_cliente:rechazada"
+    REGISTRAR_AUTORIZACION_APROBADA = "registrar_autorizacion:aprobada"
+    REGISTRAR_AUTORIZACION_RECHAZADA = "registrar_autorizacion:rechazada"
+    REGISTRAR_SOLICITUD_PAGO = "registrar_solicitud_pago"
+    CONFIRMAR = "confirmar"
+    CERRAR_POR_FALTA_DE_PAGO = "cerrar_por_falta_de_pago"
+    CERRAR_POR_INICIO_EVENTO = "cerrar_por_inicio_evento"
+
+
+_AC = AccionSolicitudCambio
+_MENSAJE_VIABILIDAD = "La viabilidad solo se evalúa en una solicitud registrada."
+_MENSAJE_DECISION_CLIENTE_SC = "La solicitud no espera la aprobación del Cliente."
+_MENSAJE_AUTORIZACION_SC = "La autorización requiere la aprobación previa del Cliente (CA-043)."
+_MENSAJE_PAGO_SC = "El pago se solicita con el anexo registrado (CA-068)."
+_EN_TRAMITE_SC = (ESC.REGISTRADA, ESC.DETENIDA_SALDO_VENCIDO, ESC.PENDIENTE_APROBACION_CLIENTE, ESC.PENDIENTE_AUTORIZACION,
+                  ESC.PENDIENTE_FORMALIZACION, ESC.PENDIENTE_PAGO)
+# Mensajes de rechazo existentes, sin cambios. confirmar devuelve sus faltantes y cerrar_por_inicio_evento no tiene
+# efecto en un estado final: la máquina solo se consulta cuando la operación procede.
+_MENSAJES_RECHAZO_SC = {
+    _AC.REGISTRAR_VIABILIDAD_NO_VIABLE: lambda o: _MENSAJE_VIABILIDAD,
+    _AC.REGISTRAR_VIABILIDAD_REQUIERE_APROBACION: lambda o: _MENSAJE_VIABILIDAD,
+    _AC.REGISTRAR_VIABILIDAD_SIN_APROBACION: lambda o: _MENSAJE_VIABILIDAD,
+    _AC.REGISTRAR_DECISION_CLIENTE_APROBADA: lambda o: _MENSAJE_DECISION_CLIENTE_SC,
+    _AC.REGISTRAR_DECISION_CLIENTE_RECHAZADA: lambda o: _MENSAJE_DECISION_CLIENTE_SC,
+    _AC.REGISTRAR_AUTORIZACION_APROBADA: lambda o: _MENSAJE_AUTORIZACION_SC,
+    _AC.REGISTRAR_AUTORIZACION_RECHAZADA: lambda o: _MENSAJE_AUTORIZACION_SC,
+    _AC.REGISTRAR_SOLICITUD_PAGO: lambda o: _MENSAJE_PAGO_SC,
+    _AC.CERRAR_POR_FALTA_DE_PAGO: lambda o: "Solo se cierra por falta de pago una solicitud Pendiente de pago.",
+}
+
+# Mapa de dominio U3, página «03 — Detalle B», «Estados de SolicitudCambio · CA-037–CA-070», y BPMN SP-03. La puerta
+# «¿Existen importes por pagar?» del mapa corresponde a las dos salidas de Pendiente de formalización (solicitud de
+# pago y confirmación). Fuera de la tabla, con sus guardas actuales y sin cambios: la regularización
+# (aplicar_decision_regularizacion, N2: Registrada → Detenida → estado anterior, o No procedente), el cierre por
+# cancelación del evento (BN-008) y asociar_anexo, heredados de _SolicitudBase.
+# AR-05: «En evaluación» no es un estado del flujo normal. No figura entre los estados de esta máquina, ninguna
+# transición entra en él ni sale de él; ver MAQUINA_COMPATIBILIDAD_EN_EVALUACION.
+MAQUINA_SOLICITUD_CAMBIO = MaquinaEstados(
+    estados=tuple(e for e in ESC if e is not ESC.EN_EVALUACION),
+    transiciones=(
+        Transicion(ESC.REGISTRADA, _AC.REGISTRAR_VIABILIDAD_NO_VIABLE, ESC.NO_PROCEDENTE),                        # ruta A
+        Transicion(ESC.REGISTRADA, _AC.REGISTRAR_VIABILIDAD_REQUIERE_APROBACION, ESC.PENDIENTE_APROBACION_CLIENTE),  # ruta B, BN-003
+        Transicion(ESC.REGISTRADA, _AC.REGISTRAR_VIABILIDAD_SIN_APROBACION, ESC.PENDIENTE_FORMALIZACION),          # ruta C
+        Transicion(ESC.PENDIENTE_APROBACION_CLIENTE, _AC.REGISTRAR_DECISION_CLIENTE_APROBADA, ESC.PENDIENTE_AUTORIZACION),
+        Transicion(ESC.PENDIENTE_APROBACION_CLIENTE, _AC.REGISTRAR_DECISION_CLIENTE_RECHAZADA, ESC.RECHAZADA_CLIENTE),
+        Transicion(ESC.PENDIENTE_AUTORIZACION, _AC.REGISTRAR_AUTORIZACION_APROBADA, ESC.PENDIENTE_FORMALIZACION),   # CA-043
+        Transicion(ESC.PENDIENTE_AUTORIZACION, _AC.REGISTRAR_AUTORIZACION_RECHAZADA, ESC.NO_AUTORIZADA),
+        Transicion(ESC.PENDIENTE_FORMALIZACION, _AC.REGISTRAR_SOLICITUD_PAGO, ESC.PENDIENTE_PAGO),                 # CA-068
+        Transicion(ESC.PENDIENTE_FORMALIZACION, _AC.CONFIRMAR, ESC.CONFIRMADA),
+        Transicion(ESC.PENDIENTE_PAGO, _AC.CONFIRMAR, ESC.CONFIRMADA),                                            # SE-007
+        Transicion(ESC.PENDIENTE_PAGO, _AC.CERRAR_POR_FALTA_DE_PAGO, ESC.CERRADA_FALTA_PAGO),                    # BN-004
+    ) + tuple(Transicion(e, _AC.CERRAR_POR_INICIO_EVENTO, ESC.CERRADA_INICIO_EVENTO) for e in _EN_TRAMITE_SC),
+    mensajes_rechazo=_MENSAJES_RECHAZO_SC,
+    nombre="SolicitudCambio",
+)
+
+# Compatibilidad histórica (AR-05), separada de la tabla normal. EN_EVALUACION es un valor heredado que ningún método
+# asigna; si una solicitud persistida lo tuviera, conserva las respuestas anteriores a E3F (referencia
+# comportamiento_solicitud_cambio_pre_e3f.json, bloque historico_en_evaluacion): la viabilidad se registra como desde
+# Registrada y el cierre por inicio del evento procede. Solo contiene salidas desde EN_EVALUACION: no hay transición
+# de entrada. Las demás acciones se rechazan con los mismos mensajes.
+MAQUINA_COMPATIBILIDAD_EN_EVALUACION = MaquinaEstados(
+    estados=ESC,
+    transiciones=(
+        Transicion(ESC.EN_EVALUACION, _AC.REGISTRAR_VIABILIDAD_NO_VIABLE, ESC.NO_PROCEDENTE),
+        Transicion(ESC.EN_EVALUACION, _AC.REGISTRAR_VIABILIDAD_REQUIERE_APROBACION, ESC.PENDIENTE_APROBACION_CLIENTE),
+        Transicion(ESC.EN_EVALUACION, _AC.REGISTRAR_VIABILIDAD_SIN_APROBACION, ESC.PENDIENTE_FORMALIZACION),
+        Transicion(ESC.EN_EVALUACION, _AC.CERRAR_POR_INICIO_EVENTO, ESC.CERRADA_INICIO_EVENTO),
+    ),
+    mensajes_rechazo=_MENSAJES_RECHAZO_SC,
+    nombre="SolicitudCambio (compatibilidad histórica de EN_EVALUACION, AR-05)",
+)
+
+
+def _maquina_solicitud_cambio(estado: ESC) -> MaquinaEstados:
+    """La tabla normal, o la de compatibilidad solo para el valor histórico EN_EVALUACION (AR-05)."""
+    return MAQUINA_COMPATIBILIDAD_EN_EVALUACION if estado is ESC.EN_EVALUACION else MAQUINA_SOLICITUD_CAMBIO
+
+
 class SolicitudCambio(_SolicitudBase):
     FINALES = (ESC.CONFIRMADA, ESC.NO_PROCEDENTE, ESC.RECHAZADA_CLIENTE, ESC.NO_AUTORIZADA,
                ESC.CERRADA_FALTA_PAGO, ESC.CERRADA_INICIO_EVENTO, ESC.CERRADA_EVENTO_CANCELADO)
@@ -134,70 +222,80 @@ class SolicitudCambio(_SolicitudBase):
         """Con menos de 7 días; solo se cobra si el cambio es viable, aceptado y se realiza (CA-061, CA-062)."""
         return CAMBIO_CON_CARGO_TARDIO.es_satisfecha_por(self.anticipacion)
 
+    def _transitar(self, accion: AccionSolicitudCambio) -> ESC:
+        """E3F: destino permitido por la máquina (o TransicionNoPermitida, un ErrorDominio, con el mensaje existente).
+        No modifica nada: cada método la consulta antes de modificar el agregado y luego asigna el destino."""
+        return _maquina_solicitud_cambio(self.estado).transitar(self.estado, accion)
+
     def registrar_viabilidad(self, resultado: ResultadoViabilidad, impacto: ImpactoModificacion, ahora: datetime) -> None:
-        if self.estado not in (ESC.REGISTRADA, ESC.EN_EVALUACION):
-            raise ErrorDominio("La viabilidad solo se evalúa en una solicitud registrada.")
+        if not resultado.viable:                                   # Ruta A
+            accion = _AC.REGISTRAR_VIABILIDAD_NO_VIABLE
+        elif CAMBIO_REQUIERE_APROBACION_CLIENTE.es_satisfecha_por(impacto):   # Ruta B
+            accion = _AC.REGISTRAR_VIABILIDAD_REQUIERE_APROBACION
+        else:                                                       # Ruta C
+            accion = _AC.REGISTRAR_VIABILIDAD_SIN_APROBACION
+        destino = self._transitar(accion)
         self.viabilidad, self.impacto = resultado, impacto
         self._registrar(ViabilidadCambioEvaluada(self.id, ahora, viable=resultado.viable))
-        if not resultado.viable:                                   # Ruta A
-            self._cerrar(ESC.NO_PROCEDENTE, CausaCierreSolicitud.NO_VIABLE, resultado.motivo, ahora)
-        elif CAMBIO_REQUIERE_APROBACION_CLIENTE.es_satisfecha_por(impacto):   # Ruta B
-            self.estado = ESC.PENDIENTE_APROBACION_CLIENTE
-        else:                                                       # Ruta C
-            self.estado = ESC.PENDIENTE_FORMALIZACION
+        if accion is _AC.REGISTRAR_VIABILIDAD_NO_VIABLE:
+            self._cerrar(destino, CausaCierreSolicitud.NO_VIABLE, resultado.motivo, ahora)
+        else:
+            self.estado = destino
         self.importes_por_pagar = resultado.viable and (_AFECTA_COSTOS.es_satisfecha_por(impacto) or self.aplica_cargo_tardio)
 
     def registrar_decision_cliente(self, d: Decision) -> None:
-        if self.estado != ESC.PENDIENTE_APROBACION_CLIENTE:
-            raise ErrorDominio("La solicitud no espera la aprobación del Cliente.")
+        destino = self._transitar(_AC.REGISTRAR_DECISION_CLIENTE_APROBADA if d.aprobada
+                                  else _AC.REGISTRAR_DECISION_CLIENTE_RECHAZADA)
         self.decision_cliente = d
         if d.aprobada:
-            self.estado = ESC.PENDIENTE_AUTORIZACION
+            self.estado = destino
         else:
-            self._cerrar(ESC.RECHAZADA_CLIENTE, CausaCierreSolicitud.RECHAZO_CLIENTE, d.motivo, d.fecha)
+            self._cerrar(destino, CausaCierreSolicitud.RECHAZO_CLIENTE, d.motivo, d.fecha)
 
     def registrar_autorizacion(self, d: Decision) -> None:
-        if self.estado != ESC.PENDIENTE_AUTORIZACION:
-            raise ErrorDominio("La autorización requiere la aprobación previa del Cliente (CA-043).")
+        destino = self._transitar(_AC.REGISTRAR_AUTORIZACION_APROBADA if d.aprobada
+                                  else _AC.REGISTRAR_AUTORIZACION_RECHAZADA)
         self.autorizacion_administracion = d
         if d.aprobada:
-            self.estado = ESC.PENDIENTE_FORMALIZACION
+            self.estado = destino
         else:
-            self._cerrar(ESC.NO_AUTORIZADA, CausaCierreSolicitud.NO_AUTORIZADA, d.motivo, d.fecha)
+            self._cerrar(destino, CausaCierreSolicitud.NO_AUTORIZADA, d.motivo, d.fecha)
 
     def puede_registrar_anexo(self) -> bool:
         return self.estado == ESC.PENDIENTE_FORMALIZACION and self.anexo_id is None
 
     def registrar_solicitud_pago(self, obligacion_pago_id: str) -> None:
-        if self.estado != ESC.PENDIENTE_FORMALIZACION or not self.anexo_id:
-            raise ErrorDominio("El pago se solicita con el anexo registrado (CA-068).")
-        self.obligacion_pago_id, self.estado = obligacion_pago_id, ESC.PENDIENTE_PAGO
+        destino = self._transitar(_AC.REGISTRAR_SOLICITUD_PAGO)
+        if not self.anexo_id:
+            raise ErrorDominio(_MENSAJE_PAGO_SC)
+        self.obligacion_pago_id, self.estado = obligacion_pago_id, destino
 
     def confirmar(self, pago_verificado: bool, evento_iniciado: bool, ahora: datetime,
                   evento_cancelado: bool = False) -> List[str]:
         faltan = []
         if evento_iniciado: faltan.append("evento no iniciado")
         if evento_cancelado: faltan.append("evento no cancelado (SE-007)")
-        if self.estado not in (ESC.PENDIENTE_FORMALIZACION, ESC.PENDIENTE_PAGO): faltan.append("aprobaciones requeridas")
+        if not _maquina_solicitud_cambio(self.estado).permite(self.estado, _AC.CONFIRMAR):   # la tabla decide el estado
+            faltan.append("aprobaciones requeridas")
         if not self.anexo_id: faltan.append("anexo vinculado al contrato original")
         if self.importes_por_pagar and not pago_verificado: faltan.append("pago registrado y verificado")
-        if not faltan:
-            self.estado = ESC.CONFIRMADA
+        if not faltan:                                   # la máquina solo se consulta con todos los requisitos cumplidos
+            self.estado = self._transitar(_AC.CONFIRMAR)
             self._registrar(CambioConfirmado(self.id, ahora, evento_ref=self.evento_id, descripcion=self.descripcion,
                                              datos_propuestos=self.datos_propuestos,
                                              condiciones_propuestas=tuple(self.condiciones_propuestas.items())))
         return faltan
 
     def cerrar_por_falta_de_pago(self, ahora: datetime) -> None:
-        if self.estado != ESC.PENDIENTE_PAGO:
-            raise ErrorDominio("Solo se cierra por falta de pago una solicitud Pendiente de pago.")
-        self._cerrar(ESC.CERRADA_FALTA_PAGO, CausaCierreSolicitud.FALTA_PAGO, "El Cliente no efectuó el pago en las 24 h naturales", ahora)
+        destino = self._transitar(_AC.CERRAR_POR_FALTA_DE_PAGO)
+        self._cerrar(destino, CausaCierreSolicitud.FALTA_PAGO, "El Cliente no efectuó el pago en las 24 h naturales", ahora)
         self._registrar(SolicitudCambioCerradaPorFaltaDePago(self.id, ahora, evento_ref=self.evento_id))
 
     def cerrar_por_inicio_evento(self, ahora: datetime) -> None:
-        if not self.pendiente:
+        if not self.pendiente:                           # estados finales: sin efecto
             return
-        self._cerrar(ESC.CERRADA_INICIO_EVENTO, CausaCierreSolicitud.INICIO_EVENTO, "El evento inició antes de confirmar", ahora)
+        destino = self._transitar(_AC.CERRAR_POR_INICIO_EVENTO)
+        self._cerrar(destino, CausaCierreSolicitud.INICIO_EVENTO, "El evento inició antes de confirmar", ahora)
         self._registrar(SolicitudCambioCerradaPorInicioEvento(self.id, ahora, evento_ref=self.evento_id))
 
 

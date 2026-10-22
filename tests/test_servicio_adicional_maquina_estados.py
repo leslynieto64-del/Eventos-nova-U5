@@ -422,8 +422,17 @@ class ConservacionDelComportamiento(unittest.TestCase):
             with self.subTest(caso=clave):
                 self.assertEqual(self.actual[clave], esperado)
 
+    # E3F modifica SolicitudCambio a propósito: su huella queda excluida de esta protección y su conservación la comprueba
+    # por comportamiento tests/test_solicitud_cambio_maquina_estados.py (referencia comportamiento_solicitud_cambio_pre_e3f).
+    HUELLA_EXCLUIDA_DESDE_E3F = 'SolicitudCambio'
+
     def test_clases_no_modificadas(self):
-        self.assertEqual(huellas_de_clases(), self.referencia['huellas'])
+        protegidas = set(self.referencia['huellas']) - {self.HUELLA_EXCLUIDA_DESDE_E3F}
+        self.assertEqual(protegidas, {'_SolicitudBase', 'SustitucionProveedor'})
+        actuales = huellas_de_clases()
+        for clase in sorted(protegidas):
+            with self.subTest(clase=clase):
+                self.assertEqual(actuales[clase], self.referencia['huellas'][clase])
         self.assertEqual(set(self.referencia['huellas']), {'_SolicitudBase', 'SolicitudCambio', 'SustitucionProveedor'})
 
     def test_referencia_de_n2_sin_cambios(self):
