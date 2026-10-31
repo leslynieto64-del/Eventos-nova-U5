@@ -15,9 +15,20 @@
 
 **Eventos Nova** es el caso de negocio para el que se propone un sistema de apoyo a la gestión de eventos, incluyendo propuestas, contratación, pagos, cancelaciones, cambios, servicios adicionales y sustituciones de proveedores.
 
+## Enlaces de entrega
+
+| Elemento | Valor |
+|---|---|
+| Repositorio GitHub | **Pendiente:** el repositorio local no tiene remoto configurado. Anotar aquí la URL cuando el equipo lo publique |
+| Sistema desplegado (Swagger UI) | **Pendiente:** no se ha desplegado en ninguna plataforma. Anotar aquí la URL real, solo después de comprobarla (pasos en [`docs/architecture/ci-cd-y-despliegue.md`](docs/architecture/ci-cd-y-despliegue.md)) |
+| Swagger UI local | `http://127.0.0.1:8000/docs` (tras `docker compose up -d --build`) |
+| Swagger UI del entorno manual aislado | `http://127.0.0.1:8001/docs` (solo para pruebas manuales; ver la sección 12; **no** es el sistema de desarrollo del puerto 8000 ni un despliegue) |
+| Especificación OpenAPI | [`docs/api/openapi.json`](docs/api/openapi.json) (60 operaciones; se regenera con `python scripts/exportar_openapi.py`) |
+| BRD en Markdown | [`docs/BRD.md`](docs/BRD.md) (exportación del BRD aprobado `.docx`) |
+
 ## Alcance
 
-El proyecto contiene una propuesta arquitectural organizada en las capas de dominio, aplicación e infraestructura, junto con diagramas, decisiones arquitecturales, matriz de trazabilidad, documentación de requisitos y pruebas automatizadas. La infraestructura de referencia utiliza almacenamiento en memoria y simulaciones para los colaboradores externos; no representa una integración de producción con una base de datos ni con servicios externos reales.
+El proyecto contiene una propuesta arquitectural organizada en las capas de dominio, aplicación e infraestructura, junto con diagramas, decisiones arquitecturales, matriz de trazabilidad, documentación de requisitos y pruebas automatizadas. La infraestructura ofrece dos modos: almacenamiento en memoria (desarrollo y pruebas unitarias) y persistencia en PostgreSQL 18 con SQLAlchemy Core, Alembic y Docker Compose (sección *Persistencia con PostgreSQL y Docker*). Los colaboradores externos (disponibilidad de proveedores, notificaciones, verificación de pagos, ejecución de devoluciones) siguen siendo adaptadores simulados: no hay integraciones externas reales. El proyecto no se ha desplegado en ninguna plataforma.
 
 ## Estructura del proyecto
 
@@ -45,12 +56,23 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │       ├── secuencia_1_confirmacion_contratacion.puml / .pdf / .png
 │       └── secuencia_2_regularizacion_y_cancelacion.puml / .pdf / .png
 ├── docs/
+│   ├── BRD.md                 (BRD en Markdown, generado del .docx aprobado)
 │   ├── ADR/
-│   │   ├── ADR_Eventos_Nova.docx
-│   │   └── ADR_Eventos_Nova.pdf
+│   │   ├── ADR_Eventos_Nova.docx / .pdf
+│   │   ├── ADR-005-postgresql.md
+│   │   ├── ADR-006-concurrencia-optimista-e-identificadores.md
+│   │   ├── ADR-007-decisiones-funcionales-e1-e4.md
+│   │   └── ADR-008-llegada-de-t-y-pago-tardio-del-saldo.md
+│   ├── api/openapi.json       (especificación OpenAPI exportada)
+│   ├── architecture/          (esquema relacional, trazabilidad de la API, CI/CD, integraciones, decisiones E-1 a E-4, cierre de la auditoría final)
+│   ├── entrega/               (reporte final PDF, presentación de defensa y LEEME.md)
+│   ├── planificacion/         (Plan_E3D_Final.docx / .pdf)
+│   ├── pruebas-manuales/
+│   │   └── GUIA_PRUEBAS_MANUALES_T14_T24.md   (guía y bitácora de la validación manual en Swagger)
 │   ├── bitacora ia/
 │   │   ├── Bitacora_IA_Eventos_Nova.docx
-│   │   └── Bitacora_IA_Eventos_Nova.pdf
+│   │   ├── Bitacora_IA_Eventos_Nova.pdf
+│   │   └── Bitacora_IA_Fase_Final_Complemento.md   (borrador de las iteraciones 19 en adelante, solo con datos verificables)
 │   ├── informe/
 │   │   ├── informe-arquitectura-eventos-nova.docx
 │   │   └── informe-arquitectura-eventos-nova.pdf
@@ -64,15 +86,20 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 ├── src/
 │   ├── api/
 │   │   ├── __init__.py
-│   │   ├── main.py            (raíz de composición de la API: GET /, GET /health y rutas de CU-01)
-│   │   ├── dependencias.py    (obtención sustituible de servicios y reloj)
-│   │   ├── esquemas.py        (esquemas de entrada y respuesta, conversión a objetos del dominio)
-│   │   ├── errores.py         (rechazos de negocio → HTTP 422)
-│   │   └── rutas_propuestas.py (POST /eventos y POST /eventos/{evento_id}/propuestas)
+│   │   ├── main.py            (raíz de composición de la API: modo de persistencia, GET /, /health, /ready y todos los routers)
+│   │   ├── dependencias.py    (obtención sustituible del contenedor, los servicios y el reloj)
+│   │   ├── esquemas.py        (esquemas de entrada y respuesta de CU-01, conversión a objetos del dominio)
+│   │   ├── esquemas_operaciones.py (esquemas de entrada del resto de operaciones)
+│   │   ├── errores.py         (rechazos de negocio → HTTP 422; errores de persistencia → 409/422/503/500)
+│   │   ├── rutas_comunes.py   (respuesta uniforme de las operaciones y despacho en línea del Outbox)
+│   │   ├── rutas_propuestas.py (POST /eventos y POST /eventos/{evento_id}/propuestas)
+│   │   ├── rutas_contratacion.py / rutas_pagos.py / rutas_eventos.py / rutas_solicitudes.py (comandos)
+│   │   └── rutas_consultas.py (consultas CQRS, solo lectura)
 │   ├── application/
 │   │   ├── cqrs.py
 │   │   ├── puertos.py
 │   │   ├── reacciones.py
+│   │   ├── reloj.py           (reloj de negocio: hora de pared de America/Mexico_City sin zona, TP-06)
 │   │   ├── resultados.py
 │   │   └── servicios.py
 │   ├── paquete_pia/           (Etapa E1: lector y DTO de los CSV, independiente de las demás capas)
@@ -92,9 +119,12 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   │   └── valores.py
 │   └── infrastructure/
 │       ├── adaptadores.py
-│       ├── composicion.py
+│       ├── composicion.py          (construir(): composición en memoria; ensamblar(): cableado común)
+│       ├── esquema_postgresql.py   (metadatos de SQLAlchemy Core: 22 tablas)
 │       ├── repositorios_memoria.py
-│       └── unidad_trabajo.py
+│       ├── unidad_trabajo.py
+│       └── persistencia/           (PostgreSQL: mapeadores, repositorios SQL, UnitOfWorkSQL, Outbox, codec de eventos,
+│                                    composición persistente, trabajador del Outbox, configuración y preparación de bases)
 ├── tests/
 │   ├── evidencias/
 │   │   ├── ejecucion-pruebas.txt
@@ -110,6 +140,16 @@ EVENTOS_NOVA_U3_ARQUITECTURA_CLNEG/
 │   ├── test_etapa9_casos_de_uso.py
 │   ├── test_etapa9_transacciones_y_reacciones.py
 │   └── test_reglas_corregidas.py
+├── migraciones/               (Alembic: env.py y versions/0001_esquema_inicial.py, 0002_proveedor_original_opcional.py, 0003_devolucion_anticipo_contratacion_cerrada.py, 0004_version_de_agregado.py)
+├── alembic.ini
+├── scripts/                   (preparar_base_de_pruebas.py, preparar_pruebas_manuales.py (solo lectura: fechas y JSON de T-21, T-23 y T-24), verificar_cobertura.py, exportar_openapi.py, convertir_brd_a_markdown.py,
+│                               generar_trazabilidad_api.py, generar_auditoria_requisitos.py, generar_entrega_pia.py, auditar_plazos_dias_habiles.py,
+│                               comparar_oraculo_decisiones_e1_e4.py)
+├── Dockerfile / .dockerignore (imagen «app» y «tests»)
+├── docker-compose.yml         (db, migrate, api, worker y tests)
+├── docker-compose.manual-test.yml (entorno AISLADO de pruebas manuales: API en el puerto 8001 y su trabajador; base eventosnova_manual_test)
+├── .github/workflows/         (ci.yml y publicar-imagen.yml)
+├── .env.example               (variables de entorno sin secretos)
 ├── requirements.txt
 ├── requirements-dev.txt       (F1: herramientas de desarrollo; incluye coverage)
 ├── .coveragerc                (F1: configuración de la medición de cobertura)
@@ -130,9 +170,215 @@ Si el comando `py` no está disponible, utiliza:
 python -m unittest discover -s tests -v
 ```
 
-`tests/evidencias/ejecucion-pruebas.txt` es el registro de una ejecución anterior (19/10/2026, versión v6, **91 pruebas**); no corresponde a la suite actual. Para regenerarlo con la versión actual, junto con la cobertura, usa los comandos de la sección *Cobertura de pruebas (F1)*. Para verificar una ejecución sin cobertura, ejecuta el comando anterior y revisa el resumen de la terminal.
+La suite actual incluye pruebas de integración con PostgreSQL (ver *Persistencia con PostgreSQL y Docker*). `tests/evidencias/ejecucion-pruebas.txt` es el registro de una ejecución anterior (19/10/2026, versión v6, **91 pruebas**); no corresponde a la suite actual. Para regenerarlo con la versión actual, junto con la cobertura, usa los comandos de la sección *Cobertura de pruebas (F1)*. Para verificar una ejecución sin cobertura, ejecuta el comando anterior y revisa el resumen de la terminal.
+
+## Seguridad: inicio de sesión y roles
+
+La aplicación **exige inicio de sesión** (cuentas en PostgreSQL, contraseñas con Argon2id, cookie de sesión `HttpOnly` + `SameSite=Strict`, protección CSRF, caducidad y bloqueo por intentos) y aplica **permisos por rol en la API** (administrador, coordinador, proveedor). No hay credenciales predeterminadas: el primer administrador se crea con
+
+```powershell
+.\.venv\Scripts\python.exe scripts\crear_administrador.py --base <base> --correo <correo> --nombre "<nombre>"
+```
+
+Documentación: [`docs/SEGURIDAD_Y_PERMISOS.md`](docs/SEGURIDAD_Y_PERMISOS.md) (mecanismo, decisiones pendientes y lo que falta antes de un despliegue público) y [`docs/SEGURIDAD_MATRIZ_PERMISOS.md`](docs/SEGURIDAD_MATRIZ_PERMISOS.md) (operación por operación). La base debe estar en la revisión `0006` (`alembic upgrade head`). Solo para desarrollo local se puede desactivar con `EVENTOSNOVA_AUTENTICACION=desactivada` (nunca con datos reales); con `EVENTOSNOVA_ENTORNO=produccion` no se permite. **Funcionar en local no significa estar protegido para Internet**: faltan HTTPS probado, auditoría, MFA y revisión independiente.
+
+## Interfaz web
+
+La aplicación tiene una interfaz web hecha con **HTML5, CSS3 y JavaScript sin frameworks** (módulos ES y `fetch()`), en `src/web/`. La sirve la propia API de FastAPI en la ruta **`/app/`**, en el mismo origen, así que no hay que configurar CORS ni instalar nada más. Las rutas de la API, Swagger (`/docs`), OpenAPI, `/health` y `/ready` no cambian.
+
+| Forma de ejecución | Dirección |
+|---|---|
+| `docker compose up -d --build` (API en el puerto 8000) | http://127.0.0.1:8000/app/ |
+| Entorno de pruebas manuales (`docker-compose.manual-test.yml`, puerto 8001) | http://127.0.0.1:8001/app/ |
+| Sin Docker, datos en memoria: `.\.venv\Scripts\python.exe -m uvicorn api.main:app --app-dir src --port 8010` | http://127.0.0.1:8010/app/ |
+
+- Guía paso a paso para usuarios: [`docs/GUIA_USUARIO_INTERFAZ_WEB.md`](docs/GUIA_USUARIO_INTERFAZ_WEB.md).
+- Correspondencia de las 60 operaciones de la API con la interfaz y sus límites: [`docs/INTERFAZ_WEB_COBERTURA.md`](docs/INTERFAZ_WEB_COBERTURA.md) (generada con `python scripts/generar_cobertura_interfaz.py`).
+- Pruebas: `tests/test_interfaz_web.py` (sin PostgreSQL ni navegador) y `scripts/probar_interfaz_navegador.mjs` (Chrome real contra la API real; ver el encabezado del archivo). La API **no tiene autenticación**: no la publiques en Internet sin una capa de acceso externa.
+
+## Persistencia con PostgreSQL y Docker (Fase 2) — estado actual
+
+La aplicación funciona en **dos modos**, con el mismo dominio, los mismos servicios y las mismas reglas:
+
+| Modo | Cómo se elige | Repositorios / unidad de trabajo / Outbox | Uso |
+|---|---|---|---|
+| **memoria** (por omisión) | sin configuración | `repositorios_memoria.py`, `UnitOfWorkMemoria`, Outbox en memoria | pruebas unitarias y desarrollo rápido; los datos se pierden al detener el proceso |
+| **postgresql** | `EVENTOSNOVA_PERSISTENCIA=postgresql` | `infrastructure/persistencia/` (SQLAlchemy Core + Psycopg 3), PostgreSQL 18 | datos que sobreviven a reinicios; Docker Compose |
+
+`construir(disponibilidad=None)` (memoria) no cambió; la composición persistente es `construir_persistente(...)`. Los colaboradores **externos** (disponibilidad de proveedores, notificaciones, verificación de pagos, ejecución de devoluciones) siguen siendo adaptadores simulados en ambos modos: no forman parte de la persistencia.
+
+**Decisiones vigentes** (detalle en [`docs/architecture/`](docs/architecture/)): la condición TP-01 se resolvió por decisión del equipo ([`resolucion-tp01.md`](docs/architecture/resolucion-tp01.md)); PostgreSQL 18 lo eligió el equipo (ADR-005; el PIA no nombra ningún motor); se mantienen las claves foráneas actuales y las referencias sin FK las comprueba la aplicación (D-01); la coincidencia entre el evento de una solicitud y el de su contrato **no** se impone en la base de datos (riesgo C-02 del esquema): la valida la aplicación desde la decisión E-2 del equipo (HTTP 422), que no tiene aprobación formal (sección 11). El estado de cada etapa de la implementación está en [`registro-progreso-persistencia-fase2.md`](docs/architecture/registro-progreso-persistencia-fase2.md) y el esquema en [`esquema-relacional-postgresql.md`](docs/architecture/esquema-relacional-postgresql.md).
+
+### Requisitos y configuración
+
+- Python 3.13, Docker Desktop (Docker Compose v2) y un entorno virtual con `python -m pip install -r requirements-dev.txt`.
+- Copie `.env.example` a `.env` y cambie `POSTGRES_PASSWORD` (y la misma contraseña dentro de `DATABASE_URL` / `TEST_DATABASE_URL`). `.env` está en `.gitignore`: **no se sube a Git**. La plantilla documenta las variables de cada contexto (desarrollo, pruebas, modo de persistencia, Docker, despliegue).
+- No fije `EVENTOSNOVA_PERSISTENCIA` en `.env`: hay que activarlo solo en la terminal que lanza la API (ver abajo); de lo contrario las pruebas de la API usarían la base de desarrollo.
+
+### 1. Iniciar PostgreSQL
+
+```powershell
+docker compose up -d db          # PostgreSQL 18 en 127.0.0.1:5432, volumen nombrado eventosnova_pgdata
+docker compose ps                # db debe aparecer como «healthy»
+```
+
+El puerto se publica **solo** en `127.0.0.1`. Nunca use `docker compose down -v`: borraría el volumen con los datos.
+
+### 2. Aplicar las migraciones (Alembic)
+
+```powershell
+.\.venv\Scripts\python.exe -m alembic current       # revisión aplicada
+.\.venv\Scripts\python.exe -m alembic upgrade head  # 0001 (esquema inicial, 22 tablas), 0002, 0003 (devolución del anticipo, decisión A) y 0004 (versión para la concurrencia optimista; head actual)
+```
+
+`alembic upgrade head --sql` genera el SQL sin conectarse. El `downgrade` solo debe usarse en bases desechables (el ciclo se prueba en `eventosnova_migraciones_test`). Si la base no está migrada, la aplicación **no arranca** y lo indica.
+
+### 3. Ejecutar la aplicación
+
+```powershell
+$env:EVENTOSNOVA_PERSISTENCIA = "postgresql"
+.\.venv\Scripts\python.exe -m uvicorn api.main:app --app-dir src --reload     # modo persistente
+# sin la variable: modo en memoria (como antes)
+```
+
+- Swagger UI: <http://127.0.0.1:8000/docs> · OpenAPI: <http://127.0.0.1:8000/openapi.json>.
+- `GET /health` (la aplicación responde) y `GET /ready` (además, la base de datos responde; 503 si no).
+- **Despacho de eventos.** Tras cada comando exitoso la API despacha en línea los eventos pendientes del Outbox (las reacciones ocurren en la misma petición). `EVENTOSNOVA_DESPACHO_EN_LINEA=0` lo desactiva y deja el trabajo al trabajador. Si el despacho falla, el comando ya está confirmado y los eventos quedan en el Outbox.
+- **Trabajador** (proceso aparte): despacha el Outbox (opcional con despacho en línea) **y, en cada ciclo, aplica la llegada de T** a los eventos cuya fecha y hora ya llegaron: un evento En organización inicia y uno En gestión se cierra sin contratación (C-01, CA-109, CA-110; ADR-008). **Sin un trabajador en ejecución no hay inicio automático**; `POST /eventos/{id}/inicio` aplica la misma regla a mano. Reloj: `application.reloj.reloj_negocio`, la hora de pared de America/Mexico_City sin zona (TP-06), común a la API, el trabajador y el Outbox (no la hora UTC del contenedor). Comando: `$env:PYTHONPATH = "src"; python -m infrastructure.persistencia.trabajador_outbox` (`--una-vez`, `--intervalo`; en Docker `PYTHONPATH` ya está definido). Puede haber varios: el reclamo con `SKIP LOCKED` evita que dos procesen el mismo evento.
+
+### 4. Docker Compose: DB + App + Tests
+
+```powershell
+docker compose up -d --build          # db + migrate (una vez) + api (127.0.0.1:8000) + worker
+docker compose ps                     # api y db «healthy»
+docker compose run --rm tests         # suite completa dentro de Docker contra la base eventosnova_test
+docker compose down                   # detiene los servicios; los datos permanecen en el volumen
+```
+
+| Servicio | Función |
+|---|---|
+| `db` | PostgreSQL 18 con healthcheck (`pg_isready`) |
+| `migrate` | `alembic upgrade head` una vez; `api` y `worker` esperan a que termine bien |
+| `api` | FastAPI en modo `postgresql`; healthcheck sobre `/ready` |
+| `worker` | despachador del Outbox y proceso periódico de la llegada de T (C-01, CA-109, CA-110; ADR-008) |
+| `tests` | perfil `tests`: crea (si no existe) y migra `eventosnova_test` y ejecuta la suite con `EVENTOSNOVA_REQUIERE_BD=1` |
+
+Las imágenes no contienen `.env`; la configuración llega por variables de entorno. La imagen de aplicación (`target app`) no incluye pruebas ni documentos.
+
+### 5. Pruebas
+
+| Qué | Comando |
+|---|---|
+| Suite completa (unitarias + integración con PostgreSQL) | `.\.venv\Scripts\python.exe -m unittest discover -s tests` |
+| Con cobertura | `coverage run -m unittest discover -s tests` y `coverage report` |
+| Requisito del PIA (≥ 80 % de sentencias) | `coverage json -o coverage.json -q` y `python scripts/verificar_cobertura.py coverage.json` |
+| Dentro de Docker | `docker compose run --rm tests` |
+| Solo la base de pruebas | `python scripts/preparar_base_de_pruebas.py` (crea `eventosnova_test` si no existe y la migra; no borra nada) |
+
+Las pruebas de integración usan bases **separadas** de la de desarrollo (`eventosnova_test` y `eventosnova_migraciones_test`, locales y con nombre terminado en `_test`); las operaciones destructivas se niegan sobre cualquier otra. Sin PostgreSQL esas pruebas se **omiten con un aviso**; con `EVENTOSNOVA_REQUIERE_BD=1` (CI y Docker) son un fallo. Las mismas pruebas HTTP se ejecutan sobre la composición en memoria y sobre PostgreSQL. Los registros de ejecución están en `tests/evidencias/` (cada uno con nombre propio; los históricos no se sobrescriben).
+
+### 6. Unidad de trabajo y Outbox (ADR-004)
+
+- **Unidad de trabajo** (`UnitOfWorkSQL`): una operación = una transacción por hilo (sin anidar); al confirmar guarda los Domain Events en el Outbox **en la misma transacción** que los cambios del agregado; al fallar, revierte todo y descarta los eventos. Los errores de la base se propagan como `ErrorDePersistencia` y la API los traduce a 409 (integridad), 422 (dato no almacenable), 503 (base no disponible) o 500, sin filtrar nombres de restricciones.
+- **Outbox** (`outbox_evento`, `outbox_reaccion`): los 31 tipos de evento se serializan con un codec versionado (JSONB); cada reacción se identifica con una clave estable (`módulo.Clase.método`) y se anota al terminar, de modo que un reintento solo ejecuta las que faltan. Los fallos se reintentan hasta `max_intentos` (3); después el evento pasa a **Revisión** con el motivo y puede reabrirse. Límite conocido: ejecutar la reacción y anotarla son dos transacciones, por eso las reacciones deben ser idempotentes.
+- **Integridad:** donde hay clave foránea la garantiza PostgreSQL; las referencias **sin** FK (p. ej. `origen_id`, `anexo_id`, `cliente_id`) las comprueba la aplicación mediante los repositorios, y **no** están protegidas frente a escrituras SQL directas (ver la sección 13.1 del documento del esquema).
+
+### 7. Operaciones disponibles en la API
+
+Cada ruta llama a **un** método de un servicio de aplicación o a un *Query Handler*; no contienen reglas de negocio. Un rechazo de negocio es HTTP 422 con `{"tipo": "rechazo_de_negocio", "detalle", "pendientes"}`; un error de forma o tipo es el 422 estándar de validación.
+
+| Grupo | Rutas |
+|---|---|
+| Propuestas (CU-01) | `POST /eventos` · `POST /eventos/{id}/propuestas` · `POST /propuestas/{id}/versiones` · `…/aceptacion` · `…/cierre-por-no-aceptacion` · `…/contrato` |
+| Contratación (CU-02) | `POST /contratos/{id}/firma` · `…/comunicacion-politica-no-reembolso` · `…/seguimiento-anticipo` · `…/confirmacion` |
+| Pagos y cuenta | `POST /estados-cuenta/{id}/pagos` · `…/pagos/{pago}/verificacion` · `…/vencimiento-saldo-original` · `…/protocolo-cobro` · `…/regularizacion` · `…/devoluciones/{dev}/ejecucion` |
+| Evento | `POST /eventos/{id}/inicio` · `…/finalizacion` · `…/cancelacion` · `…/cancelacion-por-falta-de-regularizacion` · `…/revision-administrativa` |
+| Proveedores del evento | `GET /eventos/{id}/servicios/{sid}/disponibilidad` · `POST …/proveedor` · `POST …/respuesta-proveedor` |
+| Cambios | `POST /solicitudes-cambio` · `…/{id}/viabilidad` · `…/decision-cliente` · `…/autorizacion` · `…/anexo` · `…/solicitud-pago` · `…/confirmacion` · `…/cierre-por-falta-de-pago` |
+| Servicios adicionales | `POST /solicitudes-servicio-adicional` · `…/{id}/disponibilidad` · `…/decision-espera` · `…/aprobacion-cliente` · `…/autorizacion` · `…/anexo` · `…/solicitud-pago` · `…/confirmacion` · `…/cierre-por-falta-de-pago` |
+| Sustituciones | `POST /sustituciones` · `…/{id}/alternativa` · `…/decision-cliente` · `…/autorizacion` · `…/anexo` · `…/importe-adicional` (en Pagos) · `…/confirmacion` |
+| Consultas (GET) | `/eventos?desde&hasta` · `/eventos/{id}/administracion` · `/eventos/{id}/pagos` · `/eventos/{id}/solicitudes-pendientes` · `/proveedores/{p}/eventos/{e}` · `/solicitudes` · `/pagos-pendientes` · `/devoluciones-pendientes` · `/servicios-pendientes-confirmacion` |
+
+La trazabilidad de cada ruta con su servicio y las reglas (CU, US, CA, BN, SE) citadas en el código está en [`docs/architecture/trazabilidad-api-persistencia.md`](docs/architecture/trazabilidad-api-persistencia.md). Los importes son `Decimal` finito y no negativo (no se fija máximo ni escala); los booleanos son estrictos; las fechas van sin zona horaria.
+
+### 8. Demostración reproducible
+
+```powershell
+Copy-Item .env.example .env            # y cambie la contraseña
+docker compose up -d --build           # arranca db + migrate + api + worker
+curl http://127.0.0.1:8000/ready       # {"estado":"ok","persistencia":"postgresql","base_de_datos":"ok"}
+# Abra http://127.0.0.1:8000/docs y ejecute, en orden:
+#   1. POST /eventos                                          (registrar evento)
+#   2. POST /eventos/{id}/propuestas                          (crear propuesta)
+#   3. POST /propuestas/{id}/aceptacion                       (aceptar la versión vigente)
+#   4. POST /propuestas/{id}/contrato                         (preparar contrato)
+#   5. POST /contratos/{id}/comunicacion-politica-no-reembolso  (comunicar la política de no reembolso)
+#   6. POST /contratos/{id}/firma                             (firmar el contrato)
+#   7. GET  /pagos-pendientes?evento_id=…                     (consultar el anticipo pendiente)
+#   8. POST /estados-cuenta/{id}/pagos                        (registrar el pago)
+#   9. POST /estados-cuenta/{id}/pagos/{pago_id}/verificacion (verificar el pago)
+#  10. POST /contratos/{id}/confirmacion                      (confirmar la contratación)
+#  11. GET  /eventos/{id}/administracion                      (el evento queda «En organización»)
+# El anticipo es un mínimo del 30 % del costo total: puede cubrirse con varios pagos parciales del mismo contrato, que se
+# acumulan conforme a E-3 (decisión del equipo, sin aprobación externa); la contratación no se confirma hasta que el anticipo
+# verificado alcance ese mínimo. Un comprobante repetido se rechaza.
+docker compose restart api             # los datos siguen ahí tras reiniciar
+docker compose run --rm tests          # la suite completa dentro de Docker
+```
+
+### 9. CI/CD y despliegue
+
+- **CI** (`.github/workflows/ci.yml`): instala dependencias, valida que Alembic tenga una sola cabeza, migra una base PostgreSQL efímera, ejecuta toda la suite con cobertura (mínimo del PIA: 80 % de sentencias) y valida y ejecuta Docker Compose (DB + App + Tests). **Publicación** (`.github/workflows/publicar-imagen.yml`): solo con etiquetas `v*` o a mano; publica la imagen `app` en GitHub Container Registry y, si existe el secreto `DEPLOY_HOOK_URL`, avisa a la plataforma.
+- **Pasos manuales del equipo** (nada se ha desplegado ni subido a GitHub): `git add` y commit de los archivos nuevos; subir a GitHub; en la plataforma elegida (Render, Railway, Fly.io o equivalente con Docker) crear un servicio con la imagen `app` y un PostgreSQL gestionado; definir `DATABASE_URL` (la de la plataforma) y `EVENTOSNOVA_PERSISTENCIA=postgresql`; ejecutar `python -m alembic upgrade head` antes del primer arranque; crear un segundo proceso con el comando del trabajador; opcionalmente guardar `DEPLOY_HOOK_URL` como secreto del repositorio. Los valores sensibles solo se definen en la plataforma o en los secretos de GitHub, nunca en el repositorio.
+
+### 10. Reglas de anticipo, identificadores y concurrencia (fase final)
+
+- **Anticipo (decisiones A, B y C del cierre de alcance aprobado):** el 30 % es el **mínimo**; un anticipo mayor cubre el requisito, no se devuelve ni se aplica al saldo (`anticipo_recibido_verificado` / `anticipo_aplicado` / `anticipo_excedente`). Si la contratación se cierra sin confirmar, el anticipo pendiente queda *Sin efecto*, el liquidado conserva su estado, se devuelve lo recibido (una devolución por pago) y la contratación no se reabre; un pago posterior se registra y verifica igualmente. Con el Evento cancelado no hay devolución. Plazo de la devolución del anticipo: 5 días hábiles desde la más tardía entre el cierre y el registro, con límite exclusivo a las 00:00.
+- **Identificadores:** los nuevos son prefijo + UUID v4 completo; los históricos de 8 caracteres siguen siendo válidos. La creación de cada raíz comprueba que el id no exista (la colisión es estadísticamente improbable, no imposible).
+- **Concurrencia:** control optimista por versión (migración `0004`); un conflicto responde HTTP 409 y revierte la operación entera. El Outbox entrega *al menos una vez* con deduplicación por reacción (no se afirma «exactamente una vez»).
+- **Integraciones:** verificación de pagos, notificaciones, ejecución de devoluciones y disponibilidad de proveedores son **simulaciones** (ver [`docs/architecture/integraciones-externas.md`](docs/architecture/integraciones-externas.md)). La disponibilidad de demostración se activa con `EVENTOSNOVA_DISPONIBILIDAD_ARCHIVO`.
+- **Auditoría de requisitos y trazabilidad:** [`docs/trazabilidad/auditoria-requisitos-fase-final.md`](docs/trazabilidad/auditoria-requisitos-fase-final.md) y [`docs/trazabilidad/complemento-trazabilidad-fase-final.md`](docs/trazabilidad/complemento-trazabilidad-fase-final.md).
+
+### 11. Pendientes que requieren decisión del responsable
+
+- **Plazos en días hábiles (GL-060 / C-15, decisión E-1):** todos los plazos en días hábiles (anticipo, seguimiento del anticipo, saldo, límite de la sustitución y devoluciones) vencen a las 00:00 del día siguiente al último día del plazo, con límite exclusivo; las ventanas de horas y los días naturales no cambian. El oráculo histórico (`comportamiento_estado_cuenta_v8_e3c.json`) **no se editó** (el cierre §6 lo prohíbe): cada una de sus 1203 claves se compara con su esperado derivado de las reglas E-1, H-10 y E-3/E-4, con recuento exacto en `tests/evidencias/diferencias-oraculo-e1-e4-20261025.txt`. **Pendiente de autorización:** que la responsable apruebe formalmente ese método, porque el cierre no define cómo recalcular el oráculo para E-1/E-3/E-4. Detalle en [`docs/architecture/DECISIONES_E1_E4.md`](docs/architecture/DECISIONES_E1_E4.md).
+- **Decisiones del equipo sin aprobación formal (E-2, E-3, E-4):** el evento de una solicitud de cambio, de servicio adicional o de sustitución debe ser el del contrato (HTTP 422 si no); el anticipo mínimo del 30 % puede alcanzarse con varios pagos parciales del mismo contrato (un pago menor ya no es «importe incorrecto»; un comprobante repetido se rechaza); y un pago menor al 30 % después de liquidar el anticipo se verifica como adicional, sin devolverse ni aplicarse al saldo. Las fuentes originales no las exigen: ver [`docs/architecture/DECISIONES_E1_E4.md`](docs/architecture/DECISIONES_E1_E4.md).
+- **Coherencia solicitud–contrato–evento (E-2):** implementada como decisión del equipo (HTTP 422 si el evento no es el del contrato; ver el punto anterior). Sigue sin existir una regla en las fuentes originales que la exija; la aprobación del responsable está pendiente (detalle en [`docs/trazabilidad/complemento-trazabilidad-fase-final.md`](docs/trazabilidad/complemento-trazabilidad-fase-final.md)).
+- **Defectos de implementación D-1, D-2 y D-3 (28/10/2026), corregidos con pruebas de regresión:** D-1 (C-14 / GL-015 / CA-101: un servicio adicional solo se registra con la contratación confirmada), D-2 (C-06 / CA-113 / GL-049 / SE-006: un pago del saldo posterior a su límite no lo liquida y una solicitud nueva se detiene si el saldo está vencido **de hecho**) y D-3 (C-01 / CA-109 a CA-111, D-3b: el trabajador aplica la llegada de T y no se confirma la contratación en T ni después). Además, API, trabajador y Outbox usan el reloj de negocio de America/Mexico_City (TP-06). Si se recrean contenedores a partir de una imagen anterior al 28/10, hay que reconstruirla para que incluya el vencimiento de hecho y el reloj de negocio (guía de pruebas manuales, 12.0 bis). Validación manual con el código corregido: T-21, T-23 y T-24 satisfactorias según los resultados informados por el equipo (`docs/architecture/CIERRE_AUDITORIA_FINAL.md`, sección Q). Decisiones internas sin aprobación externa: contrato Firmado cerrado por T y avisos a Cliente, Coordinador y Administración. Ver [`docs/ADR/ADR-008-llegada-de-t-y-pago-tardio-del-saldo.md`](docs/ADR/ADR-008-llegada-de-t-y-pago-tardio-del-saldo.md) y `docs/architecture/CIERRE_AUDITORIA_FINAL.md`, secciones J, M, N, O y P.
+- Reglas de texto sin respaldo aprobado (texto de solo espacios, contenido de varios textos libres) y máximos de negocio (invitados, importes): no se inventaron.
+- Repositorio remoto, ejecución real de la CI y despliegue: acciones manuales del equipo.
+
+### 12. Entorno aislado para pruebas manuales (puerto 8001)
+
+Sirve para probar a mano las operaciones de negocio en Swagger sin escribir en la base de desarrollo. Es independiente de `docker compose` (otro archivo, otro nombre de proyecto: `eventosnova-manual`) y **no sustituye** a los servicios de la sección 4.
+
+| | Desarrollo (sección 4) | Pruebas manuales (esta sección) |
+|---|---|---|
+| Archivo | `docker-compose.yml` | `docker-compose.manual-test.yml` |
+| API / Swagger | `http://127.0.0.1:8000/docs` | `http://127.0.0.1:8001/docs` |
+| Base de datos | `eventosnova` | `eventosnova_manual_test` (mismo servidor PostgreSQL `db`) |
+| Servicios | `api`, `worker` (más `db` y `migrate`) | `api-manual`, `worker-manual` (no crean `db` ni `migrate`) |
+
+```powershell
+# 1) La base manual (se crea solo si no existe, se migra a head; el nombre debe terminar en _test; no borra nada)
+$env:TEST_DATABASE_URL = "postgresql+psycopg://<usuario>:<contraseña>@127.0.0.1:5432/eventosnova_manual_test"
+.\.venv\Scripts\python.exe scripts/preparar_base_de_pruebas.py
+# 2) Con el servicio db en ejecución (sección 1), la API y el trabajador manuales
+docker compose -f docker-compose.manual-test.yml up -d
+docker compose -f docker-compose.manual-test.yml ps
+curl http://127.0.0.1:8001/ready       # {"estado":"ok","persistencia":"postgresql","base_de_datos":"ok"}
+docker compose -f docker-compose.manual-test.yml stop    # detiene solo estos dos servicios; los datos permanecen
+```
+
+El archivo toma `POSTGRES_USER` y `POSTGRES_PASSWORD` de `.env`; no contiene secretos. Nunca use `down -v`. Pasos de T-21, T-23 y T-24 con el código actualizado: sección 12 de [`docs/pruebas-manuales/GUIA_PRUEBAS_MANUALES_T14_T24.md`](docs/pruebas-manuales/GUIA_PRUEBAS_MANUALES_T14_T24.md) y `python scripts/preparar_pruebas_manuales.py t21|t23|t24`. Procedimiento y bitácora de la validación: la misma guía. Resultados registrados: sección «Validación manual en Swagger» (§I, primera ejecución) y sección Q (T-21, T-23 y T-24 con el código corregido) de [`docs/architecture/CIERRE_AUDITORIA_FINAL.md`](docs/architecture/CIERRE_AUDITORIA_FINAL.md).
 
 ## Cobertura de pruebas (F1)
+
+**Resultados medidos (2026-10-25, después de E-1 a E-4):** 1306 pruebas aprobadas, 0 fallos, 0 errores y 0 omitidas en el equipo (PostgreSQL obligatorio) y 1306 en Docker; cobertura de **98,82 % de sentencias (5379 de 5443)** y **95,85 % de ramas (1016 de 1060)** con `.coveragerc` sin cambios. Evidencias: `tests/evidencias/ejecucion-pruebas-e1-e4-host-20261025.txt`, `…-docker-20261025.txt` y `cobertura-e1-e4-20261025.txt`.
+
+**Resultados medidos (2026-10-28, después de las correcciones D-1, D-2 y D-3):** **1387 pruebas** aprobadas, 0 fallos, 0 errores y 0 omitidas en el equipo con PostgreSQL obligatorio (`tests/evidencias/ejecucion-pruebas-d1-d3-host-20261028.txt`, con cobertura) y 1387 dentro de Docker (`…-docker-20261028.txt`); cobertura de **98,82 % de sentencias (5448 de 5513) y 95,77 % de ramas (1042 de 1088)** (`tests/evidencias/cobertura-d1-d3-20261028.txt`). Las 81 pruebas nuevas son `test_d1_…` (26), `test_d2_…` (22) y `test_d3_…` (33). El oráculo histórico no se editó (SHA-256 `d98b4cff…`): sus 1203 claves se validan con las reglas E-1, H-10, E-3/E-4 y D-2 (48 claves, el grupo R12 del cierre de alcance §8; `tests/evidencias/diferencias-oraculo-d2-20261028.txt`).
+
+**Resultados medidos (2026-10-28, última ejecución registrada, después del vencimiento de hecho y del reloj de negocio):** **1415 pruebas** aprobadas, 0 fallos, 0 errores y 0 omitidas en el equipo con PostgreSQL obligatorio (`tests/evidencias/ejecucion-pruebas-d2b-reloj-host-20261028.txt`, sin cobertura) y **1415 dentro de Docker con cobertura** (`tests/evidencias/ejecucion-docker-final-20261028-202102.txt`, `Ran 1415 tests … OK`, registro en UTF-16): **98,82 % de sentencias (5462 de 5527; 65 sin cubrir) y 95,77 % de ramas (1042 de 1088)**; `scripts/verificar_cobertura.py` informa «cumple el mínimo de 80 %». El código de salida 0 lo informó el equipo; el registro no lo incluye. Las 28 pruebas nuevas respecto de las 1387 son 20 de `test_d2_…` y 8 de `test_reloj_negocio`. El oráculo histórico sigue sin editar (SHA-256 `d98b4cff…`, comprobado el 29/10/2026).
 
 La cobertura se mide con `coverage.py` sobre **todo `src/`** (`domain`, `application`, `infrastructure`, `api` y `paquete_pia`), sin omitir módulos. La configuración está en `.coveragerc` y la versión de la herramienta, fijada en `requirements-dev.txt`.
 
@@ -195,7 +441,7 @@ Se agregó la capa de presentación HTTP en `src/api/`. En esta etapa la API sol
 | `GET /` | Identifica la aplicación Eventos Nova (nombre, descripción, versión y enlaces a `/docs` y `/health`). |
 | `GET /health` | `{"estado": "ok", "aplicacion": "Eventos Nova", "version": "0.1.0"}` para verificar que la API está disponible. |
 
-Las capas `domain`, `application` e `infrastructure` no se modificaron y no dependen de FastAPI. Todavía no se exponen casos de uso, persistencia en base de datos ni autenticación; se incorporarán en etapas posteriores.
+Las capas `domain`, `application` e `infrastructure` no se modificaron y no dependen de FastAPI. Todavía no se exponen casos de uso, persistencia en base de datos ni autenticación; se incorporarán en etapas posteriores. *(Texto histórico de la Etapa 1; el estado actual de las rutas y de la persistencia se describe al final de este README.)*
 
 ### Comandos en Windows (PowerShell o CMD, desde la raíz del proyecto)
 
@@ -233,7 +479,7 @@ La API expone dos casos de uso existentes de `GestionPropuestaService`, sin regl
 | `POST /eventos` | `registrar_evento(cliente_id, DatosEvento, servicios)` | `201` con `evento_id` y mensaje |
 | `POST /eventos/{evento_id}/propuestas` | `crear_propuesta(evento_id, ContenidoPropuesta, ahora)` | `201` con `propuesta_id`, `evento_id` y mensaje |
 
-> **Datos temporales.** Mientras la API use la composición en memoria (`infrastructure.composicion.construir`), los eventos y propuestas solo existen mientras el servidor está en marcha: **se pierden al detenerlo o reiniciarlo** (también con cada recarga de `--reload`). Es una implementación provisional para desarrollo y pruebas; la persistencia se incorporará cuando se reciba la base de datos oficial del proyecto.
+> **Datos temporales.** Mientras la API use la composición en memoria (`infrastructure.composicion.construir`), los eventos y propuestas solo existen mientras el servidor está en marcha: **se pierden al detenerlo o reiniciarlo** (también con cada recarga de `--reload`). Es una implementación provisional para desarrollo y pruebas; la persistencia se incorpora por etapas con PostgreSQL 18. *Histórico:* el cierre de alcance aprobado condicionaba la persistencia (TP-01) a «recibir la base de datos oficial del proyecto»; el equipo resolvió esa condición el 2026-10-24 (el ZIP `16_Eventos_Nova` es la fuente oficial de datos recibida y el equipo construye la base de datos relacional con PostgreSQL, elegido por el equipo). Ver [`docs/architecture/resolucion-tp01.md`](docs/architecture/resolucion-tp01.md); el estado de cada etapa está en [`docs/architecture/registro-progreso-persistencia-fase2.md`](docs/architecture/registro-progreso-persistencia-fase2.md).
 
 **Diseño**
 
@@ -455,7 +701,7 @@ Antes de planificar E3D se revisaron las fuentes del dominio financiero. Esta co
 | ID | Asunto | Estado |
 |----|--------|--------|
 | AR-07 | CA-097 condicionaba que los cobros pendientes exclusivos de una solicitud cerrada sin realizarse quedaran sin efecto a que el Evento no estuviera cancelado. SE-012, BN-008, GL-053, el mapa de dominio, el BPMN SP-08 y el código (`EstadoCuenta.aplicar_cierre_sin_realizar`) los dejan sin efecto en ambos casos y reservan la condición «Evento no cancelado» para la devolución. Se conservó SE-012 y se alinearon con ella CA-097, CA-070 y CA-071 (User Stories), GL-032 (Glosario y su copia en el informe de arquitectura), la restricción del negocio del BRD y las celdas B15 y B24 de la matriz de trazabilidad. Los ID, las demás condiciones y la política de no reembolso no cambian. | Resuelto (documental) |
-| AR-08 | `EstadoCuenta.registrar_devolucion_efectuada` y `EstadoCuentaService.registrar_y_ejecutar_devolucion` buscan la devolución con `next(...)` sin valor por omisión: con un `devolucion_id` inexistente se lanza `StopIteration` en lugar de un rechazo de negocio (`ErrorDominio`). | Pendiente; no se corrige en E3D |
+| AR-08 | `EstadoCuenta.registrar_devolucion_efectuada` y `EstadoCuentaService.registrar_y_ejecutar_devolucion` buscan la devolución con `next(...)` sin valor por omisión: con un `devolucion_id` inexistente se lanza `StopIteration` en lugar de un rechazo de negocio (`ErrorDominio`). | Pendiente en E3D. **Corregido el 29/10/2026:** el agregado (`EstadoCuenta.registrar_devolucion_efectuada`) lanza `ErrorDominio("La devolución no existe.")` sin modificar el agregado ni registrar eventos (`tests/test_ar08_devolucion_inexistente.py`); el servicio ya validaba la existencia (404) y no cambia |
 
 ## Etapa E3D: State Machines explícitas de EstadoCuenta
 
@@ -473,7 +719,7 @@ No se modificaron la máquina genérica, las Specifications de E2, Evento, Contr
 | ObligacionPago | Pendiente | `REGULARIZAR` | Liquidada | `resolver_regularizacion` (cargos moratorios) | el mismo SaldoVencidoRegularizado | CA-025, CA-027 |
 | ObligacionPago | Pendiente | `DEJAR_SIN_EFECTO` | Sin efecto | `aplicar_cierre_sin_realizar` | — | SE-012, CA-070, CA-071, CA-096, CA-097, GL-053 |
 | Pago | Registrado | `VERIFICAR` | Verificado | `registrar_y_verificar_pago`, `verificar_pago_registrado` | PagoVerificado | CA-018, CA-021, CA-027 |
-| Pago | Registrado | `RECHAZAR_IMPORTE` | Importe incorrecto | `registrar_y_verificar_pago` (anticipo) | — | CA-019 |
+| Pago | Registrado | `RECHAZAR_IMPORTE` | Importe incorrecto | ninguno desde E-3/E-4 (transición histórica; un anticipo menor al mínimo es un pago parcial) | — | CA-019 |
 | Devolucion | Pendiente | `REGISTRAR_EFECTUADA` | Efectuada | `registrar_devolucion_efectuada` | DevolucionRegistrada | SE-012, CA-098, GL-057 |
 
 Estados terminales: Liquidada y Sin efecto (ObligacionPago), Verificado e Importe incorrecto (Pago), Efectuada (Devolucion). Única repetición idempotente: registrar otra vez una devolución Efectuada (sin cambios y sin segundo DevolucionRegistrada).
@@ -485,7 +731,7 @@ Estados terminales: Liquidada y Sin efecto (ObligacionPago), Verificado e Import
 - `verificar_pago_registrado` conserva su mensaje («Solo se verifica un pago registrado que está pendiente de verificación.») mediante `mensajes_rechazo` de `MAQUINA_PAGO`.
 - Las altas de obligaciones, pagos y devoluciones son creaciones, no transiciones.
 
-**Asuntos que se conservan sin resolver:** AR-08 (la búsqueda con `next(...)` no cambia) y los puntos del plan P-E3D-01 (tras «No regularizado» no se admite una segunda ventana), P-E3D-02 (el pago en el instante límite cuenta; la revisión exige un instante posterior) y P-E3D-03 (una sustitución integrada que está Vencida no queda Sin efecto al cerrarse). Las pruebas los fijan tal como están.
+**Asuntos que se conservan sin resolver:** AR-08 (la búsqueda con `next(...)` no cambiaba en E3D; corregido el 29/10/2026, ver la tabla anterior) y los puntos del plan P-E3D-01 (tras «No regularizado» no se admite una segunda ventana), P-E3D-02 (el pago en el instante límite cuenta; la revisión exige un instante posterior) y P-E3D-03 (una sustitución integrada que está Vencida no queda Sin efecto al cerrarse). Las pruebas los fijan tal como están.
 
 **Pruebas de la etapa** (53): `tests/test_estado_cuenta_maquina_estados.py`. Comparan el comportamiento con `tests/referencias/comportamiento_estado_cuenta_v8_e3c.json`, capturado con `tests/apoyo_maquina_estados_estado_cuenta.py` sobre el código del commit 8c80470, antes de E3D: 1203 combinaciones (30 situaciones del agregado × su estado inicial y 39 operaciones, más `registrar_devolucion_efectuada` en las 3 situaciones con devolución), que deben ser idénticas. La referencia no incluye identificadores inexistentes de devolución (D-E3D-5, AR-08).
 
@@ -598,7 +844,8 @@ Los entregables principales están organizados en las siguientes rutas relativas
 - **Registros de decisiones arquitecturales (ADR):** [`docs/ADR/ADR_Eventos_Nova.pdf`](docs/ADR/ADR_Eventos_Nova.pdf) y su versión editable `.docx`.
 - **Matriz de trazabilidad:** [`docs/trazabilidad/matriz-trazabilidad.xlsx`](docs/trazabilidad/matriz-trazabilidad.xlsx) y [`docs/trazabilidad/matriz-trazabilidad.pdf`](docs/trazabilidad/matriz-trazabilidad.pdf).
 - **Bitácora de IA:** [`docs/bitacora ia/Bitacora_IA_Eventos_Nova.pdf`](docs/bitacora%20ia/Bitacora_IA_Eventos_Nova.pdf) y su versión editable `.docx`.
-- **Documentos de requisitos de la Unidad 2:** glosario, BRD y User Stories en `docs/unidad 2/`.
+- **Documentos de requisitos de la Unidad 2:** glosario, BRD y User Stories en `docs/unidad 2/`; BRD en Markdown en `docs/BRD.md`.
+- **Entrega del PIA (fase final):** reporte final en PDF y presentación de defensa en `docs/entrega/` (ver `docs/entrega/LEEME.md`).
 - **Diagramas:** diagramas de clases y secuencia en `diagramas/clases/` y `diagramas/secuencia/`; mapa de dominio en `diagramas/dominio/`; BPMN maestro con todos los subprocesos desplegados y subprocesos SP-01 a SP-08 en `diagramas/bpmn/` (fuente editable en draw.io `.drawio`; la misma versión en BPMN 2.0 `.bpmn`, que se abre en cualquier herramienta compatible; y exportaciones PDF, SVG y PNG), más una versión paginada del maestro para imprimir (`BPMN_Eventos_Nova_paginado.pdf`). Los cambios al BPMN se hacen en el `.drawio` y se exportan desde draw.io; el `.bpmn` y las exportaciones incluidas corresponden a esta versión del modelo.
 - **Evidencias de pruebas:** archivos en `tests/evidencias/`.
 

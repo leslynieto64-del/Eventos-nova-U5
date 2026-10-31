@@ -48,8 +48,8 @@ class Espias:
         self._parches = [
             mock.patch.object(SolicitudServicioAdicional, 'condicion_temporal', autospec=True, side_effect=original_ct),
             mock.patch.object(AnticipacionMinima, 'es_satisfecha_por', autospec=True, side_effect=original_am),
-            mock.patch.object(EstadoCuenta, 'saldo_vencido_sin_regularizar', new_callable=mock.PropertyMock,
-                              return_value=self.saldo_vencido),
+            # GL-049 / SE-006: el servicio lee `saldo_vencido_en(ahora)` (vencimiento de hecho), no solo el estado registrado
+            mock.patch.object(EstadoCuenta, 'saldo_vencido_en', return_value=self.saldo_vencido),
         ]
         self.condicion_temporal, self.anticipacion, self.saldo = [p.start() for p in self._parches]
         return self

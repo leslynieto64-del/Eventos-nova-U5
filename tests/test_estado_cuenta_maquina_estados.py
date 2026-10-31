@@ -16,6 +16,7 @@ import xml.etree.ElementTree as ET
 from unittest import mock
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from apoyo_esperados_oraculo import esperado as esperado_oraculo                          # noqa: E402
 from apoyo_maquina_estados_estado_cuenta import (Constructor, variantes, acciones, observar, construir,          # noqa: E402
                                                  capturar_comportamiento_estado_cuenta, RUTA_REFERENCIA_ESTADO_CUENTA,
                                                  M, ANTICIPO_A_TIEMPO, ANTICIPO_TARDIO, ANTES_LIMITE, DESPUES_LIMITE,
@@ -175,8 +176,6 @@ class UsoRealDeLasMaquinas(unittest.TestCase):
              lambda c: c.ec.registrar_y_verificar_pago('PG-N', 'OB-S', M(2000), ANTES_LIMITE, 'C', True)),
             ('MAQUINA_PAGO', AP.VERIFICAR, 'saldo_pago_a_tiempo_sin_verificar',
              lambda c: c.ec.verificar_pago_registrado('PG-2', REVISION)),
-            ('MAQUINA_PAGO', AP.RECHAZAR_IMPORTE, 'anticipo_pendiente',
-             lambda c: c.ec.registrar_y_verificar_pago('PG-N', 'OB-A', M(1000), ANTICIPO_A_TIEMPO, 'C', True)),
             ('MAQUINA_DEVOLUCION', AD.REGISTRAR_EFECTUADA, 'cambio_cerrado_con_devolucion_pendiente',
              lambda c: c.ec.registrar_devolucion_efectuada('DV-1', CONSULTA, 'CMP')),
         ]
@@ -224,12 +223,12 @@ class TransicionesValidas(unittest.TestCase):
         self.assertEqual(c.ec.pagos[1].verificado_en, CONSULTA)
         self.assertEqual(nombres(c.ec.extraer_eventos()), ['PagoVerificado'])
 
-    def test_importe_incorrecto_de_anticipo(self):                           # CA-019
+    def test_pago_parcial_de_anticipo(self):                                 # E-3 (sustituye al «importe incorrecto» de CA-019)
         c = en('anticipo_pendiente')
         p = c.ec.registrar_y_verificar_pago('PG-N', 'OB-A', M(1000), ANTICIPO_A_TIEMPO, 'C', True)
-        self.assertEqual((p.estado, c.ec.obligaciones['OB-A'].estado), (EPg.IMPORTE_INCORRECTO, EO.PENDIENTE))
+        self.assertEqual((p.estado, c.ec.obligaciones['OB-A'].estado), (EPg.VERIFICADO, EO.PENDIENTE))
         self.assertIn(p, c.ec.pagos)
-        self.assertEqual(c.ec.extraer_eventos(), [])
+        self.assertEqual(nombres(c.ec.extraer_eventos()), ['PagoVerificado'])
 
     def test_vencer(self):                                                   # CA-023, CA-025
         c = en('saldo_pendiente')
@@ -329,11 +328,11 @@ class PagoAdicionalSobreObligacionLiquidada(unittest.TestCase):
         with mock.patch.object(mod_ec.MAQUINA_OBLIGACION_PAGO, 'transitar', side_effect=AssertionError('consultada')):
             self._comprobar(c, c.ec.registrar_y_verificar_pago('PG-N', 'OB-S', M(500), ANTES_LIMITE, 'C', True))
 
-    def test_anticipo_adicional_con_importe_incorrecto_sobre_liquidada(self):
+    def test_pago_adicional_menor_al_minimo_sobre_anticipo_liquidado(self):      # E-4: se verifica como adicional
         c = en('saldo_pendiente')
         p = c.ec.registrar_y_verificar_pago('PG-N', 'OB-A', M(1000), ANTICIPO_A_TIEMPO, 'C', True)
-        self.assertEqual((p.estado, c.ec.obligaciones['OB-A'].estado), (EPg.IMPORTE_INCORRECTO, EO.LIQUIDADA))
-        self.assertEqual(c.ec.extraer_eventos(), [])
+        self.assertEqual((p.estado, c.ec.obligaciones['OB-A'].estado), (EPg.VERIFICADO, EO.LIQUIDADA))
+        self.assertEqual(nombres(c.ec.extraer_eventos()), ['PagoVerificado'])
 
     def test_si_falla_una_transicion_no_hay_cambios_parciales(self):
         for variante, llamada in (
@@ -527,10 +526,26 @@ class ConservacionDelComportamiento(unittest.TestCase):
         self.assertEqual(len(self.referencia), 1203)
         self.assertEqual(set(self.actual), set(self.referencia))
 
+    # El oráculo (referencia histórica) NO se edita. Para cada clave, el esperado es la entrada del oráculo con solo los cambios que ordenan
+    # E-1 (GL-060/C-15: límite exclusivo de los plazos en días hábiles), H-10 (anticipo tardío liquidado), E-3 y E-4 (pagos parciales del
+    # anticipo). Las reglas están en tests/apoyo_esperados_oraculo.py, que no usa código de producción. Toda clave que ninguna regla
+    # toque debe ser idéntica al oráculo; el resto se compara con su esperado exacto, campo por campo.
+    # Recuento verificado de las 1203 claves: 1094 solo por E-1; 69 por E-3/E-4 (71 con H-10: 2 claves combinan ambas) y 42 por H-10 en total.
+    # D-2 (28/10/2026): 48 claves más, las del grupo R12 del cierre de alcance §8 (pago del saldo con fecha posterior al límite).
+    CLAVES_POR_REGLA = {'E-1': 1203, 'E-3/E-4': 69, 'H-10': 42, 'D-2': 48}
+
     def test_resultados_identicos(self):
-        for clave, esperado in self.referencia.items():
+        """Cada clave coincide con el oráculo histórico más las diferencias esperadas por regla (y nada más)."""
+        aplicadas = {'E-1': 0, 'E-3/E-4': 0, 'H-10': 0, 'D-2': 0}
+        for clave, referencia in self.referencia.items():
+            esperado, reglas = esperado_oraculo(clave, referencia)
+            for r in reglas:
+                aplicadas[r] += 1
             with self.subTest(caso=clave):
                 self.assertEqual(self.actual[clave], esperado)
+                if not reglas:
+                    self.assertEqual(self.actual[clave], referencia)        # sin regla aplicable: idéntica a la referencia histórica
+        self.assertEqual(aplicadas, self.CLAVES_POR_REGLA)
 
     def test_la_referencia_no_incluye_devoluciones_inexistentes(self):     # D-E3D-5, AR-08
         for clave in self.referencia:

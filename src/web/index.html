@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Eventos Nova: gestión de eventos, contratación, pagos y solicitudes.">
+  <title>Eventos Nova</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+  <a class="salto" href="#contenido">Saltar al contenido</a>
+  <div class="app">
+    <aside class="lateral" aria-label="Navegación principal">
+      <div class="marca"><span class="marca-sello" aria-hidden="true">EN</span><span>Eventos Nova</span></div>
+      <nav id="menu">
+        <a href="#/" data-modulo="inicio" data-permiso="eventos.consultar">Panel principal</a>
+        <a href="#/eventos" data-modulo="eventos" data-permiso="eventos.consultar">Eventos</a>
+        <a href="#/solicitudes" data-modulo="solicitudes" data-permiso="eventos.consultar">Solicitudes</a>
+        <a href="#/pagos" data-modulo="pagos" data-permiso="pagos.consultar">Pagos y devoluciones</a>
+        <a href="#/seguimiento" data-modulo="seguimiento" data-permiso="eventos.consultar">Seguimiento</a>
+        <a href="#/proveedores" data-modulo="proveedores" data-permiso="proveedores.consultar">Proveedores</a>
+        <a href="#/proveedor" data-modulo="proveedor" data-permiso="proveedores.propio">Mi proveedor</a>
+        <a href="#/cuentas" data-modulo="cuentas" data-permiso="usuarios.administrar">Cuentas</a>
+        <a href="#/sistema" data-modulo="sistema">Sistema y ayuda</a>
+      </nav>
+      <div id="sesion-caja" class="sesion-caja"></div>
+    </aside>
+    <div class="columna">
+      <header class="barra-superior">
+        <button id="boton-menu" class="btn btn-icono" type="button" aria-controls="menu" aria-expanded="false" aria-label="Abrir o cerrar el menú">
+          <svg viewBox="0 0 24 24" class="icono" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+        <span class="barra-titulo">Eventos Nova</span>
+      </header>
+      <main id="contenido" tabindex="-1"></main>
+    </div>
+  </div>
+  <div id="avisos" class="avisos" aria-live="polite"></div>
+  <noscript>Esta aplicación necesita JavaScript para funcionar.</noscript>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

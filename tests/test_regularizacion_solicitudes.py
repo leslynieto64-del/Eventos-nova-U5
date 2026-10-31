@@ -15,7 +15,7 @@ from decimal import Decimal as D
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from apoyo_regularizacion_solicitudes import (solicitud, observar, variantes, DECISIONES, NO_PROCEDE, AHORA,      # noqa: E402
                                               capturar_comportamiento_regularizacion,
-                                              RUTA_REFERENCIA_REGULARIZACION)
+                                              RUTA_REFERENCIA_REGULARIZACION, adaptar_referencia_e3g)
 from test_reglas_corregidas import Escenario, FECHA_EVENTO                                             # noqa: E402
 
 from domain.solicitudes import SolicitudCambio, SolicitudServicioAdicional, SustitucionProveedor     # noqa: E402
@@ -220,7 +220,7 @@ class ComparacionConLaReferencia(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         with open(RUTA_REFERENCIA_REGULARIZACION, encoding='utf-8') as f:
-            cls.referencia = json.load(f)
+            cls.referencia = adaptar_referencia_e3g(json.load(f))      # E3G: atributo nuevo con su valor por defecto
         cls.actual = json.loads(json.dumps(capturar_comportamiento_regularizacion(), ensure_ascii=False))
         cls.clases = {'SolicitudCambio': SolicitudCambio, 'SolicitudServicioAdicional': SolicitudServicioAdicional,
                       'SustitucionProveedor': SustitucionProveedor}

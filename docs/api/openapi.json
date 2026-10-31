@@ -1,0 +1,5443 @@
+{
+  "components": {
+    "schemas": {
+      "AceptarPropuestaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "version_id": {
+            "examples": [
+              "PR-1a2b3c4d-v1"
+            ],
+            "title": "Version Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "version_id"
+        ],
+        "title": "AceptarPropuestaEntrada",
+        "type": "object"
+      },
+      "AlternativaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "condiciones_alternativa": {
+            "examples": [
+              "Condiciones del reemplazo"
+            ],
+            "title": "Condiciones Alternativa",
+            "type": "string"
+          },
+          "costo_adicional": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Costo Adicional"
+          }
+        },
+        "required": [
+          "condiciones_alternativa"
+        ],
+        "title": "AlternativaEntrada",
+        "type": "object"
+      },
+      "AnexoEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "descripcion": {
+            "examples": [
+              "Cambio de hora"
+            ],
+            "title": "Descripcion",
+            "type": "string"
+          }
+        },
+        "required": [
+          "descripcion"
+        ],
+        "title": "AnexoEntrada",
+        "type": "object"
+      },
+      "AsignarProveedorEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "proveedor_id": {
+            "examples": [
+              "PV-1"
+            ],
+            "title": "Proveedor Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "proveedor_id"
+        ],
+        "title": "AsignarProveedorEntrada",
+        "type": "object"
+      },
+      "CambioContrasenaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "actual": {
+            "maxLength": 256,
+            "title": "Actual",
+            "type": "string"
+          },
+          "nueva": {
+            "maxLength": 256,
+            "title": "Nueva",
+            "type": "string"
+          }
+        },
+        "required": [
+          "actual",
+          "nueva"
+        ],
+        "title": "CambioContrasenaEntrada",
+        "type": "object"
+      },
+      "CancelacionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "motivo": {
+            "examples": [
+              "El Cliente canceló"
+            ],
+            "title": "Motivo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo"
+        ],
+        "title": "CancelacionEntrada",
+        "type": "object"
+      },
+      "CancelacionFaltaRegularizacionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "coordinador": {
+            "examples": [
+              "Coordinador"
+            ],
+            "title": "Coordinador",
+            "type": "string"
+          },
+          "fecha": {
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          },
+          "motivo": {
+            "examples": [
+              "Saldo vencido sin regularizar"
+            ],
+            "title": "Motivo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo",
+          "coordinador",
+          "fecha"
+        ],
+        "title": "CancelacionFaltaRegularizacionEntrada",
+        "type": "object"
+      },
+      "CierreNoAceptacionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "motivo": {
+            "examples": [
+              "El Cliente no respondió"
+            ],
+            "title": "Motivo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "motivo"
+        ],
+        "title": "CierreNoAceptacionEntrada",
+        "type": "object"
+      },
+      "ConceptoPago": {
+        "enum": [
+          "Anticipo",
+          "SaldoContratoOriginal",
+          "SustitucionProveedor",
+          "Cambio",
+          "CargoCambioTardio",
+          "CargosMoratorios",
+          "ServicioAdicional"
+        ],
+        "title": "ConceptoPago",
+        "type": "string"
+      },
+      "ContrasenaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "contrasena": {
+            "maxLength": 256,
+            "title": "Contrasena",
+            "type": "string"
+          }
+        },
+        "required": [
+          "contrasena"
+        ],
+        "title": "ContrasenaEntrada",
+        "type": "object"
+      },
+      "CrearPropuestaEntrada": {
+        "additionalProperties": false,
+        "description": "Campos de ContenidoPropuesta. La fecha de la versión la asigna el servidor.",
+        "properties": {
+          "condiciones": {
+            "examples": [
+              "Condiciones generales"
+            ],
+            "title": "Condiciones",
+            "type": "string"
+          },
+          "costo_total": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "examples": [
+              "10000.00"
+            ],
+            "title": "Costo Total"
+          },
+          "proveedores_considerados": {
+            "examples": [
+              [
+                "PV-1"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "title": "Proveedores Considerados",
+            "type": "array"
+          },
+          "servicios": {
+            "examples": [
+              [
+                "Banquete"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "title": "Servicios",
+            "type": "array"
+          }
+        },
+        "required": [
+          "servicios",
+          "proveedores_considerados",
+          "costo_total",
+          "condiciones"
+        ],
+        "title": "CrearPropuestaEntrada",
+        "type": "object"
+      },
+      "DatosEventoEntrada": {
+        "additionalProperties": false,
+        "description": "Campos de DatosEvento. La fecha y hora se envían sin zona horaria, como las maneja el dominio.",
+        "properties": {
+          "fecha_hora": {
+            "examples": [
+              "2026-11-20T18:00:00"
+            ],
+            "format": "date-time",
+            "title": "Fecha Hora",
+            "type": "string"
+          },
+          "invitados_aproximados": {
+            "examples": [
+              100
+            ],
+            "maximum": 9.223372036854776e+18,
+            "title": "Invitados Aproximados",
+            "type": "integer"
+          },
+          "lugar": {
+            "examples": [
+              "Salón"
+            ],
+            "title": "Lugar",
+            "type": "string"
+          },
+          "tipo": {
+            "examples": [
+              "Boda"
+            ],
+            "title": "Tipo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "tipo",
+          "fecha_hora",
+          "lugar",
+          "invitados_aproximados"
+        ],
+        "title": "DatosEventoEntrada",
+        "type": "object"
+      },
+      "DecisionEntrada": {
+        "additionalProperties": false,
+        "description": "Decisión del Cliente o de Administración (`Decision`).",
+        "properties": {
+          "actor": {
+            "examples": [
+              "Cliente"
+            ],
+            "title": "Actor",
+            "type": "string"
+          },
+          "aprobada": {
+            "title": "Aprobada",
+            "type": "boolean"
+          },
+          "fecha": {
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          },
+          "motivo": {
+            "default": "",
+            "title": "Motivo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "actor",
+          "aprobada",
+          "fecha"
+        ],
+        "title": "DecisionEntrada",
+        "type": "object"
+      },
+      "DecisionEsperaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "acepta_esperar": {
+            "title": "Acepta Esperar",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "acepta_esperar"
+        ],
+        "title": "DecisionEsperaEntrada",
+        "type": "object"
+      },
+      "DevolucionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "comprobante": {
+            "anyOf": [
+              {
+                "minLength": 1,
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Comprobante de la devolución que Administración efectuó fuera del sistema (CA-098). Si se omite, se usa el ejecutor de devoluciones simulado.",
+            "examples": [
+              "TRANSF-0001"
+            ],
+            "title": "Comprobante"
+          }
+        },
+        "title": "DevolucionEntrada",
+        "type": "object"
+      },
+      "DevolucionRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "comprobante": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Comprobante"
+          },
+          "concepto": {
+            "title": "Concepto",
+            "type": "string"
+          },
+          "devolucionId": {
+            "title": "Devolucionid",
+            "type": "string"
+          },
+          "enPlazo": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Enplazo"
+          },
+          "estado": {
+            "title": "Estado",
+            "type": "string"
+          },
+          "fechaCierre": {
+            "title": "Fechacierre",
+            "type": "string"
+          },
+          "fechaDevolucion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Fechadevolucion"
+          },
+          "fechaLimite": {
+            "title": "Fechalimite",
+            "type": "string"
+          },
+          "importe": {
+            "title": "Importe",
+            "type": "string"
+          },
+          "pagoId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Pagoid"
+          },
+          "solicitudId": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Solicitudid"
+          },
+          "tipo": {
+            "title": "Tipo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "devolucionId",
+          "concepto",
+          "importe",
+          "estado",
+          "fechaCierre",
+          "fechaLimite",
+          "tipo"
+        ],
+        "title": "DevolucionRespuesta",
+        "type": "object"
+      },
+      "DisponibilidadEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "proveedores_actuales": {
+            "items": {
+              "type": "string"
+            },
+            "title": "Proveedores Actuales",
+            "type": "array"
+          }
+        },
+        "title": "DisponibilidadEntrada",
+        "type": "object"
+      },
+      "EstadoCuentaResumenRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "anticipo": {
+            "$ref": "#/components/schemas/ObligacionPagoRespuesta"
+          },
+          "contratoId": {
+            "title": "Contratoid",
+            "type": "string"
+          },
+          "devoluciones": {
+            "items": {
+              "$ref": "#/components/schemas/DevolucionRespuesta"
+            },
+            "title": "Devoluciones",
+            "type": "array"
+          },
+          "estadoCuentaId": {
+            "title": "Estadocuentaid",
+            "type": "string"
+          },
+          "obligacionesAdicionales": {
+            "items": {
+              "$ref": "#/components/schemas/ObligacionAdicionalRespuesta"
+            },
+            "title": "Obligacionesadicionales",
+            "type": "array"
+          },
+          "pagosRegistrados": {
+            "items": {
+              "$ref": "#/components/schemas/PagoRegistradoRespuesta"
+            },
+            "title": "Pagosregistrados",
+            "type": "array"
+          },
+          "saldoContratoOriginal": {
+            "$ref": "#/components/schemas/ObligacionPagoRespuesta"
+          }
+        },
+        "required": [
+          "estadoCuentaId",
+          "contratoId",
+          "anticipo",
+          "pagosRegistrados",
+          "saldoContratoOriginal",
+          "obligacionesAdicionales",
+          "devoluciones"
+        ],
+        "title": "EstadoCuentaResumenRespuesta",
+        "type": "object"
+      },
+      "EstadoPagosRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "estadosCuenta": {
+            "items": {
+              "$ref": "#/components/schemas/EstadoCuentaResumenRespuesta"
+            },
+            "title": "Estadoscuenta",
+            "type": "array"
+          },
+          "eventoId": {
+            "title": "Eventoid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "eventoId",
+          "estadosCuenta"
+        ],
+        "title": "EstadoPagosRespuesta",
+        "type": "object"
+      },
+      "EstadoUsuarioEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "activo": {
+            "title": "Activo",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "activo"
+        ],
+        "title": "EstadoUsuarioEntrada",
+        "type": "object"
+      },
+      "EventoRegistradoRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "evento_id": {
+            "title": "Evento Id",
+            "type": "string"
+          },
+          "mensaje": {
+            "title": "Mensaje",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evento_id",
+          "mensaje"
+        ],
+        "title": "EventoRegistradoRespuesta",
+        "type": "object"
+      },
+      "FechaEntrada": {
+        "additionalProperties": false,
+        "description": "Fecha y hora (sin zona) del hecho que se registra.",
+        "properties": {
+          "fecha": {
+            "examples": [
+              "2026-10-05T10:00:00"
+            ],
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          }
+        },
+        "required": [
+          "fecha"
+        ],
+        "title": "FechaEntrada",
+        "type": "object"
+      },
+      "ImporteAdicionalSustitucionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "importe": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "examples": [
+              "250.75"
+            ],
+            "title": "Importe"
+          }
+        },
+        "required": [
+          "importe"
+        ],
+        "title": "ImporteAdicionalSustitucionEntrada",
+        "type": "object"
+      },
+      "InicioSesionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "contrasena": {
+            "maxLength": 256,
+            "title": "Contrasena",
+            "type": "string"
+          },
+          "correo": {
+            "examples": [
+              "coordinador@eventosnova.example"
+            ],
+            "maxLength": 254,
+            "title": "Correo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "correo",
+          "contrasena"
+        ],
+        "title": "InicioSesionEntrada",
+        "type": "object"
+      },
+      "ObligacionAdicionalRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "concepto": {
+            "title": "Concepto",
+            "type": "string"
+          },
+          "estado": {
+            "title": "Estado",
+            "type": "string"
+          },
+          "importe": {
+            "title": "Importe",
+            "type": "string"
+          },
+          "plazo": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Plazo"
+          }
+        },
+        "required": [
+          "concepto",
+          "importe",
+          "estado"
+        ],
+        "title": "ObligacionAdicionalRespuesta",
+        "type": "object"
+      },
+      "ObligacionPagoRespuesta": {
+        "additionalProperties": false,
+        "description": "Anticipo o saldo del contrato original. Vacío si el Estado de Cuenta no tiene esa obligación; `plazoVencido` solo se\ninforma cuando la consulta recibe reloj (CA-023); `resultadoRegularizacion` solo aparece en el saldo ya revisado.",
+        "properties": {
+          "estado": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Estado"
+          },
+          "fechaLimite": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Vencimiento del plazo (ISO 8601); null si la obligación no tiene plazo",
+            "title": "Fechalimite"
+          },
+          "importe": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Importe"
+          },
+          "plazoVencido": {
+            "anyOf": [
+              {
+                "type": "boolean"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "true si la obligación sigue Pendiente o Vencida y su plazo ya venció a la hora de la consulta (CA-023)",
+            "title": "Plazovencido"
+          },
+          "resultadoRegularizacion": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "«Regularizado» o «No regularizado», registrado por Administración",
+            "title": "Resultadoregularizacion"
+          }
+        },
+        "title": "ObligacionPagoRespuesta",
+        "type": "object"
+      },
+      "OperacionRespuesta": {
+        "description": "Éxito de una operación: mensaje del servicio y los datos que devuelve (identificadores, números...).",
+        "properties": {
+          "datos": {
+            "additionalProperties": true,
+            "title": "Datos",
+            "type": "object"
+          },
+          "mensaje": {
+            "title": "Mensaje",
+            "type": "string"
+          }
+        },
+        "required": [
+          "mensaje"
+        ],
+        "title": "OperacionRespuesta",
+        "type": "object"
+      },
+      "PagoEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "comprobante": {
+            "examples": [
+              "C-0001"
+            ],
+            "title": "Comprobante",
+            "type": "string"
+          },
+          "fecha": {
+            "description": "Cuándo el Cliente efectuó el pago (según el comprobante).",
+            "examples": [
+              "2026-10-05T10:00:00"
+            ],
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          },
+          "importe": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "examples": [
+              "3000.00"
+            ],
+            "title": "Importe"
+          },
+          "obligacion_id": {
+            "examples": [
+              "OB-1a2b3c4d"
+            ],
+            "title": "Obligacion Id",
+            "type": "string"
+          },
+          "registrado_en": {
+            "anyOf": [
+              {
+                "format": "date-time",
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Cuándo Administración lo registra; por omisión, la fecha del pago.",
+            "title": "Registrado En"
+          },
+          "verificar_ahora": {
+            "default": true,
+            "description": "Si es falso, el pago queda Registrado y se verifica después.",
+            "title": "Verificar Ahora",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "obligacion_id",
+          "importe",
+          "fecha",
+          "comprobante"
+        ],
+        "title": "PagoEntrada",
+        "type": "object"
+      },
+      "PagoRegistradoRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "concepto": {
+            "title": "Concepto",
+            "type": "string"
+          },
+          "estado": {
+            "title": "Estado",
+            "type": "string"
+          },
+          "fecha": {
+            "title": "Fecha",
+            "type": "string"
+          },
+          "importe": {
+            "title": "Importe",
+            "type": "string"
+          },
+          "registradoEn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Registradoen"
+          },
+          "verificadoEn": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Verificadoen"
+          }
+        },
+        "required": [
+          "concepto",
+          "importe",
+          "fecha",
+          "estado"
+        ],
+        "title": "PagoRegistradoRespuesta",
+        "type": "object"
+      },
+      "PrepararContratoEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "politica_incluida": {
+            "examples": [
+              true
+            ],
+            "title": "Politica Incluida",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "politica_incluida"
+        ],
+        "title": "PrepararContratoEntrada",
+        "type": "object"
+      },
+      "PropuestaCreadaRespuesta": {
+        "additionalProperties": false,
+        "properties": {
+          "evento_id": {
+            "title": "Evento Id",
+            "type": "string"
+          },
+          "mensaje": {
+            "title": "Mensaje",
+            "type": "string"
+          },
+          "propuesta_id": {
+            "title": "Propuesta Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "propuesta_id",
+          "evento_id",
+          "mensaje"
+        ],
+        "title": "PropuestaCreadaRespuesta",
+        "type": "object"
+      },
+      "ProtocoloCobroEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "comunicado_en": {
+            "format": "date-time",
+            "title": "Comunicado En",
+            "type": "string"
+          },
+          "importe_moratorio": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "examples": [
+              "200.00"
+            ],
+            "title": "Importe Moratorio"
+          },
+          "seguimiento": {
+            "examples": [
+              "Recordatorio amistoso"
+            ],
+            "title": "Seguimiento",
+            "type": "string"
+          }
+        },
+        "required": [
+          "importe_moratorio",
+          "comunicado_en",
+          "seguimiento"
+        ],
+        "title": "ProtocoloCobroEntrada",
+        "type": "object"
+      },
+      "ProveedorEntrada": {
+        "additionalProperties": false,
+        "description": "Alta de un proveedor. Solo el nombre es obligatorio: el BRD no especifica más atributos.",
+        "properties": {
+          "contacto": {
+            "default": "",
+            "description": "Texto libre (teléfono, correo...).",
+            "examples": [
+              "55 1234 5678"
+            ],
+            "title": "Contacto",
+            "type": "string"
+          },
+          "nombre": {
+            "examples": [
+              "Banquetes del Valle"
+            ],
+            "title": "Nombre",
+            "type": "string"
+          },
+          "servicios": {
+            "description": "Servicios que ofrece; se usan para proponerlo al asignar un servicio contratado.",
+            "examples": [
+              [
+                "Banquete",
+                "Música"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "title": "Servicios",
+            "type": "array"
+          }
+        },
+        "required": [
+          "nombre"
+        ],
+        "title": "ProveedorEntrada",
+        "type": "object"
+      },
+      "RechazoRespuesta": {
+        "additionalProperties": false,
+        "description": "Rechazo de negocio: el motivo es el que devuelve el servicio de aplicación o el dominio.",
+        "properties": {
+          "detalle": {
+            "title": "Detalle",
+            "type": "string"
+          },
+          "pendientes": {
+            "default": [],
+            "items": {
+              "type": "string"
+            },
+            "title": "Pendientes",
+            "type": "array"
+          },
+          "tipo": {
+            "default": "rechazo_de_negocio",
+            "title": "Tipo",
+            "type": "string"
+          }
+        },
+        "required": [
+          "detalle"
+        ],
+        "title": "RechazoRespuesta",
+        "type": "object"
+      },
+      "RegistrarEventoEntrada": {
+        "additionalProperties": false,
+        "description": "Parámetros de GestionPropuestaService.registrar_evento.",
+        "properties": {
+          "cliente_id": {
+            "examples": [
+              "CL-1"
+            ],
+            "title": "Cliente Id",
+            "type": "string"
+          },
+          "datos": {
+            "$ref": "#/components/schemas/DatosEventoEntrada"
+          },
+          "servicios": {
+            "examples": [
+              [
+                "Banquete"
+              ]
+            ],
+            "items": {
+              "type": "string"
+            },
+            "title": "Servicios",
+            "type": "array"
+          }
+        },
+        "required": [
+          "cliente_id",
+          "datos",
+          "servicios"
+        ],
+        "title": "RegistrarEventoEntrada",
+        "type": "object"
+      },
+      "RegularizacionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "revisado_en": {
+            "format": "date-time",
+            "title": "Revisado En",
+            "type": "string"
+          }
+        },
+        "required": [
+          "revisado_en"
+        ],
+        "title": "RegularizacionEntrada",
+        "type": "object"
+      },
+      "RespuestaProveedorEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "disponible": {
+            "title": "Disponible",
+            "type": "boolean"
+          },
+          "proveedor_id": {
+            "examples": [
+              "PV-1"
+            ],
+            "title": "Proveedor Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "proveedor_id",
+          "disponible"
+        ],
+        "title": "RespuestaProveedorEntrada",
+        "type": "object"
+      },
+      "RevisionAdministrativaEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "fecha": {
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          },
+          "resultado": {
+            "examples": [
+              "Sin reembolso (política de no reembolso)"
+            ],
+            "title": "Resultado",
+            "type": "string"
+          }
+        },
+        "required": [
+          "resultado",
+          "fecha"
+        ],
+        "title": "RevisionAdministrativaEntrada",
+        "type": "object"
+      },
+      "SeguimientoAnticipoEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "fecha": {
+            "examples": [
+              "2026-10-09T10:00:00"
+            ],
+            "format": "date-time",
+            "title": "Fecha",
+            "type": "string"
+          },
+          "resultado_contacto": {
+            "examples": [
+              "Se contactó al Cliente"
+            ],
+            "title": "Resultado Contacto",
+            "type": "string"
+          },
+          "sin_pago_tras_seguimiento": {
+            "examples": [
+              false
+            ],
+            "title": "Sin Pago Tras Seguimiento",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "fecha",
+          "resultado_contacto",
+          "sin_pago_tras_seguimiento"
+        ],
+        "title": "SeguimientoAnticipoEntrada",
+        "type": "object"
+      },
+      "SolicitudCambioEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "condiciones_propuestas": {
+            "anyOf": [
+              {
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "type": "object"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "servicioContratadoId → descripción de las nuevas condiciones.",
+            "title": "Condiciones Propuestas"
+          },
+          "contrato_id": {
+            "title": "Contrato Id",
+            "type": "string"
+          },
+          "datos_propuestos": {
+            "anyOf": [
+              {
+                "$ref": "#/components/schemas/DatosEventoEntrada"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "descripcion": {
+            "examples": [
+              "Cambiar la hora"
+            ],
+            "title": "Descripcion",
+            "type": "string"
+          },
+          "evento_id": {
+            "title": "Evento Id",
+            "type": "string"
+          },
+          "tarifa_vigente": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "description": "Tarifa vigente del cargo por cambio tardío (BN-003).",
+            "examples": [
+              "500.00"
+            ],
+            "title": "Tarifa Vigente"
+          }
+        },
+        "required": [
+          "evento_id",
+          "contrato_id",
+          "descripcion",
+          "tarifa_vigente"
+        ],
+        "title": "SolicitudCambioEntrada",
+        "type": "object"
+      },
+      "SolicitudPagoCambioEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "comunicado_en": {
+            "format": "date-time",
+            "title": "Comunicado En",
+            "type": "string"
+          }
+        },
+        "required": [
+          "comunicado_en"
+        ],
+        "title": "SolicitudPagoCambioEntrada",
+        "type": "object"
+      },
+      "SolicitudPagoServicioAdicionalEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "comunicado_en": {
+            "format": "date-time",
+            "title": "Comunicado En",
+            "type": "string"
+          },
+          "concepto": {
+            "$ref": "#/components/schemas/ConceptoPago",
+            "examples": [
+              "ServicioAdicional"
+            ]
+          },
+          "importe": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              }
+            ],
+            "examples": [
+              "800.00"
+            ],
+            "title": "Importe"
+          }
+        },
+        "required": [
+          "concepto",
+          "importe",
+          "comunicado_en"
+        ],
+        "title": "SolicitudPagoServicioAdicionalEntrada",
+        "type": "object"
+      },
+      "SolicitudServicioAdicionalEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "contrato_id": {
+            "title": "Contrato Id",
+            "type": "string"
+          },
+          "evento_id": {
+            "title": "Evento Id",
+            "type": "string"
+          },
+          "servicio": {
+            "examples": [
+              "Foto"
+            ],
+            "title": "Servicio",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evento_id",
+          "contrato_id",
+          "servicio"
+        ],
+        "title": "SolicitudServicioAdicionalEntrada",
+        "type": "object"
+      },
+      "SustitucionEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "contrato_id": {
+            "title": "Contrato Id",
+            "type": "string"
+          },
+          "evento_id": {
+            "title": "Evento Id",
+            "type": "string"
+          },
+          "servicio_contratado_id": {
+            "title": "Servicio Contratado Id",
+            "type": "string"
+          }
+        },
+        "required": [
+          "evento_id",
+          "servicio_contratado_id",
+          "contrato_id"
+        ],
+        "title": "SustitucionEntrada",
+        "type": "object"
+      },
+      "UsuarioEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "contrasena": {
+            "maxLength": 256,
+            "title": "Contrasena",
+            "type": "string"
+          },
+          "correo": {
+            "maxLength": 254,
+            "title": "Correo",
+            "type": "string"
+          },
+          "nombre": {
+            "maxLength": 200,
+            "title": "Nombre",
+            "type": "string"
+          },
+          "proveedor_id": {
+            "anyOf": [
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Solo para el rol proveedor: el proveedor del catálogo al que pertenece la cuenta.",
+            "title": "Proveedor Id"
+          },
+          "rol": {
+            "description": "Obligatorio: no existe un rol por omisión (mínimo privilegio).",
+            "examples": [
+              "administrador",
+              "coordinador",
+              "proveedor"
+            ],
+            "title": "Rol",
+            "type": "string"
+          }
+        },
+        "required": [
+          "correo",
+          "nombre",
+          "rol",
+          "contrasena"
+        ],
+        "title": "UsuarioEntrada",
+        "type": "object"
+      },
+      "VerificacionPagoEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "verificado_en": {
+            "examples": [
+              "2026-10-06T09:00:00"
+            ],
+            "format": "date-time",
+            "title": "Verificado En",
+            "type": "string"
+          }
+        },
+        "required": [
+          "verificado_en"
+        ],
+        "title": "VerificacionPagoEntrada",
+        "type": "object"
+      },
+      "ViabilidadEntrada": {
+        "additionalProperties": false,
+        "properties": {
+          "costo_adicional_proveedor": {
+            "anyOf": [
+              {
+                "type": "number"
+              },
+              {
+                "type": "string"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "title": "Costo Adicional Proveedor"
+          },
+          "motivo": {
+            "default": "",
+            "title": "Motivo",
+            "type": "string"
+          },
+          "viable": {
+            "title": "Viable",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "viable"
+        ],
+        "title": "ViabilidadEntrada",
+        "type": "object"
+      }
+    },
+    "securitySchemes": {
+      "SesionCookie": {
+        "description": "Cookie de sesión HttpOnly emitida por POST /auth/inicio-sesion. Las operaciones que modifican datos exigen además la cabecera X-CSRF-Token que devuelve el inicio de sesión.",
+        "in": "cookie",
+        "name": "eventosnova_sesion",
+        "type": "apiKey"
+      }
+    }
+  },
+  "info": {
+    "description": "API del sistema de apoyo a la gestión de eventos de Eventos Nova: propuestas, contratación, pagos, cancelaciones, cambios, servicios adicionales y sustituciones de proveedores.",
+    "title": "Eventos Nova API",
+    "version": "0.1.0"
+  },
+  "openapi": "3.1.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "raiz__get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Raiz  Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Identificación de la aplicación",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/auth/cambio-contrasena": {
+      "post": {
+        "operationId": "cambiar_contrasena_auth_cambio_contrasena_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CambioContrasenaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Cambiar la contraseña propia",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/auth/cierre-sesion": {
+      "post": {
+        "operationId": "cerrar_sesion_auth_cierre_sesion_post",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Cerrar sesión",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/auth/inicio-sesion": {
+      "post": {
+        "operationId": "iniciar_sesion_auth_inicio_sesion_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/InicioSesionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "summary": "Iniciar sesión",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/auth/yo": {
+      "get": {
+        "operationId": "sesion_actual_auth_yo_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Sesión actual",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/contratos/{contrato_id}/comunicacion-politica-no-reembolso": {
+      "post": {
+        "operationId": "comunicar_politica_contratos__contrato_id__comunicacion_politica_no_reembolso_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contrato_id",
+            "required": true,
+            "schema": {
+              "title": "Contrato Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FechaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar que se comunicó la política de no reembolso al Cliente",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/contratos/{contrato_id}/confirmacion": {
+      "post": {
+        "operationId": "confirmar_contratacion_contratos__contrato_id__confirmacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contrato_id",
+            "required": true,
+            "schema": {
+              "title": "Contrato Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Confirmar la contratación (firma, política comunicada y anticipo verificado)",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/contratos/{contrato_id}/firma": {
+      "post": {
+        "operationId": "registrar_firma_contratos__contrato_id__firma_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contrato_id",
+            "required": true,
+            "schema": {
+              "title": "Contrato Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FechaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la firma del contrato",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/contratos/{contrato_id}/seguimiento-anticipo": {
+      "post": {
+        "operationId": "seguimiento_anticipo_contratos__contrato_id__seguimiento_anticipo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "contrato_id",
+            "required": true,
+            "schema": {
+              "title": "Contrato Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SeguimientoAnticipoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Dar seguimiento al anticipo pendiente (y cerrar la contratación si procede)",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/devoluciones-pendientes": {
+      "get": {
+        "operationId": "devoluciones_pendientes_devoluciones_pendientes_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "evento_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Evento Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Devoluciones pendientes con su fecha límite",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/devoluciones/{devolucion_id}/ejecucion": {
+      "post": {
+        "operationId": "ejecutar_devolucion_estados_cuenta__estado_cuenta_id__devoluciones__devolucion_id__ejecucion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "devolucion_id",
+            "required": true,
+            "schema": {
+              "title": "Devolucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "anyOf": [
+                  {
+                    "$ref": "#/components/schemas/DevolucionEntrada"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ],
+                "title": "Entrada"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar y ejecutar una devolución pendiente",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/pagos": {
+      "post": {
+        "operationId": "registrar_pago_estados_cuenta__estado_cuenta_id__pagos_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PagoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar (y verificar) un pago",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/pagos/{pago_id}/verificacion": {
+      "post": {
+        "operationId": "verificar_pago_estados_cuenta__estado_cuenta_id__pagos__pago_id__verificacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "pago_id",
+            "required": true,
+            "schema": {
+              "title": "Pago Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/VerificacionPagoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Verificar un pago ya registrado",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/protocolo-cobro": {
+      "post": {
+        "operationId": "protocolo_cobro_estados_cuenta__estado_cuenta_id__protocolo_cobro_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProtocoloCobroEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Activar el protocolo de cobro (cargos moratorios)",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/regularizacion": {
+      "post": {
+        "operationId": "regularizacion_estados_cuenta__estado_cuenta_id__regularizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegularizacionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el resultado de la regularización del saldo vencido",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/estados-cuenta/{estado_cuenta_id}/vencimiento-saldo-original": {
+      "post": {
+        "operationId": "vencimiento_saldo_estados_cuenta__estado_cuenta_id__vencimiento_saldo_original_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "estado_cuenta_id",
+            "required": true,
+            "schema": {
+              "title": "Estado Cuenta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el vencimiento del saldo del contrato original",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/eventos": {
+      "get": {
+        "operationId": "eventos_proximos_eventos_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "desde",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "title": "Desde",
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "hasta",
+            "required": true,
+            "schema": {
+              "format": "date-time",
+              "title": "Hasta",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Eventos cuya fecha cae en una ventana [desde, hasta]",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      },
+      "post": {
+        "operationId": "registrar_evento_eventos_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarEventoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventoRegistradoRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar un evento",
+        "tags": [
+          "Propuestas (CU-01)"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/administracion": {
+      "get": {
+        "operationId": "informacion_administrativa_eventos__evento_id__administracion_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Información administrativa del evento (contratos, pagos, proveedores y solicitudes)",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/cancelacion": {
+      "post": {
+        "operationId": "cancelar_evento_eventos__evento_id__cancelacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelacionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Gestionar la cancelación solicitada por el Cliente",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/cancelacion-por-falta-de-regularizacion": {
+      "post": {
+        "operationId": "cancelar_por_falta_de_regularizacion_eventos__evento_id__cancelacion_por_falta_de_regularizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelacionFaltaRegularizacionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la cancelación por falta de regularización del saldo (registro formal del Coordinador)",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/finalizacion": {
+      "post": {
+        "operationId": "finalizar_evento_eventos__evento_id__finalizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FechaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la finalización del evento",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/inicio": {
+      "post": {
+        "operationId": "iniciar_evento_eventos__evento_id__inicio_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el inicio del evento",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/pagos": {
+      "get": {
+        "operationId": "estado_pagos_eventos__evento_id__pagos_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EstadoPagosRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Estado de los pagos del evento",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/propuestas": {
+      "post": {
+        "operationId": "crear_propuesta_eventos__evento_id__propuestas_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPropuestaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PropuestaCreadaRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Crear la propuesta de un evento",
+        "tags": [
+          "Propuestas (CU-01)"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/revision-administrativa": {
+      "post": {
+        "operationId": "revision_administrativa_eventos__evento_id__revision_administrativa_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RevisionAdministrativaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la revisión administrativa de un evento cancelado",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/servicios/{servicio_contratado_id}/disponibilidad": {
+      "get": {
+        "operationId": "consultar_disponibilidad_eventos__evento_id__servicios__servicio_contratado_id__disponibilidad_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "servicio_contratado_id",
+            "required": true,
+            "schema": {
+              "title": "Servicio Contratado Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Consultar la disponibilidad de proveedores de un servicio contratado",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/servicios/{servicio_contratado_id}/proveedor": {
+      "post": {
+        "operationId": "asignar_proveedor_eventos__evento_id__servicios__servicio_contratado_id__proveedor_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "servicio_contratado_id",
+            "required": true,
+            "schema": {
+              "title": "Servicio Contratado Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AsignarProveedorEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Asignar un proveedor a un servicio contratado",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/servicios/{servicio_contratado_id}/respuesta-proveedor": {
+      "post": {
+        "operationId": "respuesta_proveedor_eventos__evento_id__servicios__servicio_contratado_id__respuesta_proveedor_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "servicio_contratado_id",
+            "required": true,
+            "schema": {
+              "title": "Servicio Contratado Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RespuestaProveedorEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la respuesta del proveedor sobre su disponibilidad",
+        "tags": [
+          "Ciclo de vida del Evento y proveedores"
+        ]
+      }
+    },
+    "/eventos/{evento_id}/solicitudes-pendientes": {
+      "get": {
+        "operationId": "solicitudes_pendientes_eventos__evento_id__solicitudes_pendientes_get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Solicitudes pendientes del evento",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/health": {
+      "get": {
+        "operationId": "salud_health_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": true,
+                  "title": "Response Salud Health Get",
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Verificación de disponibilidad",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/pagos-pendientes": {
+      "get": {
+        "operationId": "pagos_pendientes_pagos_pendientes_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "evento_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Evento Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Obligaciones Pendientes o Vencidas",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/propuestas/{propuesta_id}/aceptacion": {
+      "post": {
+        "operationId": "aceptar_propuesta_propuestas__propuesta_id__aceptacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "propuesta_id",
+            "required": true,
+            "schema": {
+              "title": "Propuesta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AceptarPropuestaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Aceptar la versión vigente de la propuesta",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/propuestas/{propuesta_id}/cierre-por-no-aceptacion": {
+      "post": {
+        "operationId": "cerrar_propuesta_propuestas__propuesta_id__cierre_por_no_aceptacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "propuesta_id",
+            "required": true,
+            "schema": {
+              "title": "Propuesta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CierreNoAceptacionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Cerrar la propuesta por no aceptación del Cliente",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/propuestas/{propuesta_id}/contrato": {
+      "post": {
+        "operationId": "preparar_contrato_propuestas__propuesta_id__contrato_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "propuesta_id",
+            "required": true,
+            "schema": {
+              "title": "Propuesta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PrepararContratoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Preparar el contrato de una propuesta aceptada",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/propuestas/{propuesta_id}/versiones": {
+      "post": {
+        "operationId": "generar_nueva_version_propuestas__propuesta_id__versiones_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "propuesta_id",
+            "required": true,
+            "schema": {
+              "title": "Propuesta Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CrearPropuestaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Generar una nueva versión de la propuesta",
+        "tags": [
+          "Propuestas y contratación (CU-01, CU-02)"
+        ]
+      }
+    },
+    "/proveedores": {
+      "get": {
+        "operationId": "listar_proveedores_proveedores_get",
+        "parameters": [
+          {
+            "description": "Texto a buscar en identificador, nombre, contacto o servicios",
+            "in": "query",
+            "name": "q",
+            "required": false,
+            "schema": {
+              "default": "",
+              "description": "Texto a buscar en identificador, nombre, contacto o servicios",
+              "title": "Q",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Solo los que ofrecen este servicio",
+            "in": "query",
+            "name": "servicio",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "description": "Solo los que ofrecen este servicio",
+              "title": "Servicio"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Consultar y buscar proveedores del catálogo",
+        "tags": [
+          "Proveedores (catálogo)"
+        ]
+      },
+      "post": {
+        "operationId": "registrar_proveedor_proveedores_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProveedorEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar un proveedor en el catálogo",
+        "tags": [
+          "Proveedores (catálogo)"
+        ]
+      }
+    },
+    "/proveedores/{proveedor_id}": {
+      "get": {
+        "operationId": "consultar_proveedor_proveedores__proveedor_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "proveedor_id",
+            "required": true,
+            "schema": {
+              "title": "Proveedor Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Proveedor no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Datos de un proveedor del catálogo",
+        "tags": [
+          "Proveedores (catálogo)"
+        ]
+      }
+    },
+    "/proveedores/{proveedor_id}/eventos/{evento_id}": {
+      "get": {
+        "operationId": "servicio_asignado_proveedores__proveedor_id__eventos__evento_id__get",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "proveedor_id",
+            "required": true,
+            "schema": {
+              "title": "Proveedor Id",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "evento_id",
+            "required": true,
+            "schema": {
+              "title": "Evento Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Servicios que un proveedor tiene asignados en un evento",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/ready": {
+      "get": {
+        "operationId": "listo_ready_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          }
+        },
+        "summary": "Disponibilidad de la aplicación y de la base de datos",
+        "tags": [
+          "General"
+        ]
+      }
+    },
+    "/servicios-pendientes-confirmacion": {
+      "get": {
+        "operationId": "servicios_pendientes_servicios_pendientes_confirmacion_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "evento_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Evento Id"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Servicios y solicitudes pendientes de confirmación",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/solicitudes": {
+      "get": {
+        "operationId": "solicitudes_por_estado_solicitudes_get",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "estado",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Estado"
+            }
+          },
+          {
+            "in": "query",
+            "name": "evento_id",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Evento Id"
+            }
+          },
+          {
+            "in": "query",
+            "name": "tipo",
+            "required": false,
+            "schema": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "null"
+                }
+              ],
+              "title": "Tipo"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {}
+              }
+            },
+            "description": "Successful Response"
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Recurso no encontrado"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Parámetros no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Solicitudes filtradas por estado, evento y tipo",
+        "tags": [
+          "Consultas (solo lectura)"
+        ]
+      }
+    },
+    "/solicitudes-cambio": {
+      "post": {
+        "operationId": "registrar_cambio_solicitudes_cambio_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudCambioEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar una solicitud de cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/anexo": {
+      "post": {
+        "operationId": "anexo_cambio_solicitudes_cambio__solicitud_id__anexo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnexoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el anexo del contrato para un cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/autorizacion": {
+      "post": {
+        "operationId": "autorizacion_cambio_solicitudes_cambio__solicitud_id__autorizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la autorización de Administración sobre un cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/cierre-por-falta-de-pago": {
+      "post": {
+        "operationId": "cerrar_cambio_falta_pago_solicitudes_cambio__solicitud_id__cierre_por_falta_de_pago_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Cerrar un cambio por falta de pago",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/confirmacion": {
+      "post": {
+        "operationId": "confirmar_cambio_solicitudes_cambio__solicitud_id__confirmacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Confirmar un cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/decision-cliente": {
+      "post": {
+        "operationId": "decision_cliente_cambio_solicitudes_cambio__solicitud_id__decision_cliente_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la decisión del Cliente sobre un cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/solicitud-pago": {
+      "post": {
+        "operationId": "solicitud_pago_cambio_solicitudes_cambio__solicitud_id__solicitud_pago_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudPagoCambioEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Comunicar al Cliente la solicitud de pago de un cambio",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/solicitudes-cambio/{solicitud_id}/viabilidad": {
+      "post": {
+        "operationId": "viabilidad_cambio_solicitudes_cambio__solicitud_id__viabilidad_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ViabilidadEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la evaluación de viabilidad de un cambio",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional": {
+      "post": {
+        "operationId": "registrar_servicio_adicional_solicitudes_servicio_adicional_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudServicioAdicionalEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar una solicitud de servicio adicional",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/anexo": {
+      "post": {
+        "operationId": "anexo_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__anexo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnexoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el anexo del contrato para un servicio adicional",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/aprobacion-cliente": {
+      "post": {
+        "operationId": "aprobacion_cliente_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__aprobacion_cliente_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la aprobación o rechazo del Cliente",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/autorizacion": {
+      "post": {
+        "operationId": "autorizacion_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__autorizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la autorización de Administración",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/cierre-por-falta-de-pago": {
+      "post": {
+        "operationId": "cerrar_servicio_adicional_falta_pago_solicitudes_servicio_adicional__solicitud_id__cierre_por_falta_de_pago_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Cerrar un servicio adicional por falta de pago",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/confirmacion": {
+      "post": {
+        "operationId": "confirmar_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__confirmacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Confirmar un servicio adicional",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/decision-espera": {
+      "post": {
+        "operationId": "decision_espera_solicitudes_servicio_adicional__solicitud_id__decision_espera_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEsperaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar si el Cliente acepta esperar la búsqueda de proveedor",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/disponibilidad": {
+      "post": {
+        "operationId": "disponibilidad_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__disponibilidad_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DisponibilidadEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Evaluar la disponibilidad de proveedores para un servicio adicional",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/solicitudes-servicio-adicional/{solicitud_id}/solicitud-pago": {
+      "post": {
+        "operationId": "solicitud_pago_servicio_adicional_solicitudes_servicio_adicional__solicitud_id__solicitud_pago_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "solicitud_id",
+            "required": true,
+            "schema": {
+              "title": "Solicitud Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SolicitudPagoServicioAdicionalEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Comunicar al Cliente la solicitud de pago de un servicio adicional",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/sustituciones": {
+      "post": {
+        "operationId": "registrar_sustitucion_sustituciones_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SustitucionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar que el proveedor de un servicio no está disponible (inicia la sustitución)",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/alternativa": {
+      "post": {
+        "operationId": "alternativa_sustitucion_sustituciones__sustitucion_id__alternativa_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlternativaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Buscar una alternativa de proveedor",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/anexo": {
+      "post": {
+        "operationId": "anexo_sustitucion_sustituciones__sustitucion_id__anexo_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AnexoEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar el anexo del contrato para una sustitución",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/autorizacion": {
+      "post": {
+        "operationId": "autorizacion_sustitucion_sustituciones__sustitucion_id__autorizacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la autorización de Administración sobre la alternativa",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/confirmacion": {
+      "post": {
+        "operationId": "confirmar_sustitucion_sustituciones__sustitucion_id__confirmacion_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Confirmar una sustitución de proveedor",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/decision-cliente": {
+      "post": {
+        "operationId": "decision_cliente_sustitucion_sustituciones__sustitucion_id__decision_cliente_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DecisionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Registrar la decisión del Cliente sobre la alternativa",
+        "tags": [
+          "Solicitudes: cambios, servicios adicionales y sustituciones"
+        ]
+      }
+    },
+    "/sustituciones/{sustitucion_id}/importe-adicional": {
+      "post": {
+        "operationId": "importe_adicional_sustitucion_sustituciones__sustitucion_id__importe_adicional_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "sustitucion_id",
+            "required": true,
+            "schema": {
+              "title": "Sustitucion Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ImporteAdicionalSustitucionEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Rechazo de negocio o entrada no válida"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Integrar el importe adicional de una sustitución al saldo general",
+        "tags": [
+          "Pagos y gestión financiera"
+        ]
+      }
+    },
+    "/usuarios": {
+      "get": {
+        "operationId": "listar_usuarios_usuarios_get",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Listar las cuentas",
+        "tags": [
+          "Seguridad"
+        ]
+      },
+      "post": {
+        "operationId": "crear_usuario_usuarios_post",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UsuarioEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Crear una cuenta",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/usuarios/{usuario_id}/contrasena": {
+      "post": {
+        "operationId": "restablecer_contrasena_usuarios__usuario_id__contrasena_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "usuario_id",
+            "required": true,
+            "schema": {
+              "title": "Usuario Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContrasenaEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Restablecer la contraseña de una cuenta",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    },
+    "/usuarios/{usuario_id}/estado": {
+      "post": {
+        "operationId": "cambiar_estado_usuarios__usuario_id__estado_post",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "usuario_id",
+            "required": true,
+            "schema": {
+              "title": "Usuario Id",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstadoUsuarioEntrada"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OperacionRespuesta"
+                }
+              }
+            },
+            "description": "Successful Response"
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "No autenticado"
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Sin permiso"
+          },
+          "422": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RechazoRespuesta"
+                }
+              }
+            },
+            "description": "Datos no válidos"
+          }
+        },
+        "security": [
+          {
+            "SesionCookie": []
+          }
+        ],
+        "summary": "Activar o desactivar una cuenta",
+        "tags": [
+          "Seguridad"
+        ]
+      }
+    }
+  }
+}

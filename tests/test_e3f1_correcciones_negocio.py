@@ -28,7 +28,7 @@ from domain.servicios_dominio import EvaluarRegularizacionDeSolicitudes, Situaci
 from domain.especificaciones import (SOLICITUD_CAMBIO_EN_PLAZO, MOTIVO_EVENTO_INICIADO_SERVICIO_ADICIONAL,  # noqa: E402
                                      SituacionTemporalSolicitud)
 from domain.valores import (ErrorDominio, Decision, CausaCierreSolicitud as CC, ResultadoViabilidad,       # noqa: E402
-                            ImpactoModificacion, AnticipacionSolicitud, Importe, TipoSolicitud, ConceptoPago,
+                            ImpactoModificacion, AnticipacionSolicitud, Importe,
                             EstadoSolicitudCambio as ESC, EstadoSolicitudServicioAdicional as ESA,
                             EstadoSustitucionProveedor as ESP)
 
@@ -322,7 +322,7 @@ class RutaDePagoE3F1(unittest.TestCase):
         e.s.cambios.evaluar_viabilidad_cambio(sc, VIABLE, None, dia)            # ruta C, sin importes
         e.s.cambios.registrar_anexo_cambio(sc, 'Anexo', dia); e.d.despachar()
         obligaciones = set(e.ec().obligaciones)
-        r = e.s.pagos.comunicar_solicitud_pago(TipoSolicitud.CAMBIO, sc, ConceptoPago.CAMBIO, Importe(D(900)), dia)
+        r = e.s.pagos.comunicar_solicitud_pago_cambio(sc, dia)
         self.assertFalse(r.exito)
         self.assertEqual(r.mensaje, M_SIN_IMPORTES)
         self.assertEqual(set(e.ec().obligaciones), obligaciones)                 # la transacción se revirtió
@@ -342,7 +342,7 @@ class RutaDePagoE3F1(unittest.TestCase):
         self.assertFalse(r.exito)
         self.assertEqual(r.pendientes, [F_SOLICITUD_PAGO, F_PAGO])
         self.assertEqual(e.app.repos.cambios.obtener_por_id(sc).estado, ESC.PENDIENTE_FORMALIZACION)
-        ob = e.s.pagos.comunicar_solicitud_pago(TipoSolicitud.CAMBIO, sc, ConceptoPago.CAMBIO, Importe(D(900)), dia)
+        ob = e.s.pagos.comunicar_solicitud_pago_cambio(sc, dia)
         self.assertTrue(ob.exito)
         self.assertEqual(e.app.repos.cambios.obtener_por_id(sc).estado, ESC.PENDIENTE_PAGO)
         e.s.pagos.registrar_y_verificar_pago(e.ec_id, ob.datos['obligacion_id'], Importe(D(900)), dia + timedelta(hours=2), 'C')

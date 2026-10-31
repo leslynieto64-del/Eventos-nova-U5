@@ -11,6 +11,7 @@ solicitud y los Domain Events.
 La referencia `referencias/comportamiento_regularizacion_v8_e3d.json` se generó con esta función sobre el código del
 commit bdc98c3 (v8 + E1 + E2 + E3A + E3B + E3C + E3D), antes de corregir N2.
 """
+import copy
 import dataclasses
 import json
 import os
@@ -128,6 +129,17 @@ def ejecutar(tipo, estado, antes, con_motivo, decision):
         resultado = {'error': str(e)}
     resultado.update(observar(s))
     return resultado
+
+
+def adaptar_referencia_e3g(referencia: dict) -> dict:
+    """E3G: SolicitudCambio gana el atributo `costo_proveedor` (valor inicial None). La referencia histórica no se
+    modifica: al cargarla, cada observación de una SolicitudCambio recibe ese atributo con su valor por defecto; las de
+    SolicitudServicioAdicional y SustitucionProveedor no cambian (mismo patrón que E3F.1)."""
+    adaptada = copy.deepcopy(referencia)
+    for clave, caso in adaptada.items():
+        if clave.startswith('SolicitudCambio|') and 'anexo_id' in caso:
+            caso.setdefault('costo_proveedor', None)
+    return adaptada
 
 
 def capturar_comportamiento_regularizacion():

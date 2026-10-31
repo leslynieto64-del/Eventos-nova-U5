@@ -19,6 +19,7 @@ class AccionContrato(Enum):
     FIRMAR = "firmar"
     CONFIRMAR_CONTRATACION = "confirmar_contratacion"
     CERRAR_SIN_CONFIRMAR = "cerrar_sin_confirmar"
+    CERRAR_POR_INICIO = "cerrar_por_inicio"            # C-01 / CA-110: llegó T sin contratación confirmada
 
 
 _EC, _AC = EstadoContrato, AccionContrato
@@ -33,6 +34,8 @@ MAQUINA_CONTRATO = MaquinaEstados(
         Transicion(_EC.EN_PREPARACION, _AC.FIRMAR, _EC.FIRMADO),                                # US-008, CA-017, BN-009
         Transicion(_EC.FIRMADO, _AC.CONFIRMAR_CONTRATACION, _EC.CONTRATACION_CONFIRMADA),      # CA-019, GL-009
         Transicion(_EC.FIRMADO, _AC.CERRAR_SIN_CONFIRMAR, _EC.CERRADO_SIN_CONFIRMAR),          # CA-020, CA-021, SE-010
+        Transicion(_EC.EN_PREPARACION, _AC.CERRAR_POR_INICIO, _EC.CERRADO_SIN_CONFIRMAR),      # C-01, CA-110: llega T (contrato no firmado)
+        Transicion(_EC.FIRMADO, _AC.CERRAR_POR_INICIO, _EC.CERRADO_SIN_CONFIRMAR),             # C-01, CA-110: llega T (firmado sin confirmar)
     ),
     # Confirmar una contratación ya confirmada se acepta sin efecto: devuelve [] y no emite otro Domain Event.
     repeticiones_idempotentes=((_EC.CONTRATACION_CONFIRMADA, _AC.CONFIRMAR_CONTRATACION),),
@@ -41,6 +44,7 @@ MAQUINA_CONTRATO = MaquinaEstados(
     mensajes_rechazo={
         _AC.FIRMAR: lambda o: "Solo un contrato En preparación puede firmarse.",
         _AC.CERRAR_SIN_CONFIRMAR: lambda o: MENSAJE_SIN_SEGUIMIENTO,
+        _AC.CERRAR_POR_INICIO: lambda o: f"Un contrato {o.value} no puede cerrarse por la llegada de la fecha del evento.",
     },
     nombre="Contrato",
 )
@@ -129,6 +133,13 @@ class Contrato(AggregateRoot):
         if anticipo_efectuado_en_plazo:
             raise ErrorDominio("El Cliente efectuó el anticipo dentro del plazo; queda pendiente de registro o verificación (CA-021).")
         self.estado = self._transitar(AccionContrato.CERRAR_SIN_CONFIRMAR)
+        self._registrar(ProcesoContratacionCerrado(self.id, ahora, evento_ref=self.evento_id))
+
+    def cerrar_por_inicio(self, ahora: datetime) -> None:
+        """C-01, CA-110 (decisión aplicada el 28/10/2026): al llegar T sin contratación confirmada el contrato, esté En preparación
+        o Firmado, queda Cerrado sin confirmar. No modifica Evento ni EstadoCuenta: lo hacen las reacciones a ProcesoContratacionCerrado
+        (Evento Cerrado sin contratación, anticipo Pendiente → Sin efecto y devolución del recibido, decisión A)."""
+        self.estado = self._transitar(AccionContrato.CERRAR_POR_INICIO)
         self._registrar(ProcesoContratacionCerrado(self.id, ahora, evento_ref=self.evento_id))
 
     def registrar_anexo(self, anexo_id: str, tipo: TipoSolicitud, origen_id: str, descripcion: str, ahora: datetime) -> AnexoContrato:

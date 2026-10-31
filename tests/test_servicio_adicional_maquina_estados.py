@@ -429,6 +429,9 @@ class ConservacionDelComportamiento(unittest.TestCase):
     # Su protección se conserva con la huella posterior a E3F.1; la referencia de N2 mantiene la histórica.
     HUELLAS_DESDE_E3F1 = {'_SolicitudBase': 'e9947bcb48d349066310697f00a5aa1a07bb0ffa64611074751f2cc07c25500b'}
     HUELLAS_HISTORICAS = {'_SolicitudBase': '4b9632f58bf2a48a79cead87ea7c931b82f9aa70ba1bef517b3bedfef174a2b6'}
+    # E-1 (GL-060, C-15) modifica SustitucionProveedor.registrar_autorizacion a propósito: el límite ordinario de la sustitución
+    # es exclusivo (00:00 del día siguiente al tercer día hábil previo al evento). Su protección se conserva con la huella posterior.
+    HUELLAS_DESDE_E1 = {'SustitucionProveedor': 'fe29780566ffeb126dc64e0028a272df2b088583c31b1e323a1d2142947d5a21'}
 
     def test_clases_no_modificadas(self):
         protegidas = set(self.referencia['huellas']) - {self.HUELLA_EXCLUIDA_DESDE_E3F}
@@ -439,6 +442,8 @@ class ConservacionDelComportamiento(unittest.TestCase):
                 if clase in self.HUELLAS_DESDE_E3F1:
                     self.assertEqual(self.referencia['huellas'][clase], self.HUELLAS_HISTORICAS[clase])
                     self.assertEqual(actuales[clase], self.HUELLAS_DESDE_E3F1[clase])
+                elif clase in self.HUELLAS_DESDE_E1:
+                    self.assertEqual(actuales[clase], self.HUELLAS_DESDE_E1[clase])
                 else:
                     self.assertEqual(actuales[clase], self.referencia['huellas'][clase])
         self.assertEqual(set(self.referencia['huellas']), {'_SolicitudBase', 'SolicitudCambio', 'SustitucionProveedor'})

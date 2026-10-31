@@ -40,6 +40,7 @@ La referencia se escribe en `tests/referencias/comportamiento_solicitud_cambio_p
 """
 import argparse
 import ast
+import copy
 import dataclasses
 import hashlib
 import itertools
@@ -265,6 +266,18 @@ def capturar_comportamiento_solicitud_cambio() -> dict:
         'comportamiento': _capturar(variantes()),
         'historico_en_evaluacion': _capturar(variantes_historicas()),
     }
+
+
+def adaptar_referencia_e3g(referencia: dict) -> dict:
+    """E3G: SolicitudCambio gana el atributo `costo_proveedor` (valor inicial None). La referencia histórica no se
+    modifica: al cargarla, cada observación de una solicitud recibe ese atributo con su valor por defecto. Ninguna
+    acción de la referencia informa un costo, así que en todos los casos sigue siendo None (mismo patrón que E3F.1)."""
+    adaptada = copy.deepcopy(referencia)
+    for bloque in ('constructor', 'comportamiento', 'historico_en_evaluacion'):
+        for caso in adaptada[bloque].values():
+            if 'anexo_id' in caso:
+                caso.setdefault('costo_proveedor', None)
+    return adaptada
 
 
 def serializar(datos) -> str:

@@ -1,5 +1,8 @@
-# Herramientas de desarrollo de Eventos Nova (F1). No forman parte de la ejecución de la aplicación.
+# Herramientas de desarrollo de Eventos Nova (F1; Unidad 5: pytest como ejecutor oficial). No forman parte de la ejecución de la aplicación.
 # Incluye las dependencias de la aplicación porque la suite completa necesita FastAPI y httpx.
 # Instalación: python -m pip install -r requirements-dev.txt
 -r requirements.txt
 coverage==7.16.2        # medición de cobertura de líneas y ramas (configuración en .coveragerc)
+pytest==8.3.5           # ejecutor de la suite (pytest.ini); ejecuta también las pruebas existentes basadas en unittest.TestCase
+pytest-cov==6.1.1       # integra coverage.py con pytest (usa la misma configuración de .coveragerc)
+ruff==0.11.0            # análisis estático mínimo (errores de sintaxis y nombres no definidos; configuración en ruff.toml)

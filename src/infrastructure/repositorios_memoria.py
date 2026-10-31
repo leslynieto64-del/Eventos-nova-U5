@@ -2,7 +2,9 @@
 guardar() solo prepara el cambio; el UnitOfWork lo hace visible al confirmar."""
 from __future__ import annotations
 import copy
+import threading
 from application import puertos as P
+from domain.valores import EstadoEvento
 
 
 class _Almacen:
@@ -36,6 +38,9 @@ class _RepoBase:
     def _todos(self):
         return [copy.deepcopy(a) for a in self._alm.datos.values()]
 
+    def listar_todos(self):                        # lectura: copias de todos los agregados guardados
+        return self._todos()
+
 
 class PropuestaRepositoryMemoria(_RepoBase, P.IPropuestaRepository):
     def listar_por_evento_id(self, evento_id):
@@ -48,12 +53,20 @@ class ContratoRepositoryMemoria(_RepoBase, P.IContratoRepository):
 
 
 class EventoRepositoryMemoria(_RepoBase, P.IEventoRepository):
-    pass
+    def listar_con_fecha_vencida(self, ahora):
+        return sorted((e for e in self._todos() if e.estado in (EstadoEvento.EN_GESTION, EstadoEvento.EN_ORGANIZACION)
+                       and e.datos.fecha_hora <= ahora), key=lambda e: e.id)
 
 
 class _RepoSolicitudes(_RepoBase):
     def listar_pendientes_por_evento_id(self, evento_id):
         return [a for a in self._todos() if a.evento_id == evento_id and a.pendiente]
+
+    def listar_por_evento_id(self, evento_id):
+        return [a for a in self._todos() if a.evento_id == evento_id]
+
+    def listar_todas(self):
+        return self._todos()
 
 
 class SolicitudCambioRepositoryMemoria(_RepoSolicitudes, P.ISolicitudCambioRepository): pass
@@ -67,3 +80,25 @@ class EstadoCuentaRepositoryMemoria(_RepoBase, P.IEstadoCuentaRepository):
 
     def listar_por_evento_id(self, evento_id):
         return [a for a in self._todos() if a.evento_id == evento_id]
+
+
+class ProveedorRepositoryMemoria(P.IProveedorRepository):
+    """Catálogo de proveedores en memoria. No usa la unidad de trabajo: es un registro de referencia, sin agregado ni eventos."""
+    def __init__(self):
+        self._alm = _Almacen()                  # mismo contrato de inspección que los demás repositorios (`_alm.datos`)
+        self._por_id = self._alm.datos
+        self._cerrojo = threading.Lock()
+
+    def guardar(self, proveedor):
+        with self._cerrojo:
+            if proveedor.proveedor_id in self._por_id or any(
+                    p.nombre_normalizado == proveedor.nombre_normalizado for p in self._por_id.values()):
+                return False
+            self._por_id[proveedor.proveedor_id] = proveedor
+            return True
+
+    def obtener_por_id(self, proveedor_id):
+        return self._por_id.get(proveedor_id)
+
+    def listar_todos(self):
+        return sorted(self._por_id.values(), key=lambda p: (p.nombre_normalizado, p.proveedor_id))

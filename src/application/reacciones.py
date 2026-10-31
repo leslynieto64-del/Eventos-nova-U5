@@ -98,6 +98,10 @@ class ReaccionesPagos:
     def al_confirmarse_contratacion(self, e: E.ContratacionConfirmada):
         self.pagos.registrar_obligacion_saldo_original(e.agregado_id)
 
+    def al_cerrarse_proceso_contratacion(self, e: E.ProcesoContratacionCerrado):
+        """Decisión A: devolución de lo recibido como anticipo (distinta de la de SE-012)."""
+        self.pagos.aplicar_cierre_contratacion(e.agregado_id, e.ocurrido_en)
+
     def al_verificarse_pago(self, e: E.PagoVerificado):
         if e.concepto == "Anticipo":
             ec = self.ec.obtener_por_id(e.agregado_id)
@@ -143,6 +147,7 @@ def suscribir_reacciones(pub, r_evento, r_solicitudes, r_pagos, r_notif):
     s(E.ContratacionConfirmada, r_evento.al_confirmarse_contratacion)
     s(E.ContratacionConfirmada, r_pagos.al_confirmarse_contratacion)
     s(E.ProcesoContratacionCerrado, r_evento.al_cerrarse_proceso_contratacion)
+    s(E.ProcesoContratacionCerrado, r_pagos.al_cerrarse_proceso_contratacion)
     s(E.AnexoContratoRegistrado, r_solicitudes.al_registrarse_anexo)
     s(E.CambioConfirmado, r_evento.al_confirmarse_cambio)
     s(E.ServicioAdicionalConfirmado, r_evento.al_confirmarse_servicio_adicional)

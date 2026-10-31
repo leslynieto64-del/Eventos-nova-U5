@@ -1,0 +1,13 @@
+{
+  "_aviso": "DATOS DE DEMOSTRACION. No provienen de ningun sistema de proveedores: Eventos Nova no tiene una fuente de disponibilidad especificada. Se usan solo para demostrar la asignacion de proveedores (US-013, US-014, CA-029 a CA-031) cuando se activa EVENTOSNOVA_DISPONIBILIDAD_ARCHIVO.",
+  "Banquete": [
+    {"proveedor_id": "PV-DEMO-BANQUETE-1", "disponible": true, "costo": "5000.00", "condiciones": "Demostracion"},
+    {"proveedor_id": "PV-DEMO-BANQUETE-2", "disponible": false}
+  ],
+  "Musica": [
+    {"proveedor_id": "PV-DEMO-MUSICA-1", "disponible": true, "costo": "2000.00", "condiciones": "Demostracion"}
+  ],
+  "Fotografia": [
+    {"proveedor_id": "PV-DEMO-FOTO-1", "disponible": true, "costo": "1500.00", "condiciones": "Demostracion"}
+  ]
+}

@@ -1,0 +1,104 @@
+# Eventos Nova — Docker Compose: DB + App + Tests (PIA, requisito de contenerización).
+#
+#   docker compose up -d db                 # solo PostgreSQL 18 (desarrollo local; puerto 127.0.0.1:5432)
+#   docker compose up -d --build            # db + migrate (una vez) + api (127.0.0.1:8000) + worker del Outbox
+#   docker compose run --rm tests           # suite completa (pytest) contra la base de PRUEBAS (eventosnova_test)
+#   docker compose down                     # detiene los servicios; los datos persisten en el volumen nombrado
+#
+# Configuración solo por variables de entorno (12-Factor); sin secretos en este archivo: se toman de `.env` (vea .env.example).
+# Nunca use `docker compose down -v`: borraría el volumen con los datos de la base de desarrollo.
+name: eventosnova
+
+x-aplicacion: &aplicacion
+  build:
+    context: .
+    target: app
+  image: eventosnova-app:local
+  environment: &entorno-aplicacion
+    # Dentro de la red de Compose la base se llama `db` (no 127.0.0.1).
+    DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-eventosnova}:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}@db:5432/${POSTGRES_DB:-eventosnova}
+    EVENTOSNOVA_PERSISTENCIA: postgresql
+    # Simulación opcional de la disponibilidad de proveedores (vacía = sin datos). Vea docs/architecture/integraciones-externas.md.
+    EVENTOSNOVA_DISPONIBILIDAD_ARCHIVO: ${EVENTOSNOVA_DISPONIBILIDAD_ARCHIVO:-}
+    # Seguridad (docs/SEGURIDAD_Y_PERMISOS.md): la aplicación EXIGE inicio de sesión por omisión. «local» usa cookie sin Secure (http://127.0.0.1);
+    # en producción defina EVENTOSNOVA_ENTORNO=produccion (cookie Secure, HSTS, documentación /docs oculta) y sirva SOLO detrás de HTTPS.
+    EVENTOSNOVA_ENTORNO: ${EVENTOSNOVA_ENTORNO:-local}
+
+services:
+  db:
+    image: postgres:18
+    container_name: eventosnova-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-eventosnova}
+      POSTGRES_USER: ${POSTGRES_USER:-eventosnova}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env (vea .env.example)}
+    ports:
+      - "127.0.0.1:${POSTGRES_PORT:-5432}:5432"   # solo loopback
+    volumes:
+      - eventosnova_pgdata:/var/lib/postgresql    # destino recomendado para PostgreSQL 18+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 10s
+
+  # Aplica las migraciones de Alembic una vez y termina. La API y el trabajador esperan a que termine bien.
+  migrate:
+    <<: *aplicacion
+    command: ["python", "-m", "alembic", "upgrade", "head"]
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  api:
+    <<: *aplicacion
+    command: ["python", "-m", "uvicorn", "api.main:app", "--app-dir", "src", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "127.0.0.1:${API_PORT:-8000}:8000"        # solo loopback; Swagger UI en /docs
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      # /ready responde 503 si la base de datos no está disponible
+      test: ["CMD", "python", "-c", "import urllib.request, sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  # Despacha el Outbox (reacciones a los Domain Events). Puede haber más de un trabajador: el reclamo con SKIP LOCKED evita duplicados.
+  worker:
+    <<: *aplicacion
+    command: ["python", "-m", "infrastructure.persistencia.trabajador_outbox", "--intervalo", "2"]
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    restart: unless-stopped
+
+  # Pruebas: no arrancan con `up`; se ejecutan con `docker compose run --rm tests`. Usan la base eventosnova_test, que se crea
+  # si no existe (sin borrar nada) y se migra; la base de desarrollo no se toca.
+  tests:
+    build:
+      context: .
+      target: tests
+    image: eventosnova-tests:local
+    profiles: ["tests"]
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-eventosnova}:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}@db:5432/${POSTGRES_DB:-eventosnova}
+      TEST_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-eventosnova}:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}@db:5432/${TEST_POSTGRES_DB:-eventosnova_test}
+      EVENTOSNOVA_REQUIERE_BD: "1"                # sin base de datos las pruebas FALLAN (no se omiten)
+    depends_on:
+      db:
+        condition: service_healthy
+    command: ["sh", "-c", "python scripts/preparar_base_de_pruebas.py && python -m pytest"]
+
+volumes:
+  eventosnova_pgdata:

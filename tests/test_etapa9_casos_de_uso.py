@@ -13,7 +13,7 @@ from domain.valores import (ContenidoPropuesta, DatosEvento, Importe, Decision, 
                             EstadoEvento, EstadoPropuesta, EstadoContrato, EstadoPago, EstadoDevolucion,
                             EstadoObligacionPago as EO, EstadoSolicitudCambio as ESC,
                             EstadoSolicitudServicioAdicional as ESA, EstadoSustitucionProveedor as ESP,
-                            EstadoSolicitudCancelacion, sumar_dias_habiles, restar_dias_habiles)
+                            EstadoSolicitudCancelacion, limite_exclusivo_dias_habiles, limite_exclusivo_dias_habiles_antes)
 
 
 # ---------------------------------------------------------------- CU-01 Gestionar la propuesta
@@ -57,14 +57,14 @@ class CU02Contratacion(unittest.TestCase):
         e = Escenario()
         ant = e.obligacion('Anticipo')
         self.assertEqual(ant.importe, Importe(D('3000.00')))                  # 30 % del costo total
-        self.assertEqual(ant.plazo.vence, sumar_dias_habiles(T0, 3))         # 3 días hábiles tras la firma
+        self.assertEqual(ant.plazo.vence, limite_exclusivo_dias_habiles(T0, 3))   # 3 días hábiles tras la firma; límite exclusivo (E-1)
         e.confirmar_contratacion()
         self.assertEqual(e.app.repos.contratos.obtener_por_id(e.contrato_id).estado, EstadoContrato.CONTRATACION_CONFIRMADA)
         self.assertEqual(e.evento().estado, EstadoEvento.EN_ORGANIZACION)
         self.assertEqual(len(e.evento().servicios), 1)
         saldo = e.obligacion('SaldoContratoOriginal')
         self.assertEqual(saldo.importe, Importe(D('7000.00')))
-        self.assertEqual(saldo.plazo.vence, restar_dias_habiles(FECHA_EVENTO, 3))
+        self.assertEqual(saldo.plazo.vence, limite_exclusivo_dias_habiles_antes(FECHA_EVENTO, 3))
 
     def test_sin_politica_comunicada_no_se_confirma(self):                    # CA-016, CA-019
         e = Escenario()
@@ -76,13 +76,13 @@ class CU02Contratacion(unittest.TestCase):
         self.assertIn('política de no reembolso comunicada', r.pendientes)
         self.assertEqual(e.evento().estado, EstadoEvento.EN_GESTION)
 
-    def test_anticipo_con_importe_incorrecto_no_confirma(self):              # CA-019
+    def test_anticipo_parcial_no_confirma(self):                              # CA-019; E-3: el importe menor ya no es «incorrecto»
         e = Escenario()
         e.s.contratacion.registrar_comunicacion_politica_no_reembolso(e.contrato_id, T0)
         ob = e.obligacion('Anticipo')
         r = e.s.pagos.registrar_y_verificar_pago(e.ec_id, ob.obligacion_id, Importe(D('2500.00')), T0 + timedelta(days=1), 'C-1'); e.d.despachar()
-        self.assertEqual(r.datos['estado'], EstadoPago.IMPORTE_INCORRECTO.value)
-        self.assertEqual(e.obligacion('Anticipo').estado, EO.PENDIENTE)
+        self.assertEqual(r.datos['estado'], EstadoPago.VERIFICADO.value)
+        self.assertEqual(e.obligacion('Anticipo').estado, EO.PENDIENTE)      # el pago parcial no liquida el anticipo
         self.assertEqual(e.app.repos.contratos.obtener_por_id(e.contrato_id).estado, EstadoContrato.FIRMADO)
 
     def test_confirmacion_repetida_no_duplica_efectos(self):                  # idempotencia (Etapa 5)
@@ -186,7 +186,7 @@ class CU04Cambios(unittest.TestCase):
         e.s.cambios.registrar_decision_cliente_cambio(sid, Decision('Cliente', True, dia))
         e.s.cambios.registrar_autorizacion_administracion_cambio(sid, Decision('Administración', True, dia))
         e.s.cambios.registrar_anexo_cambio(sid, 'Anexo 120 invitados', dia); e.d.despachar()
-        ob = e.s.pagos.comunicar_solicitud_pago(TipoSolicitud.CAMBIO, sid, ConceptoPago.CAMBIO, Importe(D(900)), dia).datos['obligacion_id']
+        ob = e.s.pagos.comunicar_solicitud_pago_cambio(sid, dia).datos['obligacion_id']
         self.assertEqual(self.cambio(sid).estado, ESC.PENDIENTE_PAGO)
         self.assertFalse(e.s.cambios.cerrar_cambio_por_falta_de_pago(sid, dia + timedelta(hours=23)).exito)   # plazo vigente
         e.s.pagos.registrar_y_verificar_pago(e.ec_id, ob, Importe(D(900)), dia + timedelta(hours=30), 'C-TARDE')   # fuera de plazo

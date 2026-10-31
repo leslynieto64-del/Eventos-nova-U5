@@ -6,8 +6,8 @@ from enum import Enum
 from typing import List, Optional
 from .base import AggregateRoot
 from .maquina_estados import MaquinaEstados, Transicion
-from .valores import (DatosEvento, CondicionesServicio, restar_dias_habiles, AnticipacionSolicitud, TarifaCargoTardio, ResultadoViabilidad, ImpactoModificacion, Decision,
-                      Importe, MotivoCierreSolicitud, CausaCierreSolicitud, CondicionTemporal, DisponibilidadProveedor,
+from .valores import (DatosEvento, CondicionesServicio, limite_exclusivo_dias_habiles_antes, AnticipacionSolicitud, TarifaCargoTardio, ResultadoViabilidad, ImpactoModificacion, Decision,
+                      Importe, MotivoCierreSolicitud, CausaCierreSolicitud, CondicionTemporal, DisponibilidadProveedor, ConceptoPago,
                       EstadoSolicitudCambio as ESC, EstadoSolicitudServicioAdicional as ESA,
                       EstadoSustitucionProveedor as ESP, ErrorDominio)
 from .eventos_dominio import (CambioConfirmado, SolicitudCambioCerradaPorFaltaDePago, SolicitudCambioCerradaPorInicioEvento,
@@ -215,6 +215,7 @@ class SolicitudCambio(_SolicitudBase):
         self.estado = ESC.REGISTRADA
         self.viabilidad: Optional[ResultadoViabilidad] = None
         self.impacto: Optional[ImpactoModificacion] = None
+        self.costo_proveedor: Optional[Importe] = None      # E3G: costo adicional del proveedor (BN-003, CA-063)
         self.decision_cliente: Optional[Decision] = None
         self.autorizacion_administracion: Optional[Decision] = None
         self.importes_por_pagar = False
@@ -239,7 +240,8 @@ class SolicitudCambio(_SolicitudBase):
         No modifica nada: cada método la consulta antes de modificar el agregado y luego asigna el destino."""
         return _maquina_solicitud_cambio(self.estado).transitar(self.estado, accion)
 
-    def registrar_viabilidad(self, resultado: ResultadoViabilidad, impacto: ImpactoModificacion, ahora: datetime) -> None:
+    def registrar_viabilidad(self, resultado: ResultadoViabilidad, impacto: ImpactoModificacion, ahora: datetime,
+                             costo_proveedor: Optional[Importe] = None) -> None:
         if not resultado.viable:                                   # Ruta A
             accion = _AC.REGISTRAR_VIABILIDAD_NO_VIABLE
         elif CAMBIO_REQUIERE_APROBACION_CLIENTE.es_satisfecha_por(impacto):   # Ruta B
@@ -253,7 +255,28 @@ class SolicitudCambio(_SolicitudBase):
             self._cerrar(destino, CausaCierreSolicitud.NO_VIABLE, resultado.motivo, ahora)
         else:
             self.estado = destino
-        self.importes_por_pagar = resultado.viable and (_AFECTA_COSTOS.es_satisfecha_por(impacto) or self.aplica_cargo_tardio)
+        self.costo_proveedor = costo_proveedor if resultado.viable else None
+        # E3G: con tarifa en cero no hay cargo que cobrar; el flag sigue la regla E3F.1 (costos o cargo tardío).
+        self.importes_por_pagar = resultado.viable and (_AFECTA_COSTOS.es_satisfecha_por(impacto) or self._cobra_cargo_tardio)
+
+    @property
+    def _cobra_cargo_tardio(self) -> bool:
+        return self.aplica_cargo_tardio and self.tarifa.importe.cantidad > 0
+
+    @property
+    def importes_a_cobrar(self) -> tuple:
+        """E3G (BN-003, SE-003/005, GL-025, CA-062/063): el costo adicional del proveedor y el cargo por cambio tardío son
+        obligaciones independientes. El cargo es siempre la tarifa vigente al registrar la solicitud (nunca un importe
+        elegido por quien llama) y solo existe si el cambio es viable y se solicita con menos de 7 días naturales.
+        Devuelve pares (ConceptoPago, Importe); vacío si no hay importes por pagar."""
+        if not self.importes_por_pagar:
+            return ()
+        importes = []
+        if self.costo_proveedor is not None and self.costo_proveedor.cantidad > 0:
+            importes.append((ConceptoPago.CAMBIO, self.costo_proveedor))
+        if self._cobra_cargo_tardio:
+            importes.append((ConceptoPago.CARGO_CAMBIO_TARDIO, self.tarifa.importe))
+        return tuple(importes)
 
     def registrar_decision_cliente(self, d: Decision) -> None:
         destino = self._transitar(_AC.REGISTRAR_DECISION_CLIENTE_APROBADA if d.aprobada
@@ -413,6 +436,12 @@ class SolicitudServicioAdicional(_SolicitudBase):
         restantes; si la solicitud se detuvo antes de obtenerla, al retomarla se revalidan los cinco días."""
         return _condicion_temporal(SERVICIO_ADICIONAL_EN_PLAZO, SituacionTemporalSolicitud(
             evento_iniciado, self.elegibilidad_obtenida, AnticipacionSolicitud(ahora, self.anticipacion.fecha_evento)))
+
+    @property
+    def importe_a_cobrar(self) -> Optional[Importe]:
+        """H-06 (BN-004, GL-016, CA-073): el importe del servicio adicional es el costo establecido por el proveedor
+        elegido; Eventos Nova no aplica un cargo propio. None mientras no se haya determinado."""
+        return self.disponibilidad.costo if self.disponibilidad is not None else None
 
     def registrar_disponibilidad(self, d: DisponibilidadProveedor, ahora: datetime) -> None:
         """E3E: el resultado se calcula como antes (la condición temporal no tiene efectos) y elige la acción; la máquina
@@ -620,7 +649,7 @@ class SustitucionProveedor(_SolicitudBase):
         self._reemplazar(autorizacion_administracion=d)
         self.estado = destino
         if d.aprobada:
-            self.aprobada_despues_del_limite = d.fecha > restar_dias_habiles(fecha_evento, 3)
+            self.aprobada_despues_del_limite = d.fecha >= limite_exclusivo_dias_habiles_antes(fecha_evento, 3)   # GL-060, E-1
         else:                                                            # CA-050: se vuelve a buscar
             self._registrar(AlternativaNoAutorizadaPorAdministracion(self.id, d.fecha, proveedor_id=self.alternativas[-1].proveedor_id))
 

@@ -209,7 +209,7 @@ class PagoEfectuadoFrenteARegistroYVerificacion(unittest.TestCase):
         e.s.cambios.registrar_decision_cliente_cambio(sid, Decision('Cliente', True, dia))
         e.s.cambios.registrar_autorizacion_administracion_cambio(sid, Decision('Administración', True, dia))
         e.s.cambios.registrar_anexo_cambio(sid, 'Anexo 120 invitados', dia); e.d.despachar()
-        ob = e.s.pagos.comunicar_solicitud_pago(TipoSolicitud.CAMBIO, sid, ConceptoPago.CAMBIO, Importe(D(900)), dia).datos['obligacion_id']
+        ob = e.s.pagos.comunicar_solicitud_pago_cambio(sid, dia).datos['obligacion_id']
         return sid, ob, dia
 
     def _servicio_con_pago(self, e):

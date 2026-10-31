@@ -1,0 +1,15 @@
+# Análisis estático de Eventos Nova (Unidad 5: «lint → pruebas → cobertura → build»).
+#
+# Conjunto DELIBERADAMENTE mínimo: solo errores que romperían la ejecución o indican un defecto, no estilo.
+#   E9  : errores de sintaxis o de lectura del archivo
+#   F63 : comparaciones inválidas (p. ej. «is» con un literal)
+#   F7  : sentencias en un lugar no permitido (return/yield fuera de función, break fuera de un ciclo...)
+#   F82 : nombres no definidos
+# El código existente usa un estilo propio (varias sentencias por línea, imports tras sys.path.insert con «noqa: E402»); ampliar las
+# reglas de estilo sería una decisión del equipo y no se impone aquí.
+# Uso:  python -m ruff check src tests scripts migraciones
+target-version = "py313"
+line-length = 160
+
+[lint]
+select = ["E9", "F63", "F7", "F82"]

@@ -20,7 +20,7 @@ from unittest import mock
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from apoyo_maquina_estados_solicitud_cambio import (solicitud, variantes, variantes_historicas, acciones, observar,  # noqa: E402
                                                     capturar_comportamiento_solicitud_cambio, huellas_de_clases,
-                                                    serializar, diferencias, RUTA_REFERENCIA_SOLICITUD_CAMBIO,
+                                                    serializar, diferencias, RUTA_REFERENCIA_SOLICITUD_CAMBIO, adaptar_referencia_e3g,
                                                     RUTA_SOLICITUDES, A10, A3, FECHA_EVENTO, DATOS_MISMO_DIA,
                                                     CONDICIONES)
 from apoyo_regularizacion_solicitudes import DECISIONES                                                     # noqa: E402
@@ -596,12 +596,13 @@ class ConservacionDelComportamiento(unittest.TestCase):
     SolicitudCambio queda como dato histórico."""
     BLOQUES = ('constructor', 'comportamiento', 'historico_en_evaluacion')
     HUELLAS_PROTEGIDAS = ('_SolicitudBase', 'SustitucionProveedor')
-    HUELLAS_DESDE_E3F1 = {'_SolicitudBase': 'e9947bcb48d349066310697f00a5aa1a07bb0ffa64611074751f2cc07c25500b'}
+    HUELLAS_DESDE_E3F1 = {'_SolicitudBase': 'e9947bcb48d349066310697f00a5aa1a07bb0ffa64611074751f2cc07c25500b',
+                          'SustitucionProveedor': 'fe29780566ffeb126dc64e0028a272df2b088583c31b1e323a1d2142947d5a21'}     # esta última, desde E-1 (GL-060, C-15): límite exclusivo de la sustitución
 
     @classmethod
     def setUpClass(cls):
         with open(RUTA_REFERENCIA_SOLICITUD_CAMBIO, encoding='utf-8') as f:
-            cls.referencia = json.load(f)
+            cls.referencia = adaptar_referencia_e3g(json.load(f))      # E3G: atributo nuevo con su valor por defecto
         cls.actual = json.loads(serializar(capturar_comportamiento_solicitud_cambio()))
 
     def test_estructura_y_cobertura(self):

@@ -8,6 +8,7 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Callable
 from fastapi import Request
+from application.reloj import reloj_negocio
 from application.servicios import GestionPropuestaService
 
 
@@ -20,5 +21,6 @@ def obtener_servicio_propuestas(request: Request) -> GestionPropuestaService:
 
 
 def obtener_reloj() -> Callable[[], datetime]:
-    """Momento que se entrega a los casos de uso como `ahora` (fecha y hora local sin zona, como en el dominio)."""
-    return datetime.now
+    """Momento que se entrega a los casos de uso como `ahora`: la hora de pared de America/Mexico_City sin zona (TP-06), la misma que usa el
+    trabajador (`application.reloj.reloj_negocio`)."""
+    return reloj_negocio

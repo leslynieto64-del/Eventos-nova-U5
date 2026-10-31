@@ -16,6 +16,11 @@ __pycache__/
 .coverage
 htmlcov/
 .coverage.*
+coverage.json
+reportes/
+
+# Herramientas de calidad (Unidad 5)
+.ruff_cache/
 
 # IDE
 .vscode/
@@ -27,3 +32,5 @@ Thumbs.db
 
 # Logs
 *.log
+# Copias de seguridad de la base de pruebas manuales (no se versionan)
+backups/

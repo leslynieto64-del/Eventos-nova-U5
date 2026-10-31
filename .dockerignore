@@ -1,0 +1,25 @@
+# Nada de secretos ni de datos locales en la imagen.
+.env
+.env.*
+!.env.example
+.git
+.gitignore
+.venv
+__pycache__
+*.pyc
+.coverage
+.coverage.*
+htmlcov
+coverage.json
+reportes
+.pytest_cache
+.ruff_cache
+.vscode
+.idea
+
+# Exportaciones pesadas de BPMN (imágenes, PDF y fuentes de draw.io): la suite no las usa. Los .bpmn (XML) SÍ se incluyen: la trazabilidad
+# verifica en ellos los elementos que respaldan una operación (p. ej. el BPMN SP-04).
+diagramas/bpmn/*.svg
+diagramas/bpmn/*.png
+diagramas/bpmn/*.pdf
+diagramas/bpmn/*.drawio

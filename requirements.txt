@@ -4,3 +4,11 @@
 fastapi>=0.115,<1.0     # framework de la API (incluye Starlette y Pydantic)
 uvicorn>=0.34,<1.0      # servidor ASGI para ejecutar la API
 httpx>=0.28,<1.0        # requerido por fastapi.testclient en las pruebas de la API
+
+# Persistencia (Fase 2, incremento 1: dependencias preparadas; aún no usadas por el código).
+SQLAlchemy>=2.0,<2.1       # SQLAlchemy Core 2.0.x
+alembic>=1.14,<2.0         # migraciones (todavía sin migraciones)
+psycopg[binary]>=3.2,<4.0  # controlador PostgreSQL (Psycopg 3)
+
+# Seguridad (autenticación): hash de contraseñas Argon2id
+argon2-cffi>=23.1,<26
