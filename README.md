@@ -360,9 +360,13 @@ Sirve para probar a mano las operaciones de negocio en Swagger sin escribir en l
 | Servicios | `api`, `worker` (más `db` y `migrate`) | `api-manual`, `worker-manual` (no crean `db` ni `migrate`) |
 
 ```powershell
-# 1) La base manual (se crea solo si no existe, se migra a head; el nombre debe terminar en _test; no borra nada)
+# 1) La base manual (se crea solo si no existe, se migra a head; el nombre debe terminar en _test; no borra nada).
+#    ¡La variable es SOLO para este comando! Si se queda definida, `pytest` en esa terminal usaría la base manual (la suite se
+#    niega a ejecutarse contra ella: tests/apoyo_bd.py) y el trabajador manual consumiría los eventos del Outbox de las pruebas.
+$anterior = $env:TEST_DATABASE_URL
 $env:TEST_DATABASE_URL = "postgresql+psycopg://<usuario>:<contraseña>@127.0.0.1:5432/eventosnova_manual_test"
 .\.venv\Scripts\python.exe scripts/preparar_base_de_pruebas.py
+$env:TEST_DATABASE_URL = $anterior          # restaura la base de la suite (eventosnova_test, ver .env)
 # 2) Con el servicio db en ejecución (sección 1), la API y el trabajador manuales
 docker compose -f docker-compose.manual-test.yml up -d
 docker compose -f docker-compose.manual-test.yml ps

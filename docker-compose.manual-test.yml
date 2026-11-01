@@ -1,0 +1,46 @@
+# Eventos Nova — entorno de PRUEBAS MANUALES (aislado del de desarrollo). No sustituye a docker-compose.yml.
+#
+#   docker compose -f docker-compose.manual-test.yml up -d       # API en http://localhost:8001/docs + trabajador del Outbox
+#   docker compose -f docker-compose.manual-test.yml stop        # detiene SOLO estos dos servicios (los datos permanecen)
+#
+# Usa la base `eventosnova_manual_test` (ya creada y migrada a 0004 con scripts/preparar_base_de_pruebas.py) del PostgreSQL
+# existente (contenedor eventosnova-db, red eventosnova_default). No arranca db ni migrate, no toca la base `eventosnova`.
+# La contraseña se toma de `.env` (POSTGRES_PASSWORD); no se escribe aquí. Nunca use `down -v`.
+name: eventosnova-manual
+
+x-manual: &manual
+  image: ${EVENTOSNOVA_IMAGEN_MANUAL:-eventosnova-app:local}   # por omisión, la misma imagen que la API de desarrollo; EVENTOSNOVA_IMAGEN_MANUAL permite probar otra sin tocarla
+  environment: &entorno-manual
+    DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-eventosnova}:${POSTGRES_PASSWORD:?Defina POSTGRES_PASSWORD en .env}@db:5432/eventosnova_manual_test
+    EVENTOSNOVA_PERSISTENCIA: postgresql
+    # Seguridad (docs/SEGURIDAD_Y_PERMISOS.md): la aplicación EXIGE inicio de sesión por omisión. «local» usa cookie sin Secure (http://127.0.0.1);
+    # en producción defina EVENTOSNOVA_ENTORNO=produccion (cookie Secure, HSTS, documentación /docs oculta) y sirva SOLO detrás de HTTPS.
+    EVENTOSNOVA_ENTORNO: ${EVENTOSNOVA_ENTORNO:-local}
+    # Sin fuente de demostración: los proveedores que se pueden asignar son SOLO los registrados en el catálogo (PostgreSQL). Los datos
+    # PV-DEMO-* (src/infrastructure/datos_demo) ya no se activan aquí; cambios, servicios adicionales y sustituciones, que necesitan costo y
+    # condiciones del proveedor, no tienen entonces fuente de disponibilidad hasta que el equipo decida una (ver D-P2 y D-P3).
+  networks: [eventosnova_default]       # la red de la base existente; allí el servidor se llama `db`
+  restart: "no"
+
+services:
+  api-manual:
+    <<: *manual
+    container_name: eventosnova-api-manual
+    command: ["python", "-m", "uvicorn", "api.main:app", "--app-dir", "src", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      - "127.0.0.1:8001:8000"           # solo loopback; Swagger UI en http://localhost:8001/docs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request, sys; sys.exit(0 if urllib.request.urlopen('http://127.0.0.1:8000/ready', timeout=3).status == 200 else 1)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  worker-manual:
+    <<: *manual
+    container_name: eventosnova-worker-manual
+    command: ["python", "-m", "infrastructure.persistencia.trabajador_outbox", "--intervalo", "2"]
+
+networks:
+  eventosnova_default:
+    external: true

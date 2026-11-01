@@ -11,7 +11,8 @@
 #
 # La contraseña de PostgreSQL de este archivo es de una base EFÍMERA que solo existe durante el job (no es un secreto de la
 # aplicación). Los secretos reales nunca se escriben en el repositorio.
-name: CI
+name: "Eventos Nova | Validación y CI — Unidad 5"
+run-name: "${{ github.ref_name }} · ejecución #${{ github.run_number }} · ${{ github.event_name }}"
 
 on:
   push:
@@ -28,7 +29,7 @@ concurrency:
 
 jobs:
   pruebas:
-    name: Pruebas, migraciones y cobertura
+    name: Pruebas automatizadas y cobertura
     runs-on: ubuntu-latest
     timeout-minutes: 30
     services:
@@ -99,7 +100,7 @@ jobs:
           if-no-files-found: warn
 
   docker:
-    name: Docker Compose (DB + App + Tests)
+    name: Construcción y validación Docker
     runs-on: ubuntu-latest
     timeout-minutes: 30
     steps:
